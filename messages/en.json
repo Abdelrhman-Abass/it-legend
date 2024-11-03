@@ -1,0 +1,104 @@
+{
+    "header": {
+        "signin": "Sign In",
+        "signup": "Sign Up",
+        "discover": "Discover Free Courses",
+        "fromhere": "From Here",
+        "home": "Home",
+        "paths": "Learning Paths",
+        "policy": "Privacy Policy",
+        "aboutUs": "About Us",
+        "services": "Software Services",
+        "freeDeploma": "Enroll in Our Free Course",
+        "empty": "The Cart is Empty"
+    },
+    "footer": {
+        "title": "Still Have Any Questions?",
+        "paragraphOne": "If something is unclear,",
+        "paragraphTwo": "send us a message anytime through",
+        "whatsapp": "Send a WhatsApp Message from Here",
+        "call": "Call Us Directly"
+    },
+    "home": {
+        "heroArea": {
+            "platform": "Platform",
+            "educational": "Educational",
+            "paragraph": "If you're looking to learn programming, web development, mobile app development, and excel in the field to prepare for the job market in a way that you can make real money, you're in the right place.",
+            "supervision": "Under the supervision of Eng. Ali Shaheen",
+            "paths": "Check Out the Learning Paths",
+            "communicate": "For Contact"
+        },
+        "counterArea": {
+            "year": "Year",
+            "field": "in the field",
+            "k": "Thousand",
+            "student": "Student",
+            "years": "Years",
+            "experience": "of working in global companies",
+            "psychology": "from studying the psychology of programmers"
+        },
+        "aboutArea": {
+            "eng": "Ali Shaheen",
+            "experience": "15 years of experience in the field",
+            "student": "Student",
+            "title": "Many will teach you programming, but who will prepare you for the job market?",
+            "paragraph": "Information is everywhere, but the market demands something else... So the right question is, where is the place that will prepare me to work and earn from what I have learned?"
+        },
+        "featuresArea": {
+            "features": "Learning Benefits with",
+            "paragraphOne": "Since you're still scrolling, it means the message resonated with you and you're eager to work in this field...",
+            "paragraphTwo": "Let me tell you what you'll gain by learning programming at ITLegend:"
+        },
+        "videoArea": {
+            "success": "Success",
+            "title": "is the accumulation of many right steps",
+            "paragraph": "Start with the right step...",
+            "watch": "Watch this video"
+        },
+        "freeDeplomaArea": {
+            "FreeDeploma": "The Free Diploma",
+            "title": "We Offer You a Free Diploma to Learn Programming Fundamentals",
+            "paragraph": "We offer you a unique opportunity to gain a free diploma that will give you a strong foundation in programming basics. Whether you're a beginner or looking to enhance your skills, this diploma is specially designed to equip you with practical knowledge and the necessary tools to enter the programming world. Join now and take advantage of this special offer that will open new doors in the field of technology and programming!",
+            "featureOne": "Completely Free",
+            "featureTwo": "Will Set a Strong Foundation in Programming",
+            "featureThree": "No Prior Knowledge Required, Just Start Immediately",
+            "getIt": "Get It Now"
+        },
+        "learningPathsArea": {
+            "learningPaths": "Learning Paths",
+            "title": "Paid Diplomas on the Platform",
+            "more": "More Paths"
+        },
+        "ctaArea": {
+            "titleOne": "If You Prefer Learning on Your Phone, Download the Platform App",
+            "titleTwo": "And Enjoy a Beneficial and Focused Learning Experience, Designed Just for You"
+        },
+        "faqArea": {
+            "faq": "Frequently Asked Questions",
+            "title": "Surely You Have",
+            "faqs": "Questions",
+            "inMind": "On Your Mind",
+            "more": "For More FAQs"
+        }
+    },
+    "auth": {
+        "signIn": "Sign In",
+        "dont": "Don't Have an Account?",
+        "email": "Email",
+        "emailReq": "Email is Required",
+        "emailValid": "Email Must Be Valid",
+        "password": "Password",
+        "passwordMin": "Password Must Be at Least 6 Characters",
+        "passwordReq": "Password is Required",
+        "lost": "Forgot Password?",
+        "signUp": "Sign Up",
+        "haveAccount": "Already Have an Account?",
+        "firstName": "First Name",
+        "firstNameReq": "First Name is Required",
+        "lastName": "Last Name",
+        "lastNameReq": "Last Name is Required",
+        "agree": "I Agree to the User Agreement",
+        "terms": "Terms and Conditions.",
+        "mustAgree": "You Must Agree to the Terms and Conditions"
+    }
+}
