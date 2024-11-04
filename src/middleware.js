@@ -36,31 +36,10 @@ export async function middleware(req) {
   // if (!isUserLoggedIn && privatePaths.some((path) => pathname.includes(path))) {
   //   return NextResponse.redirect(new URL("/auth", req.url));
   // }
-  
+
   // Run the intl middleware first to handle locales
   const response = intlMiddleware(req);
 
-  const validPaths = [
-    "/",
-    "/auth",
-    "/diploma-details/:id*",
-    "/course-player/:id*",
-    "/diploma/:id*",
-    "/learning-path/:id*",
-    ...locales.map((locale) => `/${locale}`), // Include locale-specific root paths
-  ];
-
-  // Check if the requested path matches any valid paths
-  const isValidPath = validPaths.some((path) => {
-    // Use regex to check dynamic routes
-    const regexPath = path.replace(/:\w+\*/, ".*").replace(/:\w+/, "[^/]+");
-    return new RegExp(`^${regexPath}$`).test(pathname);
-  });
-
-  // If the path is not valid, rewrite to the 404 page
-  if (!isValidPath) {
-    return NextResponse.rewrite(new URL("/404", req.url));
-  }
   return response || NextResponse.next();
 }
 

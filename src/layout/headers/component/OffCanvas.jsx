@@ -99,7 +99,7 @@ const OffCanvas = ({ isOpen, setIsOpen }) => {
                   )}
 
                   {!menu.submenus && (
-                    <Link href={menu.link}>{t(menu.title) || menu.title}</Link>
+                    <Link href={menu.link}>{t(menu.title)}</Link>
                   )}
                 </li>
               ))}
