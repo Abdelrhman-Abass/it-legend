@@ -9,7 +9,22 @@ const nextConfig = {
   //   locales: ['en','ar'],
   //   defaultLocale: 'ar',
   // },
- 
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '*',
+      },
+    ],
+   },
+  // images: {
+  //   remotePatterns: [
+  //     {
+  //       protocol: "https",
+  //       hostname: "images.unsplash.com",
+  //     },
+  //   ],
+  // },
   async rewrites() {
     return [
       {
