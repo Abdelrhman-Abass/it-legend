@@ -47,7 +47,18 @@
         "featuresArea": {
             "features": "Learning Benefits with",
             "paragraphOne": "Since you're still scrolling, it means the message resonated with you and you're eager to work in this field...",
-            "paragraphTwo": "Let me tell you what you'll gain by learning programming at ITLegend:"
+            "paragraphTwo": "Let me tell you what you'll gain by learning programming at ITLegend:",
+            "businessManagement": "Business Management",
+            "artsAndDesign": "Arts and Design",
+            "personalDevelopment": "Personal Development",
+            "healthAndFitness": "Health and Fitness",
+            "dataScience": "Data Science",
+            "marketing": "Marketing",
+            "businessAndFinance": "Business and Finance",
+            "computerScience": "Computer Science",
+            "videoAndPhotography": "Video and Photography",
+            "courseText": "courses"
+            
         },
         "videoArea": {
             "success": "Success",

@@ -3,7 +3,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useMouseMoveUI } from "@/contexts/mouse-move-context";
 import { useTranslations } from "next-intl";
-import Image from "next/image";
 
 const LandingFooter = () => {
   const t = useTranslations("footer");
@@ -67,7 +66,7 @@ const LandingFooter = () => {
             y: mouseReverse(30).y,
           }}
         >
-          <Image src="/assets/images/counterup/shape-02.png" alt="shape" />
+          <img src="/assets/images/counterup/shape-02.png" alt="shape" />
         </motion.li>
 
         <li

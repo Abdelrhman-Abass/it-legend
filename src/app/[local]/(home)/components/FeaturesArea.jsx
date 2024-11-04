@@ -1,7 +1,18 @@
 import { useTranslations } from "next-intl";
 import React from "react";
+// import { useState } from '../../../../../.next/static/chunks/main-app';
 
 function Feature({ delay, color, icon, icon_class, title, course }) {
+
+  const t = useTranslations("home.featuresArea");
+
+  // const [translated , setTranslated]= useState("ar")
+
+  // if (t("features") == "features") {
+  //   setTranslated("en")
+  // }
+
+
   return (
     <div
       className="col-lg-4 col-md-6"
@@ -19,7 +30,7 @@ function Feature({ delay, color, icon, icon_class, title, course }) {
           {/* <Link href="/course-style-1"> */}
           <h5 className="title">{title}</h5>
           {/* </Link> */}
-          <span className="course-count">{course} كورس</span>
+          <span className="course-count">{course} {t("courseText")}</span>
         </div>
       </div>
     </div>
@@ -28,6 +39,8 @@ function Feature({ delay, color, icon, icon_class, title, course }) {
 
 const FeaturesArea = () => {
   const t = useTranslations("home.featuresArea");
+
+  
 
   return (
     <div className="edu-categorie-area categorie-area-4 edu-section-gap">
@@ -62,8 +75,9 @@ const FeaturesArea = () => {
             delay="50"
             color="color-primary-style"
             icon="icon-9"
-            title="إدارة الأعمال"
+            title={t("businessManagement")}
             course="38"
+            
           />
 
           <Feature
@@ -71,7 +85,7 @@ const FeaturesArea = () => {
             color="color-secondary-style"
             icon="icon-9"
             icon_class="art-design"
-            title="الفنون والتصميم"
+            title={t("artsAndDesign")}
             course="40"
           />
 
@@ -80,7 +94,7 @@ const FeaturesArea = () => {
             color="color-extra01-style"
             icon="icon-11"
             icon_class="personal-development"
-            title="التنمية الشخصية"
+            title={t("personalDevelopment")}
             course="42"
           />
 
@@ -89,7 +103,7 @@ const FeaturesArea = () => {
             color="color-tertiary-style"
             icon="icon-12"
             icon_class="health-fitness"
-            title="الصحة واللياقة البدنية"
+            title={t("healthAndFitness")}
             course="36"
           />
 
@@ -98,7 +112,7 @@ const FeaturesArea = () => {
             color="color-extra02-style"
             icon="icon-13"
             icon_class="data-science"
-            title="علوم البيانات"
+            title={t("dataScience")}
             course="35"
           />
 
@@ -106,7 +120,7 @@ const FeaturesArea = () => {
             delay="150"
             color="color-extra03-style"
             icon="icon-14"
-            title="التسويق"
+            title={t("marketing")}
             course="28"
           />
 
@@ -114,7 +128,7 @@ const FeaturesArea = () => {
             delay="50"
             color="color-extra04-style"
             icon="icon-15"
-            title="الأعمال والمالية"
+            title={t("businessAndFinance")}
             course="25"
           />
 
@@ -123,7 +137,7 @@ const FeaturesArea = () => {
             color="color-extra05-style"
             icon="icon-16"
             icon_class="computer-science"
-            title="علوم الحاسوب"
+            title={t("computerScience")}
             course="26"
           />
 
@@ -132,7 +146,7 @@ const FeaturesArea = () => {
             color="color-extra06-style"
             icon="icon-17"
             icon_class="video-photography"
-            title="الفيديو والتصوير"
+            title={t("videoAndPhotography")}
             course="22"
           />
         </div>
