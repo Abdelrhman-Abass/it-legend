@@ -6,12 +6,9 @@ import { MouseMoveProvider } from "@/contexts/mouse-move-context";
 import { getMessages } from "next-intl/server";
 import "@/styles/index.scss";
 import Client from "./Client";
-// import Script from "next/script";
+import { notFound } from 'next/navigation'
 
-export const metadata = {
-  title: "IT Legend",
-  description: "IT Legend",
-};
+// import Script from "next/script";
 
 const notoKufiArabic = Noto_Kufi_Arabic({
   subsets: ["arabic"],
@@ -26,10 +23,12 @@ const poppins = Poppins({
   variable: "--poppins-font-family",
   display: "swap", // Ensures fonts are loaded in a non-blocking way
 });
-
+const locales = ["en", "ar"];
 export default async function RootLayout({ children, params: { local } }) {
   const messages = await getMessages();
-
+  if (!locales.includes(local)) {
+    notFound()
+  }
   return (
     <html lang={local} dir={local === "ar" ? "rtl" : "ltr"}>
       <link rel="icon" type="image" href="/favicon.png" />
