@@ -5,9 +5,9 @@ import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import AOS from "aos";
 import "aos/dist/aos.css";
-if (typeof window !== "undefined") {
-  require("bootstrap/dist/js/bootstrap");
-}
+// if (typeof window !== "undefined") {
+//   import("bootstrap/dist/js/bootstrap");
+// }
 export default function Client({ children }) {
   useEffect(() => {
     AOS.init({ duration: 900, once: true });

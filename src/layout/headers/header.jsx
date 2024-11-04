@@ -189,7 +189,7 @@ const Header = ({
                             onClick={handleLogout}
                             className="edu-btn btn-medium"
                           >
-                            تسجيل الخروج
+                            {t('signout')}
                           </button>
                         </li>
                       )}

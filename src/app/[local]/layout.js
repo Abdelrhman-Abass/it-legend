@@ -26,9 +26,9 @@ const poppins = Poppins({
 const locales = ["en", "ar"];
 export default async function RootLayout({ children, params: { local } }) {
   const messages = await getMessages();
-  if (!locales.includes(local)) {
-    notFound()
-  }
+  // if (!locales.includes(local)) {
+  //   notFound()
+  // }
   return (
     <html lang={local} dir={local === "ar" ? "rtl" : "ltr"}>
       <link rel="icon" type="image" href="/favicon.png" />

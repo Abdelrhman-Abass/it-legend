@@ -1,8 +1,8 @@
-import React from "react";
+'use server';
+
 import AboutArea from "@/components/diploma/AboutArea";
-import BlogMasonryArea from "@/components/diploma/BlogMasonryArea";
+// import BlogMasonryArea from "@/components/diploma/BlogMasonryArea";
 import BrandArea from "@/components/diploma/BrandArea";
-import EventArea from "@/components/diploma/EventArea";
 import PricingArea from "@/components/diploma/PricingArea";
 import SalesFaqArea from "@/components/diploma/SalesFaqArea";
 import Testimonial from "@/components/diploma/Testimonial";
@@ -26,13 +26,14 @@ const data = {
   ],
 };
 
-const page = () => {
+// Change to a named export and remove any potential layout wrapping
+export default async function DiplomaPage() {
   return (
-    <>
+    <div className="diploma-sales-page">
       <CountDown />
       <VideoArea />
       <BrandArea data={data} />
-      <BlogMasonryArea />
+      {/* <BlogMasonryArea /> */}
       <AboutArea isInstructor={true} />
       <div
         style={{ margin: "-20px" }}
@@ -47,13 +48,10 @@ const page = () => {
           <i className="icon-19"></i>
         </span>
       </div>
-      {/* <EventArea /> */}
       <DiplomaCourses />
       <Testimonial about_p_2={true} />
       <PricingArea />
       <SalesFaqArea />
-    </>
+    </div>
   );
-};
-
-export default page;
+}

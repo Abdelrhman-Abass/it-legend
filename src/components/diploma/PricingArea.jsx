@@ -72,6 +72,7 @@ function PricingTable({
             style={{ cursor: "pointer" }}
             onClick={handleAddToCart}
             className="edu-btn btn-border btn-medium"
+            href="#"
           >
             {cartCourses.some((item) => item.id == id)
               ? "حذف من السلة"

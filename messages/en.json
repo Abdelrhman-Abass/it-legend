@@ -2,6 +2,7 @@
     "header": {
         "signin": "Sign In",
         "signup": "Sign Up",
+        "signout":"Log out",
         "discover": "Discover Free Courses",
         "fromhere": "From Here",
         "home": "Home",
@@ -10,7 +11,8 @@
         "aboutUs": "About Us",
         "services": "Software Services",
         "freeDeploma": "Enroll in Our Free Course",
-        "empty": "The Cart is Empty"
+        "empty": "The Cart is Empty",
+        "courses": "Courses"
     },
     "footer": {
         "title": "Still Have Any Questions?",

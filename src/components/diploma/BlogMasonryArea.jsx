@@ -8,9 +8,8 @@ const BlogMasonryArea = ({ showMore = false }) => {
   const [blogItems, setBlogItems] = useState([]);
 
   useEffect(() => {
-    const blogItems = blog_data.filter((blog) => blog?.blog_masonry);
-    setBlogItems(blogItems);
-  }, []);
+    setBlogItems(blog_data.filter((blog) => blog?.blog_masonry));
+  }, [blogItems]);
 
   return (
     <section id="projects" className="section-gap-equal">
