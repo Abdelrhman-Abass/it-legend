@@ -1,10 +1,15 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useMouseMoveUI } from "@/contexts/mouse-move-context";
 import VideoModal from "../common/popup-modal/video-modal";
-import { AutoPlay } from "swiper"; // Import the Autoplay module
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from 'swiper/modules';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/autoplay';
 
 const contents = {
   pre_title: "الآراء",
@@ -95,26 +100,28 @@ const Testimonial = ({ about_p_2 }) => {
           </div>
           {isMounted && (
             <Swiper
+              modules={[Autoplay, Pagination]}
               className="testimonial-activation swiper"
               slidesPerView={1}
-              spaceBetween={0}
+              spaceBetween={30}
               loop={true}
               grabCursor={true}
-              modules={[Autoplay]}
               speed={1000}
-              autoplay={{ delay: 1500, disableOnInteraction: false }}
+              autoplay={{
+                delay: 3000,
+                disableOnInteraction: false,
+              }}
+              pagination={{
+                clickable: true,
+                el: '.swiper-pagination',
+              }}
               breakpoints={{
                 768: {
                   slidesPerView: 2,
                 },
                 992: {
                   slidesPerView: 3,
-                },
-              }}
-              pagination={{
-                el: ".swiper-pagination",
-                type: "bullets",
-                clickable: true,
+                }
               }}
             >
               {testimonial_items.map((item, i) => {

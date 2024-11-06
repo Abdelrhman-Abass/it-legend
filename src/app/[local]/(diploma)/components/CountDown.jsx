@@ -2,18 +2,25 @@
 import React, { useEffect, useState } from "react";
 import FlipClockCountdown from "@leenguyen/react-flip-clock-countdown";
 import "@leenguyen/react-flip-clock-countdown/dist/index.css";
+import SwitchThemeButton from "@/components/common/SwitchThemeButton";
 
+import { useTheme } from "next-themes";
 const CountDown = () => {
   const [isMounted, setIsMounted] = useState(false);
+  const { theme, systemTheme } = useTheme();
 
   useEffect(() => {
-    // Set isMounted to true after the component is mounted
     setIsMounted(true);
   }, []);
 
+  if (!isMounted) {
+    return null;
+  }
+  const currentTheme = theme === 'system' ? systemTheme : theme;
   return (
     <div className="timer">
       <div className="container">
+        <SwitchThemeButton/>
         <div
           className="flip"
           data-aos-delay="150"
