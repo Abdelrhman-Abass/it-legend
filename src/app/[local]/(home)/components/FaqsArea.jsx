@@ -36,6 +36,8 @@ const accordion_items = [
 const FaqsArea = () => {
   const t = useTranslations("home.faqArea");
   const { mouseDirection, mouseReverse } = useMouseMoveUI();
+  const [activeId, setActiveId] = React.useState('collapseOne');
+
   return (
     <div className="edu-faq-area faq-style-5 section-gap-equal">
       <div className="container">
@@ -111,28 +113,26 @@ const FaqsArea = () => {
               <div className="faq-accordion" id="faq-accordion">
                 <div className="accordion">
                   {accordion_items.map((item, i) => {
-                    const { desc, id, show, title } = item;
+                    const { desc, id, title } = item;
+                    const isActive = activeId === id;
+                    
                     return (
                       <div key={i} className="accordion-item">
                         <h5 className="accordion-header">
                           <button
-                            className={`accordion-button ${
-                              show ? "" : "collapsed"
-                            }`}
+                            className={`accordion-button ${isActive ? "" : "collapsed"}`}
                             type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target={`#${id}`}
-                            aria-expanded={show ? "true" : "false"}
+                            onClick={() => setActiveId(isActive ? '' : id)}
                           >
                             {title}
                           </button>
                         </h5>
                         <div
-                          id={id}
-                          className={`accordion-collapse collapse ${
-                            show ? "show" : ""
-                          }`}
-                          data-bs-parent="#faq-accordion"
+                          style={{
+                            maxHeight: isActive ? '1000px' : '0',
+                            overflow: 'hidden',
+                            transition: 'max-height 0.3s ease-in-out'
+                          }}
                         >
                           <div className="accordion-body">
                             <p>{desc}</p>

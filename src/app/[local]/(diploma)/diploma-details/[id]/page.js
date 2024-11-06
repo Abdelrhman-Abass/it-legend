@@ -26,21 +26,30 @@ const data = {
   ],
 };
 
-const page = () => {
+const ErrorBoundaryWrapper = ({ children }) => {
+  try {
+    return children;
+  } catch (error) {
+    console.error('Error in component:', error);
+    return <div>Something went wrong in this component.</div>;
+  }
+};
+
+const Page = () => {
   return (
     <>
-      <HeroArea />
-      <VideoArea />
-      <WhyChose />
-      <AboutArea />
-      <BrandArea data={data} />
-      <CategoryArea />
-      <AdBanner />
-      <BlogMasonryArea showMore={true} />
-      <FaqArea />
-      <AdBanner2 />
+      <ErrorBoundaryWrapper><HeroArea /></ErrorBoundaryWrapper>
+      <ErrorBoundaryWrapper><VideoArea /></ErrorBoundaryWrapper>
+      <ErrorBoundaryWrapper><WhyChose /></ErrorBoundaryWrapper>
+      <ErrorBoundaryWrapper><AboutArea /></ErrorBoundaryWrapper>
+      <ErrorBoundaryWrapper><BrandArea data={data} /></ErrorBoundaryWrapper>
+      <ErrorBoundaryWrapper><CategoryArea /></ErrorBoundaryWrapper>
+      <ErrorBoundaryWrapper><AdBanner /></ErrorBoundaryWrapper>
+      <ErrorBoundaryWrapper><BlogMasonryArea showMore={true} /></ErrorBoundaryWrapper>
+      <ErrorBoundaryWrapper><FaqArea /></ErrorBoundaryWrapper>
+      <ErrorBoundaryWrapper><AdBanner2 /></ErrorBoundaryWrapper>
     </>
   );
 };
 
-export default page;
+export default Page;

@@ -1,7 +1,7 @@
 'use server';
 
 import AboutArea from "@/components/diploma/AboutArea";
-// import BlogMasonryArea from "@/components/diploma/BlogMasonryArea";
+import BlogMasonryArea from "@/components/diploma/BlogMasonryArea";
 import BrandArea from "@/components/diploma/BrandArea";
 import PricingArea from "@/components/diploma/PricingArea";
 import SalesFaqArea from "@/components/diploma/SalesFaqArea";
@@ -33,7 +33,7 @@ export default async function DiplomaPage() {
       <CountDown />
       <VideoArea />
       <BrandArea data={data} />
-      {/* <BlogMasonryArea /> */}
+      <BlogMasonryArea />
       <AboutArea isInstructor={true} />
       <div
         style={{ margin: "-20px" }}

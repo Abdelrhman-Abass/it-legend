@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useMouseMoveUI } from "@/contexts/mouse-move-context";
 import VideoModal from "../common/popup-modal/video-modal";
-import { Autoplay } from "swiper"; // Import the Autoplay module
+import { AutoPlay } from "swiper"; // Import the Autoplay module
 import { Swiper, SwiperSlide } from "swiper/react";
 
 const contents = {

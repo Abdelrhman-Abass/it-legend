@@ -1,6 +1,8 @@
 "use client";
 import React from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
+
 
 const features = [
   {
@@ -75,15 +77,29 @@ const WhyChose = () => {
             <div className="why-choose-gallery">
               <div className="gallery-thumbnail">
                 <div className="thumbnail thumbnail-1">
-                  <img
+                  <Image
                     src="/assets/images/others/why-choose-01.webp"
                     alt="Why Choose"
+                    width={370}
+                    height={470}
+                    data-aos-delay="60"
+                data-aos="fade-right"
+                data-aos-duration="900"
                   />
                 </div>
-                <motion.div className="thumbnail thumbnail-2" style={{ y }}>
-                  <img
+                <motion.div className="thumbnail thumbnail-2" style={{y,
+                    position: 'absolute',
+                    right: '-10px',  // Adjust this value to move more/less to the right
+                    top: '105%',
+                    }}>
+                  <Image
                     src="/assets/images/others/why-choose-02.webp"
                     alt="Why Choose"
+                    width={300}
+                    height={370}
+                    data-aos-delay="60"
+                  data-aos="fade-up"
+                data-aos-duration="900"
                   />
                 </motion.div>
               </div>
