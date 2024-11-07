@@ -3,6 +3,9 @@ import React from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useMouseMoveUI } from "@/contexts/mouse-move-context";
 import { Link } from "@/navigation";
+import Image from "next/image";
+
+// import SwitchThemeButton from "../common/SwitchThemeButton";
 
 const HeroArea = () => {
   const { mouseDirection, mouseReverse } = useMouseMoveUI();
@@ -10,9 +13,10 @@ const HeroArea = () => {
   const y = useTransform(scrollYProgress, [0, 1], [0, 1000]);
 
   return (
-    <section className="why-choose-area-3 edu-section-gap ">
+    <section className="why-choose-area-3 edu-section-gap">
+      {/* <SwitchThemeButton className="absolute top-4 right-4"/> */}
       <div className="container">
-        <div className="row row--45">
+        <div className="row row--45 ">
           <div
             className="section-title-flex section-title justify-content-center"
             data-aos-delay="150"
@@ -26,7 +30,7 @@ const HeroArea = () => {
                 justifyContent: "center",
               }}
             >
-              <div className="left-content">
+              <div className="left-content mt-[-50px]">
                 <h2 className="title">
                   هيا بنا ي صديقي
                   <br />
@@ -39,17 +43,20 @@ const HeroArea = () => {
                 </span>
               </div>
             </div>
-            <div className="right-content" style={{ maxWidth: 420 }}>
-              <div className="edu-team-grid team-style-3">
-                <div className="inner">
-                  <div className="thumbnail-wrap">
+            <div className="right-content w-full lg:max-w-[450px] ">
+              <div className="edu-team-grid team-style-3 ">
+                <div className="inner ">
+                  <div className="thumbnail-wrap ">
                     <div className="thumbnail">
                       <Link
                         href={`/course-player/c84e7902-1205-426f-a857-922bedd84bdf"`}
                       >
-                        <img
-                          src={`https://edublink.react.devsblink.com/assets/images/team/team-02/team-01.webp`}
+                        <Image
+                          src='/assets/images/keep-going.jpg'
                           alt="team images"
+                          className=" h-[500px]"
+                          width={450}
+                          height={550}
                         />
                       </Link>
                     </div>

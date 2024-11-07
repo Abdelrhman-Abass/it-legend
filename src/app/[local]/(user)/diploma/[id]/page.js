@@ -1,5 +1,6 @@
 "use client";
 import BreadcrumbTwo from "@/components/breadcrumb/breadcrumb-2";
+import SwitchThemeButton from "@/components/common/SwitchThemeButton";
 import CourseTwoArea from "@/components/courses/CourseTwoArea";
 import CounterArea from "@/components/my-path/counter-area";
 import ListArea from "@/components/my-path/list-area";

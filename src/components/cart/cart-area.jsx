@@ -32,7 +32,7 @@ const CartArea = () => {
       {cartCourses.length > 0 && (
         <div className="container">
           <div className="table-responsive">
-            <table className="table cart-table">
+            <table className="table cart-table ">
               <thead>
                 <tr>
                   <th scope="col" className="product-remove"></th>

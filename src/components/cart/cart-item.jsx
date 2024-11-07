@@ -24,7 +24,7 @@ const CartItem = ({ item }) => {
       <td className="product-thumbnail">
         {/* <Link href={`/course-details/${item.id}`}> */}
         <img src={item.img} alt="Books" />
-        {/* </Link> */}
+        {/* </Link> --bs-table-bg*/}
       </td>
 
       <td className="product-title">

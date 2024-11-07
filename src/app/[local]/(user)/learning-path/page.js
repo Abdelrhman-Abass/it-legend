@@ -1,14 +1,18 @@
+import SwitchThemeButton from "@/components/common/SwitchThemeButton";
 import CourseTypeOne from "@/components/course/course-type-one";
 import CourseTwoArea from "@/components/courses/CourseTwoArea";
 import CategoryArea from "@/components/my-path/CategoryArea";
 import CounterUpArea from "@/components/my-path/CounterUpArea";
 import HeroArea from "@/components/my-path/HeroArea";
 import { course_data } from "@/data";
+
 import React from "react";
 
 const page = () => {
   return (
     <div style={{ paddingBottom: 92 }}>
+      <SwitchThemeButton className=""/>
+
       <HeroArea />
       <CategoryArea />
       <CounterUpArea />

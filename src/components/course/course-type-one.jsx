@@ -64,7 +64,7 @@ const CourseTypeOne = ({
 
   return (
     <div
-      style={{ backgroundColor: bg }}
+      // style={{ backgroundColor: bg }}
       className={`edu-course course-style-1 ${
         classes ? classes : undefined
       } hover-button-bg-white`}
