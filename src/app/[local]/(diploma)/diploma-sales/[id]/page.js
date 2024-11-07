@@ -18,11 +18,11 @@ const data = {
     "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg",
     "https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg",
     "https://upload.wikimedia.org/wikipedia/commons/9/95/Vue.js_Logo_2.svg",
-    "https://svgshare.com/i/1At8.svg",
-    "https://svgshare.com/i/1At9.svg",
-    "https://svgshare.com/i/1Ave.svg",
-    "https://svgshare.com/i/1AwH.svg",
-    "https://svgshare.com/i/1Avf.svg",
+    "https://upload.wikimedia.org/wikipedia/commons/0/0a/MySQL_textlogo.svg",
+    "https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg",
+    "https://raw.githubusercontent.com/dnfield/flutter_svg/7d374d7107561cbd906d7c0ca26fef02cc01e7c8/example/assets/flutter_logo.svg?sanitize=true",
+    "https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg",
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Sql_data_base_with_logo.svg/640px-Sql_data_base_with_logo.svg.png",
   ],
 };
 
