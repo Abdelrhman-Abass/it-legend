@@ -39,12 +39,12 @@ export default async function RootLayout({ children, params: { locale } }) {
 
   const title =
     locale == "ar"
-      ? "Property Search | بحث ذكي، وعثور أسرع"
-      : "Property Search | Search Smarter, Find Faster";
+      ? "IT Legend | منصة تعليمية للبرمجة والتكنولوجيا"
+      : "IT Legend | Programming & Technology Learning Platform";
   const description =
     locale == "ar"
-      ? "أفضل وسيط عقاري يمكنك من خلاله تصفح ومراقبة اسعار العقارات في مصر. تصفح المناطق والمجمعات السكنية والعقارات حسب السعر والموقع وغرف النوم  والمرافق للعثور على المكان المثالي لك ولعائلتك."
-      : "The best real estate broker through which you can browse and monitor real estate prices in Egypt. Browse areas, residential complexes, properties by price, location, bedrooms, and facilities to find the perfect place for you and your family.";
+      ? "منصة تعليمية رائدة تقدم دورات احترافية في البرمجة وتطوير المواقع وتطبيقات الموبايل والذكاء الاصطناعي. تعلم من خبراء الصناعة واحصل على شهادات معتمدة لتطوير مهاراتك المهنية."
+      : "A leading educational platform offering professional courses in programming, web development, mobile applications, and artificial intelligence. Learn from industry experts and get certified to advance your career skills.";
 
 
   return (
