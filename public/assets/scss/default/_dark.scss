@@ -138,6 +138,7 @@
     .hero-banner.hero-style-5,
     .edu-course-area.course-area-10,
     .hero-style-10,
+    .tabel,
     .testimonial-area-3,
     .testimonial-area-9,
     .hero-banner.hero-style-6:before,
@@ -2830,10 +2831,13 @@
         th,
         td {
             border-bottom: 1px solid var(--dark-color-border) !important;
+            background-color: transparent;
         }
         tbody {
             td {
                 color: var(--color-title);
+                background-color: transparent;
+
             }
         }
     }
