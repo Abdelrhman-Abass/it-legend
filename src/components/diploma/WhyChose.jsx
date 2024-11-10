@@ -110,9 +110,12 @@ const WhyChose = () => {
                   data-aos="fade"
                   data-aos-duration="200"
                 >
-                  <img
+                  <Image
                     src="/assets/images/about/shape-14.png"
                     alt="Shape Images"
+                    width={370}
+                    height={470}
+                    
                   />
                 </li>
                 <li
@@ -121,9 +124,11 @@ const WhyChose = () => {
                   data-aos="fade"
                   data-aos-duration="200"
                 >
-                  <img
+                  <Image
                     src="/assets/images/about/shape-10.png"
                     alt="Shape Images"
+                    width={300}
+                    height={370}
                   />
                 </li>
               </ul>

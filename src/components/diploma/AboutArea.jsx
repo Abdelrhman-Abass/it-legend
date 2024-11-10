@@ -2,6 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useMouseMoveUI } from "@/contexts/mouse-move-context";
+import Image from "next/image";
 
 const lists = ["مطور مواقع", "مصمم تجربة المستخدم", "مطور تطبيقات موبايل"];
 const instructorLists = ["مطور مواقع", "درب اكثر من 5000 متدرب", "خبرة 15 سنه"];
@@ -20,18 +21,22 @@ const AboutArea = ({ isInstructor = false }) => {
                 data-aos="fade-right"
                 data-aos-duration="800"
               >
-                <img
+                <Image
                   src="/assets/images/about/about-06.webp"
                   alt="About Image"
+                  width={350}
+                  height={350}
                 />
               </div>
-              <img
+              <Image
                 className="main-img-2"
                 src="/assets/images/about/about-07.webp"
                 alt="About Image"
                 data-aos-delay="60"
                 data-aos="fade-up"
                 data-aos-duration="900"
+                width={230}
+                height={230}
               />
               <ul className="shape-group">
                 <motion.li

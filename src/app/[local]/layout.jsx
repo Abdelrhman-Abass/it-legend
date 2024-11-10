@@ -6,9 +6,9 @@ import { MouseMoveProvider } from "@/contexts/mouse-move-context";
 import { getMessages } from "next-intl/server";
 import "@/styles/index.scss";
 import Client from "./Client";
-import { notFound } from 'next/navigation';
+// import { notFound } from 'next/navigation';
 
-import Script from "next/script";
+// import Script from "next/script";
 
 const notoKufiArabic = Noto_Kufi_Arabic({
   subsets: ["arabic"],
@@ -81,10 +81,10 @@ export default async function RootLayout({ children, params: { locale } }) {
         </ThemeProvider>
 
         {/* Load the Vdocipher Player script after the page is fully loaded */}
-        <Script
+        {/* <Script
           src="https://player.vdocipher.com/v2/api.js"
           strategy="lazyOnload" // This will load the script after the page is fully loaded
-        />
+        /> */}
       </body>
     </html>
   );

@@ -49,6 +49,7 @@ const VideoArea = ({ about_p_2, title }) => {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   referrerPolicy="strict-origin-when-cross-origin"
                   allowFullScreen
+                  loading="lazy"
                 ></iframe>
                 <div className="video-overlay"></div>
                 <ul className="shape-group">
