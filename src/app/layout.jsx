@@ -6,6 +6,8 @@ import { MouseMoveProvider } from "@/contexts/mouse-move-context";
 import { getMessages } from "next-intl/server";
 import "@/styles/index.scss";
 import Client from "./Client";
+import { setRequestLocale } from 'next-intl/server';
+
 import { notFound } from 'next/navigation'
 
 // import Script from "next/script";
@@ -35,6 +37,8 @@ const locales = ["en", "ar"];
 
 export default async function RootLayout({ children, params: { locale } }) {
   // const local = await getLocale(params);
+  setRequestLocale(locale);
+
   const messages = await getMessages();
 
   const title =
@@ -63,8 +67,24 @@ export default async function RootLayout({ children, params: { locale } }) {
         {/* <!-- twitter --> */}
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
+        
+
+        <link
+          rel="preload"
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;500;600;700;800&display=swap"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
       </head>
-    
+
       <body
       
         className={` ${locale == "ar" ? notoKufiArabic.variable : poppins.variable
@@ -83,7 +103,7 @@ export default async function RootLayout({ children, params: { locale } }) {
           </MouseMoveProvider>
           <Theme />
         </ThemeProvider>
-        <script src="https://player.vdocipher.com/v2/api.js"></script>
+        {/* <script src="https://player.vdocipher.com/v2/api.js"></script> */}
       </body>
     </html >
   );

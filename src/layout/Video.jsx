@@ -46,9 +46,16 @@ const VideoArea = ({ about_p_2, title }) => {
                   src="https://www.youtube.com/embed/fgG4xvYLzgk?si=3g4olcnq5p6Ho-S3"
                   title="YouTube video player"
                   frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allow="accelerometer; 
+                  autoplay; 
+                  clipboard-write; 
+                  encrypted-media; 
+                  gyroscope; 
+                  picture-in-picture; 
+                  web-share"
                   referrerPolicy="strict-origin-when-cross-origin"
                   allowFullScreen
+                  loading="lazy"
                 ></iframe>
                 <div className="video-overlay"></div>
                 <ul className="shape-group">
