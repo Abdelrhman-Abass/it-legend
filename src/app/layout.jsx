@@ -67,12 +67,7 @@ export default async function RootLayout({ children, params: { locale } }) {
         {/* <!-- twitter --> */}
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
-        <link
-          rel="preload"
-          href="/_next/static/css/app/[local]/page.css"
-          as="style"
-          type="text/css"
-        />
+        
 
         <link
           rel="preload"
