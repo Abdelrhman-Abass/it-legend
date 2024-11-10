@@ -66,6 +66,7 @@ export default async function RootLayout({ children, params: { locale } }) {
       </head>
     
       <body
+      
         className={` ${locale == "ar" ? notoKufiArabic.variable : poppins.variable
           }`}
         cz-shortcut-listen="false"
