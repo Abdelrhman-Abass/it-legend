@@ -6,6 +6,8 @@ import { MouseMoveProvider } from "@/contexts/mouse-move-context";
 import { getMessages } from "next-intl/server";
 import "@/styles/index.scss";
 import Client from "./Client";
+import { setRequestLocale } from 'next-intl/server';
+
 import { notFound } from 'next/navigation'
 
 // import Script from "next/script";
@@ -35,6 +37,8 @@ const locales = ["en", "ar"];
 
 export default async function RootLayout({ children, params: { locale } }) {
   // const local = await getLocale(params);
+  setRequestLocale(locale);
+
   const messages = await getMessages();
 
   const title =
