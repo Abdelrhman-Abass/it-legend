@@ -1,6 +1,8 @@
 import { Wrapper } from "@/layout";
+import { useTranslations } from "next-intl";
 
 const RootLayout = ({ children }) => {
+  const t = useTranslations("auth");
   return (
     <Wrapper inSign={true} isSticky={false} hideFooter={true}>
       <section className="account-page-area section-gap-equal">
@@ -14,15 +16,15 @@ const RootLayout = ({ children }) => {
             </div>
             <div className="col-xl-4 col-lg-6 order-card-1">
               <div className="contact-us-info">
-                <h3 className="heading-title">مرحبا بك ي صديقي</h3>
+                <h3 className="heading-title">{t("welcome")}</h3>
                 <ul className="address-list">
                   <li>
-                    <h5 className="title">مستعد؟</h5>
-                    <p>هل انت مستعد لمواكبة سوق العمل التي سوف نوفرها لك؟</p>
+                    <h5 className="title">{t("ready")}</h5>
+                    <p>{t("readyDesc")}</p>
                   </li>
                   <li>
-                    <h5 className="title">الوقت</h5>
-                    <p>كل ماهو عليك ان توفر وقت وسوف نطور مستواك</p>
+                    <h5 className="title">{t("time")}</h5>
+                    <p>{t("timeDesc")}</p>
                   </li>
                 </ul>
               </div>

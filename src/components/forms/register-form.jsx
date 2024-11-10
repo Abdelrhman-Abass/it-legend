@@ -1,24 +1,26 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import { registerSchema } from "../../utils/validation-schema";
 import ErrorMsg from "./error-msg";
 import { Link } from "@/navigation";
-import { useState } from "react";
-import { authHandler } from "@/app/[local]/auth/authHandler";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { useTranslations } from "next-intl";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
+import { useDispatch, useSelector } from "react-redux";
+import { signupUser } from "@/store/features/auth-slice";
 
 const RegisterForm = () => {
   const t = useTranslations("auth");
   const router = useRouter();
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.auth);
+  
   const [showPass, setShowPass] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [dialCode, setDialCode] = useState(20);
+
   const {
     handleChange,
     handleSubmit,
@@ -38,29 +40,27 @@ const RegisterForm = () => {
     },
     validationSchema: registerSchema,
     onSubmit: async (values) => {
-      delete values.terms;
-      setLoading(true);
-      setError(null);
-      try {
-        const data = {}
-        // const res = await authHandler("/api/account/register", {
-        //   ...values,
-        //   countrycode: dialCode,
-        // });
+      const userData = {
+        ...values,
+        countrycode: dialCode,
+      };
+      delete userData.terms;
 
-        // if (res.data.data.id) {
+      try {
+        console.log(userData)
+        // const resultAction = await dispatch(signupUser(userData)).unwrap();
+        // if (resultAction) {
+        //   toast.success(t("registerSuccess"));
         //   router.push("/");
         // } else {
-        //   setError(res.data.message.title);
-        //   toast.error(res.data.message.title);
+        //   toast.error(resultAction.payload || t("registerError"));
         // }
       } catch (err) {
-        setError("Register Error");
-      } finally {
-        setLoading(false);
+        toast.error(t("registerError"));
       }
     },
   });
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group">
@@ -177,6 +177,7 @@ const RegisterForm = () => {
         </div>
       </div>
       {touched.terms && errors.terms && <ErrorMsg error={t(errors.terms)} />}
+      {error && <ErrorMsg error={t(error)} />}
       <div className="form-group">
         <button
           type="submit"

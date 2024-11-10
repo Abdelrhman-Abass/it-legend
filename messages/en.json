@@ -2,7 +2,7 @@
     "header": {
         "signin": "Sign In",
         "signup": "Sign Up",
-        "signout":"Log out",
+        "signout": "Log out",
         "discover": "Discover Free Courses",
         "fromhere": "From Here",
         "home": "Home",
@@ -60,7 +60,6 @@
             "computerScience": "Computer Science",
             "videoAndPhotography": "Video and Photography",
             "courseText": "courses"
-            
         },
         "videoArea": {
             "success": "Success",
@@ -112,6 +111,12 @@
         "lastNameReq": "Last Name is Required",
         "agree": "I Agree to the User Agreement",
         "terms": "Terms and Conditions.",
-        "mustAgree": "You Must Agree to the Terms and Conditions"
+        "mustAgree": "You Must Agree to the Terms and Conditions",
+        "welcome": "Welcome, Friend",
+        "ready": "Ready?",
+        "readyDesc": "Are you ready to keep pace with the job market opportunities we will provide?",
+        "time": "Time",
+        "timeDesc": "All you need to do is provide time and we will develop your skills",
+        "warning": "Please make sure to enter a valid username and password"
     }
 }

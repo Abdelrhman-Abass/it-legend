@@ -1,18 +1,20 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
+import { useDispatch } from "react-redux";
 import { loginSchema } from "../../utils/validation-schema";
 import ErrorMsg from "./error-msg";
-import { useState } from "react";
-import { authHandler } from "@/app/[local]/auth/authHandler";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/navigation";
+import { loginUser } from "@/store/features/auth-slice";
 
 const LoginForm = ({ setAuthError }) => {
   const t = useTranslations("auth");
   const router = useRouter();
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [showPass, setShowPass] = useState(false);
+
   const { handleChange, handleSubmit, handleBlur, errors, values, touched } =
     useFormik({
       initialValues: { email: "", password: "" },
@@ -21,11 +23,9 @@ const LoginForm = ({ setAuthError }) => {
         setLoading(true);
         setAuthError(null);
         try {
-          const res = await authHandler("/api/account/login", values);
-          if (res.data.data.id) {
+          const resultAction = await dispatch(loginUser(values)).unwrap();
+          if (resultAction) {
             router.push("/learning-path");
-          } else {
-            setAuthError(res.data.message.title);
           }
         } catch (err) {
           setAuthError("من فضلك تأكد من ادخال اسم مستخدم وكلمة مرور صحيحين");
@@ -35,6 +35,10 @@ const LoginForm = ({ setAuthError }) => {
         }
       },
     });
+
+  const handleResetPass = (email) => {
+    // Implement password reset logic
+  };
 
   return (
     <form onSubmit={handleSubmit}>
