@@ -63,8 +63,29 @@ export default async function RootLayout({ children, params: { locale } }) {
         {/* <!-- twitter --> */}
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
+        <link
+          rel="preload"
+          href="/_next/static/css/app/[local]/page.css"
+          as="style"
+          type="text/css"
+        />
+
+        <link
+          rel="preload"
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;500;600;700;800&display=swap"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
       </head>
-    
+
       <body
         className={` ${locale == "ar" ? notoKufiArabic.variable : poppins.variable
           }`}
@@ -82,7 +103,7 @@ export default async function RootLayout({ children, params: { locale } }) {
           </MouseMoveProvider>
           <Theme />
         </ThemeProvider>
-        <script src="https://player.vdocipher.com/v2/api.js"></script>
+        {/* <script src="https://player.vdocipher.com/v2/api.js"></script> */}
       </body>
     </html >
   );
