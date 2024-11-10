@@ -25,12 +25,71 @@ const page = async ({ params }) => {
     `/api/NodesApi/GetCourseNodes?courseId=${params.id}`,
     params.id
   );
-
-  console.log("data", data);
+  
+  const mockData = {
+    data: {
+      nodes: [
+        {
+          moduleId: "module1",
+          title: "Module 1: Introduction",
+          nodes: [
+            {
+              contentId: "video1",
+              title: "Welcome Video",
+              type: 0, // video type
+              playerType: 0, // YouTube player
+              index: 0,
+              isCompleted: false
+            },
+            {
+              contentId: "pdf1",
+              title: "Course Materials",
+              type: 4, // PDF type
+              path: "https://example.com/sample.pdf",
+              index: 1,
+              isCompleted: false
+            },
+            {
+              contentId: "exam1",
+              title: "Module 1 Quiz",
+              type: 1, // exam type
+              index: 2,
+              isCompleted: false
+            }
+          ]
+        },
+        {
+          moduleId: "module2",
+          title: "Module 2: Advanced Topics",
+          nodes: [
+            {
+              contentId: "video2",
+              title: "Advanced Concepts",
+              type: 0, // video type
+              playerType: 1, // Publitio player
+              index: 3,
+              isCompleted: false
+            },
+            {
+              contentId: "problem1",
+              title: "Coding Challenge",
+              type: 2, // problem type
+              index: 4,
+              isCompleted: false
+            }
+          ]
+        }
+      ],
+      stoppedIndex: 0
+    }
+  };
+  
+  
+  console.log("data", mockData);
 
   return (
     <div className="w-full px-3">
-      <Content data={data?.data } courseId={params.id} />
+      <Content data={mockData?.data } courseId={params.id} />
     </div>
   );
 };
