@@ -70,6 +70,7 @@ const Content = ({ data, courseId }) => {
     }
   }, [ask]);
 
+  console.log(data)
   const sendAsk = async () => {
     try {
       setLoadSubmitAsk(true);
@@ -115,7 +116,7 @@ const Content = ({ data, courseId }) => {
     <>
       {/* Leader Board */}
       <Modal
-        footer={false}
+        footer={true}
         width={450}
         onCancel={() => setBoard(false)}
         style={{
