@@ -3,6 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useMouseMoveUI } from "@/contexts/mouse-move-context";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 const AppArea = () => {
   const t = useTranslations("home.ctaArea");
@@ -39,7 +40,7 @@ const AppArea = () => {
                     Play Store
                   </span>
                   <h3 className="title">
-                    <a
+                    <Link
                       href="https://play.google.com/store/apps/details?id=com.itlegend.itlegendapp"
                       target="_blank"
                     >
@@ -47,7 +48,7 @@ const AppArea = () => {
                         style={{ margin: "6px 0" }}
                         src="https://itlegend.net/Website/assets/images/google-play.png"
                       />
-                    </a>
+                    </Link>
                   </h3>
                 </div>
                 <div className="sparator">
@@ -65,7 +66,7 @@ const AppArea = () => {
                     App store
                   </span>
                   <h3 className="title">
-                    <a
+                    <Link
                       href="https://apps.apple.com/us/app/it-legend/id6446231104"
                       target="_blank"
                     >
@@ -73,7 +74,7 @@ const AppArea = () => {
                         style={{ marginTop: 6 }}
                         src="https://itlegend.net/Website/assets/images/ios.png"
                       />
-                    </a>
+                    </Link>
                   </h3>
                 </div>
               </div>

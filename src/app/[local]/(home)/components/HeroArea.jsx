@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { useMouseMoveUI } from "@/contexts/mouse-move-context";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 const HeroArea = () => {
   const t = useTranslations("home.heroArea");
@@ -56,7 +57,7 @@ const HeroArea = () => {
                 data-aos="fade-up"
                 data-aos-duration="1000"
               >
-                <img src="/assets/images/banner/girl-2.webp" alt="Girl Image" />
+                <Image src="/assets/images/banner/girl-2.webp" loading="lazy" alt="Girl Image" width={270} height={300} />
               </div>
               <div
                 className="thumbnail thumbnail-2"
@@ -64,7 +65,7 @@ const HeroArea = () => {
                 data-aos="fade-down"
                 data-aos-duration="1000"
               >
-                <img src="/assets/images/banner/man-1.webp" alt="Man Image" />
+                <Image src="/assets/images/banner/man-1.webp" alt="Man Image" loading="lazy" width={240} height={370}/>
               </div>
               <div
                 className="online-support"

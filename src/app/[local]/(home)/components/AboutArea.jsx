@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { useMouseMoveUI } from "@/contexts/mouse-move-context";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 const features_list = [
   "Expert Trainers",
@@ -18,17 +19,23 @@ const AboutArea = () => {
         <div className="row g-5 align-items-center">
           <div className="col-lg-7">
             <div className="about-image-gallery">
-              <img
+              <Image
                 className="main-img-1"
                 src="/assets/images/about/about-03.webp"
                 alt="About Image"
+                width={520}
+                height={370}
+                loading="lazy"
               />
               <div className="author-box">
                 <div className="inner">
                   <div className="thumb">
-                    <img
+                    <Image
                       src="/assets/images/about/shape-03.png"
                       alt="Shape Image"
+                      width={520}
+                      height={370}
+                      loading="lazy"
                     />
                   </div>
                   <div className="content">

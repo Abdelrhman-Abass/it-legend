@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useMouseMoveUI } from "@/contexts/mouse-move-context";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 const lists = ["featureOne", "featureTwo", "featureThree"];
 
@@ -25,18 +26,24 @@ const FreeDeploma = () => {
                 data-aos="fade-right"
                 data-aos-duration="800"
               >
-                <img
+                <Image
                   src="/assets/images/about/about-06.webp"
                   alt="About Image"
+                  width={350}
+                  height={350}
+                  loading="lazy"
                 />
               </div>
-              <img
+              <Image
                 className="main-img-2"
                 src="/assets/images/about/about-07.webp"
                 alt="About Image"
                 data-aos-delay="60"
                 data-aos="fade-up"
                 data-aos-duration="900"
+                width={230}
+                height={230}
+                loading="lazy"
               />
               <ul className="shape-group">
                 <motion.li

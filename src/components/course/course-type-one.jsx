@@ -7,6 +7,7 @@ import {
   add_to_wishlist,
   wishlistItems,
 } from "@/store/features/wishlist-slice";
+import Image from "next/image";
 
 const CourseTypeOne = ({
   data,
@@ -74,9 +75,12 @@ const CourseTypeOne = ({
           <Link
             href={my ? `/diploma/${data.id}` : `/diploma-details/${data.id}`}
           >
-            <img
+            <Image
               src={`/assets/images/course/course-${image_location_path}/${data.img}`}
               alt="Course Meta"
+              width={370}
+              height={220}
+              loading="lazy"
             />
           </Link>
           <div className="time-top">
