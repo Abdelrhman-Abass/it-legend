@@ -1,19 +1,16 @@
 import React from "react";
-import dynamic from 'next/dynamic';
 import { Wrapper } from "@/layout";
 import HeroArea from "./components/HeroArea";
 import CounterArea from "./components/CounterArea";
-
-// Dynamic imports for components that are below the fold or not immediately needed
-const AboutArea = dynamic(() => import("./components/AboutArea"));
-const FeaturesArea = dynamic(() => import("./components/FeaturesArea"));
-const Banner = dynamic(() => import("./components/Banner"));
-const VideoArea = dynamic(() => import("./components/VideoArea"));
-const FreeDeploma = dynamic(() => import("./components/FreeDeploma"));
-const AdsBanner = dynamic(() => import("./components/AdsBanner"));
-const DiplomasArea = dynamic(() => import("./components/DiplomasArea"));
-const AppArea = dynamic(() => import("./components/AppArea"));
-const FaqsArea = dynamic(() => import("./components/FaqsArea"));
+import AboutArea from "./components/AboutArea";
+import FeaturesArea from "./components/FeaturesArea";
+import Banner from "./components/Banner";
+import VideoArea from "./components/VideoArea";
+import FreeDeploma from "./components/FreeDeploma";
+import AdsBanner from "./components/AdsBanner";
+import DiplomasArea from "./components/DiplomasArea";
+import AppArea from "./components/AppArea";
+import FaqsArea from "./components/FaqsArea";
 
 
 export default function Home() {
