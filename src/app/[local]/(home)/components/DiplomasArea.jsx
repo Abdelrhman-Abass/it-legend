@@ -10,7 +10,7 @@ const DiplomasArea = () => {
       id="paths"
       className="edu-course-area course-area-2 gap-tb-text bg-lighten03"
     >
-      <div className="container">
+      <div className="container ">
         <div
           className="section-title section-center"
           data-aos-delay="100"
@@ -23,7 +23,7 @@ const DiplomasArea = () => {
             <i className="icon-19"></i>
           </span>
         </div>
-        <div className="row g-5">
+        <div className="row g-5 pb-[50px]">
           {course_data.slice(0, 6).map((course) => {
             return (
               <div

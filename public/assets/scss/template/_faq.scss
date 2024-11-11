@@ -302,6 +302,7 @@
 		.accordion-item {
 			.accordion-button {
 				color: var(--color-white);
+				border-radius: 10px 10px 0px 0;
 				&:before {
 					color: var(--color-white);
 				}

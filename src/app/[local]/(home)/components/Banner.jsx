@@ -23,8 +23,8 @@ const Banner = () => {
                   {t("title")}
                   <br /> {t("paragraph")}
                 </h2>
-                <a href="#video-area" className="edu-btn">
-                  <i className="icon-4"></i>
+                <a className="edu-btn">
+                  <i className="icon-41"></i>
                   {t("watch")}
                 </a>
               </div>

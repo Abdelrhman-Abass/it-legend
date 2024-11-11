@@ -33,6 +33,7 @@
 			.accordion-button {
 				background: var(--gradient-primary);
 				transition: background .3s ease;
+				border-radius: 10px 10px 0px 0;
 				
 				&.collapsed {
 					background: transparent;

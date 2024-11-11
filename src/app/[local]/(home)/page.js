@@ -23,7 +23,7 @@ export default function Home() {
       <Banner />
       <VideoArea />
       <FreeDeploma />
-      <AdsBanner />
+      {/* <AdsBanner /> */}
       <DiplomasArea />
       <AppArea />
       <FaqsArea />

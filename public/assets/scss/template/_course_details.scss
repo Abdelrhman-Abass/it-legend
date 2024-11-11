@@ -578,6 +578,7 @@
                 .accordion-button {
                     padding: 30px 50px 26px 65px;
                     display: block;
+                    border-radius: 10px 10px 0px 0;
                     &:before {
                         content: "";
                         height: 20px;

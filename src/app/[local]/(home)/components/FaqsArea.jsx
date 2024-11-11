@@ -103,8 +103,7 @@ const FaqsArea = () => {
                 <span className="pre-title">{t("faq")}</span>
                 <h2 className="title">
                   {t("title")}{" "}
-                  <span className="color-secondary">{t("faqs")}</span> <br />
-                  {t("inMind")}
+                 
                 </h2>
                 <span className="shape-line">
                   <i className="icon-19"></i>
