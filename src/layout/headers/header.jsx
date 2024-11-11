@@ -10,9 +10,7 @@ import Image from "next/image";
 import { Moon, Sun } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
-
 import SwitchLang from "../../components/common/SwitchLang";
-
 
 const Header = ({
   header_style = false,
@@ -23,36 +21,38 @@ const Header = ({
   const router = useRouter();
   const { sticky } = useSticky();
   const { quantity } = useCartInfo();
-  // const wishlists = useSelector(wishlistItems);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const t = useTranslations("header");
   const { theme, setTheme } = useTheme();
   const [isMounted, setIsMounted] = useState(false);
-  const [userId, setUserId] = useState(null); // State to hold user ID
+  const [userId, setUserId] = useState(null);
 
+  // Listen for language changes and adjust theme
   useEffect(() => {
     if (!theme) {
-      setTheme("light");
+      setTheme("light"); // default theme
     }
 
     setIsMounted(true);
 
     // Get user ID from cookies
-    const cookies = document.cookie.split("; ");
-    const userIdCookie = cookies.find((cookie) =>
-      cookie.startsWith("user_id=")
-    );
-    if (userIdCookie) {
-      setUserId(userIdCookie.split("=")[1]); // Extract user ID
-    }
-  }, []);
+    // const cookies = document.cookie.split("; ");
+    // const userIdCookie = cookies.find((cookie) =>
+    //   cookie.startsWith("user_id=")
+    // );
+    // if (userIdCookie) {
+    //   setUserId(userIdCookie.split("=")[1]); // Extract user ID
+    // }
+  }, [theme]);
+
+
 
   const handleLogout = () => {
     // Delete user_id cookie
     document.cookie =
-      "user_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; // Set cookie to expire in the past
-    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; // Set cookie to expire in the past
+      "user_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     setUserId(null); // Clear user ID from state
     router.push("/");
   };
@@ -62,19 +62,13 @@ const Header = ({
       {isMounted && (
         <>
           <header
-            className={`edu-header header-style-${
-              header_style ? header_style : "1"
-            } ${
-              disable_full_width
-                ? "disbale-header-fullwidth"
-                : "header-fullwidth"
+            className={`edu-header header-style-${header_style ? header_style : "1"} ${
+              disable_full_width ? "disbale-header-fullwidth" : "header-fullwidth"
             } no-topbar `}
           >
             <div id="edu-sticky-placeholder"></div>
             <div
-              className={`header-mainmenu ${
-                sticky && isSticky ? "edu-sticky" : undefined
-              }`}
+              className={`header-mainmenu ${sticky && isSticky ? "edu-sticky" : undefined}`}
             >
               <div className="container-fluid">
                 <div className="header-navbar">
@@ -107,33 +101,6 @@ const Header = ({
                   </div>
                   <div className="header-right">
                     <ul className="header-action">
-                      {/* <li className="search-bar">
-                        <div className="input-group">
-                          <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Search"
-                          />
-                          <button className="search-btn" type="button">
-                            <i className="icon-2"></i>
-                          </button>
-                        </div>
-                      </li> */}
-                      {/* <li className="icon search-icon">
-              <a
-                style={{ cursor: "pointer" }}
-                onClick={() => setIsSearchOpen(true)}
-                className="search-trigger"
-              >
-                <i className="icon-2"></i>
-              </a>
-            </li>
-            <li className="icon">
-              <Link href="/" className="wishlist">
-                <i className="icon-22"></i>
-                <span className="count">{wishlists?.length}</span>
-              </Link>
-            </li> */}
                       <li className="icon cart-icon">
                         <Link href="/cart" className="cart-icon">
                           <i className="icon-3"></i>
@@ -145,33 +112,27 @@ const Header = ({
                         <button
                           className="btn"
                           style={{ paddingLeft: 0, paddingRight: 0 }}
-                          onClick={() =>
-                            setTheme(theme === "light" ? "dark" : "light")
-                          }
-                          aria-label={`Switch to ${
-                            theme == "light" ? "dark" : "light"
-                          } mode`}
                         >
-                          {theme == "light" ? (
-                            <Moon
-                              strokeWidth={2}
-                              size={28}
-                              style={{ cursor: "pointer" }}
-                              color="#181818"
-                            />
-                          ) : (
-                            <Sun
-                              strokeWidth={2}
-                              size={32}
-                              style={{ cursor: "pointer" }}
-                              color="#FFEB3B"
-                            />
-                          )}
+                          {isMounted &&
+                            (theme === "dark" ? (
+                              <Sun
+                                strokeWidth={2}
+                                size={32}
+                                style={{ cursor: "pointer" }}
+                                color="#FFEB3B"
+                              />
+                            ) : (
+                              <Moon
+                                strokeWidth={2}
+                                size={28}
+                                style={{ cursor: "pointer" }}
+                                color="#181818"
+                              />
+                            ))}
                         </button>
                       </li>
                       <li>
-                        {/* until i define the redux context this gonna help */}
-                        <SwitchLang theme={theme}/>
+                        <SwitchLang />
                       </li>
 
                       {!userId && (
@@ -185,11 +146,8 @@ const Header = ({
 
                       {userId && (
                         <li className="header-btn">
-                          <button
-                            onClick={handleLogout}
-                            className="edu-btn btn-medium"
-                          >
-                            {t('signout')}
+                          <button onClick={handleLogout} className="edu-btn btn-medium">
+                            {t("signout")}
                           </button>
                         </li>
                       )}
@@ -207,17 +165,8 @@ const Header = ({
                 </div>
               </div>
             </div>
-
-            {/* <!-- Start Search Popup  --> */}
-            {/* <SearchPopup
-          isSearchOpen={isSearchOpen}
-          setIsSearchOpen={setIsSearchOpen}
-        /> */}
-            {/* <!-- End Search Popup  --> */}
           </header>
-          {/* sidebar start */}
           <OffCanvas isOpen={isOpen} setIsOpen={setIsOpen} />
-          {/* sidebar end */}
         </>
       )}
     </>

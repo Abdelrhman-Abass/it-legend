@@ -135,7 +135,7 @@ const RegisterForm = () => {
         <div style={{ position: "relative" }}>
           <label htmlFor="log-password">{t("password")}</label>
           <input
-            autocomplete="current-password"
+            autoComplete="current-password"
             value={values.password}
             onChange={handleChange}
             onBlur={handleBlur}

@@ -105,6 +105,7 @@
         "lost": "Forgot Password?",
         "signUp": "Sign Up",
         "haveAccount": "Already Have an Account?",
+        "phoneNumber": "Phone Number",
         "firstName": "First Name",
         "firstNameReq": "First Name is Required",
         "lastName": "Last Name",

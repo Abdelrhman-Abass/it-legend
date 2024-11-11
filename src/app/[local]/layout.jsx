@@ -54,7 +54,7 @@ export default async function RootLayout({ children, params: { locale } }) {
         : "programming courses, learn programming, web development, mobile applications, artificial intelligence, coding certification";
 
     return (
-        <html lang={locale} dir={locale == "ar" ? "rtl" : "ltr"}>
+        <html lang={locale} dir={locale == "ar" ? "rtl" : "ltr"} suppressHydrationWarning>
             <head>
                 <link rel="icon" type="image" href="/favicon.png" />
                 <title>{title}</title>
@@ -70,6 +70,7 @@ export default async function RootLayout({ children, params: { locale } }) {
             </head>
 
             <body
+                suppressHydrationWarning
                 className={` ${locale == "ar" ? notoKufiArabic.variable : poppins.variable}`}
                 cz-shortcut-listen="false"
             >

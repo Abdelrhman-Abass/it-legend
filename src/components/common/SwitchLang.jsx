@@ -3,9 +3,12 @@ import { useLocale } from "next-intl";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useTransition } from "react";
+import { useTheme } from "next-themes";
 
-const SwitchLang = ({theme}) => {
+const SwitchLang = () => {
   const [isPending, startTransition] = useTransition();
+  const { theme, setTheme } = useTheme();
+
   const router = useRouter();
   const local = useLocale();
   const pathname = usePathname();
