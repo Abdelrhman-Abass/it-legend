@@ -1,15 +1,17 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Link, useRouter } from "@/navigation";
+import { Link, useRouter, usePathname } from "@/navigation";
 import MainMenu from "../headers/component/main-menu";
 import useSticky from "@/hooks/use-sticky";
 import useCartInfo from "@/hooks/use-cart-info";
 import OffCanvas from "./component/OffCanvas";
 import Cart from "./component/cart";
 import Image from "next/image";
-import { Moon, Sun } from "lucide-react";
+import { ArrowLeft, ArrowRight, Moon, MoveDownLeft, MoveRight, Sun } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
+import { MoveLeft } from 'lucide-react';
+
 
 import SwitchLang from "../../components/common/SwitchLang";
 
@@ -30,12 +32,17 @@ const Header = ({
   const { theme, setTheme } = useTheme();
   const [isMounted, setIsMounted] = useState(false);
   const [userId, setUserId] = useState(null); // State to hold user ID
-
+  const pathname = usePathname();
+  const currentLocale = pathname.split('/')[1]; // This will give you 'ar' or 'en'
+  const [local, setLocal] = useState(currentLocale);
+  
+  console.log(local);
   useEffect(() => {
     if (!theme) {
       setTheme("light");
     }
-
+    
+    setLocal(currentLocale);
     setIsMounted(true);
 
     // Get user ID from cookies
@@ -46,7 +53,7 @@ const Header = ({
     if (userIdCookie) {
       setUserId(userIdCookie.split("=")[1]); // Extract user ID
     }
-  }, []);
+  }, [local]);
 
   const handleLogout = () => {
     // Delete user_id cookie
@@ -137,7 +144,9 @@ const Header = ({
                       <li className="icon cart-icon">
                         <Link href="/cart" className="cart-icon">
                           <i className="icon-3"></i>
+                          {quantity >0 &&
                           <span className="count">{quantity}</span>
+                          }
                         </Link>
                         <Cart />
                       </li>
@@ -177,8 +186,13 @@ const Header = ({
                       {!userId && (
                         <li className="header-btn">
                           <Link href="/auth" className="edu-btn btn-medium">
-                            <i className="icon-4"></i>
-                            <span> {t("signin")} </span>
+                          {local === "ar" ? (
+                              // <i className="icon-100 mr-2"></i>
+                              <ArrowLeft className="d-inline h-[20px]"/>
+                            ) : (
+                              <i className="icon-4 mr-2"></i>
+                            )}
+                            <span>{t("signin")}</span>
                           </Link>
                         </li>
                       )}
@@ -189,7 +203,15 @@ const Header = ({
                             onClick={handleLogout}
                             className="edu-btn btn-medium"
                           >
-                            {t('signout')}
+                            {t('signout') === "تسجيل الدخول" ? (
+                              <>
+                              <i className="icon-6 ml-2"></i>
+                              <p>let </p>
+                              </>
+                            ) : (
+                              <i className="icon-4 mr-2"></i>
+                            )}
+                            <span>{t('signout')}</span>
                           </button>
                         </li>
                       )}
