@@ -35,13 +35,16 @@ const Header = ({
   const pathname = usePathname();
   const currentLocale = pathname.split('/')[1]; // This will give you 'ar' or 'en'
   const [local, setLocal] = useState(currentLocale);
-  
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   console.log(local);
+
+  
   useEffect(() => {
     if (!theme) {
       setTheme("light");
     }
-    
+
     setLocal(currentLocale);
     setIsMounted(true);
 
@@ -114,41 +117,44 @@ const Header = ({
                   </div>
                   <div className="header-right">
                     <ul className="header-action">
-                      {/* <li className="search-bar">
-                        <div className="input-group">
-                          <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Search"
-                          />
-                          <button className="search-btn" type="button">
-                            <i className="icon-2"></i>
-                          </button>
-                        </div>
-                      </li> */}
-                      {/* <li className="icon search-icon">
-              <a
-                style={{ cursor: "pointer" }}
-                onClick={() => setIsSearchOpen(true)}
-                className="search-trigger"
-              >
-                <i className="icon-2"></i>
-              </a>
-            </li>
-            <li className="icon">
-              <Link href="/" className="wishlist">
-                <i className="icon-22"></i>
-                <span className="count">{wishlists?.length}</span>
-              </Link>
-            </li> */}
+                      <li className="dropdown" style={{ position: 'relative', display: 'inline-block' }}>
+                        <button 
+                          style={{display:"block", background: 'none', border: 'none', cursor: 'pointer' }}
+                          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                        >
+                          Links
+                        </button>
+                        {isDropdownOpen && (
+                          <div className="dropdown-content" style={{
+                            display: 'block',
+                            position: 'absolute',
+                            backgroundColor: '#f9f9f9',
+                            minWidth: '160px',
+                            boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)',
+                            zIndex: 1
+                          }}>
+                            <Link href="/course-details/10" style={{ display: 'block', padding: '8px 16px', textDecoration: 'none' }}>Course Details</Link>
+                            <Link href="/courses" style={{ display: 'block', padding: '8px 16px', textDecoration: 'none' }}>Courses</Link>
+                            <Link href="/diploma-details/10" style={{ display: 'block', padding: '8px 16px', textDecoration: 'none' }}>Diploma Details</Link>
+                            <Link href="/diploma-sales" style={{ display: 'block', padding: '8px 16px', textDecoration: 'none' }}>Diploma Sales</Link>
+                            <Link href="/auth" style={{ display: 'block', padding: '8px 16px', textDecoration: 'none' }}>Auth</Link>
+                            <Link href="/cart" style={{ display: 'block', padding: '8px 16px', textDecoration: 'none' }}>Cart</Link>
+                            <Link href="/checkout" style={{ display: 'block', padding: '8px 16px', textDecoration: 'none' }}>Checkout</Link>
+                            <Link href="/successful-operation" style={{ display: 'block', padding: '8px 16px', textDecoration: 'none' }}>Successful Operation</Link>
+                            <Link href="/diploma/10" style={{ display: 'block', padding: '8px 16px', textDecoration: 'none' }}>Diploma</Link>
+                            <Link href="/learning-path" style={{ display: 'block', padding: '8px 16px', textDecoration: 'none' }}>Learning Path</Link>
+                          </div>
+                        )}
+                      </li>
                       <li className="icon cart-icon">
                         <Link href="/cart" className="cart-icon">
                           <i className="icon-3"></i>
-                          {quantity >0 &&
-                          <span className="count">{quantity}</span>
+                          {quantity > 0 &&
+                            <span className="count">{quantity}</span>
                           }
                         </Link>
                         <Cart />
+
                       </li>
                       <li>
                         <button
@@ -157,9 +163,8 @@ const Header = ({
                           onClick={() =>
                             setTheme(theme === "light" ? "dark" : "light")
                           }
-                          aria-label={`Switch to ${
-                            theme == "light" ? "dark" : "light"
-                          } mode`}
+                          aria-label={`Switch to ${theme == "light" ? "dark" : "light"
+                            } mode`}
                         >
                           {theme == "light" ? (
                             <Moon
@@ -180,15 +185,15 @@ const Header = ({
                       </li>
                       <li>
                         {/* until i define the redux context this gonna help */}
-                        <SwitchLang theme={theme}/>
+                        <SwitchLang theme={theme} />
                       </li>
 
                       {!userId && (
                         <li className="header-btn">
                           <Link href="/auth" className="edu-btn btn-medium">
-                          {local === "ar" ? (
+                            {local === "ar" ? (
                               // <i className="icon-100 mr-2"></i>
-                              <ArrowLeft className="d-inline h-[20px]"/>
+                              <ArrowLeft className="d-inline h-[20px]" />
                             ) : (
                               <i className="icon-4 mr-2"></i>
                             )}
@@ -205,8 +210,8 @@ const Header = ({
                           >
                             {t('signout') === "تسجيل الدخول" ? (
                               <>
-                              <i className="icon-6 ml-2"></i>
-                              <p>let </p>
+                                <i className="icon-6 ml-2"></i>
+                                <p>let </p>
                               </>
                             ) : (
                               <i className="icon-4 mr-2"></i>
@@ -229,13 +234,6 @@ const Header = ({
                 </div>
               </div>
             </div>
-
-            {/* <!-- Start Search Popup  --> */}
-            {/* <SearchPopup
-          isSearchOpen={isSearchOpen}
-          setIsSearchOpen={setIsSearchOpen}
-        /> */}
-            {/* <!-- End Search Popup  --> */}
           </header>
           {/* sidebar start */}
           <OffCanvas isOpen={isOpen} setIsOpen={setIsOpen} />
