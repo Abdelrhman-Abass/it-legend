@@ -39,9 +39,9 @@ const page = () => {
         </div>
       </div>
       <CounterArea />
-      <ListArea title="المستوي الأول" />
-      <ListArea title="المستوي الثاني" />
-      <ListArea title="المستوي الثالث" />
+      <ListArea title="المستوي مبتدئ" />
+      <ListArea title="المستوي متوسط" />
+      <ListArea title="المستوي متقدم" />
     </>
   );
 };

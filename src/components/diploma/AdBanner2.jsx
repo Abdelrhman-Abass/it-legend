@@ -3,6 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useMouseMoveUI } from "@/contexts/mouse-move-context";
 import { Link } from "@/navigation";
+import { FaArrowLeft } from "react-icons/fa";
 
 const AdBanner2 = ({ home_4 }) => {
   const { mouseDirection, mouseReverse } = useMouseMoveUI();
@@ -37,7 +38,7 @@ const AdBanner2 = ({ home_4 }) => {
                   هتشوفه. احرص على اختيار الطريق الصحيح وتجنب العثرات الشائعة!
                 </p>
                 <Link href="/diploma-sales/1" className="edu-btn btn-secondary">
-                  ابدأ الان <i className="icon-4"></i>
+                  ابدأ الان F<FaArrowLeft/>
                 </Link>
               </div>
             </div>

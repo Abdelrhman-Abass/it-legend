@@ -41,6 +41,8 @@ const SwitchThemeButton = () => {
             className="inline-flex items-center justify-center p-2 rounded-lg transition-colors hover:text-gray-900 dark:hover:text-white bg-transparent border-none focus:outline-none"
             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
             aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+            style={{marginTop:"30px", marginLeft:"10px" , float:"left"}}
+            
         >
             {theme === "light" ? (
                 <Moon

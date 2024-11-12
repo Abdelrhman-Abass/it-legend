@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useMouseMoveUI } from "@/contexts/mouse-move-context";
 import { Link } from "@/navigation";
 import Image from "next/image";
+import SwitchThemeButton from "../common/SwitchThemeButton";
 
 // import SwitchThemeButton from "../common/SwitchThemeButton";
 

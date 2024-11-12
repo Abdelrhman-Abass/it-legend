@@ -9,6 +9,7 @@ const HeroArea = () => {
   const { mouseDirection, mouseReverse } = useMouseMoveUI();
   return (
     <div className="hero-banner hero-style-2 bg-image">
+      
       <div className="container">
         <div className="row row--45 align-items-center">
           <div className="col-lg-6">
