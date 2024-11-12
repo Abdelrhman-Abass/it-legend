@@ -18,11 +18,11 @@ const data = {
     "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg",
     "https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg",
     "https://upload.wikimedia.org/wikipedia/commons/9/95/Vue.js_Logo_2.svg",
-    "https://svgshare.com/i/1At8.svg",
-    "https://svgshare.com/i/1At9.svg",
-    "https://svgshare.com/i/1Ave.svg",
-    "https://svgshare.com/i/1AwH.svg",
-    "https://svgshare.com/i/1Avf.svg",
+    "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg",
+    "https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg",
+    "https://upload.wikimedia.org/wikipedia/commons/9/95/Vue.js_Logo_2.svg",
+    "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg",
+    "https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg",    
   ],
 };
 

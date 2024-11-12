@@ -691,6 +691,43 @@ textarea {
   z-index: 3;
 }
 
+.course-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+  transition: all 0.3s ease;
+}
+
+.course-item:hover {
+  background-color: rgba(var(--color-primary-rgb), 0.05);
+}
+
+.course-item.active {
+  background-color: rgba(var(--color-primary-rgb), 0.1);
+}
+
+.course-item-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.course-item .title {
+  font-size: 14px;
+  color: var(--color-heading);
+}
+
+.course-item .duration {
+  font-size: 12px;
+  color: var(--color-body);
+}
+
+[dir="rtl"] .course-item-content {
+  flex-direction: row-reverse;
+}
+
 .video-frame + .video-overlay {
   position: absolute;
   width: 100%;

@@ -19,7 +19,7 @@ const SignInCard = ({ setIsFlip }) => {
       <h3 className="title">{t("signIn")}</h3>
       <p>
         {t("dont")}{" "}
-        <Link href="#" onClick={() => setIsFlip((prev) => !prev)}>
+        <Link href="#" style={{color:"red"}}  onClick={() => setIsFlip((prev) => !prev)}>
           {t("signUp")}
         </Link>
       </p>
@@ -42,7 +42,7 @@ const SignUpCard = ({ setIsFlip }) => {
       <h3 className="title">{t("signUp")}</h3>
       <p>
         {t("haveAccount")}{" "}
-        <Link href="#" onClick={() => setIsFlip((prev) => !prev)}>
+        <Link href="#" style={{color:"red"}} onClick={() => setIsFlip((prev) => !prev)}>
           {t("signIn")}
         </Link>
       </p>
