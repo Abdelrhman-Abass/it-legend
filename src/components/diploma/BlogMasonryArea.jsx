@@ -1,11 +1,19 @@
 "use client";
-import React, { useEffect, useState } from "react";
 import { blog_data } from "@/data";
 import { Link } from "@/navigation";
+import { ArrowLeft, Moon, Sun } from "lucide-react";
+import React, { useEffect, useState } from "react";
 
 const BlogMasonryArea = ({ showMore = false }) => {
   const [blogItems, setBlogItems] = useState([]);
   const [columns, setColumns] = useState(3);
+  const [direction, setDirection] = useState('rtl');
+
+  useEffect(() => {
+    const htmlElement = document.documentElement; // or document.querySelector('html')
+    const currentDirection = htmlElement.dir
+    setDirection(currentDirection);
+  }, [direction]);
 
   // Handle responsive columns
   useEffect(() => {
@@ -16,6 +24,7 @@ const BlogMasonryArea = ({ showMore = false }) => {
         setColumns(2);
       } else {
         setColumns(3);
+        
       }
     };
 
@@ -92,9 +101,9 @@ const BlogMasonryArea = ({ showMore = false }) => {
             المشروعات اللي هتعملها أثناء الدبلومة دي
           </h3>
 
-          <div 
-            style={{ 
-              display: 'grid', 
+          <div
+            style={{
+              display: 'grid',
               gridTemplateColumns: `repeat(${columns}, 1fr)`,
               gap: '30px'
             }}
@@ -114,7 +123,11 @@ const BlogMasonryArea = ({ showMore = false }) => {
         <ul className="edu-pagination top-space-30"></ul>
         {showMore && (
           <Link href="/diploma-sales/1#projects" className="edu-btn">
-            <i className="icon-4"></i>
+            {direction == "rtl" ? (
+              <ArrowLeft className="d-inline h-[20px]" />
+            ) : (
+              <i className="icon-4 mr-2"></i>
+            )}
             <span>المزيد من المشاريع</span>
           </Link>
         )}
