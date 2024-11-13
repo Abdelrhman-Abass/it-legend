@@ -81,7 +81,7 @@ const WhyChose = () => {
                     src="/assets/images/others/why-choose-01.webp"
                     alt="Why Choose"
                     width={370}
-                    height={470}
+                    height={390}
                     data-aos-delay="60"
                 data-aos="fade-right"
                 data-aos-duration="900"
@@ -89,8 +89,8 @@ const WhyChose = () => {
                 </div>
                 <motion.div className="thumbnail thumbnail-2" style={{y,
                     position: 'absolute',
-                    right: '-10px',  // Adjust this value to move more/less to the right
-                    top: '105%',
+                    right: '200px',  // Adjust this value to move more/less to the right
+                    top: '100%',
                     }}>
                   <Image
                     src="/assets/images/others/why-choose-02.webp"
