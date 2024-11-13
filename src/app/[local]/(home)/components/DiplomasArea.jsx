@@ -27,7 +27,8 @@ const DiplomasArea = () => {
           {course_data.slice(0, 6).map((course) => {
             return (
               <div
-                className="col-md-6 col-lg-4"
+                className="col-md-5 col-lg-3 w-auto h-auto"
+                style={{ width: "auto !mportant", height: "auto !mportant"  }}
                 data-aos-delay="150"
                 data-aos="fade-up"
                 data-aos-duration="800"

@@ -3,10 +3,6 @@ import { Link } from "@/navigation";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cart_course } from "@/store/features/cart-slice";
-import {
-  add_to_wishlist,
-  wishlistItems,
-} from "@/store/features/wishlist-slice";
 import Image from "next/image";
 
 const CourseTypeOne = ({
@@ -18,38 +14,8 @@ const CourseTypeOne = ({
 }) => {
   const { cartCourses } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  const wishlists = useSelector(wishlistItems);
-  const isWishlistSelected = wishlists.find(
-    (w) => Number(w.id) === Number(data.id)
-  );
-
-  const handleWishlist = (course_item) => {
-    if (wishlists.find((i) => i.id === course_item.id)) {
-      dispatch(
-        add_to_wishlist({
-          change_type: "remove_wishlist",
-          item: {
-            id: course_item.id,
-            img: `/assets/images/course/course-06/${course_item.img}`,
-            title: course_item.title,
-            price: course_item.course_price,
-          },
-        })
-      );
-    } else {
-      dispatch(
-        add_to_wishlist({
-          change_type: "add_wishlist",
-          item: {
-            id: course_item.id,
-            img: `/assets/images/course/course-06/${course_item.img}`,
-            title: course_item.title,
-            price: course_item.course_price,
-          },
-        })
-      );
-    }
-  };
+  
+  
 
   // handle add to cart
   const handleAddToCart = (course) => {
@@ -71,7 +37,7 @@ const CourseTypeOne = ({
       } hover-button-bg-white`}
     >
       <div className="inner">
-        <div className="thumbnail">
+        <div className="thumbnail" >
           <Link
             href={my ? `/diploma/${data.id}` : `/diploma-details/${data.id}`}
           >
@@ -126,6 +92,8 @@ const CourseTypeOne = ({
                 alignItems: "center",
               }}
             >
+
+              
               <i className="icon-25"></i>
               {data.student} طالب
             </li>
@@ -134,26 +102,12 @@ const CourseTypeOne = ({
       </div>
 
       <div className="course-hover-content-wrapper">
-        <button
-          onClick={() => handleWishlist(data)}
-          className={`wishlist-btn ${
-            isWishlistSelected ? "active" : undefined
-          }`}
-        >
-          <i className="icon-22"></i>
-        </button>
+        
       </div>
 
       <div className="course-hover-content">
         <div className="content">
-          <button
-            onClick={() => handleWishlist(data)}
-            className={`wishlist-btn ${
-              isWishlistSelected ? "active" : undefined
-            }`}
-          >
-            <i className="icon-22"></i>
-          </button>
+          
           <span className="course-level">{data.level}</span>
           <h6 className="title">
             <Link

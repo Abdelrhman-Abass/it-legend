@@ -32,20 +32,29 @@ const Header = ({
   const { theme, setTheme } = useTheme();
   const [isMounted, setIsMounted] = useState(false);
   const [userId, setUserId] = useState(null); // State to hold user ID
-  const pathname = usePathname();
-  const currentLocale = pathname.split('/')[1]; // This will give you 'ar' or 'en'
-  const [local, setLocal] = useState(currentLocale);
+  
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  console.log(local);
 
-  
+  const [direction, setDirection] = useState('rtl');
+
+  useEffect(() => {
+    const htmlElement = document.documentElement; // or document.querySelector('html')
+    const currentDirection = htmlElement.dir
+    setDirection(currentDirection);
+  }, [direction]);
+
+  console.log(direction);
+
   useEffect(() => {
     if (!theme) {
       setTheme("light");
     }
 
-    setLocal(currentLocale);
+    const htmlElement = document.documentElement; // or document.querySelector('html')
+    const currentDirection = htmlElement.dir
+    setDirection(currentDirection);
+
     setIsMounted(true);
 
     // Get user ID from cookies
@@ -53,10 +62,10 @@ const Header = ({
     const userIdCookie = cookies.find((cookie) =>
       cookie.startsWith("user_id=")
     );
-    if (userIdCookie) {
-      setUserId(userIdCookie.split("=")[1]); // Extract user ID
-    }
-  }, [local]);
+    // if (userIdCookie) {
+    //   setUserId(userIdCookie.split("=")[1]); // Extract user ID
+    // }
+  }, [direction]);
 
   const handleLogout = () => {
     // Delete user_id cookie
@@ -72,19 +81,16 @@ const Header = ({
       {isMounted && (
         <>
           <header
-            className={`edu-header header-style-${
-              header_style ? header_style : "1"
-            } ${
-              disable_full_width
+            className={`edu-header header-style-${header_style ? header_style : "1"
+              } ${disable_full_width
                 ? "disbale-header-fullwidth"
                 : "header-fullwidth"
-            } no-topbar `}
+              } no-topbar `}
           >
             <div id="edu-sticky-placeholder"></div>
             <div
-              className={`header-mainmenu ${
-                sticky && isSticky ? "edu-sticky" : undefined
-              }`}
+              className={`header-mainmenu ${sticky && isSticky ? "edu-sticky" : undefined
+                }`}
             >
               <div className="container-fluid">
                 <div className="header-navbar">
@@ -118,8 +124,8 @@ const Header = ({
                   <div className="header-right">
                     <ul className="header-action">
                       <li className="dropdown" style={{ position: 'relative', display: 'inline-block' }}>
-                        <button 
-                          style={{display:"block", background: 'none', border: 'none', cursor: 'pointer' }}
+                        <button
+                          style={{ display: "block", background: 'none', border: 'none', cursor: 'pointer' }}
                           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                         >
                           Links
@@ -191,8 +197,7 @@ const Header = ({
                       {!userId && (
                         <li className="header-btn">
                           <Link href="/auth" className="edu-btn btn-medium">
-                            {local === "ar" ? (
-                              // <i className="icon-100 mr-2"></i>
+                            {direction == "rtl" ? (
                               <ArrowLeft className="d-inline h-[20px]" />
                             ) : (
                               <i className="icon-4 mr-2"></i>
@@ -202,7 +207,9 @@ const Header = ({
                         </li>
                       )}
 
-                      {userId && (
+
+
+                      {/* {userId && (
                         <li className="header-btn">
                           <button
                             onClick={handleLogout}
@@ -219,7 +226,7 @@ const Header = ({
                             <span>{t('signout')}</span>
                           </button>
                         </li>
-                      )}
+                      )} */}
 
                       <li className="mobile-menu-bar d-block d-xl-none">
                         <button
