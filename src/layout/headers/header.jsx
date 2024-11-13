@@ -7,10 +7,9 @@ import useCartInfo from "@/hooks/use-cart-info";
 import OffCanvas from "./component/OffCanvas";
 import Cart from "./component/cart";
 import Image from "next/image";
-import { ArrowLeft, ArrowRight, Moon, MoveDownLeft, MoveRight, Sun } from "lucide-react";
+import { ArrowLeft, Moon, Sun } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
-import { MoveLeft } from 'lucide-react';
 
 
 import SwitchLang from "../../components/common/SwitchLang";

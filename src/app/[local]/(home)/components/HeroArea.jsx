@@ -2,14 +2,26 @@
 import { motion } from "framer-motion";
 import { useMouseMoveUI } from "@/contexts/mouse-move-context";
 import { useTranslations } from "next-intl";
+import React, { useEffect, useState } from "react";
+import { ArrowLeft, Moon, Sun } from "lucide-react";
+
 import Image from "next/image";
 
 const HeroArea = () => {
+  const [direction, setDirection] = useState('rtl');
+
+  useEffect(() => {
+    const htmlElement = document.documentElement; // or document.querySelector('html')
+    const currentDirection = htmlElement.dir
+    setDirection(currentDirection);
+  }, [direction]);
+
+
   const t = useTranslations("home.heroArea");
   const { mouseDirection, mouseReverse } = useMouseMoveUI();
   return (
     <div className="hero-banner hero-style-2 bg-image">
-      
+
       <div className="container">
         <div className="row row--45 align-items-center">
           <div className="col-lg-6">
@@ -45,7 +57,12 @@ const HeroArea = () => {
                 data-aos-duration="1000"
               >
                 <a href="#paths" className="edu-btn">
-                  <i className="icon-4"></i> {t("paths")}
+                  {direction == "rtl" ? (
+                    <ArrowLeft className="d-inline h-[20px]" />
+                  ) : (
+                    <i className="icon-4"></i>
+                  )}
+                  {t("paths")}
                 </a>
               </div>
             </div>
@@ -66,7 +83,7 @@ const HeroArea = () => {
                 data-aos="fade-down"
                 data-aos-duration="1000"
               >
-                <Image src="/assets/images/banner/man-1.webp" alt="Man Image" loading="lazy" width={240} height={370}/>
+                <Image src="/assets/images/banner/man-1.webp" alt="Man Image" loading="lazy" width={240} height={370} />
               </div>
               <div
                 className="online-support"

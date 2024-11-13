@@ -1,14 +1,23 @@
 "use client";
 import { Link } from "@/navigation";
-import React from "react";
 import { motion } from "framer-motion";
 import { useMouseMoveUI } from "@/contexts/mouse-move-context";
 import { useTranslations } from "next-intl";
+import React, { useEffect, useState } from "react";
+import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
 
 const lists = ["featureOne", "featureTwo", "featureThree"];
 
 const FreeDeploma = () => {
+  const [direction, setDirection] = useState('rtl');
+
+  useEffect(() => {
+    const htmlElement = document.documentElement; // or document.querySelector('html')
+    const currentDirection = htmlElement.dir
+    setDirection(currentDirection);
+  }, [direction]);
+
   const t = useTranslations("home.freeDeplomaArea");
   const { mouseDirection, mouseReverse } = useMouseMoveUI();
   return (
@@ -16,6 +25,7 @@ const FreeDeploma = () => {
       id="freeDeploma"
       className="edu-section-gap edu-about-area about-style-4"
     >
+      
       <div className="container">
         <div className="row g-5 align-items-center">
           <div className="col-lg-6">
@@ -115,7 +125,12 @@ const FreeDeploma = () => {
                 ))}{" "}
               </ul>
               <Link href="/diploma-details/1" className="edu-btn">
-                <i className="icon-4"></i> {t("getIt")}
+              {direction == "rtl" ? (
+                    <ArrowLeft className="d-inline h-[20px]" />
+                  ) : (
+                    <i className="icon-4"></i>
+                  )}
+                {t("getIt")}
               </Link>
             </div>
           </div>

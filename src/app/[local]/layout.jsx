@@ -8,10 +8,7 @@ import "@/styles/index.scss";
 import Client from "./Client";
 // import Script from "next/script";
 
-export const metadata = {
-    title: "IT Legend",
-    description: "IT Legend",
-};
+
 
 const notoKufiArabic = Noto_Kufi_Arabic({
     subsets: ["arabic"],
@@ -62,7 +59,7 @@ export default async function RootLayout({ children, params: { local } }) {
                     </MouseMoveProvider>
                     <Theme />
                 </ThemeProvider>
-                <script src="https://player.vdocipher.com/v2/api.js"></script>
+                {/* <script src="https://player.vdocipher.com/v2/api.js"></script> */}
             </body>
         </html>
     );

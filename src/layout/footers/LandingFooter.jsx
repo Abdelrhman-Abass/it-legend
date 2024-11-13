@@ -1,12 +1,20 @@
 "use client";
-import React from "react";
 import { motion } from "framer-motion";
 import { useMouseMoveUI } from "@/contexts/mouse-move-context";
 import { useTranslations } from "next-intl";
+import React, { useEffect, useState } from "react";
+import { ArrowLeft, Moon, Sun } from "lucide-react";
 
 const LandingFooter = () => {
   const t = useTranslations("footer");
   const { mouseDirection, mouseReverse } = useMouseMoveUI();
+  const [direction, setDirection] = useState('rtl');
+
+  useEffect(() => {
+    const htmlElement = document.documentElement; // or document.querySelector('html')
+    const currentDirection = htmlElement.dir
+    setDirection(currentDirection);
+  }, [direction]);
 
   return (
     <div className="pv-cta-area bg-image">
@@ -35,21 +43,31 @@ const LandingFooter = () => {
               href="https://wa.me/1234567890"
               target="_blank"
               className="edu-btn"
-              // data-aos-delay="400"
-              // data-aos="fade-left"
-              // data-aos-duration="1000"
+            // data-aos-delay="400"
+            // data-aos="fade-left"
+            // data-aos-duration="1000"
             >
-              <i className="icon-4"></i> {t("whatsapp")}
+              {direction == "rtl" ? (
+                <ArrowLeft className="d-inline h-[20px]" />
+              ) : (
+                <i className="icon-4"></i>
+              )}
+              {t("whatsapp")}
             </a>
             <a
               href="tel:+1234567890"
               target="_blank"
               className="edu-btn btn-bg-white"
-              // data-aos-delay="400"
-              // data-aos="fade-right"
-              // data-aos-duration="1000"
+            // data-aos-delay="400"
+            // data-aos="fade-right"
+            // data-aos-duration="1000"
             >
-              <i className="icon-4"></i> {t("call")}
+              {direction == "rtl" ? (
+                <ArrowLeft className="d-inline h-[20px]" />
+              ) : (
+                <i className="icon-4"></i>
+              )}
+              {t("call")}
             </a>
           </div>
         </div>
