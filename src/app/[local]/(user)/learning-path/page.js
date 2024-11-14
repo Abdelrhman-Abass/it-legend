@@ -58,8 +58,8 @@ const page = () => {
       </div>
       {/* Course */}
       <div
-        style={{ marginTop: 36 }}
-        className="section-center"
+        style={{ marginTop: 36 ,marginBottom:-35}}
+        className="section-title section-center"
         data-aos-delay="150"
         data-aos="fade-up"
         data-aos-duration="800"
