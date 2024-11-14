@@ -79,7 +79,7 @@ const SortingArea = ({
           <div className="icon">
             <i className="icon-55"></i>
           </div>
-          <select onChange={handleChange} className="edu-select">
+          <select className="edu-select">
             <option>Filters</option>
             <option>Low To High</option>
             <option>High To Low</option>
