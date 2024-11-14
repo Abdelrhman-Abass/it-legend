@@ -29,7 +29,7 @@ const FaqArea = () => {
   const [activeId, setActiveId] = React.useState('collapseOne');
 
   return (
-    <div className="edu-faq-area faq-style-1">
+    <div className="edu-faq-area" style={{paddingBottom:30}}>
       <div className="container">
         <div className="row g-5 row--45">
           <div className="col-lg-6">

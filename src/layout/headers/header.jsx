@@ -88,7 +88,7 @@ const Header = ({
           >
             <div id="edu-sticky-placeholder"></div>
             <div
-              className={`header-mainmenu ${sticky && isSticky ? "edu-sticky" : undefined
+              className={`header-mainmenu ${sticky && isSticky ? "edu-sticky" : "edu-sticky" 
                 }`}
             >
               <div className="container-fluid">

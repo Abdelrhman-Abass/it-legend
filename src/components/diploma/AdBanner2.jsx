@@ -1,17 +1,23 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useMouseMoveUI } from "@/contexts/mouse-move-context";
 import { Link } from "@/navigation";
 import { FaArrowLeft } from "react-icons/fa";
 
 const AdBanner2 = ({ home_4 }) => {
+  const [direction, setDirection] = useState('rtl');
   const { mouseDirection, mouseReverse } = useMouseMoveUI();
+
+  useEffect(() => {
+    const htmlElement = document.documentElement; // or document.querySelector('html')
+    const currentDirection = htmlElement.dir
+    setDirection(currentDirection);
+  }, [direction]);
   return (
     <div
-      className={`${
-        home_4 ? "online-academy-cta-wrapper" : "university-cta-wrapper"
-      } edu-cta-banner-area bg-image`}
+      className={`${home_4 ? "online-academy-cta-wrapper" : "university-cta-wrapper"
+        } edu-cta-banner-area bg-image`}
     >
       <div className="container">
         <div className="edu-cta-banner">
@@ -38,7 +44,12 @@ const AdBanner2 = ({ home_4 }) => {
                   هتشوفه. احرص على اختيار الطريق الصحيح وتجنب العثرات الشائعة!
                 </p>
                 <Link href="/diploma-sales/1" className="edu-btn btn-secondary">
-                  ابدأ الان F<FaArrowLeft/>
+                  {direction == "rtl" ? (
+                    <FaArrowLeft className="d-inline h-[20px]" />
+                  ) : (
+                    <i className="icon-4 mr-2"></i>
+                  )}
+                  ابدأ الان
                 </Link>
               </div>
             </div>
