@@ -16,7 +16,7 @@ const nextConfig = {
         hostname: '*',
       },
     ],
-   },
+  },
   // images: {
   //   remotePatterns: [
   //     {

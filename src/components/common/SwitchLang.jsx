@@ -26,9 +26,9 @@ const SwitchLang = ({theme}) => {
         onClick={onChangeLang}
         className="d-flex align-items-center gap-2 lang-btn"
       >
-        <div className="lang-global text-black">
+        {/* <div className="lang-global text-black">
           <Image src="/lang.png" width={20} height={20} alt="lang" />
-        </div>
+        </div> */}
         <span className={`text-uppercase ${theme ==="light" ? "text-black" : "text-white"}`}>{local == "ar" ? "EN" : "AR"}</span>
       </button>
     </div>

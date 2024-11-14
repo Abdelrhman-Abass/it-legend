@@ -5,16 +5,15 @@ import CategoryArea from "@/components/my-path/CategoryArea";
 import CounterUpArea from "@/components/my-path/CounterUpArea";
 import HeroArea from "@/components/my-path/HeroArea";
 import { course_data } from "@/data";
+import { UserHeader } from "@/layout";
 
 import React from "react";
 
 const page = () => {
   return (
     <div style={{ paddingBottom: 92 }}>
-      <SwitchThemeButton 
-        style={{ marginTop: '40px', float: 'left' }} 
-      />
-
+      
+  <UserHeader />
       <HeroArea />
       <CategoryArea />
       <CounterUpArea />
