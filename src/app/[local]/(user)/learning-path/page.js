@@ -59,7 +59,7 @@ const page = () => {
       {/* Course */}
       <div
         style={{ marginTop: 36 }}
-        className="section-title section-center"
+        className="section-center"
         data-aos-delay="150"
         data-aos="fade-up"
         data-aos-duration="800"
@@ -70,9 +70,9 @@ const page = () => {
           <i className="icon-19"></i>
         </span>
       </div>
-      <CourseTwoArea my={true} coursePerView={3} title="مرحلة ما قبل التعلم" />
-      <CourseTwoArea my={true} coursePerView={3} title="مرحلة التأسيس" />
-      <CourseTwoArea my={true} coursePerView={3} title="التأهيل لسوق العمل" />
+      <CourseTwoArea my={true} coursePerView={3}  />
+      {/* <CourseTwoArea my={true} coursePerView={3}  />
+      <CourseTwoArea my={true} coursePerView={3} /> */}
       {/* Recommend Course */}
       <CourseTwoArea title="مرشح لك" />
     </div>
