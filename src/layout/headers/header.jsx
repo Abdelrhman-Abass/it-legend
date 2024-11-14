@@ -141,7 +141,7 @@ const Header = ({
                             <Link href="/course-details/10" style={{ display: 'block', padding: '8px 16px', textDecoration: 'none' }}>Course Details</Link>
                             <Link href="/courses" style={{ display: 'block', padding: '8px 16px', textDecoration: 'none' }}>Courses</Link>
                             <Link href="/diploma-details/10" style={{ display: 'block', padding: '8px 16px', textDecoration: 'none' }}>Diploma Details</Link>
-                            <Link href="/diploma-sales" style={{ display: 'block', padding: '8px 16px', textDecoration: 'none' }}>Diploma Sales</Link>
+                            <Link href="/diploma-sales/10" style={{ display: 'block', padding: '8px 16px', textDecoration: 'none' }}>Diploma Sales</Link>
                             <Link href="/auth" style={{ display: 'block', padding: '8px 16px', textDecoration: 'none' }}>Auth</Link>
                             <Link href="/cart" style={{ display: 'block', padding: '8px 16px', textDecoration: 'none' }}>Cart</Link>
                             <Link href="/checkout" style={{ display: 'block', padding: '8px 16px', textDecoration: 'none' }}>Checkout</Link>

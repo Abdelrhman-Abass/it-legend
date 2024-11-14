@@ -9,6 +9,7 @@ import Testimonial from "@/components/diploma/Testimonial";
 import VideoArea from "@/layout/Video";
 import CountDown from "../../components/CountDown";
 import DiplomaCourses from "../../components/DiplomaCourses";
+import { UserHeader } from "@/layout";
 
 const data = {
   pre_title: "المميزات",
@@ -30,6 +31,7 @@ const data = {
 export default async function DiplomaPage() {
   return (
     <div className="diploma-sales-page">
+      <UserHeader />
       <CountDown />
       <VideoArea />
       <BrandArea data={data} />

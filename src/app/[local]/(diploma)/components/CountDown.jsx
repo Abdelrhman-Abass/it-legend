@@ -7,7 +7,6 @@ import SwitchThemeButton from "@/components/common/SwitchThemeButton";
 import { useTheme } from "next-themes";
 const CountDown = () => {
   const [isMounted, setIsMounted] = useState(false);
-  const { theme, systemTheme } = useTheme();
 
   useEffect(() => {
     setIsMounted(true);
@@ -16,11 +15,9 @@ const CountDown = () => {
   if (!isMounted) {
     return null;
   }
-  const currentTheme = theme === 'system' ? systemTheme : theme;
   return (
     <div className="timer">
       <div className="container">
-        <SwitchThemeButton/>
         <div
           className="flip"
           data-aos-delay="150"
