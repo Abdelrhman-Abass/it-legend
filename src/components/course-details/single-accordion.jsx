@@ -1,55 +1,44 @@
-import React from "react";
+import { useState } from 'react';
 
-const SingleAccordion = ({ show = false, id, title, desc }) => {
+const SingleAccordion = ({ show, id, title, desc }) => {
+  const [isOpen, setIsOpen] = useState(show);
+
   return (
     <div className="accordion-item">
-      <h3 className="accordion-header" id="headingOne">
+      <h3 className="accordion-header">
         <button
-          className={`accordion-button ${show ? "" : "collapsed"}`}
+          className={`accordion-button ${!isOpen ? 'collapsed' : ''}`}
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target={`#question-${id}`}
-          aria-expanded={show ? "true" : "false"}
+          onClick={() => setIsOpen(!isOpen)}
+          aria-expanded={isOpen}
         >
-          <span style={{ textAlign: "start" }}>{title}</span>
+          {title}
         </button>
       </h3>
-
       <div
-        id={`question-${id}`}
-        className={`accordion-collapse collapse ${show ? "show" : ""}`}
-        data-bs-parent="#faq-accordion"
+        className={`accordion-collapse collapse ${isOpen ? 'show' : ''}`}
       >
         <div className="accordion-body">
-          <div className="course-lesson">
-            <ul>
-              {desc.map((list, i) => (
-                <li key={i}>
-                  {list.title && (
-                    <div className="text d-flex align-items-center">
-                      <i className="icon-65"></i>
-                      {list.title}
+          <ul className="course-item">
+            {desc.map((item, i) => (
+              <li key={i}>
+                {item.badge_list ? (
+                  <div className="course-item-link">
+                    <span>{item.title}</span>
+                    <div className="course-item-meta">
+                      {item.question > 0 && <span>{item.question} Questions</span>}
+                      {item.minutes > 0 && <span>{item.minutes} Minutes</span>}
                     </div>
-                  )}
-                  {!list?.badge_list && (
-                    <div className="icon">
-                      <i className={list?.icon}></i>
-                    </div>
-                  )}
-                  {list?.badge_list && (
-                    <div className="badge-list">
-                      <span className="badge badge-primary">
-                        {list?.question} Question
-                      </span>
-                      <span className="badge badge-secondary">
-                        {list?.minutes} Minutes
-                      </span>
-                    </div>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
+                  </div>
+                ) : (
+                  <div className="course-item-link">
+                    <i className={item.icon}></i>
+                    <span>{item.title}</span>
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>

@@ -9,7 +9,9 @@ html[lang="ar"] body {
 html[lang="en"] body {
   font-family: var(--poppins-font-family) !important;
 }
-
+.accordion-item{
+  background: transparent !important;
+}
 .react-international-phone-input-container input {
   text-align: left !important;
 }
