@@ -6,7 +6,7 @@ const RootLayout = ({ children }) => {
   return (
     <Wrapper inSign={true} isSticky={false} hideFooter={true}>
       <section className="account-page-area section-gap-equal">
-        <div className="container position-relative">
+      <div className="container position-relative" style={{paddingTop:100}}>
           <div className="row g-5 justify-content-between">
             <div
               className="col-lg-6 order-card-2"

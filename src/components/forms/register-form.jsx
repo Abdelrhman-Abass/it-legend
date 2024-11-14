@@ -172,7 +172,7 @@ const RegisterForm = () => {
             id="terms-condition"
           />
           <label htmlFor="terms-condition">
-            {t("agree")} <Link href="/auth">{t("terms")}</Link>
+            {t("agree")} <Link href="/auth" style={{color:"red"}}>{t("terms")}</Link>
           </label>
         </div>
       </div>

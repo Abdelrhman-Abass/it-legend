@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import FlipClockCountdown from "@leenguyen/react-flip-clock-countdown";
 import "@leenguyen/react-flip-clock-countdown/dist/index.css";
-import SwitchThemeButton from "@/components/common/SwitchThemeButton";
 
 import { useTheme } from "next-themes";
 const CountDown = () => {

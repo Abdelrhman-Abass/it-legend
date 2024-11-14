@@ -84,7 +84,7 @@ const LoginForm = ({ setAuthError }) => {
         <a
           href="#"
           onClick={() => handleResetPass(values.email)}
-          className="password-reset"
+          className="password-reset" style={{color:"red"}}
         >
           {t("lost")}
         </a>
