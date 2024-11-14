@@ -283,6 +283,9 @@
 [data-theme="dark"] .edu-sorting-area .sorting-right .layout-switcher .switcher-btn li a {
     border: 1px solid var(--dark-color-border) !important;
 }
+[data-theme="dark"] .edu-sorting-area .edu-select {
+    background-color: var(--dark-color-bg-body) !important;
+}
 
 .rangeslider, .rangeslider .rangeslider__fill,
 .rangeslider .rangeslider__handle {
