@@ -2,6 +2,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { add_force_page, add_item_offset } from "@/store/features/filter-slice";
+import Link from "next/link";
 
 const SortingArea = ({
   course_items,
@@ -11,29 +12,29 @@ const SortingArea = ({
   course_list,
   items,
 }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const handleChange = (e) => {
-    if (e.target.value === "Filters") {
-      setCourses(course_items);
-    } else if (e.target.value === "Low To High") {
-      const lowToHigh = courses
-        .slice()
-        .sort(
-          (a, b) => parseFloat(a.course_price) - parseFloat(b.course_price)
-        );
-      setCourses(lowToHigh);
-    } else if (e.target.value === "High To Low") {
-      const highToHigh = courses
-        .slice()
-        .sort(
-          (a, b) => parseFloat(b.course_price) - parseFloat(a.course_price)
-        );
-      setCourses(highToHigh);
-    }
-    dispatch(add_item_offset(0));
-    dispatch(add_force_page(0));
-  };
+  // const handleChange = (e) => {
+  //   if (e.target.value === "Filters") {
+  //     setCourses(course_items);
+  //   } else if (e.target.value === "Low To High") {
+  //     const lowToHigh = courses
+  //       .slice()
+  //       .sort(
+  //         (a, b) => parseFloat(a.course_price) - parseFloat(b.course_price)
+  //       );
+  //     setCourses(lowToHigh);
+  //   } else if (e.target.value === "High To Low") {
+  //     const highToHigh = courses
+  //       .slice()
+  //       .sort(
+  //         (a, b) => parseFloat(b.course_price) - parseFloat(a.course_price)
+  //       );
+  //     setCourses(highToHigh);
+  //   }
+  //   dispatch(add_item_offset(0));
+  //   dispatch(add_force_page(0));
+  // };
 
   return (
     <div className="edu-sorting-area">
@@ -58,7 +59,7 @@ const SortingArea = ({
           <ul className="switcher-btn">
             <li>
               <Link
-                href="/course-style-1"
+                href="#"
                 className={!course_list ? "active" : ""}
               >
                 <i className="icon-53"></i>
@@ -66,7 +67,7 @@ const SortingArea = ({
             </li>
             <li>
               <Link
-                href="/course-style-4"
+                href="#"
                 className={course_list ? "active" : ""}
               >
                 <i className="icon-54"></i>
