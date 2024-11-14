@@ -10,6 +10,7 @@ const page = () => {
       <CourseBreadcrumb
         course={course}
         subtitle="دورة احتراف تصميم التطبيقات"
+        style={{paddingTop: 120}}
       />
       <CourseDetailsArea course={course} />
       <Testimonial about_p_2={true} />

@@ -10,10 +10,10 @@ const CourseBreadcrumb = ({ course, subtitle }) => {
   const { mouseDirection, mouseReverse } = useMouseMoveUI();
   const locale = useLocale();
   return (
-    <div className="edu-breadcrumb-area breadcrumb-style-3">
+    <div className="edu-breadcrumb-area breadcrumb-style-3" style={{paddingTop: 120 ,marginBottom:-50}}>
       <div className="container">
         <div className="breadcrumb-inner">
-          {/* <ul className="edu-breadcrumb">
+          <ul className="edu-breadcrumb">
             <li className="breadcrumb-item">
               <Link href="/">الرئيسة</Link>
             </li>
@@ -37,7 +37,7 @@ const CourseBreadcrumb = ({ course, subtitle }) => {
             <li className="breadcrumb-item active" aria-current="page">
               {subtitle}
             </li>
-          </ul> */}
+          </ul>
           <div className="page-title" style={{ paddingTop: 32 }}>
             <h1 className="title" style={{ position: "relative", zIndex: 12 }}>
               {title}
