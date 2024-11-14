@@ -53,7 +53,7 @@ const SortingArea = ({
         )}
       </div>
       <div className="sorting-right">
-        {/*   <div className="layout-switcher">
+          <div className="layout-switcher">
            <label>{course_list ? "List" : "Grid"}</label> 
           <ul className="switcher-btn">
             <li>
@@ -73,8 +73,8 @@ const SortingArea = ({
               </Link>
             </li>
           </ul> 
-        </div>*/}
-        {/* <div className="edu-sorting">
+        </div>
+        <div className="edu-sorting">
           <div className="icon">
             <i className="icon-55"></i>
           </div>
@@ -83,7 +83,7 @@ const SortingArea = ({
             <option>Low To High</option>
             <option>High To Low</option>
           </select>
-        </div> */}
+        </div>
       </div>
     </div>
   );

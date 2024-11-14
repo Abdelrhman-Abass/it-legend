@@ -1,17 +1,26 @@
+"use client"
+import SortingArea from "@/components/course-filter/sorting-area";
 import CourseTwoArea from "@/components/courses/CourseTwoArea";
 import { Wrapper } from "@/layout";
-import React from "react";
+import React, { useState } from "react";
 
-const page = () => {
+const Page = () => {
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+
   return (
-    <Wrapper>
-      <div style={{ paddingBottom: 72 }}>
-        <CourseTwoArea title="مرحلة ما قبل التعلم" />
-        <CourseTwoArea title="مرحلة التأسيس" />
-        <CourseTwoArea coursePerView={3} title="التأهيل لسوق العمل" />
+    <Wrapper >
+        
+      <div className="container">
+
+        <CourseTwoArea />
+        <CourseTwoArea  />
+        <CourseTwoArea />
+
       </div>
     </Wrapper>
   );
 };
 
-export default page;
+export default Page;
