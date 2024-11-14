@@ -1,5 +1,4 @@
 "use client"
-import SortingArea from "@/components/course-filter/sorting-area";
 import CourseTwoArea from "@/components/courses/CourseTwoArea";
 import { Wrapper } from "@/layout";
 import React, { useState } from "react";
