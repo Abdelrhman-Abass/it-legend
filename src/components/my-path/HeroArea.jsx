@@ -44,7 +44,7 @@ const HeroArea = () => {
                 </span>
               </div>
             </div>
-            <div className="right-content w-full lg:max-w-[450px] ">
+            <div className="right-content w-full  lg:max-w-[330px] ">
               <div className="edu-team-grid team-style-3 ">
                 <div className="inner ">
                   <div className="thumbnail-wrap ">

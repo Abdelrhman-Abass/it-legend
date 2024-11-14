@@ -18,7 +18,7 @@ import SwitchLang from "../../components/common/SwitchLang";
 const Header = ({
   header_style = false,
   disable_full_width = false,
-  isSticky,
+  isSticky = true,
   inSign = false,
 }) => {
   const router = useRouter();
