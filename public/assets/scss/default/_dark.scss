@@ -16,6 +16,7 @@
     .edu-course .content .course-meta li,
     .event-details .details-content .event-meta li a,
     .edu-sorting-area .sorting-right .layout-switcher label,
+    .edu-accordion .sorting-right .edu-sorting option,
     .course-details-content .course-enroll-box .single-item .login-btn a,
     .course-details-3 .nav-tabs .nav-item .nav-link.active, 
     .course-details-3 .nav-tabs .nav-item .nav-link:hover,
@@ -276,7 +277,9 @@
     .tpd-visible-frame-right .tpd-frame-left:after {
         border-right: 13px solid var(--color-black);
     }
-
+    .edu-accordion .sorting-right .edu-sorting .edu-select option{
+        background-color: var(--dark-color-bg-bod);
+    }
     .tpd-visible-frame-right .tpd-frame-right:after {
         border-left: 13px solid var(--color-black);
     }
