@@ -18,7 +18,7 @@ import SwitchLang from "../../components/common/SwitchLang";
 const UserHeader = ({
   header_style = false,
   disable_full_width = false,
-  isSticky=true,
+  isSticky = true,
   inSign = false,
 }) => {
   const router = useRouter();
@@ -31,7 +31,7 @@ const UserHeader = ({
   const { theme, setTheme } = useTheme();
   const [isMounted, setIsMounted] = useState(false);
   const [userId, setUserId] = useState(null); // State to hold user ID
-  
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
 
@@ -160,7 +160,14 @@ const UserHeader = ({
                         </Link>
                         <Cart />
 
+                        
+
                       </li> */}
+
+                      <li>
+                        {/* until i define the redux context this gonna help */}
+                        <Link href="/">Home</Link>
+                      </li>
                       <li>
                         <button
                           className="btn"
