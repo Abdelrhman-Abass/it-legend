@@ -12,6 +12,7 @@ html[lang="en"] body {
 .accordion-item{
   background: transparent !important;
 }
+
 .react-international-phone-input-container input {
   text-align: left !important;
 }

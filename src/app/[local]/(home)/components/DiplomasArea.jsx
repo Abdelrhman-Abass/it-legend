@@ -24,20 +24,24 @@ const DiplomasArea = () => {
           </span>
         </div>
         <div className="row g-5 pb-[50px]">
-          {course_data.slice(0, 6).map((course) => {
-            return (
-              <div
-                className="col-12 col-sm-6 col-lg-4 w-auto h-auto"
-                style={{ width: "auto !mportant", height: "auto !mportant"  }}
-                data-aos-delay="150"
-                data-aos="fade-up"
-                data-aos-duration="800"
-                key={course.id}
-              >
-                <CourseTypeOne data={course} image_location_path="02" />
-              </div>
-            );
-          })}
+        {course_data.slice(0, 6).map((course) => {
+              return (
+                <div
+                  className="col-md-6 col-lg-4"
+                  data-aos-delay="150"
+                  data-aos="fade-up"
+                  data-aos-duration="800"
+                  key={course.id}
+                >
+                  <CourseTypeOne
+                    bg="#f5f1eb"
+                    my={true}
+                    data={course}
+                    image_location_path="02"
+                  />
+                </div>
+              );
+            })}
         </div>
         {/* <div
           className="course-view-all"

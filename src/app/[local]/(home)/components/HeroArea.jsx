@@ -22,7 +22,7 @@ const HeroArea = () => {
   return (
     <div className="hero-banner hero-style-2 bg-image">
 
-      <div className="container">
+      <div className="container" style={{ paddingTop: "120px" }}>
         <div className="row row--45 align-items-center">
           <div className="col-lg-6">
             <div className="banner-content">
