@@ -21,12 +21,10 @@ export const authHandler = async (url, body) => {
       const { data } = response.data; // Extract the 'data' from the response
       const { token, refreshToken } = data;
 
-      // Log token for debugging (optional)
-      console.log("Received token:", token);
-
+      
       // Store tokens and user data in cookies
-      cookies().set("token", token);
-      cookies().set("refreshToken", refreshToken);
+      cookies().set("token", token,{ httpOnly: true, secure: true } );
+      cookies().set("refreshToken", refreshToken ,{ httpOnly: true, secure: true });
       // cookies().set("user_id", data.id);
       cookies().set("user", JSON.stringify(data));
       // Return the user data and tokens (matching Redux expectations)
