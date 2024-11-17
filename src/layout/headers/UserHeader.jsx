@@ -78,7 +78,7 @@ const UserHeader = ({
     // if (userIdCookie) {
     //   setUserId(userIdCookie.split("=")[1]); // Extract user ID
     // }
-  }, [direction ,user]);
+  }, [direction]);
 
   const handleLogout = () => {
     // Delete user_id cookie
