@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { loginSchema } from "../../utils/validation-schema";
 import ErrorMsg from "./error-msg";
 import { useTranslations } from "next-intl";
-import { useRouter } from "@/navigation";
+import { useRouter } from "next/navigation";
 import { loginUser } from "@/store/features/auth-slice";
 
 const LoginForm = ({ setAuthError }) => {
@@ -22,9 +22,11 @@ const LoginForm = ({ setAuthError }) => {
       onSubmit: async (values) => {
         setLoading(true);
         setAuthError(null);
+        console.log("values", values);
         try {
           const resultAction = await dispatch(loginUser(values)).unwrap();
           if (resultAction) {
+            // Navigate to the desired page after successful login
             router.push("/learning-path");
           }
         } catch (err) {
@@ -95,7 +97,7 @@ const LoginForm = ({ setAuthError }) => {
             <div className="spinner-border text-light" role="status"></div>
           ) : (
             <i className="icon-4"></i>
-          )}{" "}
+          )}
           <span> {t("signIn")}</span>
         </button>
       </div>

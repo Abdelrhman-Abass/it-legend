@@ -43,7 +43,6 @@ const Header = ({
     setDirection(currentDirection);
   }, [direction]);
 
-  console.log(direction);
 
   useEffect(() => {
     if (!theme) {
