@@ -19,6 +19,7 @@ const UserHeader = ({
   inSign = false,
 }) => {
   const router = useRouter();
+
   const { sticky } = useSticky();
   
   const [isOpen, setIsOpen] = useState(false);
@@ -62,13 +63,12 @@ const UserHeader = ({
   }, [direction]);
 
   const handleLogout = () => {
-    // Delete user_id cookie
-    document.cookie =
-      "user_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; // Set cookie to expire in the past
-    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; // Set cookie to expire in the past
+    const cookies = ['user', 'token', 'refreshToken'];
+    cookies.forEach(cookieName => {
+      document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}; secure;`;
+    });
     setUser(null); // Clear user ID from state
     router.push("/");
-
   };
 
   return (

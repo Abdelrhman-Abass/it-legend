@@ -39,7 +39,6 @@ export const authHandler = async (url, body) => {
     return null;
   }
 };
-
 // Example of the `getJWT` helper function (also using Axios)
 const getJWT = async (body) => {
   try {

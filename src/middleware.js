@@ -13,14 +13,14 @@ const intlMiddleware = createMiddleware({
 
 export async function middleware(req) {
   // Access cookies from the request headers
-  const userId = req.cookies.get("user_id")?.value;
+  const user = req.cookies.get("user")?.value;
 
   const { pathname } = req.nextUrl;
 
   // Define login-only and private paths
   const loginPaths = ["/auth", "/diploma-details/"]; // Public pages when not logged in
   const privatePaths = ["/course-player/", "/diploma/", "/learning-path"]; // Pages for logged-in users
-  const isUserLoggedIn = Boolean(userId);
+  const isUserLoggedIn = Boolean(user);
 
   // If user is authenticated and trying to access login paths, redirect to homepage
   if (
@@ -33,9 +33,11 @@ export async function middleware(req) {
   }
 
   // If user is not logged in and trying to access private paths, redirect to login
-  // if (!isUserLoggedIn && privatePaths.some((path) => pathname.includes(path))) {
-  //   return NextResponse.redirect(new URL("/auth", req.url));
-  // }
+  if (!isUserLoggedIn && privatePaths.some((path) => pathname.includes(path)) ||
+    pathname == "/ar" ||
+    pathname == "/en") {
+    return NextResponse.redirect(new URL("/auth", req.url));
+  }
 
   // Run the intl middleware first to handle locales
   const response = intlMiddleware(req);

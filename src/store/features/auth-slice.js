@@ -146,6 +146,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { authHandler } from "@/app/[local]/auth/authHandler";
 
+
 const initialState = {
   user: null,
   accessToken: null,
@@ -182,7 +183,6 @@ export const logoutUser = createAsyncThunk(
     try {
       cookies().set("token", "", { maxAge: 0 });
       cookies().set("refreshToken", "", { maxAge: 0 });
-      cookies().set("user_id", "", { maxAge: 0 });
       cookies().set("user", "", { maxAge: 0 });
       return true;
     } catch (error) {
