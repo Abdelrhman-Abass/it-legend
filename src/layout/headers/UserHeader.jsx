@@ -1,17 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Link, useRouter, usePathname } from "@/navigation";
+import { Link, useRouter } from "@/navigation";
 
-import MainMenu from "../headers/component/main-menu";
 import useSticky from "@/hooks/use-sticky";
-import useCartInfo from "@/hooks/use-cart-info";
 import OffCanvas from "./component/OffCanvas";
-import Cart from "./component/cart";
 import Image from "next/image";
 import { ArrowLeft, Moon, Sun } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
-import { useSelector, useDispatch } from 'react-redux';
 
 import SwitchLang from "../../components/common/SwitchLang";
 
@@ -24,19 +20,15 @@ const UserHeader = ({
 }) => {
   const router = useRouter();
   const { sticky } = useSticky();
-  const { quantity } = useCartInfo();
-  // const wishlists = useSelector(wishlistItems);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  
   const [isOpen, setIsOpen] = useState(false);
   const t = useTranslations("header");
   const { theme, setTheme } = useTheme();
   const [isMounted, setIsMounted] = useState(false);
-  const [userId, setUserId] = useState(null); // State to hold user ID
   
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [user, setUser] = useState(null); // State to store user information
   const [direction, setDirection] = useState('rtl');
-  // const { user } = useSelector((state) => state.auth);
 
 
 
@@ -66,18 +58,7 @@ const UserHeader = ({
       const userData = JSON.parse(decodeURIComponent(userCookie.split("=")[1]));
       setUser(userData); // Store user data in state
     }
-    // const userData = sessionStorage.getItem("user");
-
-    // if (userData) {
-    //   const parsedUser = JSON.parse(userData); // Parse the user data from JSON
-    //   setUser(parsedUser); // Store the parsed user data in state
-    // }
     
-    console.log("user", user);
-
-    // if (userIdCookie) {
-    //   setUserId(userIdCookie.split("=")[1]); // Extract user ID
-    // }
   }, [direction]);
 
   const handleLogout = () => {
@@ -85,7 +66,7 @@ const UserHeader = ({
     document.cookie =
       "user_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; // Set cookie to expire in the past
     document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; // Set cookie to expire in the past
-    setUserId(null); // Clear user ID from state
+    setUser(null); // Clear user ID from state
     router.push("/");
 
   };
@@ -214,29 +195,6 @@ const UserHeader = ({
                         {/* until i define the redux context this gonna help */}
                         <SwitchLang theme={theme} />
                       </li>
-                      {user ? (
-                        <li className="header-btn">
-                          <span>Hello, {user.fristName}</span> {/* Display user's first name */}
-                          <button
-                            onClick={handleLogout}
-                            className="edu-btn btn-medium"
-                          >
-                            <span>Sign Out</span>
-                          </button>
-
-                        </li>
-                      ) : (
-                        <li className="header-btn">
-                          <Link href="/auth" className="edu-btn btn-medium">
-                            {direction === "rtl" ? (
-                              <ArrowLeft className="d-inline h-[20px]" />
-                            ) : (
-                              <i className="icon-4 mr-2"></i>
-                            )}
-                            <span>Sign In</span>
-                          </Link>
-                        </li>
-                      )}
 
                       {!user && (
                         <li className="header-btn">
@@ -253,34 +211,21 @@ const UserHeader = ({
 
 
 
-                      {/* {userId && (
+                      {user && (
                         <li className="header-btn">
                           <button
                             onClick={handleLogout}
                             className="edu-btn btn-medium"
                           >
-                            {t('signout') === "تسجيل الدخول" ? (
-                              <>
-                                <i className="icon-6 ml-2"></i>
-                                <p>let </p>
-                                {
-    "fristName": "Alaa",
-    "lastName": "Mohamed Galal",
-    "countryCode": "20",
-    "image": "Avatar-Profile.png",
-    "email": "alaamuhamed97@gmail.com",
-    "phoneNumber": "1094002482",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImE4YzhlMGQ1LTU5MmYtNDdhZC1hYWIyLTA2OWM2MjEwNmVkOCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhbGFhbXVoYW1lZDk3QGdtYWlsLmNvbSIsImp0aSI6IjQ4ZDFjNDA2LTIwOGItNDFmMy04YWNhLTEzZjFiOTNmOTM0OCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6InVzZXIiLCJleHAiOjE3MzE4ODg3NDcsImlzcyI6Imh0dHBzOi8vd3d3Lml0bGVnZW5kLm5ldC8iLCJhdWQiOiJodHRwczovL3d3dy5pdGxlZ2VuZC5uZXQvIn0.WbgJXiHN7m6OBxMkaSUtTRrN1D1sOheGI0KQSfoNpWM",
-    "refreshToken": "CfDJ8I1t14UX53lAuxaX4G9HW0wpwLBOBZblG5gx7UPqGPaLPyeEJA83d97MIEoAdjfbLqDl/lVWUo2a0ZzENRvBulKX/3K0r4enA6kR8WPSwJxpHGkFvVR33Ic1XyAWOUZnwZIIYORQ/MSUfuMVTaFZvl4KpFXNagZGyi4K+I1p39YggzPXucqifsRTiXiVSHC2786xd3+yO6W+4a7A0jKwnLETiFuUaQtiW0qWc+KkIAgZ"
-}
-                              </>
+                            {direction == "rtl" ? (
+                              <ArrowLeft className="d-inline h-[20px]" />
                             ) : (
                               <i className="icon-4 mr-2"></i>
                             )}
                             <span>{t('signout')}</span>
                           </button>
                         </li>
-                      )} */}
+                      )}
 
                       <li className="mobile-menu-bar d-block d-xl-none">
                         <button
