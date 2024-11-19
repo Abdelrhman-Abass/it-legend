@@ -77,10 +77,10 @@ const page = () => {
         </span>
       </div>
       {/* Recommend Course */}
-      <CourseTwoArea title="مرشح لك" />
+      <CourseTwoArea title="مرشح لك" my={true} />
+      {/* <CourseTwoArea my={true} coursePerView={3}  />
       <CourseTwoArea my={true} coursePerView={3}  />
-      <CourseTwoArea my={true} coursePerView={3}  />
-      <CourseTwoArea my={true} coursePerView={3} />
+      <CourseTwoArea my={true} coursePerView={3} /> */}
     </div>
   );
 };

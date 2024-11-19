@@ -42,7 +42,7 @@ const CourseTwoArea = ({
             </div>
           ))}
         </div>
-        {/* {next < courses.length && (
+        {my (
           <div
             onClick={handleLoadData}
             className="load-more-btn"
@@ -54,7 +54,7 @@ const CourseTwoArea = ({
               المزيد <i className="icon-56"></i>
             </a>
           </div>
-        )} */}
+        )}
       </div>
     </div>
   );
