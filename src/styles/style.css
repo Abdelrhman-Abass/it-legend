@@ -29,6 +29,45 @@ html[lang="en"] body {
 .accordion-button::after {
   margin: 0 !important;
 }
+.features-area-1 .container {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr); /* 1 column by default */
+  gap: 20px; /* Adjust the gap between items */
+}
+
+@media (min-width: 768px) {
+  .features-area-1 .container {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+  }
+}
+
+@media (min-width: 1024px) {
+  .features-area-1 .container {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns on large screens */
+  }
+}
+
+.features-box {
+  padding: 20px;
+  background-color: #fff; /* You can adjust background color */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.features-box .icon {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.features-box .title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.features-box p {
+  font-size: 14px;
+}
 
 /* custom */
 .player-side {

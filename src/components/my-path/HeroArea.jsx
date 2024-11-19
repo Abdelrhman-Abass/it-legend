@@ -56,7 +56,7 @@ const HeroArea = () => {
                         <Image
                           src='/assets/images/keep-going.jpg'
                           alt="team images"
-                          className="h-[100px] object-cover"
+                          className="h-[120px] object-cover"
                           width={450}
                           height={550}
                         />
