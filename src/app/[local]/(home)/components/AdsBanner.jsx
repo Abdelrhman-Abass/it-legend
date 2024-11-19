@@ -14,10 +14,13 @@ const AdsBanner = () => {
   }, []);
 
   return (
-    <div
+    <div className={`${isMobile && "container"}`}>
+
+    <div 
       style={{
         background: "#D8E4FF",
-        height: !isMobile ? 370 : 320,
+        height: !isMobile ? 110 : 300,
+        // width: isMobile && 100 ,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -25,6 +28,7 @@ const AdsBanner = () => {
       }}
     >
       Ads Area
+    </div>
     </div>
   );
 };

@@ -195,12 +195,12 @@ const Header = ({
                       {!userId && (
                         <li className="header-btn">
                           <Link href="/auth" className="edu-btn btn-medium">
+                            <span>{t("signin")}</span>
                             {direction == "rtl" ? (
                               <ArrowLeft className="d-inline h-[20px]" />
                             ) : (
                               <i className="icon-4 mr-2"></i>
                             )}
-                            <span>{t("signin")}</span>
                           </Link>
                         </li>
                       )}
