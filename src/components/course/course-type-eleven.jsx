@@ -65,7 +65,7 @@ const CourseTypeEleven = ({ data, classes, my, idx }) => {
             </Link>
           </h5>
           <p>{data.short_desc}</p>
-          <div className="course-rating">
+          {/* <div className="course-rating">
             <div className="rating">
               <i className="icon-23"></i>
               <i className="icon-23"></i>
@@ -76,7 +76,7 @@ const CourseTypeEleven = ({ data, classes, my, idx }) => {
             <span className="rating-count">
               ({data.rating} /{data.rating_count} التقيمات)
             </span>
-          </div>
+          </div> */}
 
           <div className="read-more-btn">
             <a

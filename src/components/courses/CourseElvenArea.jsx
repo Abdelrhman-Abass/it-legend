@@ -21,7 +21,7 @@ const CourseElevenArea = ({
   };
 
   return (
-    <div className="edu-course-area course-area-1 gap-tb-text">
+    <div className="edu-course-area course-area-1 ">
       <div className="container">
         {title && <h3 className="title">{title}</h3>}
         {/* <SortingArea

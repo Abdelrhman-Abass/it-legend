@@ -33,10 +33,11 @@ const HeroArea = () => {
             >
               <div className="left-content mt-[-50px]">
                 <h2 className="title">
-                  هيا بنا ي صديقي
+                هيا بنا يا صديقي
+
                   <br />
                   <span className="color-secondary">
-                    لا تهدر الوقت وابدأ الان
+                استكمل اخر كورس 
                   </span>
                 </h2>
                 <span className="shape-line">
@@ -62,7 +63,7 @@ const HeroArea = () => {
                       </Link>
                     </div>
                   </div>
-                  <div className="content">
+                  {/* <div className="content">
                     <h5 className="title">
                       <Link
                         href={`/course-player/c84e7902-1205-426f-a857-922bedd84bdf"`}
@@ -71,7 +72,7 @@ const HeroArea = () => {
                       </Link>
                     </h5>
                     <span className="designation">التاريخ والوقت</span>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

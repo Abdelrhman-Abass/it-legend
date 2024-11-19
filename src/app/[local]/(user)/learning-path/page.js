@@ -39,9 +39,9 @@ const page = () => {
             </span>
           </div>
 
-          <ListArea title="مرحلة ما قبل التعلم"/>
-
-          <div className="row g-5">
+          <ListArea/>
+          {/* mobile just */}
+          {/* <div className="row g-5">
             {course_data.slice(0, 6).map((course) => {
               return (
                 <div
@@ -60,12 +60,12 @@ const page = () => {
                 </div>
               );
             })}
-          </div>
+          </div> */}
         </div>
       </div>
       {/* Course */}
       <div
-        style={{ marginTop: 36 ,marginBottom:-35}}
+        style={{ marginBottom:-70}}
         className="section-title section-center"
         data-aos-delay="150"
         data-aos="fade-up"
@@ -78,7 +78,7 @@ const page = () => {
         </span>
       </div>
       {/* Recommend Course */}
-      <CourseElevenArea title="مرشح لك" my={true} />
+      <CourseElevenArea  my={true} />
       {/* <CourseTwoArea my={true} coursePerView={3}  />
       <CourseTwoArea my={true} coursePerView={3}  />
       <CourseTwoArea my={true} coursePerView={3} /> */}

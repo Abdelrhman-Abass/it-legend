@@ -165,6 +165,10 @@ const UserHeader = ({
                         <Link href="/">Home</Link>
                       </li>
                       <li>
+                        {/* until i define the redux context this gonna help */}
+                        <Link href="learning-path#myDiploma">My Diploma</Link>
+                      </li>
+                      <li>
                         <button
                           className="btn"
                           style={{ paddingLeft: 0, paddingRight: 0 }}

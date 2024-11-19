@@ -4,12 +4,12 @@ import { Link } from "@/navigation";
 
 const ListArea = ({ title }) => {
   return (
-    <section>
+    <section id="myDiploma">
       <div className="container">
         <h4 className="title">{title}</h4>
         <div className="row row--30" style={{ justifyContent: "center" }}>
           <div className="col-10">
-            {course_data.slice(0, 3).map((blog) => {
+            {course_data.slice(0, 1).map((blog) => {
               const { id, img, title, date, course_desc, comment } = blog;
               return (
                 <div
