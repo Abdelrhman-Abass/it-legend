@@ -29,6 +29,12 @@ const ListArea = ({ title }) => {
                           alt="Blog Images"
                         />
                       </Link>
+                        <div className="time-top">
+                          <span className="duration_1">
+                            45%
+                            {/* <i className="icon-61"></i> */}
+                          </span>
+                        </div>
                     </div>
                     <div className="content">
                       <h5 className="title">

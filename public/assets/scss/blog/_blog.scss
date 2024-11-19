@@ -81,6 +81,74 @@
                 transition: var(--transition);
             }
         }
+        .time-top {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .duration_1 {
+            background-color: #fff;
+            /* Yellow background */
+            border-radius: 50%;
+            /* Make it a circle */
+            padding: 12px 16px;
+            /* Adjust padding to ensure it's a circle and the text fits well */
+            font-weight: 500;
+            /* Keep font weight as before */
+            font-size: 14px;
+            /* Adjust font size to fit inside the circle */
+            // color: var(--color-white);
+            /* White text color */
+            font-family: var(--font-secondary);
+            /* Custom font */
+            display: flex;
+            /* Flexbox for centering text */
+            justify-content: center;
+            /* Center the text horizontally */
+            align-items: center;
+            /* Center the text vertically */
+            width: 45px;
+            /* Set a fixed width (adjust if needed) */
+            height: 45px;
+            /* Set a fixed height to make it a circle */
+            text-align: center;
+            /* Center the text inside the circle */
+            line-height: 1.2;
+            border: 5px solid transparent;
+            /* Default border to be transparent */
+            border-right: 5px solid red;
+            /* Create a red border on top */
+            border-radius: 50%;
+            /* Ensure the border is rounded */
+            position: relative;
+
+            i {
+                display: none;
+                font-size: 16px;
+                position: relative;
+                top: 2px;
+                margin-right: 6px;
+            }
+        }
+
+        .duration_1::before {
+            content: "";
+            /* Create a visual element */
+            position: absolute;
+            /* Position it over the border */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: conic-gradient(red 0% 30%,
+                    /* Red from 0% to 30% */
+                    transparent 30% 100%
+                    /* Transparent from 30% to 100% */
+                );
+            border-radius: 50%;
+            /* Make it a circle */
+            z-index: -1;
+        }
         .video-play-btn {
             height: 80px;
             width: 80px;
