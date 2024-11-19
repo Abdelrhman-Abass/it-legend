@@ -3,8 +3,8 @@ import Dropdown from "antd/es/dropdown/dropdown";
 const menu_data = [
   
   {
-    title: "myDeploma",
-    link: "/learning-path#myDeploma",
+    title: "myDiploma",
+    link: "/learning-path#myDiploma",
     mega_menu: false,
   },
   {

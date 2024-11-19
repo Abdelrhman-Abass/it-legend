@@ -95,7 +95,8 @@
     },
     "userHeader": {
         "myDeploma": "دبلوماتي",
-        "Courses": "كورساتي"
+        "Courses": "كورساتي",
+        "myLevel": "مستوايا"
     },
     "auth": {
         "signIn": "تسجيل الدخول",

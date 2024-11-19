@@ -95,7 +95,9 @@
     },
     "userHeader": {
         "myDeploma": "My Diplomas",
-        "Courses": "My Courses"
+        "Courses": "My Courses",
+        "myLevel": "My Level",
+        "relatedCourses": "Related Courses"
     },
     "auth": {
         "signIn": "Sign In",
