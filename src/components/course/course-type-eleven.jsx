@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { cart_course } from "@/store/features/cart-slice";
 import { useLocale } from "next-intl";
 
-const CourseTypeSix = ({ data, classes, my, idx }) => {
+const CourseTypeEleven = ({ data, classes, my, idx }) => {
   const { cartCourses } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const locale = useLocale();
@@ -44,9 +44,9 @@ const CourseTypeSix = ({ data, classes, my, idx }) => {
             />
           </Link>
           <div className="time-top">
-            <span className="duration">
-              {data.course_outline}
-              <i className="icon-61"></i>
+            <span className="duration_1">
+              45%
+              {/* <i className="icon-61"></i> */}
             </span>
           </div>
         </div>
@@ -105,4 +105,4 @@ const CourseTypeSix = ({ data, classes, my, idx }) => {
     </div>
   );
 };
-export default CourseTypeSix;
+export default CourseTypeEleven;

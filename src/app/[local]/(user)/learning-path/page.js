@@ -10,6 +10,7 @@ import { UserHeader } from "@/layout";
 import React from "react";
 import AdsBanner from "../../(home)/components/AdsBanner";
 import ListArea from "@/components/my-path/list-area";
+import CourseElevenArea from "@/components/courses/CourseElvenArea";
 
 const page = () => {
   return (
@@ -77,7 +78,7 @@ const page = () => {
         </span>
       </div>
       {/* Recommend Course */}
-      <CourseTwoArea title="مرشح لك" my={true} />
+      <CourseElevenArea title="مرشح لك" my={true} />
       {/* <CourseTwoArea my={true} coursePerView={3}  />
       <CourseTwoArea my={true} coursePerView={3}  />
       <CourseTwoArea my={true} coursePerView={3} /> */}
