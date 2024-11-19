@@ -65,7 +65,7 @@ const page = () => {
       </div>
       {/* Course */}
       <div
-        style={{ marginBottom:-70}}
+        style={{ marginBottom:30}}
         className="section-title section-center"
         data-aos-delay="150"
         data-aos="fade-up"

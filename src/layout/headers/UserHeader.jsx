@@ -10,6 +10,7 @@ import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 
 import SwitchLang from "../../components/common/SwitchLang";
+import SeconedMenu from "./component/seconed-menu";
 
 
 const UserHeader = ({
@@ -111,9 +112,7 @@ const UserHeader = ({
                   </div>
                   <div className="header-mainnav">
                     <nav className="mainmenu-nav">
-                      {/* main menu start
-                      <MainMenu />
-                      main menu end */}
+                      <SeconedMenu />
                     </nav>
                   </div>
                   <div className="header-right">
