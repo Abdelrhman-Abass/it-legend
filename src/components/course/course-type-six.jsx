@@ -44,9 +44,9 @@ const CourseTypeSix = ({ data, classes, my, idx }) => {
             />
           </Link>
           <div className="time-top">
-            <span className="duration">
-              <i className="icon-61"></i>
-              {data.course_outline}
+            <span className="duration_1">
+              45%
+              {/* <i className="icon-61"></i> */}
             </span>
           </div>
         </div>
