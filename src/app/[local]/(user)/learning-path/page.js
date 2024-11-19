@@ -8,6 +8,8 @@ import { course_data } from "@/data";
 import { UserHeader } from "@/layout";
 
 import React from "react";
+import AdsBanner from "../../(home)/components/AdsBanner";
+import ListArea from "@/components/my-path/list-area";
 
 const page = () => {
   return (
@@ -17,6 +19,7 @@ const page = () => {
       <HeroArea />
       <CategoryArea />
       <CounterUpArea />
+      <AdsBanner />
       {/* Diploma */}
       <div
         style={{ paddingBottom: 20 }}
@@ -34,6 +37,9 @@ const page = () => {
               <i className="icon-19"></i>
             </span>
           </div>
+
+          <ListArea title="مرحلة ما قبل التعلم"/>
+
           <div className="row g-5">
             {course_data.slice(0, 6).map((course) => {
               return (
@@ -70,11 +76,11 @@ const page = () => {
           <i className="icon-19"></i>
         </span>
       </div>
-      <CourseTwoArea my={true} coursePerView={3}  />
-      {/* <CourseTwoArea my={true} coursePerView={3}  />
-      <CourseTwoArea my={true} coursePerView={3} /> */}
       {/* Recommend Course */}
       <CourseTwoArea title="مرشح لك" />
+      <CourseTwoArea my={true} coursePerView={3}  />
+      <CourseTwoArea my={true} coursePerView={3}  />
+      <CourseTwoArea my={true} coursePerView={3} />
     </div>
   );
 };
