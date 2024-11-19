@@ -93,6 +93,10 @@
             "more": "For More FAQs"
         }
     },
+    "userHeader": {
+        "myDeploma": "My Diplomas",
+        "Courses": "My Courses"
+    },
     "auth": {
         "signIn": "Sign In",
         "dont": "Don't Have an Account?",

@@ -3,13 +3,13 @@ import Dropdown from "antd/es/dropdown/dropdown";
 const menu_data = [
   
   {
-    title: "My Deploma",
-    link: "/#myDeploma",
+    title: "myDeploma",
+    link: "/learning-path#myDeploma",
     mega_menu: false,
   },
   {
-    title: "courses",
-    link: "/courses",
+    title: "Courses",
+    link: "/learning-path#courses",
     mega_menu: false,
   },
   

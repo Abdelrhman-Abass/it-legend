@@ -5,7 +5,7 @@ import { Link } from "@/navigation";
 import { useTranslations } from "next-intl";
 
 const SeconedMenu = () => {
-  const t = useTranslations("header");
+  const t = useTranslations("userHeader");
 
   return (
     <ul className="mainmenu">
