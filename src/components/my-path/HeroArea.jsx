@@ -31,7 +31,7 @@ const HeroArea = () => {
                 justifyContent: "center",
               }}
             >
-              <div className="left-content mt-[-50px]">
+              <div className="left-content">
                 <h2 className="title">
                 هيا بنا يا صديقي
 
@@ -56,23 +56,14 @@ const HeroArea = () => {
                         <Image
                           src='/assets/images/keep-going.jpg'
                           alt="team images"
-                          className="h-[200px]"
+                          className="h-[100px] object-cover"
                           width={450}
                           height={550}
                         />
                       </Link>
                     </div>
                   </div>
-                  {/* <div className="content">
-                    <h5 className="title">
-                      <Link
-                        href={`/course-player/c84e7902-1205-426f-a857-922bedd84bdf"`}
-                      >
-                        اكمل حيثما توقفت
-                      </Link>
-                    </h5>
-                    <span className="designation">التاريخ والوقت</span>
-                  </div> */}
+                  
                 </div>
               </div>
             </div>
