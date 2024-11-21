@@ -514,7 +514,9 @@
                     -webkit-box-orient: vertical;
                 }
             }
+
         }
+
     }
 
     &.course-style-3 {
@@ -1156,6 +1158,23 @@
         }
     }
 }
+
+.row {
+    &.desktop {
+        @media #{$smlg-device} {
+            display: none;
+        }
+    }
+
+    &.mobile {
+        display: none;
+
+        @media #{$large-mobile} {
+            display: flex;
+        }
+    }
+}
+
 
 .edu-course-area {
     position: relative;

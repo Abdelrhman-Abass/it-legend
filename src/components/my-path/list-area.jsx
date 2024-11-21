@@ -1,13 +1,14 @@
 import React from "react";
 import { course_data } from "@/data";
 import { Link } from "@/navigation";
+import CourseTypeOne from "@/components/course/course-type-one";
 
 const ListArea = ({ title }) => {
   return (
     <section id="myDiploma">
       <div className="container">
         <h4 className="title">{title}</h4>
-        <div className="row row--30" style={{ justifyContent: "center" }}>
+        <div className="row row--30 desktop" style={{ justifyContent: "center" }}>
           <div className="col-10">
             {course_data.slice(0, 1).map((blog) => {
               const { id, img, title, date, course_desc, comment } = blog;
@@ -69,6 +70,27 @@ const ListArea = ({ title }) => {
             })}
           </div>
         </div>
+
+        <div className="row g-5 mobile ">
+            {course_data.slice(0, 3).map((course) => {
+              return (
+                <div
+                  className="col-md-6 col-lg-4"
+                  data-aos-delay="150"
+                  data-aos="fade-up"
+                  data-aos-duration="800"
+                  key={course.id}
+                >
+                  <CourseTypeOne
+                    bg="#f5f1eb"
+                    my={true}
+                    data={course}
+                    image_location_path="02"
+                  />
+                </div>
+              );
+            })}
+          </div>
       </div>
     </section>
   );
