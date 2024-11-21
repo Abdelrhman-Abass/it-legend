@@ -2,12 +2,12 @@
     Spacing
 -------------------------*/
 .edu-section-gap {
-    padding: 50px 0 40px;
+    padding: 50px 0 10px;
     @media #{$md-layout} {
         padding: 95px 0 100px;
     }
     @media #{$sm-layout} {
-        padding: 75px 0 80px;
+        padding: 40px 0 20px;
     }
 }
 

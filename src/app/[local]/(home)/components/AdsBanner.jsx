@@ -14,7 +14,7 @@ const AdsBanner = () => {
   }, []);
 
   return (
-    <div className={`${isMobile && "container"} mt-[90px]`}>
+    <div className={`${isMobile && "container"} mt-[80px]`}>
 
     <div 
       style={{

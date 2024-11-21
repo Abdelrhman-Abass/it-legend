@@ -17,6 +17,13 @@
             }
         }
     }
+    .row{
+        padding: 0 60px;
+        @media #{$sm-layout} {
+            padding: 0 0px;
+        }
+
+    }
 }
 
 .features-box {

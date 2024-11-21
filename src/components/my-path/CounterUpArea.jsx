@@ -9,7 +9,7 @@ const CounterUpArea = () => {
         <div className="counterup-wrap">
           <div className="row">
             <div className="col-sm-4">
-              <div className="edu-counterup counterup-style-1 border-end">
+              <div className="edu-counterup counterup-style-1 ">
                 <h2 className="counter-item count-number primary-color">
                   <span className="odometer">
                     <Counter number="8" text="+" />
@@ -31,7 +31,7 @@ const CounterUpArea = () => {
               </div>
             </div>
             <div className="col-sm-4">
-              <div className="edu-counterup counterup-style-1">
+              <div className="edu-counterup counterup-style-1 border-end">
                 <h2 className="counter-item count-number extra02-color">
                   <span className="odometer">
                     <Counter number="51" text="+" />

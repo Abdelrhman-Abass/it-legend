@@ -52,7 +52,7 @@
 
 // CounterUp Style
 .pv-demo-counterup {
-    margin-top: -25px;
+    margin-top: -35px;
     position: relative;
     z-index: 1;
     .counterup-wrap {
@@ -62,9 +62,10 @@
         box-shadow: 0 20px 50px 0 rgba(0,0,0, .03);
         border-radius: 10px;
         margin: 0 auto;
-        padding: 50px 0;
+        padding: 30px 0;
         @media #{$sm-layout} {
-            padding: 40px 0;
+            padding: 15px 0;
+            margin-top: 35px;
         }
         .edu-counterup {
             box-shadow: none;

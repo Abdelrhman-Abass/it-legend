@@ -15,7 +15,6 @@ const HeroArea = () => {
 
   return (
     <section className="why-choose-area-3 edu-section-gap">
-      {/* <SwitchThemeButton className="absolute top-4 right-4"/> */}
       <div className="container">
         <div className="row row--45 ">
           <div
@@ -52,11 +51,12 @@ const HeroArea = () => {
                     <div className="thumbnail">
                       <Link
                         href={`/course-player/c84e7902-1205-426f-a857-922bedd84bdf"`}
+                        className="flex justify-center items-center"
                       >
                         <Image
                           src='/assets/images/keep-going.jpg'
                           alt="team images"
-                          className="h-[120px] object-cover"
+                          className="h-[100px] object-cover"
                           width={450}
                           height={550}
                         />
