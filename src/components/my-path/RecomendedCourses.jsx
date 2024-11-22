@@ -2,9 +2,12 @@
 import React from "react";
 import { useState ,useEffect} from "react";
 import { ArrowLeft } from "lucide-react";
+import { useRouter } from "@/navigation";
+
 
 import { course_data } from "@/data";
 import CourseTypeSix from "../course/course-type-six";
+import Link from "next/link";
 
 const RecommendedCourses = ({
     my = false,
@@ -15,6 +18,8 @@ const RecommendedCourses = ({
     const [next, setNext] = useState(coursePerView);
     const [courses, setCourses] = useState(course_data);
     const [direction, setDirection] = useState('rtl');
+    const router = useRouter();
+
 
 
     // handleLoadData
@@ -44,19 +49,18 @@ const RecommendedCourses = ({
 
 
                 <div
-                    className="load-more-btn"
                     data-aos-delay="100"
                     data-aos="fade-up"
                     data-aos-duration="1200"
                 >
-                    <a className="edu-btn" href="/courses" style={{ cursor: "pointer" }}>
+                    <Link className="edu-btn" href="/courses" style={{ cursor: "pointer" }}>
                         {direction == "rtl" ? (
                             <ArrowLeft className="d-inline h-[20px]" />
                         ) : (
                             <i className="icon-4 mr-2"></i>
                         )}
                         <span>المزيد</span>
-                    </a>
+                    </Link>
                 </div>
             </div>
 
