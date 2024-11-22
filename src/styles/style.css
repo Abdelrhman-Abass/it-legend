@@ -43,6 +43,14 @@ html[lang="en"] body {
   border-left: 1px solid #e5e5e5;
 }
 
+.truncate-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}
+
 .player-side::-webkit-scrollbar {
   width: 8px;
 }
