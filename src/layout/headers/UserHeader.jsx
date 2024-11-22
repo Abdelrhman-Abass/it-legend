@@ -11,6 +11,7 @@ import { useTheme } from "next-themes";
 
 import SwitchLang from "../../components/common/SwitchLang";
 import SeconedMenu from "./component/seconed-menu";
+import ProfileIcon from "./component/ProfileIcon";
 
 
 const UserHeader = ({
@@ -197,6 +198,14 @@ const UserHeader = ({
                       <li>
                         {/* until i define the redux context this gonna help */}
                         <SwitchLang theme={theme} />
+                      </li>
+                      <li className="icon cart-icon">
+                        <Link href="/" className="cart-icon">
+                          <i className="icon-44"></i>
+                        </Link>
+                        
+                        <ProfileIcon />
+
                       </li>
 
                       {!user && (
