@@ -14,18 +14,10 @@ const AdsBanner = () => {
   }, []);
 
   return (
-    <div className={`${isMobile && "container"} mt-[80px]`}>
+    <div className={`mx-[15px] lg:mx-[0] mt-[80px] `}>
 
     <div 
-      style={{
-        background: "#D8E4FF",
-        height: !isMobile ? 120 : 300,
-        // width: isMobile && 100 ,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        fontWeight: 600,
-      }}
+      className={`bg-[#D8E4FF] lg:h-[120px] h-[300px] flex items-center justify-center font-semibold`}
     >
       Ads Area
     </div>

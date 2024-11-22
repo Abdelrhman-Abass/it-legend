@@ -1163,7 +1163,7 @@
 
 .row {
     &.desktop {
-        @media #{$smlg-device} {
+        @media #{$large-mobile} {
             display: none;
         }
     }
