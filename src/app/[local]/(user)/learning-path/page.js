@@ -11,6 +11,7 @@ import React from "react";
 import AdsBanner from "../../(home)/components/AdsBanner";
 import ListArea from "@/components/my-path/list-area";
 import CourseElevenArea from "@/components/courses/CourseElvenArea";
+import RecommendedCourses from "@/components/my-path/RecomendedCourses";
 
 const page = () => {
   return (
@@ -39,28 +40,8 @@ const page = () => {
             </span>
           </div>
 
-          <ListArea/>
-          {/* mobile just */}
-          {/* <div className="row g-5 block sm:hidden">
-            {course_data.slice(0, 6).map((course) => {
-              return (
-                <div
-                  className="col-md-6 col-lg-4"
-                  data-aos-delay="150"
-                  data-aos="fade-up"
-                  data-aos-duration="800"
-                  key={course.id}
-                >
-                  <CourseTypeOne
-                    bg="#f5f1eb"
-                    my={true}
-                    data={course}
-                    image_location_path="02"
-                  />
-                </div>
-              );
-            })}
-          </div> */}
+          <ListArea />
+
         </div>
       </div>
       {/* Course */}
@@ -82,6 +63,21 @@ const page = () => {
       {/* <CourseTwoArea my={true} coursePerView={3}  />
       <CourseTwoArea my={true} coursePerView={3}  />
       <CourseTwoArea my={true} coursePerView={3} /> */}
+
+      <div
+        style={{ marginBottom: 30 }}
+        className="section-title section-center"
+        data-aos-delay="150"
+        data-aos="fade-up"
+        data-aos-duration="800"
+      >
+        <span className="pre-title"></span>
+        <h2 className="title">مرشح لك</h2>
+        <span className="shape-line">
+          <i className="icon-19"></i>
+        </span>
+      </div>
+      <RecommendedCourses my={true}/>
     </div>
   );
 };
