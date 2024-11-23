@@ -118,7 +118,7 @@ const UserHeader = ({
                   </div>
                   <div className="header-right">
                     <ul className="header-action">
-                      <li className="dropdown" style={{ position: 'relative', display: 'inline-block' }}>
+                      {/* <li className="dropdown" style={{ position: 'relative', display: 'inline-block' }}>
                         <button
                           style={{ display: "block", background: 'none', border: 'none', cursor: 'pointer' }}
                           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -149,9 +149,9 @@ const UserHeader = ({
                       </li>
                       
                       <li>
-                        {/* until i define the redux context this gonna help */}
                         <Link href="learning-path#myDiploma">My Diploma</Link>
-                      </li>
+                      </li> */}
+                      
                       <li>
                         <button
                           className="btn"

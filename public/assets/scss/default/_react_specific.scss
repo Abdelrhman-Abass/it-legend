@@ -635,7 +635,7 @@
                 .each-item {
                     .content {
                         .title {
-                            a {
+                            a , div, button {
                                 color: var(--color-title);
                                 &:hover {
                                     color: var(--color-primary);
