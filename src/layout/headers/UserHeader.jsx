@@ -111,7 +111,7 @@ const UserHeader = ({
                       </Link>
                     </div>
                   </div>
-                  <div className="header-mainnav">
+                  <div className="header-seconednav">
                     <nav className="mainmenu-nav">
                       <SeconedMenu />
                     </nav>

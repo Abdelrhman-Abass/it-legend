@@ -38,6 +38,12 @@
                 display: none; 
             }
         }
+        .header-seconednav {
+            flex: 1;
+            // @media #{$smlg-device} {
+            //     display: none; 
+            // }
+        }
     }
     .header-brand {
         display: flex;
@@ -170,6 +176,17 @@
             .mainmenu {
                 @media only screen and (max-width: 1350px) {
                     justify-content: center;
+                }
+            }
+        }
+    }
+    .header-seconednav {
+        .mainmenu-nav {
+            .mainmenu {
+                @media only screen and (max-width: 1350px) {
+                    justify-content: center;
+                    flex-wrap: nowrap;
+                    padding :0 0 0 69px;
                 }
             }
         }
@@ -381,6 +398,17 @@
     }
     .header-navbar {
         .header-mainnav {
+            margin-left: 25px;
+            @media only screen and (max-width: 1350px) {
+                margin-left: 0;
+            }
+            .mainmenu {
+                @media only screen and (max-width: 1350px) {
+                    justify-content: center;
+                }
+            }
+        }
+        .header-seconednav {
             margin-left: 25px;
             @media only screen and (max-width: 1350px) {
                 margin-left: 0;

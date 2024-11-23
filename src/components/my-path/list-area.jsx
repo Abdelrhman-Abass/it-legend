@@ -1,7 +1,8 @@
 import React from "react";
 import { course_data } from "@/data";
 import { Link } from "@/navigation";
-import CourseTypeOne from "@/components/course/course-type-one";
+import CourseDiploma from "@/components/course/CourseDiploma";
+// import CourseDiploma from "../course/CourseDiploma";
 
 const ListArea = ({ title }) => {
   return (
@@ -81,7 +82,7 @@ const ListArea = ({ title }) => {
                   data-aos-duration="800"
                   key={course.id}
                 >
-                  <CourseTypeOne
+                  <CourseDiploma
                     bg="#f5f1eb"
                     my={true}
                     data={course}
