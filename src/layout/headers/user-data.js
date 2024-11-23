@@ -4,12 +4,12 @@ const menu_data = [
   
   {
     title: "myDeploma",
-    link: "/learning-path#myDiploma",
+    link: "#myDeploma",
     mega_menu: false,
   },
   {
     title: "Courses",
-    link: "/learning-path#courses",
+    link: "#myCourses",
     mega_menu: false,
   },
   

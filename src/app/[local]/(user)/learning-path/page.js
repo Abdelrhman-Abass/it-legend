@@ -24,6 +24,7 @@ const page = () => {
       <AdsBanner />
       {/* Diploma */}
       <div
+      id="myDeploma" 
         style={{ paddingBottom: 20 }}
         className="edu-course-area course-area-2 gap-tb-text"
       >
@@ -40,12 +41,13 @@ const page = () => {
             </span>
           </div>
 
-          <ListArea />
+          <ListArea id="myDeploma" />
 
         </div>
       </div>
       {/* Course */}
       <div
+      id="myCourses"
         style={{ marginBottom: 30 }}
         className="section-title section-center"
         data-aos-delay="150"

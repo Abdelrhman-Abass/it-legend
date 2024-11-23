@@ -5,7 +5,7 @@ import CourseTypeOne from "@/components/course/course-type-one";
 
 const ListArea = ({ title }) => {
   return (
-    <section id="myDiploma">
+    <section >
       <div className="container">
         <h4 className="title">{title}</h4>
         <div className="row row--30 desktop" style={{ justifyContent: "center" }}>
