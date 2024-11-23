@@ -137,7 +137,7 @@ const UserHeader = ({
                             <Link href="/course-details/10" style={{ display: 'block', padding: '8px 16px', textDecoration: 'none' }}>Course Details</Link>
                             <Link href="/courses" style={{ display: 'block', padding: '8px 16px', textDecoration: 'none' }}>Courses</Link>
                             <Link href="/diploma-details/10" style={{ display: 'block', padding: '8px 16px', textDecoration: 'none' }}>Diploma Details</Link>
-                            <Link href="/diploma-sales" style={{ display: 'block', padding: '8px 16px', textDecoration: 'none' }}>Diploma Sales</Link>
+                            <Link href="/diploma-sales/10" style={{ display: 'block', padding: '8px 16px', textDecoration: 'none' }}>Diploma Sales</Link>
                             <Link href="/auth" style={{ display: 'block', padding: '8px 16px', textDecoration: 'none' }}>Auth</Link>
                             <Link href="/cart" style={{ display: 'block', padding: '8px 16px', textDecoration: 'none' }}>Cart</Link>
                             <Link href="/checkout" style={{ display: 'block', padding: '8px 16px', textDecoration: 'none' }}>Checkout</Link>
@@ -147,23 +147,7 @@ const UserHeader = ({
                           </div>
                         )}
                       </li>
-                      {/* <li className="icon cart-icon">
-                        <Link href="/cart" className="cart-icon">
-                          <i className="icon-3"></i>
-                          {quantity > 0 &&
-                            <span className="count">{quantity}</span>
-                          }
-                        </Link>
-                        <Cart />
-
-                        
-
-                      </li> */}
-
-                      <li>
-                        {/* until i define the redux context this gonna help */}
-                        <Link href="/">Home</Link>
-                      </li>
+                      
                       <li>
                         {/* until i define the redux context this gonna help */}
                         <Link href="learning-path#myDiploma">My Diploma</Link>
@@ -195,13 +179,10 @@ const UserHeader = ({
                           )}
                         </button>
                       </li>
-                      <li>
-                        {/* until i define the redux context this gonna help */}
-                        <SwitchLang theme={theme} />
-                      </li>
-
+                      
+                       
                       <li className="icon cart-icon">
-                        <Link href="/" className="cart-icon">
+                        <Link href="" className="cart-icon">
                           <i className="icon-44"></i>
                         </Link>
 
@@ -226,7 +207,7 @@ const UserHeader = ({
                               <li className="each-item">
                                 <div className="content">
                                   <h5 className="title flex gap-4 justify-center items-center cursor-pointer ">
-                                    <div className="flex items-center" >
+                                    <Link href="/profile" className="flex items-center" >
                                       {direction == "rtl" ? (
                                         <ArrowLeft className="d-inline h-[20px]" />
                                       ) : (
@@ -234,7 +215,7 @@ const UserHeader = ({
                                       )}
                                       <SwitchLang theme={theme} />
 
-                                    </div>
+                                    </Link>
                                   </h5>
                                 </div>
 
@@ -257,14 +238,17 @@ const UserHeader = ({
                               <li className="each-item">
                                 <div className="content">
                                   <h5 className="title flex gap-4 justify-center items-center cursor-pointer ">
-                                    <div onClick={handleLogout}>
+                                    <Link href="" >
+                                    <button onClick={handleLogout}>
                                       {direction == "rtl" ? (
                                         <ArrowLeft className="d-inline h-[20px]" />
                                       ) : (
                                         <i className="icon-4 mr-2"></i>
                                       )}
                                       <span>{t("signout")}</span>
-                                    </div>
+
+                                    </button>
+                                    </Link>
                                   </h5>
                                 </div>
 
@@ -277,7 +261,7 @@ const UserHeader = ({
 
                       </li>
 
-                      {!user && (
+                      {/* {!user && (
                         <li className="header-btn">
                           <Link href="/auth" className="edu-btn btn-medium">
                             {direction == "rtl" ? (
@@ -288,11 +272,11 @@ const UserHeader = ({
                             <span>{t("signin")}</span>
                           </Link>
                         </li>
-                      )}
+                      )} */}
 
 
 
-                      {user && (
+                      {/* {user && (
                         <li className="header-btn">
                           <button
                             onClick={handleLogout}
@@ -306,16 +290,16 @@ const UserHeader = ({
                             <span>{t('signout')}</span>
                           </button>
                         </li>
-                      )}
+                      )} */}
 
-                      <li className="mobile-menu-bar d-block d-xl-none">
+                      {/* <li className="mobile-menu-bar d-block d-xl-none">
                         <button
                           className="hamberger-button"
                           onClick={() => setIsOpen(true)}
                         >
                           <i className="icon-54"></i>
                         </button>
-                      </li>
+                      </li> */}
                     </ul>
                   </div>
                 </div>
@@ -323,7 +307,7 @@ const UserHeader = ({
             </div>
           </header>
           {/* sidebar start */}
-          <OffCanvas isOpen={isOpen} setIsOpen={setIsOpen} />
+          {/* <OffCanvas isOpen={isOpen} setIsOpen={setIsOpen} /> */}
           {/* sidebar end */}
         </>
       )}
