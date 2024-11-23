@@ -39,11 +39,11 @@ const BreadcrumbTwo = ({ subtitle }) => {
             </li>
           </ul>
         </div>
-        <div className="flex items-center gap-4">
+        {/* <div className="flex items-center gap-4">
           <SwitchThemeButton />
           <SwitchLang theme={theme}/>
 
-        </div>
+        </div> */}
 
       </div>
     </div>

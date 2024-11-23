@@ -43,9 +43,9 @@ const UserHeader = ({
 
 
   useEffect(() => {
-    if (!theme) {
-      setTheme("light");
-    }
+    // if (!theme) {
+    //   setTheme("light");
+    // }
 
     const htmlElement = document.documentElement; // or document.querySelector('html')
     const currentDirection = htmlElement.dir

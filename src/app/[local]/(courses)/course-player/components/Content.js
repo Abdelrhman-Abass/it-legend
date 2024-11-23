@@ -27,6 +27,7 @@ import {
 } from "../../utils/coursesHandler";
 import { validateYupSchema } from "formik";
 import BreadcrumbTwo from "@/components/breadcrumb/breadcrumb-2";
+import { UserHeader } from "@/layout";
 
 const Content = ({ data, courseId }) => {
   const local = useLocale();
@@ -304,7 +305,8 @@ const Content = ({ data, courseId }) => {
             paddingLeft: local == "en" && showPlayerSide && 405,
           }}
         >
-          <BreadcrumbTwo subtitle={"تطوير تطبيقات الويب"} />
+          <UserHeader/>
+          {/* <BreadcrumbTwo subtitle={"تطوير تطبيقات الويب"} /> */}
           <div className={`video-player type-${type}`}>
             <div
               onClick={() => setShowPlayerSide(!showPlayerSide)}

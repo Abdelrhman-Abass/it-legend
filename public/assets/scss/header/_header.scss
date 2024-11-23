@@ -183,10 +183,11 @@
     .header-seconednav {
         .mainmenu-nav {
             .mainmenu {
-                @media only screen and (max-width: 1350px) {
+                @media only screen and (max-width: 960px) {
                     justify-content: center;
                     flex-wrap: nowrap;
                     padding :0 0 0 69px;
+                    width: max-content;
                 }
             }
         }

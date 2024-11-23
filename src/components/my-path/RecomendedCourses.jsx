@@ -2,12 +2,11 @@
 import React from "react";
 import { useState ,useEffect} from "react";
 import { ArrowLeft } from "lucide-react";
-import { useRouter } from "@/navigation";
+import { useRouter ,Link } from "@/navigation";
 
 
 import { course_data } from "@/data";
 import CourseTypeSix from "../course/course-type-six";
-import Link from "next/link";
 
 const RecommendedCourses = ({
     my = false,

@@ -4,13 +4,15 @@ import SwitchThemeButton from "@/components/common/SwitchThemeButton";
 import CourseTwoArea from "@/components/courses/CourseTwoArea";
 import CounterArea from "@/components/my-path/counter-area";
 import ListArea from "@/components/my-path/list-area";
+import { UserHeader } from "@/layout";
 import { Progress, Tooltip } from "antd";
 import React from "react";
 
 const page = () => {
   return (
     <>
-      <BreadcrumbTwo subtitle={"تطوير تطبيقات الويب"} />
+    <UserHeader/>
+      {/* <BreadcrumbTwo subtitle={"تطوير تطبيقات الويب"} /> */}
       <div className="container">
         <div
           style={{
