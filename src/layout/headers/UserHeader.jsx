@@ -23,12 +23,12 @@ const UserHeader = ({
   const router = useRouter();
 
   const { sticky } = useSticky();
-  
+
   const [isOpen, setIsOpen] = useState(false);
   const t = useTranslations("header");
   const { theme, setTheme } = useTheme();
   const [isMounted, setIsMounted] = useState(false);
-  
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [user, setUser] = useState(null); // State to store user information
   const [direction, setDirection] = useState('rtl');
@@ -54,14 +54,14 @@ const UserHeader = ({
     setIsMounted(true);
 
     // Get user ID from cookies
-    const cookies =  document.cookie.split('; ');
+    const cookies = document.cookie.split('; ');
     const userCookie = cookies.find((cookie) => cookie.startsWith("user="));
     if (userCookie) {
       // Parse user data from cookie
       const userData = JSON.parse(decodeURIComponent(userCookie.split("=")[1]));
       setUser(userData); // Store user data in state
     }
-    
+
   }, [direction]);
 
   const handleLogout = () => {
@@ -199,12 +199,81 @@ const UserHeader = ({
                         {/* until i define the redux context this gonna help */}
                         <SwitchLang theme={theme} />
                       </li>
+
                       <li className="icon cart-icon">
                         <Link href="/" className="cart-icon">
                           <i className="icon-44"></i>
                         </Link>
-                        
-                        <ProfileIcon />
+
+                        <div className="edublink-header-mini-profile">
+                          <div className="wrapper">
+                            <ul className="items">
+                              <li className="each-item">
+                                <div className="content">
+                                  <h5 className="title flex gap-4 justify-center items-center cursor-pointer ">
+                                    <Link href="/profile" >
+                                      {direction == "rtl" ? (
+                                        <ArrowLeft className="d-inline h-[20px]" />
+                                      ) : (
+                                        <i className="icon-4 mr-2"></i>
+                                      )}
+                                      <span>{t("profile")}</span>
+                                    </Link>
+                                  </h5>
+                                </div>
+
+                              </li>
+                              <li className="each-item">
+                                <div className="content">
+                                  <h5 className="title flex gap-4 justify-center items-center cursor-pointer ">
+                                    <div className="flex items-center" >
+                                      {direction == "rtl" ? (
+                                        <ArrowLeft className="d-inline h-[20px]" />
+                                      ) : (
+                                        <i className="icon-4 mr-2"></i>
+                                      )}
+                                      <SwitchLang theme={theme} />
+
+                                    </div>
+                                  </h5>
+                                </div>
+
+                              </li>
+                              <li className="each-item">
+                                <div className="content">
+                                  <h5 className="title flex gap-4 justify-center items-center cursor-pointer ">
+                                    <Link href="https://wa.me/01007582994" >
+                                      {direction == "rtl" ? (
+                                        <ArrowLeft className="d-inline h-[20px]" />
+                                      ) : (
+                                        <i className="icon-4 mr-2"></i>
+                                      )}
+                                      <span>{t("support")}</span>
+                                    </Link>
+                                  </h5>
+                                </div>
+
+                              </li>
+                              <li className="each-item">
+                                <div className="content">
+                                  <h5 className="title flex gap-4 justify-center items-center cursor-pointer ">
+                                    <div onClick={handleLogout}>
+                                      {direction == "rtl" ? (
+                                        <ArrowLeft className="d-inline h-[20px]" />
+                                      ) : (
+                                        <i className="icon-4 mr-2"></i>
+                                      )}
+                                      <span>{t("signout")}</span>
+                                    </div>
+                                  </h5>
+                                </div>
+
+                              </li>
+
+                            </ul>
+
+                          </div>
+                        </div>
 
                       </li>
 

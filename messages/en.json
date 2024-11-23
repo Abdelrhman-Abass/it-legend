@@ -12,7 +12,9 @@
         "services": "Software Services",
         "freeDeploma": "Enroll in Our Free Course",
         "empty": "The Cart is Empty",
-        "courses": "Courses"
+        "courses": "Courses",
+        "profile": "Profile",
+        "support" : "Support"
     },
     "footer": {
         "title": "Greate Solutions for Smart People",

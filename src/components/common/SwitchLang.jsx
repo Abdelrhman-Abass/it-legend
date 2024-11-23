@@ -29,7 +29,7 @@ const SwitchLang = ({theme}) => {
         {/* <div className="lang-global text-black">
           <Image src="/lang.png" width={20} height={20} alt="lang" />
         </div> */}
-        <span className={`text-uppercase ${theme ==="light" ? "text-black" : "text-white"}`}>{local == "ar" ? "EN" : "AR"}</span>
+        <span className={`text-uppercase ${theme ==="light" ? "text-black" : "text-white"}`}>{local == "ar" ? "ENGLISH" : "العربية"}</span>
       </button>
     </div>
   );

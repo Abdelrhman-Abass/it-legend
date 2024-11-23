@@ -144,6 +144,131 @@
 
 
 /* mini cart style */
+.edublink-header-mini-profile {
+    top: 90%;
+    right: -50px; 
+    position: absolute;
+    // opacity: 0;
+    // visibility: hidden;
+    transition: 0.3s;
+    pointer-events: none;
+    // @media only screen and (max-width: 1199px) {
+    //     display: none;
+    // }
+    .wrapper {
+        height: auto;
+        width: 150px;
+        z-index: 8;
+        // text-align: left;
+        padding: 10px 15px;
+        transition: 0.3s;
+        background: var(--color-white);
+        box-shadow: 0px 10px 40px rgb(0 0 0 / 8%);
+        .items {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            &.cart-height {
+                max-height: 400px;
+                // overflow: hidden;
+                // overflow-y: scroll;
+            }
+            .each-item {
+                display: flex;
+                width: 100%;
+                // justify-content: space-between;
+                margin: 0;
+                .thumb {
+                    min-width: 75px;
+                    margin-right: 15px;
+                    img {
+                        width: 75px;
+                        height: 75px;
+                        object-fit: cover;
+                        border-radius: 5px;
+                    }
+                }
+                &:not(:last-child) {
+                    margin-bottom: 10px;
+                }
+                .content {
+                    .title {
+                        margin-top: 5px;
+                        margin-bottom: 5px;
+                        a {
+                            font-size: var(--font-size-b2);
+                            line-height: var(--line-height-b2);
+                            color: var(--color-black);
+                            height: inherit;
+                            &:hover {
+                                color: var(--color-primary);
+                            }
+                        }
+                    }
+                    .price-and-quantity {
+                        color: var(--color-black);
+                        font-size: 15px;
+                    }
+                }
+                .cart-item-remove {
+                    // margin-left: auto;
+                    button {
+                        border: 0;
+                        color: var(--color-body);
+                        background: transparent;
+                        font-size: 12px;
+                        margin-top: 7px;
+                        &:hover {
+                            color: var(--color-secondary);
+                        }
+                    }
+                }
+            }
+        }
+        .total-price-wrapper {
+            border-top: 3px double rgba(178, 187, 197, 0.3);
+            padding: 20px 0 20px;
+            display: flex;
+            margin: 0;
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-black);
+            justify-content: space-between;
+        }
+        .cart-checkout-buttons {
+            display: flex;
+            justify-content: center;
+            .edu-btn {
+                border-radius: 25px;
+                font-size: 14px;
+                height: 40px;
+                line-height: 40px;
+                color: var(--edu-btn-color);
+                padding: 0 36px;
+                &.cart-btn {
+                    margin-right: 10px;
+                }
+            }
+        }
+        &.empty-cart-wrapper {
+            width: 270px;
+            padding: 15px 25px;
+            .empty-cart {
+                margin: 0;
+                text-align: center;
+            }
+        }
+    }
+}
+.header-action li.icon.cart-icon:hover .edublink-header-mini-profile {
+    opacity: 1;
+    visibility: visible;
+    top: 100%;
+    pointer-events: auto;
+    z-index: 2;
+}
+
 .edublink-header-mini-cart {
     top: 90%;
     right: -50px; 
@@ -454,6 +579,35 @@
         color: var(--color-white) !important;
     }
     .edublink-header-mini-cart {
+        .wrapper {
+            background: #02060d;
+            .items {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                .each-item {
+                    .content {
+                        .title {
+                            a {
+                                color: var(--color-title);
+                                &:hover {
+                                    color: var(--color-primary);
+                                }
+                            }
+                        }
+                        .price-and-quantity {
+                            color: var(--color-title);
+                            font-size: 15px;
+                        }
+                    }
+                }
+            }
+            .total-price-wrapper {
+                color: var(--color-white);
+            }
+        }
+    }
+    .edublink-header-mini-profile {
         .wrapper {
             background: #02060d;
             .items {
