@@ -207,15 +207,14 @@ const UserHeader = ({
                               <li className="each-item">
                                 <div className="content">
                                   <h5 className="title flex gap-4 justify-center items-center cursor-pointer ">
-                                    <Link href="/profile" className="flex items-center" >
+                                    <div  className="flex items-center" >
                                       {direction == "rtl" ? (
                                         <ArrowLeft className="d-inline h-[20px]" />
                                       ) : (
                                         <i className="icon-4 mr-2"></i>
                                       )}
                                       <SwitchLang theme={theme} />
-
-                                    </Link>
+                                    </div>
                                   </h5>
                                 </div>
 
@@ -238,7 +237,6 @@ const UserHeader = ({
                               <li className="each-item">
                                 <div className="content">
                                   <h5 className="title flex gap-4 justify-center items-center cursor-pointer ">
-                                    <Link href="" >
                                     <button onClick={handleLogout}>
                                       {direction == "rtl" ? (
                                         <ArrowLeft className="d-inline h-[20px]" />
@@ -248,7 +246,6 @@ const UserHeader = ({
                                       <span>{t("signout")}</span>
 
                                     </button>
-                                    </Link>
                                   </h5>
                                 </div>
 

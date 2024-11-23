@@ -204,6 +204,24 @@
                                 color: var(--color-primary);
                             }
                         }
+                        div {
+                            font-size: var(--font-size-b2);
+                            line-height: var(--line-height-b2);
+                            color: var(--color-black);
+                            height: inherit;
+                            &:hover {
+                                color: var(--color-primary);
+                            }
+                        }
+                        button {
+                            font-size: var(--font-size-b2);
+                            line-height: var(--line-height-b2);
+                            color: var(--color-black);
+                            height: inherit;
+                            &:hover {
+                                color: var(--color-primary);
+                            }
+                        }
                     }
                     .price-and-quantity {
                         color: var(--color-black);
@@ -264,7 +282,7 @@
 .header-action li.icon.cart-icon:hover .edublink-header-mini-profile {
     opacity: 1;
     visibility: visible;
-    top: 100%;
+    top: 70%;
     pointer-events: auto;
     z-index: 2;
 }
