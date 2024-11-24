@@ -91,8 +91,8 @@ const UserHeader = ({
             >
               <div className="container-fluid">
                 <div className="header-navbar">
-                  <div className="header-brand">
-                    <div className="logo">
+                <div className="header-brand">
+                    <div className="logo user-logo">
                       <Link href="/">
                         <Image
                           className="logo-light"

@@ -67,6 +67,13 @@
                 display: block;
             }
         }
+        .user-logo{
+            img{
+                @media #{$smlg-device} {
+                    max-width: 135%;
+                }
+            }
+        }
     }
     .header-category {
         border-left: 1.5px solid #f2f2f2;
