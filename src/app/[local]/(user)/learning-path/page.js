@@ -25,7 +25,6 @@ const page = () => {
       {/* Diploma */}
       <div
       id="myDeploma" 
-        style={{ paddingBottom: 20 }}
         className="edu-course-area course-area-2 gap-tb-text"
       >
         <div className="container">
