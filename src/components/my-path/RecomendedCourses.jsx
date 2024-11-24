@@ -34,7 +34,7 @@ const RecommendedCourses = ({
             {title && <h3 className="title">{title}</h3>}
 
                 <div className="row g-5 ">
-                    {courses?.slice(0, 3)?.map((course, idx) => (
+                    {courses?.slice(0, 6)?.map((course, idx) => (
                         <div key={course.id} className="col-md-6 col-lg-4">
                             <CourseTypeSix
                                 my={my}

@@ -18,7 +18,7 @@ const HeroArea = () => {
       <div className="container">
         <div className="row row--45 ">
           <div
-            className="section-title-flex section-title justify-content-center"
+            className=" section-title-flex flex section-title justify-content-center"
             data-aos-delay="150"
             data-aos="fade-up"
             data-aos-duration="800"
@@ -31,7 +31,7 @@ const HeroArea = () => {
               }}
             >
               <div className="left-content">
-                <h2 className="title flex flex-column flex-wrap ">
+                <h2 className=" title flex flex-column flex-wrap ">
                 هيا بنا يا صديقي
 
                   <br />

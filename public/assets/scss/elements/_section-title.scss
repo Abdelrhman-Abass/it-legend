@@ -44,7 +44,7 @@
 .section-title-flex {
     display: flex;
     @media #{$sm-layout} {
-        display: block;
+        display: flex;
         text-align: center;  
     }
     .left-content {
@@ -67,6 +67,11 @@
             right: -45px;
             @media #{$sm-layout} {
                 display: none;
+            }
+        }
+        h2{
+            @media #{$sm-layout} {
+                font-size: large;
             }
         }
     }

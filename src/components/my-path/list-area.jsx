@@ -9,8 +9,8 @@ const ListArea = ({ title }) => {
     <section >
       <div className="container">
         <h4 className="title">{title}</h4>
-        <div className="row row--30 desktop" style={{ justifyContent: "center" }}>
-          <div className="col-10">
+        <div className="pr-[50px] pl-[70px] row row--30 desktop" style={{ justifyContent: "center" }}>
+          <div className=" px-[60px]">
             {course_data.slice(0, 1).map((blog) => {
               const { id, img, title, date, course_desc, comment } = blog;
               return (
@@ -73,7 +73,7 @@ const ListArea = ({ title }) => {
         </div>
 
         <div className="row g-5 mobile ">
-            {course_data.slice(0, 3).map((course) => {
+            {course_data.slice(0, 1).map((course) => {
               return (
                 <div
                   className="col-md-6 col-lg-4"
