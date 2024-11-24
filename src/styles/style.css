@@ -56,7 +56,10 @@ html[lang="en"] body {
   white-space: normal; /* Allow wrapping */
 }
 #myDeploma{
-  scroll-margin-top: 100px;  /* Offset of 100px when scrolling */
+  scroll-margin-top: 200px;  /* Offset of 100px when scrolling */
+}
+#myCourses{
+  scroll-margin-top: 200px;  /* Offset of 100px when scrolling */
 }
 .player-side::-webkit-scrollbar {
   width: 8px;

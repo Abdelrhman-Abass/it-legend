@@ -19,6 +19,7 @@
     }
     .title {
         margin-bottom: 4px;
+        scroll-margin-top: 200px;
         br {
             @media #{$sm-layout} {
                 display: none;
@@ -73,6 +74,8 @@
         h2{
             @media #{$sm-layout} {
                 font-size: x-large;
+                align-items: flex-start;
+                margin-right: 10px;
             }
         }
     }
