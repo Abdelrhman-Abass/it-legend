@@ -768,7 +768,9 @@ textarea {
     display: none;
   }
 }
-
+.masonry-column{
+  padding: 0 25px;
+}
 .timer {
   display: flex;
   align-items: center;
@@ -776,7 +778,7 @@ textarea {
   flex-direction: column;
   background: #f5f1eb;
   font-weight: 600;
-  padding: 56px 0 46px;
+  padding: 150px 0 46px;
 }
 
 /* timer */
@@ -799,9 +801,9 @@ textarea {
 }
 
 @media (max-width: 767px) {
-  .timer {
+  /* .timer {
     padding: 56px 0 26px;
-  }
+  } */
   .timer ._2EBbg {
     width: 36px !important;
     height: 68px !important;

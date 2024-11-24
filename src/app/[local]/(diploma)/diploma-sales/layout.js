@@ -1,7 +1,7 @@
 import { Wrapper } from "@/layout";
 
 const RootLayout = ({ children }) => {
-  return <Wrapper hideHeader={true}>{children}</Wrapper>;
+  return <Wrapper hideHeader={false}>{children}</Wrapper>;
 };
 
 export default RootLayout;

@@ -8,7 +8,7 @@ import { useRouter ,Link } from "@/navigation";
 import { course_data } from "@/data";
 import CourseTypeSix from "../course/course-type-six";
 
-const RecommendedCourses = ({
+const DiplomaSales = ({
     my = false,
     recommend = false,
     title = null,
@@ -29,13 +29,13 @@ const RecommendedCourses = ({
     }, [direction]);
 
     return (
-        <div className="edu-course-area course-area-1 ">
+        <div className="edu-course-area course-area-1 pt-[30px]">
             <div className="container">
-            {title && <h3 className="title">{title}</h3>}
+            {title && <h3 className="title mb-[30px]">{title}</h3>}
 
                 <div className="row g-5 ">
                     {courses?.slice(0, 3)?.map((course, idx) => (
-                        <div key={course.id} className="col-md-6 col-lg-4">
+                        <div key={course.id} className="col-md-6 col-lg-4 ">
                             <CourseTypeSix
                                 my={my}
                                 title={title}
@@ -48,7 +48,7 @@ const RecommendedCourses = ({
                 </div>
 
 
-                <div
+                {/* <div
                     data-aos-delay="100"
                     data-aos="fade-up"
                     data-aos-duration="1200"
@@ -61,11 +61,11 @@ const RecommendedCourses = ({
                         )}
                         <span>المزيد</span>
                     </Link>
-                </div>
+                </div> */}
             </div>
 
         </div>
     );
 };
 
-export default RecommendedCourses;
+export default DiplomaSales;

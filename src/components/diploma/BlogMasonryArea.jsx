@@ -77,7 +77,7 @@ const BlogMasonryArea = ({ showMore = false }) => {
                 {date}
               </li>
             </ul>
-            <p>{desc}</p>
+            <p className="truncate-text">{desc}</p>
           </div>
         </div>
       </div>
@@ -85,7 +85,7 @@ const BlogMasonryArea = ({ showMore = false }) => {
   };
 
   return (
-    <section id="projects" className="section-gap-equal">
+    <section id="projects" className="pt-[80px]">
       <div className="container">
         <div
           className="g-5"
@@ -105,11 +105,11 @@ const BlogMasonryArea = ({ showMore = false }) => {
             style={{
               display: 'grid',
               gridTemplateColumns: `repeat(${columns}, 1fr)`,
-              gap: '30px'
+              gap: '0px'
             }}
           >
             {getColumnsContent().map((column, columnIndex) => (
-              <div key={columnIndex} className="masonry-column">
+              <div key={columnIndex} className="masonry-column ">
                 {column.map((blog) => (
                   <div key={blog.id} style={{ marginBottom: '30px' }}>
                     <BlogCard blog={blog} />

@@ -31,14 +31,14 @@ const data = {
 export default async function DiplomaPage() {
   return (
     <div className="diploma-sales-page">
-      <UserHeader />
+      {/* <UserHeader /> */}
       <CountDown />
       <VideoArea />
       <BrandArea data={data} />
       <BlogMasonryArea />
       <AboutArea isInstructor={true} />
       <div
-        style={{ margin: "-20px" }}
+        style={{ marginTop: "50px" }}
         className="section-title section-center"
         data-aos-delay="150"
         data-aos="fade-up"

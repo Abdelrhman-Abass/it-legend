@@ -88,7 +88,7 @@ function PricingTable({
 
 const PricingArea = () => {
   return (
-    <div className="edu-section-gap">
+    <div className="pb-[60px]">
       <div className="container">
         <div
           className="section-title section-center"
