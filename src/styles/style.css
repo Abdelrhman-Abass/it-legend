@@ -51,12 +51,12 @@ html[lang="en"] body {
   text-overflow: ellipsis; 
 }
 .single-line {
-  height: auto; /* Allow height to adjust naturally */
+  height: 60px; /* Allow height to adjust naturally */
   overflow: hidden; /* Show overflow */
   white-space: normal; /* Allow wrapping */
 }
 #myDeploma{
-  scroll-margin-top: 200px;  /* Offset of 100px when scrolling */
+  scroll-padding-top: 150px;  /* Offset of 100px when scrolling */
 }
 #myCourses{
   scroll-margin-top: 200px;  /* Offset of 100px when scrolling */
