@@ -51,7 +51,7 @@ export default async function RootLayout({ children, params: { local } }) {
           src="/src/utils/publitio_player.min.js"
           strategy="lazyOnload" // The script will load after the page is fully loaded
         /> */}
-                <ThemeProvider defaultTheme="light">
+                <ThemeProvider defaultTheme="light" enableSystem={true}>
                     <MouseMoveProvider>
                         <NextIntlClientProvider messages={messages}>
                             <Client>{children}</Client>

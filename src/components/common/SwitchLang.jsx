@@ -4,7 +4,7 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useTransition } from "react";
 
-const SwitchLang = ({theme}) => {
+const SwitchLang = ({theme }) => {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const local = useLocale();
