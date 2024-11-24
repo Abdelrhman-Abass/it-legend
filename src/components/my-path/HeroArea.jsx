@@ -31,7 +31,7 @@ const HeroArea = () => {
               }}
             >
               <div className="left-content">
-                <h2 className="title">
+                <h2 className="title flex flex-column flex-wrap ">
                 هيا بنا يا صديقي
 
                   <br />
