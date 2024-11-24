@@ -55,7 +55,9 @@ html[lang="en"] body {
   overflow: hidden; /* Show overflow */
   white-space: normal; /* Allow wrapping */
 }
-
+#myDeploma{
+  scroll-margin-top: 100px;  /* Offset of 100px when scrolling */
+}
 .player-side::-webkit-scrollbar {
   width: 8px;
 }

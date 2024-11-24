@@ -11,7 +11,7 @@ const SeconedMenu = () => {
     <ul className="mainmenu">
       {user_data.map((menu, i) => (
         <li key={i} className={menu.mega_menu && "has-droupdown"}>
-          <Link href={menu.link}>{t(menu.title) || menu.title}</Link>
+          <Link href={menu.link} >{t(menu.title) || menu.title}</Link>
           {menu?.mega_menu && (
             <ul className="submenu">
               {menu?.submenus?.map((nav, i) => (

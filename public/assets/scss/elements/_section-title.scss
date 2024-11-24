@@ -3,6 +3,7 @@
 ----------------------------*/
 .section-title {
     margin-bottom: 15px;
+    scroll-margin-top: 100px;
     @media #{$sm-layout} {
         margin-bottom: 40px;
     }

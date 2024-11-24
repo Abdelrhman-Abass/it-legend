@@ -13,6 +13,7 @@
 
 .gap-tb-text {
     padding: 70px 0 0;
+    scroll-margin-top: 100px;
     @media #{$md-layout} {
         padding: 95px 0 0;
     }
