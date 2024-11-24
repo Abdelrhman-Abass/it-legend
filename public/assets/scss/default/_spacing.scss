@@ -2,7 +2,7 @@
     Spacing
 -------------------------*/
 .edu-section-gap {
-    padding: 50px 0 10px;
+    padding: 50px 0 30px;
     @media #{$md-layout} {
         padding: 95px 0 100px;
     }
@@ -64,7 +64,7 @@
 .gap-bottom-equal {
     padding-bottom: 120px;
     @media #{$md-layout} {
-       padding-bottom: 100px;
+       padding-bottom: 0px;
     }
     @media #{$sm-layout} {
        padding-bottom: 80px;

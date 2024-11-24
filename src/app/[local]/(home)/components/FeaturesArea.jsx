@@ -30,7 +30,7 @@ function Feature({ delay, color, icon, icon_class, title, course }) {
           {/* <Link href="/course-style-1"> */}
           <h5 className="title">{title}</h5>
           {/* </Link> */}
-          <span className="course-count">{course} {t("courseText")}</span>
+          <span className="course-count">{course}</span>
         </div>
       </div>
     </div>
@@ -76,7 +76,7 @@ const FeaturesArea = () => {
             color="color-primary-style"
             icon="icon-9"
             title={t("businessManagement")}
-            course="38"
+            course="معاك منتور بيساعدك في كل خطوة"
             
           />
 
@@ -86,7 +86,7 @@ const FeaturesArea = () => {
             icon="icon-9"
             icon_class="art-design"
             title={t("artsAndDesign")}
-            course="40"
+            course="بالتطبيق على مسائل ومشاريع حقيقية"
           />
 
           <Feature
@@ -95,7 +95,7 @@ const FeaturesArea = () => {
             icon="icon-11"
             icon_class="personal-development"
             title={t("personalDevelopment")}
-            course="42"
+            course="اتعلم بمتعة: نقاط، ميداليات، وتحديات يومية"
           />
 
           <Feature
@@ -104,7 +104,7 @@ const FeaturesArea = () => {
             icon="icon-12"
             icon_class="health-fitness"
             title={t("healthAndFitness")}
-            course="36"
+            course="هتلاقي مسار التعلم اللي يناسبك"
           />
 
           <Feature
@@ -113,7 +113,7 @@ const FeaturesArea = () => {
             icon="icon-13"
             icon_class="data-science"
             title={t("dataScience")}
-            course="35"
+            course="فيديو، كتب، وملخصات"
           />
 
           <Feature
@@ -121,7 +121,7 @@ const FeaturesArea = () => {
             color="color-extra03-style"
             icon="icon-14"
             title={t("marketing")}
-            course="28"
+            course="لاب توب، موبايل، أو كمبيوتر بسهولة"
           />
 
           <Feature
@@ -129,7 +129,7 @@ const FeaturesArea = () => {
             color="color-extra04-style"
             icon="icon-15"
             title={t("businessAndFinance")}
-            course="25"
+            course="المحتوى مفتوح ترجع له أي وقت"
           />
 
           <Feature
@@ -138,7 +138,7 @@ const FeaturesArea = () => {
             icon="icon-16"
             icon_class="computer-science"
             title={t("computerScience")}
-            course="26"
+            course="عندك مشكلة؟ احنا معاك"
           />
 
           <Feature
@@ -147,7 +147,7 @@ const FeaturesArea = () => {
             icon="icon-17"
             icon_class="video-photography"
             title={t("videoAndPhotography")}
-            course="22"
+            course="شارك إنجازاتك واسأل زملائك"
           />
         </div>
       </div>

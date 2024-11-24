@@ -9,6 +9,7 @@
 
     &.course-style-1 {
         transition: var(--transition-2);
+        box-shadow: 0 20px 50px 0 rgba(0, 0, 0, 0.09);
 
         .thumbnail {
             transition: var(--transition-2);
