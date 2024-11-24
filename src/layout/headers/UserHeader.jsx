@@ -193,11 +193,11 @@ const UserHeader = ({
                                 <div className="content">
                                   <h5 className="title flex gap-4 justify-center items-center cursor-pointer ">
                                     <Link href="/profile" >
-                                      {direction == "rtl" ? (
+                                      {/* {direction == "rtl" ? (
                                         <ArrowLeft className="d-inline h-[20px]" />
                                       ) : (
                                         <i className="icon-4 mr-2"></i>
-                                      )}
+                                      )} */}
                                       <span>{t("profile")}</span>
                                     </Link>
                                   </h5>
@@ -208,11 +208,11 @@ const UserHeader = ({
                                 <div className="content">
                                   <h5 className="title flex gap-4 justify-center items-center cursor-pointer ">
                                     <div  className="flex items-center" >
-                                      {direction == "rtl" ? (
+                                      {/* {direction == "rtl" ? (
                                         <ArrowLeft className="d-inline h-[20px]" />
                                       ) : (
                                         <i className="icon-4 mr-2"></i>
-                                      )}
+                                      )} */}
                                       <SwitchLang theme={theme} />
                                     </div>
                                   </h5>
@@ -223,11 +223,11 @@ const UserHeader = ({
                                 <div className="content">
                                   <h5 className="title flex gap-4 justify-center items-center cursor-pointer ">
                                     <Link href="https://wa.me/01007582994" >
-                                      {direction == "rtl" ? (
+                                      {/* {direction == "rtl" ? (
                                         <ArrowLeft className="d-inline h-[20px]" />
                                       ) : (
                                         <i className="icon-4 mr-2"></i>
-                                      )}
+                                      )} */}
                                       <span>{t("support")}</span>
                                     </Link>
                                   </h5>
@@ -238,11 +238,11 @@ const UserHeader = ({
                                 <div className="content">
                                   <h5 className="title flex gap-4 justify-center items-center cursor-pointer ">
                                     <button onClick={handleLogout}>
-                                      {direction == "rtl" ? (
+                                      {/* {direction == "rtl" ? (
                                         <ArrowLeft className="d-inline h-[20px]" />
                                       ) : (
                                         <i className="icon-4 mr-2"></i>
-                                      )}
+                                      )} */}
                                       <span>{t("signout")}</span>
 
                                     </button>

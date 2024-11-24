@@ -64,7 +64,7 @@ const CourseTypeSix = ({ data, classes, my, idx }) => {
               {data.title}
             </Link>
           </h5>
-          <p className="truncate-text">{data.short_desc}</p>
+          <p className={`truncate-text ${data.short_desc.split('\n').length === 1 ? 'single-line' : ''}`}>{data.short_desc}</p>
           <div className="course-rating">
             <div className="rating">
               <i className="icon-23"></i>

@@ -54,12 +54,12 @@ const RecommendedCourses = ({
                     data-aos-duration="1200"
                 >
                     <Link className="edu-btn" href="/courses" style={{ cursor: "pointer" }}>
+                        <span> المزيد من الكورسات</span>
                         {direction == "rtl" ? (
                             <ArrowLeft className="d-inline h-[20px]" />
                         ) : (
                             <i className="icon-4 mr-2"></i>
                         )}
-                        <span>المزيد</span>
                     </Link>
                 </div>
             </div>

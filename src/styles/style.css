@@ -50,6 +50,11 @@ html[lang="en"] body {
   overflow: hidden;
   text-overflow: ellipsis; 
 }
+.single-line {
+  height: auto; /* Allow height to adjust naturally */
+  overflow: hidden; /* Show overflow */
+  white-space: normal; /* Allow wrapping */
+}
 
 .player-side::-webkit-scrollbar {
   width: 8px;

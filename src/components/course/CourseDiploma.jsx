@@ -50,9 +50,8 @@ const CourseDiploma = ({
             />
           </Link>
           <div className="time-top">
-            <span className="duration">
-              <i className="icon-61"></i> <span>{data.duration}</span>{" "}
-              <span>اسابيع</span>
+            <span className="duration_1">
+               <span>45%</span>
             </span>
           </div>
         </div>
