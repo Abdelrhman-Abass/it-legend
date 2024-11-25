@@ -46,12 +46,12 @@ export const UserCourses = createAsyncThunk(
       // Handle the response to safely access `data`
       const { data } = response; // Get data from the response (either null or actual data)
 
-      if (data === null) {
-        console.log("No data found.");
-        return {}; // Return an empty object or handle this case appropriately
-      }
+      // if (data === null) {
+      //   console.log("No data found.");
+      //   return {}; // Return an empty object or handle this case appropriately
+      // }
 
-      return data; // Return the actual data if it's not null
+      return response; // Return the actual data if it's not null
     } catch (error) {
       console.error(error);
       return rejectWithValue(error.message); // Return error if any
