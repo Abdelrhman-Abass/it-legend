@@ -137,7 +137,7 @@ const CourseElevenArea = ({
       console.log("Courses Data:", courses);
       const { data } = courses;  // Assuming `courses` has a `data` property that holds the array
       setCour(data);  // Set cour as the array, not a string
-      console.log("Data array:", data);  // Log the actual array
+      // console.log("Data array:", data);  // Log the actual array
     }
     if (status === "failed") {
       console.log("Error:", error);

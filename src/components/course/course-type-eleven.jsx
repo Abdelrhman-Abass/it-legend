@@ -11,10 +11,10 @@ const CourseTypeEleven = ({ data, classes, my, idx }) => {
   // const locale = useLocale();
 
   // handle add to cart
-  useEffect(() => {
-    // Dispatch UserCourses action to fetch courses
-    console.log(data)
-  }, []);
+  // useEffect(() => {
+  //   // Dispatch UserCourses action to fetch courses
+  //   console.log(data)
+  // }, []);
   // const handleAddToCart = (course) => {
   //   dispatch(
   //     cart_course({

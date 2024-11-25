@@ -103,6 +103,7 @@
     },
     "auth": {
         "signIn": "Sign In",
+        "Login": "Sign In",
         "dont": "Don't Have an Account?",
         "email": "Email",
         "emailReq": "Email is Required",

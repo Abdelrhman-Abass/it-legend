@@ -11,11 +11,11 @@ const SignInCard = ({ setIsFlip }) => {
   const [authError, setAuthError] = useState(null);
   return (
     <div className="login-form-box">
-      {authError && (
+      {/* {authError && (
         <div className="alert alert-danger" role="alert">
           {authError}
         </div>
-      )}
+      )} */}
       <h3 className="title">{t("signIn")}</h3>
       <p>
         {t("dont")}{" "}
@@ -34,11 +34,11 @@ const SignUpCard = ({ setIsFlip }) => {
 
   return (
     <div className="login-form-box registration-form">
-      {authError && (
+      {/* {authError && (
         <div className="alert alert-danger" role="alert">
           {authError}
         </div>
-      )}
+      )} */}
       <h3 className="title">{t("signUp")}</h3>
       <p>
         {t("haveAccount")}{" "}
