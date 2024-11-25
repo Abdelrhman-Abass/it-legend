@@ -109,10 +109,10 @@ const CourseElevenArea = ({
   const error = useSelector(selectCourseError);
 
   // Filter unique courses by courseId
-  const uniqueCourses = courses.filter(
-    (course, index, self) =>
-      index === self.findIndex((c) => c.courseId === course.courseId)
-  );
+  // const uniqueCourses = courses.filter(
+  //   (course, index, self) =>
+  //     index === self.findIndex((c) => c.courseId === course.courseId)
+  // );
 
   // Handle loading more data
   const handleLoadData = () => {
@@ -126,7 +126,7 @@ const CourseElevenArea = ({
   useEffect(() => {
     console.log("Courses Status:", status);
     if (status === 'succeeded') {
-      console.log("Courses Data:", course);
+      console.log("Courses Data:", courses);
     }
     if (status === 'failed') {
       console.log("Error:", error);
@@ -138,7 +138,7 @@ const CourseElevenArea = ({
       <div className="container">
         {title && <h3 className="title">{title}</h3>}
         <div className="row g-5">
-          {uniqueCourses.slice(0, next).map((course, idx) => (
+          {/* {uniqueCourses.slice(0, next).map((course, idx) => (
             <div key={course.courseId} className="col-md-6 col-lg-4">
               <CourseTypeEleven
                 my={my}
@@ -149,9 +149,9 @@ const CourseElevenArea = ({
               />
               <p>{course.titleAr}</p>
             </div>
-          ))}
+          ))} */}
         </div>
-        {next < uniqueCourses.length && (
+        {/* {next < uniqueCourses.length && (
           <div
             onClick={handleLoadData}
             className="load-more-btn"
@@ -163,7 +163,7 @@ const CourseElevenArea = ({
               المزيد <i className="icon-56"></i>
             </a>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
