@@ -102,6 +102,7 @@ const CourseElevenArea = ({
   coursePerView = 6,
 }) => {
   const [next, setNext] = useState(coursePerView);
+  const [cour, setCour] = useState([]);
   const dispatch = useDispatch();
 
   const courses = useSelector(selectCourses) || []; // Ensure it's always an array
@@ -117,27 +118,45 @@ const CourseElevenArea = ({
     dispatch(UserCourses());
   }, [dispatch]);
 
+  // useEffect(() => {
+  //   console.log("Courses Status:", status);
+  //   if (status === "succeeded") {
+  //     console.log("Courses Data:", courses);
+  //     const {data} = courses
+  //     setCour(JSON.stringify(data))
+  //     console.log("data "+JSON.stringify(data));
+  //   }
+  //   if (status === "failed") {
+  //     console.log("Error:", error);
+  //   }
+  // }, [status, courses, error]);
+
   useEffect(() => {
     console.log("Courses Status:", status);
     if (status === "succeeded") {
       console.log("Courses Data:", courses);
+      const { data } = courses;  // Assuming `courses` has a `data` property that holds the array
+      setCour(data);  // Set cour as the array, not a string
+      console.log("Data array:", data);  // Log the actual array
     }
     if (status === "failed") {
       console.log("Error:", error);
     }
   }, [status, courses, error]);
 
+
   return (
     <div className="edu-course-area course-area-1">
       <div className="container">
-        {title && <h3 className="title">{title}</h3>}
+        {/* {title && <h3 className="title">{title}</h3>} */}
         <div className="row g-5">
+               
           {status === "loading" && (
             <p className="loading-text">Loading...</p>
           )}
           {status === "succeeded" &&
-            courses.slice(0, next).map((course, idx) => (
-              <div key={course.courseId} className="col-md-6 col-lg-4">
+            cour.map((course, idx) => (
+              <div key={idx} className="col-md-6 col-lg-4">
                 <CourseTypeEleven
                   my={my}
                   title={title}
@@ -152,7 +171,7 @@ const CourseElevenArea = ({
             <p className="error-text">Failed to load courses. Please try again.</p>
           )}
         </div>
-        {next < courses.length && status === "succeeded" && (
+        {/* {next < courses.length && status === "succeeded" && (
           <div
             onClick={handleLoadData}
             className="load-more-btn"
@@ -164,7 +183,7 @@ const CourseElevenArea = ({
               المزيد <i className="icon-56"></i>
             </a>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
