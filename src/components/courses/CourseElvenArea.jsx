@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { course_data } from "@/data";
-
 import CourseTypeEleven from "../course/course-type-eleven";
 import { useDispatch, useSelector } from "react-redux";
 import { UserCourses } from "../../store/features/course-slice"; // Adjust the import based on your project structure
@@ -16,7 +15,7 @@ const CourseElevenArea = ({
   coursePerView = 6,
 }) => {
   const [next, setNext] = useState(coursePerView);
-  const [courses, setCourses] = useState(course_data);
+  // const [courses, setCourses] = useState(test_data);
   const dispatch = useDispatch();
 
   const course = useSelector(selectCourses);
@@ -31,6 +30,7 @@ const CourseElevenArea = ({
   useEffect(() => {
     // Dispatch UserCourses action to fetch courses
     dispatch(UserCourses());
+    console.log("test-data " +course )
   }, [dispatch]);
 
   // Log the status and fetched data to the console for debugging
@@ -49,17 +49,18 @@ const CourseElevenArea = ({
     <div className="edu-course-area course-area-1 ">
       <div className="container">
         {title && <h3 className="title">{title}</h3>}
-        
+
         <div className="row g-5 ">
           {course?.slice(0, next)?.map((course, idx) => (
             <div key={course.courseId} className="col-md-6 col-lg-4">
-              <CourseTypeEleven
+              {/* <CourseTypeEleven
                 my={my}
                 title={title}
                 data={course}
                 classes="course-box-shadow"
                 idx={idx}
-              />
+              /> */}
+              <p>{course.titleAr}</p>
             </div>
           ))}
         </div>
