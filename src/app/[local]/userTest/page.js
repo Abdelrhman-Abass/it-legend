@@ -44,8 +44,7 @@ const page = () => {
       const data = await response.json();
       return data;
     } catch (error) {
-      return rejectWithValue(error.message);
-    }
+console.log(error)    }
   };
 
 
