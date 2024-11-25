@@ -108,12 +108,6 @@ const CourseElevenArea = ({
   const status = useSelector(selectCourseStatus);
   const error = useSelector(selectCourseError);
 
-  // Filter unique courses by courseId
-  // const uniqueCourses = courses.filter(
-  //   (course, index, self) =>
-  //     index === self.findIndex((c) => c.courseId === course.courseId)
-  // );
-
   // Handle loading more data
   const handleLoadData = () => {
     setNext((value) => value + 3);
@@ -125,33 +119,40 @@ const CourseElevenArea = ({
 
   useEffect(() => {
     console.log("Courses Status:", status);
-    if (status === 'succeeded') {
+    if (status === "succeeded") {
       console.log("Courses Data:", courses);
     }
-    if (status === 'failed') {
+    if (status === "failed") {
       console.log("Error:", error);
     }
   }, [status, courses, error]);
-  
+
   return (
     <div className="edu-course-area course-area-1">
       <div className="container">
         {title && <h3 className="title">{title}</h3>}
         <div className="row g-5">
-          {/* {uniqueCourses.slice(0, next).map((course, idx) => (
-            <div key={course.courseId} className="col-md-6 col-lg-4">
-              <CourseTypeEleven
-                my={my}
-                title={title}
-                data={course}
-                classes="course-box-shadow"
-                idx={idx}
-              />
-              <p>{course.titleAr}</p>
-            </div>
-          ))} */}
+          {status === "loading" && (
+            <p className="loading-text">Loading...</p>
+          )}
+          {status === "succeeded" &&
+            courses.slice(0, next).map((course, idx) => (
+              <div key={course.courseId} className="col-md-6 col-lg-4">
+                <CourseTypeEleven
+                  my={my}
+                  title={title}
+                  data={course}
+                  classes="course-box-shadow"
+                  idx={idx}
+                />
+                <p>{course.titleAr}</p>
+              </div>
+            ))}
+          {status === "failed" && (
+            <p className="error-text">Failed to load courses. Please try again.</p>
+          )}
         </div>
-        {/* {next < uniqueCourses.length && (
+        {next < courses.length && status === "succeeded" && (
           <div
             onClick={handleLoadData}
             className="load-more-btn"
@@ -163,7 +164,7 @@ const CourseElevenArea = ({
               المزيد <i className="icon-56"></i>
             </a>
           </div>
-        )} */}
+        )}
       </div>
     </div>
   );
