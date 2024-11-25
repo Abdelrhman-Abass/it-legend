@@ -1,10 +1,13 @@
 "use client";
-import React from "react";
-import { useState } from "react";
+
+import React, { useEffect, useState } from "react";
 import { course_data } from "@/data";
-import CourseTypeSix from "../course/course-type-six";
-import SortingArea from "../course-filter/sorting-area";
+
 import CourseTypeEleven from "../course/course-type-eleven";
+import { useDispatch, useSelector } from "react-redux";
+import { UserCourses } from "../../store/features/course-slice"; // Adjust the import based on your project structure
+import { selectCourses, selectCourseStatus, selectCourseError } from "../../store/features/course-slice"; // Adjust as needed
+
 
 const CourseElevenArea = ({
   my = false,
@@ -14,22 +17,39 @@ const CourseElevenArea = ({
 }) => {
   const [next, setNext] = useState(coursePerView);
   const [courses, setCourses] = useState(course_data);
+  const dispatch = useDispatch();
+
+  const course = useSelector(selectCourses);
+  const status = useSelector(selectCourseStatus);
+  const error = useSelector(selectCourseError);
 
   // handleLoadData
   const handleLoadData = () => {
     setNext((value) => value + 3);
   };
 
+  useEffect(() => {
+    // Dispatch UserCourses action to fetch courses
+    dispatch(UserCourses());
+  }, [dispatch]);
+
+  // Log the status and fetched data to the console for debugging
+  useEffect(() => {
+    console.log("Courses Status:", status);
+    if (status === 'succeeded') {
+      console.log("Courses Data:", course);
+    }
+    if (status === 'failed') {
+      console.log("Error:", error);
+    }
+  }, [status, course, error]);
+
+
   return (
     <div className="edu-course-area course-area-1 ">
       <div className="container">
         {title && <h3 className="title">{title}</h3>}
-        {/* <SortingArea
-          course_items={course_data}
-          num={courses?.slice(0, next)?.length}
-          setCourses={setCourses}
-          courses={courses}
-        /> */}
+        
         <div className="row g-5 ">
           {courses?.slice(0, next)?.map((course, idx) => (
             <div key={course.id} className="col-md-6 col-lg-4">

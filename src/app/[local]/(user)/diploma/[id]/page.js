@@ -3,6 +3,7 @@ import BreadcrumbTwo from "@/components/breadcrumb/breadcrumb-2";
 import SwitchThemeButton from "@/components/common/SwitchThemeButton";
 import CourseTwoArea from "@/components/courses/CourseTwoArea";
 import CounterArea from "@/components/my-path/counter-area";
+import DiplomaArea from "@/components/my-path/diploma-area";
 import ListArea from "@/components/my-path/list-area";
 import { UserHeader } from "@/layout";
 import { Progress, Tooltip } from "antd";
@@ -41,9 +42,9 @@ const page = () => {
         </div>
       </div>
       <CounterArea />
-      <ListArea title="مرحلة ما قبل التعلم"/>
-      <ListArea title="مرحلة التأسيس"/>
-      <ListArea title="مرحلةالتأهيل لسوق العمل" />
+      <DiplomaArea title="مرحلة ما قبل التعلم"/>
+      <DiplomaArea title="مرحلة التأسيس"/>
+      <DiplomaArea title="مرحلةالتأهيل لسوق العمل" />
     </>
   );
 };

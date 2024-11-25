@@ -5,6 +5,7 @@ import wishlistSlice from "./features/wishlist-slice"; // Path to your wishlistS
 import eventSlice from "./features/event-slice"; // Path to your eventSlice
 import filterSlice from "./features/filter-slice"; // Path to your filterSlice
 import authSlice from "./features/auth-slice"; // Path to your authSlice
+import diplomaSlice from "./features/diploma-slice";
 
 // Combine the reducers
 const rootReducer = combineReducers({
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   wishlist: wishlistSlice,
   event: eventSlice,
   filter: filterSlice,
+  diploma:diplomaSlice,
 });
 
 // Create the store with combined reducers
