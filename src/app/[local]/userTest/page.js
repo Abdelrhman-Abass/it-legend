@@ -82,7 +82,6 @@ const page = () => {
   return (
     <div className="edu-course-area course-area-1 ">
       <div className="container">
-        {title && <h3 className="title">{title}</h3>}
         
         {/* <div className="row g-5 ">
           {courses?.slice(0, next)?.map((course, idx) => (
