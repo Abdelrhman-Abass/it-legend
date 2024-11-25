@@ -35,30 +35,38 @@ const initialState = {
 //     }
 //   }
 // );
+
+// Async action to fetch courses
 export const UserCourses = createAsyncThunk(
   "user/courses",
   async (_, { rejectWithValue }) => {
     try {
       const response = await courseUSerData();
-      const { data } = response;
-      if (data === undefined || data === null){
-        data = {}
-      }
-      console.log(data)
-      return data ;
 
-      
+      // Handle the response to safely access `data`
+      const { data } = response; // Get data from the response (either null or actual data)
+
+      if (data === null) {
+        console.log("No data found.");
+        return {}; // Return an empty object or handle this case appropriately
+      }
+
+      return data; // Return the actual data if it's not null
     } catch (error) {
-      console.log(error)
+      console.error(error);
+      return rejectWithValue(error.message); // Return error if any
     }
   }
 );
+
 // Create the slice
 export const courseSlice = createSlice({
-  name: "courses", // Ensure this is "courses"
+  name: "courses",
   initialState,
   reducers: {
-    single_product: (state, { payload }) => {},
+    single_product: (state, { payload }) => {
+      // Handle single product logic if needed
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -77,7 +85,8 @@ export const courseSlice = createSlice({
 });
 
 export const { single_product } = courseSlice.actions;
-export const selectCourses = (state) => state.courses.courses; // Make sure to use state.courses
-export const selectCourseStatus = (state) => state.courses.status; // Adjust for consistency
-export const selectCourseError = (state) => state.courses.error; // Adjust for consistency
+export const selectCourses = (state) => state.courses.courses; // Use the correct slice path
+export const selectCourseStatus = (state) => state.courses.status;
+export const selectCourseError = (state) => state.courses.error;
+
 export default courseSlice.reducer;
