@@ -12,6 +12,7 @@ export const courseUSerData = async () => {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
         });
   
@@ -25,6 +26,8 @@ export const courseUSerData = async () => {
         return error.message;
       }
 };
+
+
 // Example of the `getJWT` helper function (also using Axios)
 const getJWT = async (body) => {
   try {
