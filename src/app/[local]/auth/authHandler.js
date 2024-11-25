@@ -7,7 +7,7 @@ export const authHandler = async (url, body) => {
   try {
     // Send the POST request using Axios
     const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/${url}`,
+      `http://49.13.77.125:1118/Endpoint/api/${url}`,
       body,
       {
         headers: {
