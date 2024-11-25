@@ -18,7 +18,7 @@ const CourseElevenArea = ({
   const courses = useSelector(selectCourses);
   const status = useSelector(selectCourseStatus);
   const error = useSelector(selectCourseError);
-
+  setCourse(courses)
   // handleLoadData
   const handleLoadData = () => {
     setNext((value) => value + 3);
@@ -28,9 +28,8 @@ const CourseElevenArea = ({
   useEffect(() => {
     // Dispatch UserCourses action to fetch courses
     dispatch(UserCourses());
-    setCourse(useSelector(selectCourses))
-    console.log(course)
-  }, [dispatch, course]);
+    console.log(courses)
+  }, [dispatch , courses]);
 
   // Log the status and fetched data to the console for debugging
   useEffect(() => {
@@ -41,7 +40,7 @@ const CourseElevenArea = ({
     if (status === 'failed') {
       console.log("Error:", error);
     }
-  }, [status, course, error]);
+  }, [status, courses, error]);
 
   return (
     <div className="edu-course-area course-area-1">
