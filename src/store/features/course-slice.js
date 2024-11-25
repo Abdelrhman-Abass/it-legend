@@ -1,3 +1,4 @@
+"use server"
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { cookies } from "next/headers";
 
