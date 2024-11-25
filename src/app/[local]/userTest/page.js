@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { UserCourses } from "../../../store/features/course-slice"; // Adjust the import based on your project structure
-import { selectCourses, selectCourseStatus, selectCourseError } from "../slices/dataSlice"; // Adjust as needed
+import { selectCourses, selectCourseStatus, selectCourseError } from "../../../store/features/course-slice"; // Adjust as needed
 
 
 const CourseElevenArea = ({
