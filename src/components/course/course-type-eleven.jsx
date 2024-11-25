@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "@/navigation";
 // import { useDispatch, useSelector } from "react-redux";
 // import { cart_course } from "@/store/features/cart-slice";
@@ -11,7 +11,10 @@ const CourseTypeEleven = ({ data, classes, my, idx }) => {
   // const locale = useLocale();
 
   // handle add to cart
-  console.log(data)
+  useEffect(() => {
+    // Dispatch UserCourses action to fetch courses
+    console.log(data)
+  }, []);
   // const handleAddToCart = (course) => {
   //   dispatch(
   //     cart_course({
