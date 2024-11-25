@@ -12,7 +12,7 @@ const SignInCard = ({ setIsFlip }) => {
   return (
     <div className="login-form-box">
       {authError && (
-        <div class="alert alert-danger" role="alert">
+        <div className="alert alert-danger" role="alert">
           {authError}
         </div>
       )}
@@ -35,7 +35,7 @@ const SignUpCard = ({ setIsFlip }) => {
   return (
     <div className="login-form-box registration-form">
       {authError && (
-        <div class="alert alert-danger" role="alert">
+        <div className="alert alert-danger" role="alert">
           {authError}
         </div>
       )}

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import { UserCourses } from "../../store/features/course-slice"; // Adjust the import based on your project structure
 // import { UserCourses, selectCourses, selectCourseStatus, selectCourseError } from "../../store/features/course-slice"; // Adjust path accordingly
 import { course_data } from "@/data";
+import { cookies } from "next/headers";
 
 const page = () => {
 //   const [next, setNext] = useState(coursePerView);
@@ -55,15 +56,16 @@ console.log(error)    }
   useEffect(() => {
     // Dispatch UserCourses action to fetch courses
     // dispatch(UserCourses());
-    const data = fetchDataUser()
-    const token =
-          document.cookie
-              .split("; ")
-              .find((row) => row.startsWith("token="))
-              ?.split("=")[1]
+    // const data = fetchDataUser()
+    // const token =
+    //       document.cookie
+    //           .split("; ")
+    //           .find((row) => row.startsWith("token="))
+    //           ?.split("=")[1]
+              console.log("token " +cookies().get('token')?.value);
 
-    console.log("data " + token)
-    console.log("data " + data)
+    // console.log("data " + token)
+    // console.log("data " + data)
   }, []);
 
   // Log the status and fetched data to the console for debugging
