@@ -4,10 +4,13 @@
 
 html[lang="ar"] body {
   font-family: var(--notoKufiArabic-font-family) !important;
+  scroll-behavior: smooth;
 }
 
 html[lang="en"] body {
   font-family: var(--poppins-font-family) !important;
+  scroll-behavior: smooth;
+
 }
 .accordion-item{
   background: transparent !important;

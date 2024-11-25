@@ -39,11 +39,12 @@ export const UserCourses = createAsyncThunk(
   "user/courses",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await courseUSerData("MemberCourse");
+      const response = await courseUSerData();
       if (response) {
         const { data } = response;
+        console.log(data)
         return { data };
-        
+
       } else {
         return rejectWithValue("Login failed");
       }

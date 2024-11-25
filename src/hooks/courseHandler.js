@@ -3,7 +3,7 @@ import axios from "axios";
 import { cookies } from "next/headers";
 
 // Define a function to handle authentication requests with Axios
-export const courseUSerData = async (url, body) => {
+export const courseUSerData = async () => {
     try {
         const token = cookies().get('token')?.value;
         if (!token) throw new Error("Token is not available");
@@ -12,7 +12,6 @@ export const courseUSerData = async (url, body) => {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
           },
         });
   
