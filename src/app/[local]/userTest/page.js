@@ -5,11 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 // import { UserCourses, selectCourses, selectCourseStatus, selectCourseError } from "../../store/features/course-slice"; // Adjust path accordingly
 import { course_data } from "@/data";
 
-const page = async({
- 
-}) => {
+const page = () => {
 //   const [next, setNext] = useState(coursePerView);
-  const [courses, setCourses] = useState(course_data);
+//   const [courses, setCourses] = useState(course_data);
   // const dispatch = useDispatch();
    // Accessing courses from Redux state
   //  const course = useSelector(selectCourses);
@@ -58,7 +56,7 @@ const page = async({
   useEffect(() => {
     // Dispatch UserCourses action to fetch courses
     // dispatch(UserCourses());
-    // const data = fetchDataUser()
+    const data = fetchDataUser()
     const token =
           document.cookie
               .split("; ")
@@ -66,6 +64,7 @@ const page = async({
               ?.split("=")[1]
 
     console.log("data " + token)
+    console.log("data " + data)
   }, []);
 
   // Log the status and fetched data to the console for debugging
