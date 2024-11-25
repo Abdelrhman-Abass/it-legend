@@ -15,7 +15,7 @@ export const courseUSerData = async () => {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json",
                 },
-                timeout: 120000, // Set timeout to 30 seconds
+                timeout: 300000, // Set timeout to 30 seconds
 
             }
         );
