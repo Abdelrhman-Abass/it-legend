@@ -7,7 +7,7 @@ export const courseUSerData = async (url, body) => {
     try {
         const token = cookies().get('token')?.value;
         if (!token) throw new Error("Token is not available");
-        console.log("token "+token)
+        // console.log("token "+token)
         const response = await fetch(`http://49.13.77.125:1118/Endpoint/api/MemberCourse`, {
           method: "GET",
           headers: {
