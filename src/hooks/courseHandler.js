@@ -20,6 +20,11 @@ export const courseUSerData = async () => {
           throw new Error("Failed to fetch data");
         }
         console.log("response " + response?.data)
+        const data = response?.data
+        if (data === undefined || data === null){
+            data = {}
+            return data
+          }
         return response?.data;
         // return data;
       } catch (error) {

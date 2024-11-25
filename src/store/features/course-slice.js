@@ -41,6 +41,9 @@ export const UserCourses = createAsyncThunk(
     try {
       const response = await courseUSerData();
       const { data } = response;
+      if (data === undefined || data === null){
+        data = {}
+      }
       console.log(data)
       return data ;
 
