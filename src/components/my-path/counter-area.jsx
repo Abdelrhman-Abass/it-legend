@@ -50,7 +50,7 @@ const CounterArea = ({ about_p_3 }) => {
             return (
               <div
                 key={i}
-                className="col-lg-3 col-sm-6"
+                className="col-lg-3 col-6 col-sm-6"
                 data-aos-delay="150"
                 data-aos="fade-up"
                 data-aos-duration="800"

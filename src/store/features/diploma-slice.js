@@ -57,7 +57,7 @@ export const diplomaSlice = createSlice({
   },
 });
 
-export const { single_product } = courseSlice.actions;
+export const { single_product } = diplomaSlice.actions;
 export const selectDiploma = (state) => state.diploma.diploma; // Use the correct slice path
 export const selectDiplomaStatus = (state) => state.diploma.status;
 export const selectDiplomaError = (state) => state.diploma.error;

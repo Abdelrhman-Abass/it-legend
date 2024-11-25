@@ -26,7 +26,7 @@ const DiplomaArea = ({ title }) => {
                   <div className="inner">
                     <div className="thumbnail">
                       <Link
-                        href={`/course-player/c84e7902-1205-426f-a857-922bedd84bdf}`}
+                        href={`/diploma/10`}
                       >
                         <img
                           src={"/assets/images/blog/blog-25.jpg"}
@@ -43,7 +43,7 @@ const DiplomaArea = ({ title }) => {
                     <div className="content">
                       <h5 className="title">
                         <Link
-                          href={`/course-player/c84e7902-1205-426f-a857-922bedd84bdf}`}
+                          href={`/diploma/10`}
                         >
                           {title}...
                         </Link>
