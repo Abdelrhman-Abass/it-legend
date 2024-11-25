@@ -1,90 +1,55 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { UserCourses } from "../../store/features/course-slice"; // Adjust the import based on your project structure
-// import { UserCourses, selectCourses, selectCourseStatus, selectCourseError } from "../../store/features/course-slice"; // Adjust path accordingly
-import { course_data } from "@/data";
-import { cookies } from "next/headers";
+import { UserCourses } from "../../../store/features/course-slice"; // Adjust the import based on your project structure
+import { selectCourses, selectCourseStatus, selectCourseError } from "../../../store/features/course-slice"; // Adjust as needed
 
-const page = () => {
-//   const [next, setNext] = useState(coursePerView);
-//   const [courses, setCourses] = useState(course_data);
-  // const dispatch = useDispatch();
-   // Accessing courses from Redux state
-  //  const course = useSelector(selectCourses);
-  //  const status = useSelector(selectCourseStatus);
-  //  const error = useSelector(selectCourseError);
 
-  //  setCourses(course)
+const CourseElevenArea = ({
+  my = false,
+  recommend = false,
+  title = null,
+  coursePerView = 6,
+}) => {
+  const dispatch = useDispatch();
+  const [next, setNext] = useState(coursePerView);
+
+  // Accessing courses from Redux state
+  const courses = useSelector(selectCourses);
+  const status = useSelector(selectCourseStatus);
+  const error = useSelector(selectCourseError);
+
   // handleLoadData
-
-  const fetchDataUser = async () => {
-    try {
-      const token =
-        typeof window !== "undefined"
-          ? document.cookie
-              .split("; ")
-              .find((row) => row.startsWith("token="))
-              ?.split("=")[1]
-          : null;
-
-      if (!token) throw new Error("Token is not available");
-
-      const response = await fetch(`http://49.13.77.125:1118/Endpoint/api/MemberCourse`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch data");
-      }
-
-      const data = await response.json();
-      return data;
-    } catch (error) {
-console.log(error)    }
+  const handleLoadData = () => {
+    setNext((value) => value + 3);
   };
 
-
-//   const handleLoadData = () => {
-//     setNext((value) => value + 3);
-//   };
-
+  // Fetch courses data on component mount
   useEffect(() => {
     // Dispatch UserCourses action to fetch courses
-    // dispatch(UserCourses());
-    // const data = fetchDataUser()
-    // const token =
-    //       document.cookie
-    //           .split("; ")
-    //           .find((row) => row.startsWith("token="))
-    //           ?.split("=")[1]
-              console.log("token " +cookies().get('token')?.value);
-
-    // console.log("data " + token)
-    // console.log("data " + data)
-  }, []);
+    dispatch(UserCourses());
+    console.log(courses)
+  }, [dispatch]);
 
   // Log the status and fetched data to the console for debugging
-  // useEffect(() => {
-  //   console.log("Courses Status:", status);
-  //   if (status === 'succeeded') {
-  //     console.log("Courses Data:", courses);
-  //   }
-  //   if (status === 'failed') {
-  //     console.log("Error:", error);
-  //   }
-  // }, [status, courses, error]);
+  useEffect(() => {
+    console.log("Courses Status:", status);
+    if (status === 'succeeded') {
+      console.log("Courses Data:", courses);
+    }
+    if (status === 'failed') {
+      console.log("Error:", error);
+    }
+  }, [status, courses, error]);
 
-  // console.log("data "+ courses)
   return (
-    <div className="edu-course-area course-area-1 ">
+    <div className="edu-course-area course-area-1">
       <div className="container">
-        
-        {/* <div className="row g-5 ">
+        {/* {title && <h3 className="title">{title}</h3>}
+
+        <div className="row g-5">
+          {status === 'loading' && <div>Loading...</div>}
+          {status === 'failed' && <div>Error: {error}</div>}
           {courses?.slice(0, next)?.map((course, idx) => (
             <div key={course.id} className="col-md-6 col-lg-4">
               <CourseTypeEleven
@@ -97,10 +62,13 @@ console.log(error)    }
             </div>
           ))}
         </div> */}
-        
+{/* 
+        <div className="load-more-btn">
+          <button onClick={handleLoadData}>Load More</button>
+        </div> */}
       </div>
     </div>
   );
 };
 
-export default page;
+export default CourseElevenArea;

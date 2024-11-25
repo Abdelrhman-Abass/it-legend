@@ -1,50 +1,66 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { course_data } from "../../data";
-
-// Define an async thunk for fetching data
-export const fetchCourses = createAsyncThunk(
-  'courses/fetchCourses',
-  async () => {
-    const response = await fetch('https://api.example.com/courses'); // Replace with your API URL
-    if (!response.ok) {
-      throw new Error('Failed to fetch courses');
-    }
-    const data = await response.json();
-    return data; // Return the fetched data
-  }
-);
+import { cookies } from "next/headers";
 
 const initialState = {
-  courses: course_data,
-  course: {},
-  status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
+  courses: [], // Assuming courses are an array
+  course: [], // Assuming course is an array (if you want a single course, modify this accordingly)
+  status: "idle", // 'idle' | 'loading' | 'succeeded' | 'failed'
   error: null,
 };
 
+// Async action to fetch courses
+export const UserCourses = createAsyncThunk(
+  "user/courses", // Thunk action type
+  async (_, { rejectWithValue }) => {
+    try {
+      const token = cookies().get('token')?.value;
+      if (!token) throw new Error("Token is not available");
+
+      const response = await fetch(`http://49.13.77.125:1118/Endpoint/api/MemberCourse`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+// Create the slice
 export const courseSlice = createSlice({
-  name: "course",
+  name: "courses", // Ensure this is "courses"
   initialState,
   reducers: {
     single_product: (state, { payload }) => {},
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchCourses.pending, (state) => {
-        state.status = 'loading';
+      .addCase(UserCourses.pending, (state) => {
+        state.status = "loading";
       })
-      .addCase(fetchCourses.fulfilled, (state, action) => {
-        state.status = 'succeeded';
+      .addCase(UserCourses.fulfilled, (state, action) => {
+        state.status = "succeeded";
         state.courses = action.payload; // Store the fetched courses
       })
-      .addCase(fetchCourses.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message; // Store the error message
+      .addCase(UserCourses.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload; // Store the error message
       });
   },
 });
 
 export const { single_product } = courseSlice.actions;
-export const selectCourses = (state) => state.courses.courses;
-export const selectCourseStatus = (state) => state.courses.status;
-export const selectCourseError = (state) => state.courses.error;
+export const selectCourses = (state) => state.courses.courses; // Make sure to use state.courses
+export const selectCourseStatus = (state) => state.courses.status; // Adjust for consistency
+export const selectCourseError = (state) => state.courses.error; // Adjust for consistency
 export default courseSlice.reducer;
