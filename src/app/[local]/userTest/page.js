@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { UserCourses } from "../../../store/features/course-slice"; // Adjust the import based on your project structure
-import { selectCourses, selectCourseStatus, selectCourseError } from "../../../store/features/course-slice"; // Adjust as needed
+import { selectCourses, selectCourseStatus, selectCourseError } from "../slices/dataSlice"; // Adjust as needed
 
 
 const CourseElevenArea = ({
@@ -13,12 +13,12 @@ const CourseElevenArea = ({
 }) => {
   const dispatch = useDispatch();
   const [next, setNext] = useState(coursePerView);
-  const [course , setCourse] = useState(null)
+
   // Accessing courses from Redux state
   const courses = useSelector(selectCourses);
   const status = useSelector(selectCourseStatus);
   const error = useSelector(selectCourseError);
-  setCourse(courses)
+
   // handleLoadData
   const handleLoadData = () => {
     setNext((value) => value + 3);
@@ -28,8 +28,7 @@ const CourseElevenArea = ({
   useEffect(() => {
     // Dispatch UserCourses action to fetch courses
     dispatch(UserCourses());
-    console.log(courses)
-  }, [dispatch , courses]);
+  }, [dispatch]);
 
   // Log the status and fetched data to the console for debugging
   useEffect(() => {
