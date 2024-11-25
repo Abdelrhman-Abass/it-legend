@@ -164,7 +164,7 @@ const CourseElevenArea = ({
                   classes="course-box-shadow"
                   idx={idx}
                 />
-                <p>{course.titleAr}</p>
+                {/* <p>{course.titleAr}</p> */}
               </div>
             ))}
           {status === "failed" && (
