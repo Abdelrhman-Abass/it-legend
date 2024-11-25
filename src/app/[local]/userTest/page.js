@@ -13,7 +13,7 @@ const CourseElevenArea = ({
 }) => {
   const dispatch = useDispatch();
   const [next, setNext] = useState(coursePerView);
-
+  const [course , setCourse] = useState(null)
   // Accessing courses from Redux state
   const courses = useSelector(selectCourses);
   const status = useSelector(selectCourseStatus);
@@ -28,8 +28,9 @@ const CourseElevenArea = ({
   useEffect(() => {
     // Dispatch UserCourses action to fetch courses
     dispatch(UserCourses());
-    console.log(courses)
-  }, [dispatch]);
+    setCourse(useSelector(selectCourses))
+    console.log(course)
+  }, [dispatch, course]);
 
   // Log the status and fetched data to the console for debugging
   useEffect(() => {
@@ -40,7 +41,7 @@ const CourseElevenArea = ({
     if (status === 'failed') {
       console.log("Error:", error);
     }
-  }, [status, courses, error]);
+  }, [status, course, error]);
 
   return (
     <div className="edu-course-area course-area-1">
