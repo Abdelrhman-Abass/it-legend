@@ -14,7 +14,7 @@ const fetchWithRetry = async (url, config, retries = 3, delay = 1000) => {
         }
     }
 };
-
+// alaamuhamed97@gmail.com
 export const courseUSerData = async () => {
     try {
         const token = cookies().get("token")?.value;

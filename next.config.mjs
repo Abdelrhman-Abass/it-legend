@@ -17,10 +17,7 @@ const nextConfig = {
       },
     ],
   },
-  api: {
-    responseLimit: '8mb', // Adjust as needed
-    externalResolver: true, // For resolving requests outside Next.js control
-  },
+  
   // images: {
   //   remotePatterns: [
   //     {

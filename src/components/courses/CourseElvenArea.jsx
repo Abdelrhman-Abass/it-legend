@@ -51,8 +51,8 @@ const CourseElevenArea = ({
         {title && <h3 className="title">{title}</h3>}
         
         <div className="row g-5 ">
-          {courses?.slice(0, next)?.map((course, idx) => (
-            <div key={course.id} className="col-md-6 col-lg-4">
+          {course?.slice(0, next)?.map((course, idx) => (
+            <div key={course.courseId} className="col-md-6 col-lg-4">
               <CourseTypeEleven
                 my={my}
                 title={title}

@@ -1,26 +1,27 @@
 "use client";
 import React from "react";
 import { Link } from "@/navigation";
-import { useDispatch, useSelector } from "react-redux";
-import { cart_course } from "@/store/features/cart-slice";
-import { useLocale } from "next-intl";
+// import { useDispatch, useSelector } from "react-redux";
+// import { cart_course } from "@/store/features/cart-slice";
+// import { useLocale } from "next-intl";
 
 const CourseTypeEleven = ({ data, classes, my, idx }) => {
-  const { cartCourses } = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
-  const locale = useLocale();
+  // const { cartCourses } = useSelector((state) => state.cart);
+  // const dispatch = useDispatch();
+  // const locale = useLocale();
 
   // handle add to cart
-  const handleAddToCart = (course) => {
-    dispatch(
-      cart_course({
-        id: course.id,
-        img: `/assets/images/course/course-06/${course.img}`,
-        price: course.course_price,
-        title: course.title,
-      })
-    );
-  };
+  console.log(data)
+  // const handleAddToCart = (course) => {
+  //   dispatch(
+  //     cart_course({
+  //       id: course.id,
+  //       img: `/assets/images/course/course-06/${course.img}`,
+  //       price: course.course_price,
+  //       title: course.title,
+  //     })
+  //   );
+  // };
 
   return (
     <div
@@ -35,11 +36,11 @@ const CourseTypeEleven = ({ data, classes, my, idx }) => {
             href={
               my
                 ? `/course-player/c84e7902-1205-426f-a857-922bedd84bdf`
-                : `/course-details/${data.id}`
+                : `/course-details/${data.courseId}`
             }
           >
             <img
-              src={`/assets/images/course/course-04/${data.img}`}
+              src={`/assets/images/course/course-04/course-01.jpg`}
               alt="Course Meta"
             />
           </Link>
@@ -52,53 +53,33 @@ const CourseTypeEleven = ({ data, classes, my, idx }) => {
         </div>
 
         <div className="content">
-          <span className="course-level">{data.level}</span>
+          <span className="course-level">{data.levelTitleAr}</span>
           <h5 className="title">
             <Link
               href={
                 my
-                  ? `/course-player/c84e7902-1205-426f-a857-922bedd84bdf`
-                  : `/course-details/${data.id}`
+                  ? `/diploma/${data.courseId}`
+                  : `/course-details/${data.courseId}`
               }
             >
               {data.title}
             </Link>
           </h5>
-          <p className="truncate-text">{data.short_desc}</p>
-          {/* <div className="course-rating">
-            <div className="rating">
-              <i className="icon-23"></i>
-              <i className="icon-23"></i>
-              <i className="icon-23"></i>
-              <i className="icon-23"></i>
-              <i className="icon-23"></i>
-            </div>
-            <span className="rating-count">
-              ({data.rating} /{data.rating_count} التقيمات)
-            </span>
-          </div> */}
+          <p className="truncate-text">{data.shortDescriptionAr}</p>
+          
 
           <div className="read-more-btn">
-            <a
+            <Link
               href={
                 my &&
-                `/${locale}/course-player/c84e7902-1205-426f-a857-922bedd84bdf`
+                `/diploma/${data.courseId}`
               }
               className="edu-btn btn-small btn-secondary"
-              onClick={() => !my && handleAddToCart(data)}
               style={{ cursor: "pointer" }}
             >
-              {my ? (
                 <>انتقل</>
-              ) : (
-                <>
-                  {cartCourses.some((item) => item.id === data.id)
-                    ? "حذف من السلة"
-                    : "اضف الي السلة"}
-                  <i className="icon-4"></i>
-                </>
-              )}
-            </a>
+              
+            </Link>
           </div>
         </div>
       </div>
