@@ -42,7 +42,7 @@ export const UserCourses = createAsyncThunk(
       const response = await courseUSerData();
       const { data } = response;
       console.log(data)
-      return { data };
+      return data ;
 
       
     } catch (error) {
