@@ -1,6 +1,5 @@
-"use server"
+import { courseUSerData } from "@/hooks/courseHandler";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { cookies } from "next/headers";
 
 const initialState = {
   courses: [], // Assuming courses are an array
@@ -10,33 +9,49 @@ const initialState = {
 };
 
 // Async action to fetch courses
+// export const UserCourses = createAsyncThunk(
+//   "user/courses", // Thunk action type
+//   async (_, { rejectWithValue }) => {
+//     try {
+//       const token = cookies().get('token')?.value;
+//       if (!token) throw new Error("Token is not available");
+
+//       const response = await fetch(`http://49.13.77.125:1118/Endpoint/api/MemberCourse`, {
+//         method: "GET",
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//           "Content-Type": "application/json",
+//         },
+//       });
+
+//       if (!response.ok) {
+//         throw new Error("Failed to fetch data");
+//       }
+
+//       const data = await response.json();
+//       return data;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
 export const UserCourses = createAsyncThunk(
-  "user/courses", // Thunk action type
+  "user/courses",
   async (_, { rejectWithValue }) => {
     try {
-      const token = cookies().get('token')?.value;
-      if (!token) throw new Error("Token is not available");
-
-      const response = await fetch(`http://49.13.77.125:1118/Endpoint/api/MemberCourse`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch data");
+      const response = await courseUSerData("MemberCourse");
+      if (response) {
+        const { data } = response;
+        return { data };
+        
+      } else {
+        return rejectWithValue("Login failed");
       }
-
-      const data = await response.json();
-      return data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response?.data?.message || "Login failed");
     }
   }
 );
-
 // Create the slice
 export const courseSlice = createSlice({
   name: "courses", // Ensure this is "courses"
