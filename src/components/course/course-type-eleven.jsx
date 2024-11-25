@@ -62,7 +62,7 @@ const CourseTypeEleven = ({ data, classes, my, idx }) => {
                   : `/course-details/${data.courseId}`
               }
             >
-              {data.title}
+              {data.titleAr}
             </Link>
           </h5>
           <p className="truncate-text">{data.shortDescriptionAr}</p>
