@@ -37,7 +37,6 @@ const ListArea = ({ title }) => {
       console.log("Error:", error);
     }
   }, [status, diploma, error]);
-  console.log(typeof diploma + "diploma type")
   return (
     <section >
       <div className="container">
@@ -59,7 +58,7 @@ const ListArea = ({ title }) => {
                   <div className="thumbnail">
                     <Link href={`/course-player/c84e7902-1205-426f-a857-922bedd84bdf}`}>
                       <img
-                        src={"/assets/images/blog/blog-25.jpg"}
+                        src={`http://49.13.77.125:1118/Content/Uploads/CategoryMedia/${course.image}`}
                         alt="Blog Images"
                       />
                     </Link>

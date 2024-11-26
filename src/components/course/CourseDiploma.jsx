@@ -22,7 +22,7 @@ const CourseDiploma = ({
     dispatch(
       cart_course({
         id: course.id,
-        img: `/assets/images/course/course-06/${course.img}`,
+        img: `/assets/images/course/course-06/course-01`,
         price: course.course_price,
         title: course.title,
       })
@@ -42,7 +42,7 @@ const CourseDiploma = ({
             href={my ? `/diploma/${data.categoryId}` : `/diploma-details/${data.categoryId}`}
           >
             <Image
-              src={`/assets/images/course/course-01/course-01.jpg`}
+              src={`http://49.13.77.125:1118/Content/Uploads/CategoryMedia/${data.image}`}
               alt="Course Meta"
               width={370}
               height={220}
