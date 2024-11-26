@@ -36,7 +36,7 @@ export async function middleware(req) {
   if (!isUserLoggedIn && privatePaths.some((path) => pathname.includes(path)) ||
     pathname == "/ar" ||
     pathname == "/en") {
-    return NextResponse.redirect(new URL("/auth", req.url));
+    return NextResponse.redirect(new URL("/", req.url));
   }
 
   // Run the intl middleware first to handle locales
