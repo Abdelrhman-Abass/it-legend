@@ -1,5 +1,5 @@
 import { courseUSerData } from "@/hooks/courseHandler";
-import { diplomaUSerData } from "@/hooks/diplomaHanler";
+import { diplomaUSerData } from "@/hooks/diplomaHandler";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -10,7 +10,7 @@ const initialState = {
 };
 
 // Async action to fetch courses
-export const UserCourses = createAsyncThunk(
+export const UserDiploma = createAsyncThunk(
   "user/diploma",
   async (_, { rejectWithValue }) => {
     try {
@@ -43,14 +43,14 @@ export const diplomaSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(UserCourses.pending, (state) => {
+      .addCase(UserDiploma.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(UserCourses.fulfilled, (state, action) => {
+      .addCase(UserDiploma.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.diploma = action.payload; // Store the fetched courses
       })
-      .addCase(UserCourses.rejected, (state, action) => {
+      .addCase(UserDiploma.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload; // Store the error message
       });

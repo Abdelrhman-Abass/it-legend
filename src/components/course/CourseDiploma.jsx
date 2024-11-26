@@ -39,10 +39,10 @@ const CourseDiploma = ({
       <div className="inner">
         <div className="thumbnail" >
           <Link
-            href={my ? `/diploma/${data.id}` : `/diploma-details/${data.id}`}
+            href={my ? `/diploma/${data.categoryId}` : `/diploma-details/${data.categoryId}`}
           >
             <Image
-              src={`/assets/images/course/course-${image_location_path}/${data.img}`}
+              src={`/assets/images/course/course-01/course-01.jpg`}
               alt="Course Meta"
               width={370}
               height={220}
@@ -56,9 +56,9 @@ const CourseDiploma = ({
           </div>
         </div>
         <div className="content">
-          <span className="course-level">{data.level}</span>
+          {/* <span className="course-level">{data.level}</span> */}
           <h6 className="title">
-            <a href="#">{data.title}</a>
+            <a href="#">{data.titleAr}</a>
           </h6>
           
           <ul className="course-meta">
@@ -69,7 +69,7 @@ const CourseDiploma = ({
                 alignItems: "center",
               }}
             >
-              <i className="icon-24"></i> <span>{data.lesson}</span>{" "}
+              <i className="icon-24"></i> <span>{data.lectures}</span>{" "}
               <span>المحاضرات</span>
             </li>
             
@@ -84,16 +84,16 @@ const CourseDiploma = ({
       <div className="course-hover-content">
         <div className="content">
           
-          <span className="course-level">{data.level}</span>
+          {/* <span className="course-level">{data.level}</span> */}
           <h6 className="title">
             <Link
-              href={my ? `/diploma/${data.id}` : `/diploma-details/${data.id}`}
+              href={my ? `/diploma/${data.categoryId}` : `/diploma-details/${data.categoryId}`}
             >
-              {data.title}
+              {data.titleAr}
             </Link>
           </h6>
           
-          <p>{data.short_desc}</p>
+          <p>{data.shortDescriptionAr ? data.shortDescriptionAr : "No description available"}</p>
           <ul className="course-meta">
             <li
               style={{
@@ -102,13 +102,13 @@ const CourseDiploma = ({
                 alignItems: "center",
               }}
             >
-              <i className="icon-24"></i> <span>{data.lesson}</span>{" "}
+              <i className="icon-24"></i> <span>{data.lectures}</span>{" "}
               <span>المحاضرات</span>
             </li>
             
           </ul>
           <Link
-            href={my ? `/diploma/${data.id}` : `/diploma-details/${data.id}`}
+            href={my ? `/diploma/${data.categoryId}` : `/diploma-details/${data.categoryId}`}
             className="edu-btn btn-secondary btn-small"
           >
             {my ? <>ابدأ</> : <> مزيد من المعلومات</>}

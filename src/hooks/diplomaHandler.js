@@ -9,7 +9,7 @@ export const diplomaUSerData = async () => {
         if (!token) throw new Error("Token is not available");
 
         const response = await fetch(
-            `http://49.13.77.125:1118/Endpoint/api/MemberGategory`,
+            `http://49.13.77.125:1118/Endpoint/api/MemberCategory/categories`,
             {
                 method: "GET",
                 headers: {
