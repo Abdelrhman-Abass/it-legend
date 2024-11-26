@@ -2349,7 +2349,10 @@ html[dir="rtl"]{
             }
         }
         &.team-style-3 {
-            padding-right: 60px;
+            @media #{$sm-layout} {
+                // margin-right: 0 !important;
+                padding-right: 60px;
+            }
             .content {
                 left: inherit;
                 right: 30px;
