@@ -146,48 +146,32 @@ const CourseElevenArea = ({
 
 
   return (
-    <>
-      <div
-        id="myCourses"
-        style={{ marginBottom: 30 }}
-        className="section-title section-center"
-        data-aos-delay="150"
-        data-aos="fade-up"
-        data-aos-duration="800"
-      >
-        <span className="pre-title"></span>
-        <h2 className="title">كورساتي</h2>
-        <span className="shape-line">
-          <i className="icon-19"></i>
-        </span>
-      </div>
-      <div className="edu-course-area course-area-1">
-        <div className="container">
-          {/* {title && <h3 className="title">{title}</h3>} */}
-
-          <div className="row g-5">
-
-            {status === "loading" && (
-              <p className="loading-text">Loading...</p>
-            )}
-            {status === "succeeded" &&
-              cour.map((course, idx) => (
-                <div key={idx} className="col-md-6 col-lg-4">
-                  <CourseTypeEleven
-                    my={my}
-                    title={title}
-                    data={course}
-                    classes="course-box-shadow"
-                    idx={idx}
-                  />
-                  {/* <p>{course.titleAr}</p> */}
-                </div>
-              ))}
-            {status === "failed" && (
-              <p className="error-text">Failed to load courses. Please try again.</p>
-            )}
-          </div>
-          {/* {next < courses.length && status === "succeeded" && (
+    <div className="edu-course-area course-area-1">
+      <div className="container">
+        {/* {title && <h3 className="title">{title}</h3>} */}
+        <div className="row g-5">
+               
+          {status === "loading" && (
+            <p className="loading-text">Loading...</p>
+          )}
+          {status === "succeeded" &&
+            cour.map((course, idx) => (
+              <div key={idx} className="col-md-6 col-lg-4">
+                <CourseTypeEleven
+                  my={my}
+                  title={title}
+                  data={course}
+                  classes="course-box-shadow"
+                  idx={idx}
+                />
+                {/* <p>{course.titleAr}</p> */}
+              </div>
+            ))}
+          {status === "failed" && (
+            <p className="error-text">Failed to load courses. Please try again.</p>
+          )}
+        </div>
+        {/* {next < courses.length && status === "succeeded" && (
           <div
             onClick={handleLoadData}
             className="load-more-btn"
@@ -200,9 +184,8 @@ const CourseElevenArea = ({
             </a>
           </div>
         )} */}
-        </div>
       </div>
-    </>
+    </div>
   );
 };
 

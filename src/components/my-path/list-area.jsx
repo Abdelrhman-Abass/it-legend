@@ -36,10 +36,10 @@ const ListArea = ({ title }) => {
     }
   }, [status, diploma, error]);
 
-  if (diploma.length === 0) {
-    return null; // Do not render anything if there are no diplomas
-  }
-  
+  // if (diploma.length === 0) {
+  //   return null; // Do not render anything if there are no diplomas
+  // }
+
   return (
     <section >
       <div className="container">
@@ -60,7 +60,7 @@ const ListArea = ({ title }) => {
             {status === "loading" && (
               <p className="loading-text">Loading...</p>
             )}
-            {status === "succeeded" && diploma.map((course, idx) => (
+            {status === "succeeded" && diploma?.map((course, idx) => (
               <div
                 key={idx}
                 className="edu-blog blog-style-list"

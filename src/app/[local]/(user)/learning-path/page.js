@@ -45,7 +45,7 @@ const page = () => {
         </div>
       </div>
       {/* Course */}
-      {/* <div
+      <div
       id="myCourses"
         style={{ marginBottom: 30 }}
         className="section-title section-center"
@@ -58,7 +58,7 @@ const page = () => {
         <span className="shape-line">
           <i className="icon-19"></i>
         </span>
-      </div> */}
+      </div>
       {/* Recommend Course */}
       {/* <CourseElevenArea my={true} /> */}
       {/* <CourseTwoArea my={true} coursePerView={3}  />
