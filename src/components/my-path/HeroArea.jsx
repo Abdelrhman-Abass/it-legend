@@ -30,7 +30,7 @@ const HeroArea = () => {
                 justifyContent: "center",
               }}
             >
-              <div className="left-content">
+              <div className="left-content flex flex-column items-center ">
                 <h2 className=" title flex flex-column flex-wrap ">
                 هيا بنا يا صديقي
 

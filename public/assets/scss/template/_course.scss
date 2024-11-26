@@ -116,16 +116,16 @@
             /* Center the text horizontally */
             align-items: center;
             /* Center the text vertically */
-            width: 45px;
+            width: 50px;
             /* Set a fixed width (adjust if needed) */
-            height: 45px;
+            height: 50px;
             /* Set a fixed height to make it a circle */
             text-align: center;
             /* Center the text inside the circle */
-            line-height: 1.2;
-            border: 5px solid transparent;
+            line-height: 1.1;
+            // border: 5px solid transparent;
             /* Default border to be transparent */
-            border-right: 5px solid red;
+            // border-right: 5px solid red;
             /* Create a red border on top */
             border-radius: 50%;
             /* Ensure the border is rounded */

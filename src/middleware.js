@@ -33,11 +33,11 @@ export async function middleware(req) {
   }
 
   // If user is not logged in and trying to access private paths, redirect to login
-  // if (!isUserLoggedIn && privatePaths.some((path) => pathname.includes(path)) ||
-  //   pathname == "/ar" ||
-  //   pathname == "/en") {
-  //   return NextResponse.redirect(new URL("/auth", req.url));
-  // }
+  if (!isUserLoggedIn && privatePaths.some((path) => pathname.includes(path)) ||
+    pathname == "/ar" ||
+    pathname == "/en") {
+    return NextResponse.redirect(new URL("/auth", req.url));
+  }
 
   // Run the intl middleware first to handle locales
   const response = intlMiddleware(req);

@@ -3,12 +3,12 @@ import React, { useEffect } from "react";
 import { Link } from "@/navigation";
 // import { useDispatch, useSelector } from "react-redux";
 // import { cart_course } from "@/store/features/cart-slice";
-// import { useLocale } from "next-intl";
+import { useLocale } from "next-intl";
 
 const CourseTypeEleven = ({ data, classes, my, idx }) => {
   // const { cartCourses } = useSelector((state) => state.cart);
   // const dispatch = useDispatch();
-  // const locale = useLocale();
+  const local = useLocale();
 
   // handle add to cart
   // useEffect(() => {
@@ -48,15 +48,17 @@ const CourseTypeEleven = ({ data, classes, my, idx }) => {
             />
           </Link>
           <div className="time-top">
-            <span className="duration_1">
-              45%
+            <span className="duration_1" >
+              {data?.progressPercentage ? `${data.progressPercentage.toFixed(1)}%` : "0%"}
               {/* <i className="icon-61"></i> */}
             </span>
           </div>
         </div>
 
         <div className="content">
-          <span className="course-level">{data.levelTitleAr}</span>
+          <span className="course-level">
+            {local === "ar" ? data.levelTitleAr : data.levelTitleEn}
+          </span>          
           <h5 className="title">
             <Link
               href={
@@ -65,11 +67,12 @@ const CourseTypeEleven = ({ data, classes, my, idx }) => {
                   : `/course-details/${data.courseId}`
               }
             >
-              {data.titleAr}
+              {/* {data.titleAr} */}
+              {local === "ar" ? data.titleAr : data.titleEn}
+
             </Link>
           </h5>
-          <p className="truncate-text">{data.shortDescriptionAr}</p>
-          
+          <p className="truncate-text">{local === "ar" ? data.shortDescriptionAr : data.shortDescriptionEn}</p>
 
           <div className="read-more-btn">
             <Link
@@ -80,8 +83,8 @@ const CourseTypeEleven = ({ data, classes, my, idx }) => {
               className="edu-btn btn-small btn-secondary"
               style={{ cursor: "pointer" }}
             >
-                <>انتقل</>
-              
+              <>انتقل</>
+
             </Link>
           </div>
         </div>
