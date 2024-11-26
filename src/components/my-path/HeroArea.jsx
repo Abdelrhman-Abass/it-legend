@@ -29,6 +29,7 @@ const HeroArea = () => {
                 alignItems: "center",
                 justifyContent: "center",
               }}
+              className="lg:w-[450px]"
             >
               <div className="left-content flex flex-column items-center ">
                 <h2 className=" title flex flex-column flex-wrap ">
@@ -48,7 +49,7 @@ const HeroArea = () => {
               <div className="edu-team-grid team-style-3 ">
                 <div className="inner ">
                   <div className="thumbnail-wrap ">
-                    <div className="thumbnail">
+                    <div className="thumbnail px-[50px]">
                       <Link
                         href={`/course-player/c84e7902-1205-426f-a857-922bedd84bdf"`}
                         className="flex justify-center items-center"

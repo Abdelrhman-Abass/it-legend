@@ -2340,6 +2340,8 @@ html[dir="rtl"]{
 
     //team 
     .edu-team-grid {
+        
+
         &.team-style-1 {
             .team-share-info {
                 right: inherit;
@@ -2347,6 +2349,7 @@ html[dir="rtl"]{
             }
         }
         &.team-style-3 {
+            padding-right: 60px;
             .content {
                 left: inherit;
                 right: 30px;

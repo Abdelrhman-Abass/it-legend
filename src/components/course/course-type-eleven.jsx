@@ -48,8 +48,11 @@ const CourseTypeEleven = ({ data, classes, my, idx }) => {
             />
           </Link>
           <div className="time-top">
-            <span className="duration_1" >
-              {data?.progressPercentage ? `${data.progressPercentage.toFixed(1)}%` : "0%"}
+            <span className="duration_1" style={{
+              "--progress-color": data.progressPercentage > 50 ? "green" : "red",
+              "--progress-rotate": `${(data.progressPercentage / 100) * 360}deg`,
+            }} >
+              {data?.progressPercentage ? `${data.progressPercentage.toFixed(2)}%` : "0%"}
               {/* <i className="icon-61"></i> */}
             </span>
           </div>
@@ -58,7 +61,7 @@ const CourseTypeEleven = ({ data, classes, my, idx }) => {
         <div className="content">
           <span className="course-level">
             {local === "ar" ? data.levelTitleAr : data.levelTitleEn}
-          </span>          
+          </span>
           <h5 className="title">
             <Link
               href={
