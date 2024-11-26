@@ -40,7 +40,7 @@ const page = () => {
             </span>
           </div> */}
 
-          <ListArea id="myDeploma" />
+          {/* <ListArea id="myDeploma" /> */}
 
         </div>
       </div>
