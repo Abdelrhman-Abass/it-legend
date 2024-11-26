@@ -28,7 +28,7 @@ const page = () => {
         className="edu-course-area course-area-2 gap-tb-text"
       >
         <div className="container">
-          <div
+          {/* <div
             className="section-title section-center"
             data-aos-delay="100"
             data-aos="fade-up"
@@ -38,14 +38,14 @@ const page = () => {
             <span className="shape-line">
               <i className="icon-19"></i>
             </span>
-          </div>
+          </div> */}
 
           <ListArea id="myDeploma" />
 
         </div>
       </div>
       {/* Course */}
-      <div
+      {/* <div
       id="myCourses"
         style={{ marginBottom: 30 }}
         className="section-title section-center"
@@ -58,7 +58,7 @@ const page = () => {
         <span className="shape-line">
           <i className="icon-19"></i>
         </span>
-      </div>
+      </div> */}
       {/* Recommend Course */}
       {/* <CourseElevenArea my={true} /> */}
       {/* <CourseTwoArea my={true} coursePerView={3}  />
