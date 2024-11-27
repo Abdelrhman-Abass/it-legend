@@ -39,3 +39,40 @@ export const diplomaUSerData = async () => {
     }
 };
 
+
+// Function to fetch courses by category
+export const getCoursesByCategory = async (categoryId) => {
+    try {
+        const token = cookies().get("token")?.value;
+        if (!token) throw new Error("Token is not available");
+
+        const response = await fetch(
+            `http://49.13.77.125:1118/Endpoint/api/MemberCategory/${categoryId}/details`,
+            {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch courses data");
+        }
+
+        const data = await response.json();
+
+        // Ensure that the response has the correct structure
+        return {
+            data: data?.data ?? null, // If 'data' is undefined, return null
+            message: data?.message ?? null,
+        };
+    } catch (error) {
+        console.error(error);
+        return {
+            data: null, // Return null if there is an error
+            message: error.message,
+        };
+    }
+};

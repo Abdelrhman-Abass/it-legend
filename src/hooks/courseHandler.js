@@ -43,6 +43,7 @@ export const courseUSerData = async () => {
         };
     }
 };
+
 // export const courseUSerData = async () => {
 //     try {
 //         const token = cookies().get("token")?.value;

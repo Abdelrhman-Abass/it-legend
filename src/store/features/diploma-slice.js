@@ -1,12 +1,14 @@
 import { courseUSerData } from "@/hooks/courseHandler";
-import { diplomaUSerData } from "@/hooks/diplomaHandler";
+import { diplomaUSerData ,getCoursesByCategory } from "@/hooks/diplomaHandler";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
   diploma: [], // Assuming courses are an array
-  course: [], // Assuming course is an array (if you want a single course, modify this accordingly)
+  courses: [], // Assuming course is an array (if you want a single course, modify this accordingly)
   status: "idle", // 'idle' | 'loading' | 'succeeded' | 'failed'
   error: null,
+  errorCourse:null,
+  statusCourses:"idle",
 };
 
 // Async action to fetch courses
@@ -32,6 +34,25 @@ export const UserDiploma = createAsyncThunk(
   }
 );
 
+export const fetchCoursesByCategory = createAsyncThunk(
+  ".user/diploma/fetchCoursesByCategory",
+  async (categoryId, { rejectWithValue }) => {
+    try {
+      const response = await getCoursesByCategory(categoryId);
+      const { data } = response;
+
+      if (!data) {
+        return rejectWithValue("No courses found for the category.");
+      }
+
+      return data;
+    } catch (error) {
+      console.error(error);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 // Create the slice
 export const diplomaSlice = createSlice({
   name: "diploma",
@@ -53,6 +74,17 @@ export const diplomaSlice = createSlice({
       .addCase(UserDiploma.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload; // Store the error message
+      })
+      .addCase(fetchCoursesByCategory.pending, (state) => {
+        state.statusCourses = "loading";
+      })
+      .addCase(fetchCoursesByCategory.fulfilled, (state, action) => {
+        state.statusCourses = "succeeded";
+        state.courses = action.payload;
+      })
+      .addCase(fetchCoursesByCategory.rejected, (state, action) => {
+        state.statusCourses = "failed";
+        state.errorCourse = action.payload;
       });
   },
 });
@@ -60,6 +92,10 @@ export const diplomaSlice = createSlice({
 export const { single_product } = diplomaSlice.actions;
 export const selectDiploma = (state) => state.diploma.diploma; // Use the correct slice path
 export const selectDiplomaStatus = (state) => state.diploma.status;
+export const selectDiplomaCourses = (state) => state.diploma.courses;
+export const selectDiplomaCoursesStatus = (state) => state.diploma.statusCourses;
+export const selectDiplomaCoursesError = (state) => state.diploma.errorCourse;
+
 export const selectDiplomaError = (state) => state.diploma.error;
 
 export default diplomaSlice.reducer;

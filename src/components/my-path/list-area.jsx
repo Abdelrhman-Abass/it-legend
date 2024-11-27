@@ -35,11 +35,7 @@ const ListArea = ({ title }) => {
       console.log("Error:", error);
     }
   }, [status, diploma, error]);
-
-  // if (diploma.length === 0) {
-  //   return null; // Do not render anything if there are no diplomas
-  // }
-
+  
   return (
     <section >
       <div className="container">
@@ -60,7 +56,7 @@ const ListArea = ({ title }) => {
             {status === "loading" && (
               <p className="loading-text">Loading...</p>
             )}
-            {status === "succeeded" && diploma?.map((course, idx) => (
+            {status === "succeeded" && diploma.map((course, idx) => (
               <div
                 key={idx}
                 className="edu-blog blog-style-list"
@@ -85,7 +81,7 @@ const ListArea = ({ title }) => {
                   </div>
                   <div className="content">
                     <h5 className="title">
-                      <Link href={`/course-player/c84e7902-1205-426f-a857-922bedd84bdf}`}>
+                      <Link href={`/diploma/${course.categoryId}`}>
                         {course.titleAr}...
                       </Link>
                     </h5>
