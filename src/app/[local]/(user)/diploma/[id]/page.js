@@ -247,58 +247,54 @@ const Page = () => {
         course.courses.map((cour, idx) => (
           <section >
             <div className="container">
-              <h4 className="title">{title}</h4>
+              {/* <h4 className="title">{cour.title}</h4> */}
               <div className="pr-[70px] pl-[70px] row row--30 desktop" style={{ justifyContent: "center" }}>
                 <div className=" px-[60px]">
-                  {data.map((cour, idx) => {
-                    return (
-                      <div
-                        key={idx}
-                        className="edu-blog blog-style-list"
-                        data-aos-delay="150"
-                        data-aos="fade-up"
-                        data-aos-duration="800"
-                      >
-                        {/* <div>{cour.titleAr}</div> */}
-                        <div className="inner">
-                          <div className="thumbnail">
-                            <Link
-                              href={`/course-player/${cour.courseId}`}
-                            >
-                              <img
-                                src={"/assets/images/blog/blog-25.jpg"}
-                                alt="Blog Images"
-                              />
-                            </Link>
-                            <div className="time-top">
-                              <span className="duration_1">
-                                45%
-                              </span>
-                            </div>
-                          </div>
-                          <div className="content">
-                            <h5 className="title">
-                              <Link
-                                href={`/course-player/${cour.courseId}`}
-                              >
-                                {cour.titleAr}...
-                              </Link>
-                            </h5>
-                            
-                            <p>{cour.shortDescriptionAr}</p>
-                            <div className="read-more-btn">
-                              <Link
-                                href={`/course-player/${cour.courseId}`}
-                                className="edu-btn btn-border btn-medium"
-                              >
-                                ابدا الان <i className="icon-4"></i>
-                              </Link>
-                            </div>
-                          </div>
+                  <div
+                    key={idx}
+                    className="edu-blog blog-style-list"
+                    data-aos-delay="150"
+                    data-aos="fade-up"
+                    data-aos-duration="800"
+                  >
+                    {/* <div>{cour.titleAr}</div> */}
+                    <div className="inner">
+                      <div className="thumbnail">
+                        <Link
+                          href={`/course-player/${cour.courseId}`}
+                        >
+                          <img
+                            src={"/assets/images/blog/blog-25.jpg"}
+                            alt="Blog Images"
+                          />
+                        </Link>
+                        <div className="time-top">
+                          <span className="duration_1">
+                            45%
+                          </span>
                         </div>
                       </div>
-                    );
-                  })}
+                      <div className="content">
+                        <h5 className="title">
+                          <Link
+                            href={`/course-player/${cour.courseId}`}
+                          >
+                            {cour.titleAr}...
+                          </Link>
+                        </h5>
+
+                        <p>{cour.shortDescriptionAr}</p>
+                        <div className="read-more-btn">
+                          <Link
+                            href={`/course-player/${cour.courseId}`}
+                            className="edu-btn btn-border btn-medium"
+                          >
+                            ابدا الان <i className="icon-4"></i>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
