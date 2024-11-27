@@ -258,7 +258,7 @@ const Page = () => {
                     data-aos-duration="800"
                   >
                     <div>{cour.titleAr}</div>
-                    {/* <div className="inner">
+                    <div className="inner">
                       <div className="thumbnail">
                         <Link
                           href={`/course-player/${cour.courseId}`}
@@ -283,7 +283,7 @@ const Page = () => {
                           </Link>
                         </h5>
 
-                        <p>{cour.shortDescriptionAr}</p>
+                        {/* <p>{cour.shortDescriptionAr}</p> */}
                         <div className="read-more-btn">
                           <Link
                             href={`/course-player/${cour.courseId}`}
@@ -293,7 +293,7 @@ const Page = () => {
                           </Link>
                         </div>
                       </div> 
-                    </div>*/}
+                    </div>
                   </div>
                 </div>
               </div>
