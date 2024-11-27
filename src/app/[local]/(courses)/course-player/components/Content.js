@@ -29,7 +29,7 @@ import { validateYupSchema } from "formik";
 import BreadcrumbTwo from "@/components/breadcrumb/breadcrumb-2";
 import { UserHeader } from "@/layout";
 
-const Content = ({ data, courseId }) => {
+const Content = ({ data, courseId , links}) => {
   const local = useLocale();
   const [moduleId, setModuleId] = useState(null);
   const [showPlayerSide, setShowPlayerSide] = useState(true);
@@ -466,7 +466,7 @@ const Content = ({ data, courseId }) => {
               />
             </div>
             {/* links */}
-            {data?.courseLinks && (
+            {links && (
               <div id="links" className="course-sidebar-3">
                 <div className="edu-course-widget widget-course-summery">
                   <div className="inner">
@@ -474,24 +474,7 @@ const Content = ({ data, courseId }) => {
                       <h4 className="widget-title"> روابط مهمة</h4>
                       <ul className="course-item">
                         {/* [data?.courseLinks] */}
-                        {[
-                          {
-                            path: "https://www.youtube.com/@itlegend9709",
-                            title: "قناة اليوتيوب",
-                          },
-                          {
-                            path: "https://www.youtube.com/@itlegend9709",
-                            title: "جروب التلجرام",
-                          },
-                          {
-                            path: "https://www.youtube.com/@itlegend9709",
-                            title: "موقع الابتوب",
-                          },
-                          {
-                            path: "https://www.youtube.com/@itlegend9709",
-                            title: "دورة CS50",
-                          },
-                        ]?.map(({ path, title }, idx) => {
+                        {links.map(({ path, title }, idx) => {
                           return (
                             <li key={idx}>
                               <a

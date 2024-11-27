@@ -6,6 +6,7 @@ import Content from "../components/Content";
 import { cookies } from "next/headers";
 import Breadcrumb from "@/components/breadcrumb/breadcrumb";
 import BreadcrumbTwo from "@/components/breadcrumb/breadcrumb-2";
+import { CoursePlayerLinks } from "@/hooks/PlayerHandler";
 
 const page = async ({ params }) => {
   // {{itlegend}}/api/NodesApi/GetCourseNodes?courseId=78a34224-b9b3-424b-bd5a-137e891326ca&userId=54d739c2-228e-4f64-8808-678a56a8da45s
@@ -20,12 +21,11 @@ const page = async ({ params }) => {
   // const courseId = "78a34224-b9b3-424b-bd5a-137e891326ca"
   // att
   // const courseId = "78a34224-b9b3-424b-bd5a-137e891326ca"
+  console.log(params.id)
 
-  const data = await getCoursesData(
-    `/api/NodesApi/GetCourseNodes?courseId=${params.id}`,
-    params.id
-  );
-  
+  const {data} = await CoursePlayerLinks(params.id);
+  const links = data
+  console.log(links)
   const mockData = {
     data: {
       nodes: [
@@ -83,13 +83,13 @@ const page = async ({ params }) => {
       stoppedIndex: 0
     }
   };
-  
-  
-  console.log("data", mockData);
+  // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImE4YzhlMGQ1LTU5MmYtNDdhZC1hYWIyLTA2OWM2MjEwNmVkOCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhbGFhbXVoYW1lZDk3QGdtYWlsLmNvbSIsImp0aSI6ImMwYmJkNTVhLTY5OTgtNDdhNS05N2M1LWZiY2VhOGFjNmU1YiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6InVzZXIiLCJleHAiOjE3MzI3MDU2MDgsImlzcyI6Imh0dHBzOi8vd3d3Lml0bGVnZW5kLm5ldC8iLCJhdWQiOiJodHRwczovL3d3dy5pdGxlZ2VuZC5uZXQvIn0.K9pIEWP7FY98a7YmDJYWYS8Hp7GrbTqw5YWWdKPKyEg
+  // http://localhost:3000/en/course-player/44438416-eec6-4232-b94e-10d587d7f08e?contentId=video1&type=0&playerType=0
+  // console.log("data", mockData);
 
   return (
     <div className="w-full px-3">
-      <Content data={mockData?.data } courseId={params.id} />
+      <Content data={mockData?.data } courseId={params.id} links={links} />
     </div>
   );
 };
