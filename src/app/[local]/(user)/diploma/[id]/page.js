@@ -261,7 +261,7 @@ const Page = () => {
                     <div className="inner">
                       <div className="thumbnail">
                         <Link
-                          href={`/course-player/${cour.courseId}`}
+                          href={`/course-player/`}
                         >
                           <img
                             src={"/assets/images/blog/blog-25.jpg"}
@@ -277,16 +277,16 @@ const Page = () => {
                       <div className="content">
                         <h5 className="title">
                           <Link
-                            href={`/course-player/${cour.courseId}`}
+                            href={`/course-player/`}
                           >
                             {cour.titleAr}...
                           </Link>
                         </h5>
 
-                        {/* <p>{cour.shortDescriptionAr}</p> */}
+                        <p>{cour.shortDescriptionAr}</p>
                         <div className="read-more-btn">
                           <Link
-                            href={`/course-player/${cour.courseId}`}
+                            href={`/course-player/`}
                             className="edu-btn btn-border btn-medium"
                           >
                             ابدا الان <i className="icon-4"></i>
