@@ -225,7 +225,7 @@ const Page =  () => {
         >
           <h4 className="title">مستوي التقدم في الدبلومة</h4>
           <Tooltip title={"Your Progress"}>
-            <Progress percent={33} strokeColor="#080264" showInfo={false} />
+            <Progress percent={course.categoryProgress} strokeColor="#080264" showInfo={false} />
           </Tooltip>
           <div
             className="percent-label"
@@ -237,12 +237,24 @@ const Page =  () => {
               transition: "all 0.1s",
             }}
           >
-            {33}%
+            {course.categoryProgress}%
           </div>
         </div>
       </div>
 
       <CounterArea />
+      {status === "succeeded" &&
+            course.courses.map((cour, idx) => (
+              <div
+                className="col-md-6 col-lg-4"
+                data-aos-delay="150"
+                data-aos="fade-up"
+                data-aos-duration="800"
+                key={idx}
+              >
+                <p>{cour.titleAr}</p>
+              </div>
+            ))}
 
       {/* Render diploma sections dynamically */}
       <DiplomaArea title="مرحلة ما قبل التعلم" />
