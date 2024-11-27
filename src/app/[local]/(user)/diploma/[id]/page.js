@@ -225,7 +225,7 @@ const Page =  () => {
         >
           <h4 className="title">مستوي التقدم في الدبلومة</h4>
           <Tooltip title={"Your Progress"}>
-            <Progress percent={course.categoryProgress} strokeColor="#080264" showInfo={false} />
+            <Progress percent={course.categoryProgress.tofixed(2)} strokeColor="#080264" showInfo={false} />
           </Tooltip>
           <div
             className="percent-label"
@@ -237,7 +237,7 @@ const Page =  () => {
               transition: "all 0.1s",
             }}
           >
-            {course.categoryProgress}%
+            {course.categoryProgress.tofixed(2)}%
           </div>
         </div>
       </div>
@@ -257,7 +257,7 @@ const Page =  () => {
             ))}
 
       {/* Render diploma sections dynamically */}
-      <DiplomaArea title="مرحلة ما قبل التعلم" />
+      <DiplomaArea data={course.courses} title="مرحلة ما قبل التعلم" />
       <DiplomaArea title="مرحلة التأسيس" />
       <DiplomaArea title="مرحلة التأهيل لسوق العمل" />
 

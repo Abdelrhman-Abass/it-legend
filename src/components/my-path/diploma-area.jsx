@@ -6,18 +6,17 @@ import { course_data } from "@/data";
 import { Link } from "@/navigation";
 import CourseDiploma from "@/components/course/CourseDiploma";
 
-const DiplomaArea = ({ title }) => {
+const DiplomaArea = ({ title ,data }) => {
   return (
     <section >
       <div className="container">
         <h4 className="title">{title}</h4>
         <div className="pr-[70px] pl-[70px] row row--30 desktop" style={{ justifyContent: "center" }}>
           <div className=" px-[60px]">
-            {course_data.slice(0, 1).map((blog) => {
-              const { id, img, title, date, course_desc, comment } = blog;
+            {data.map((cour, idx) => {
               return (
                 <div
-                  key={id}
+                  key={idx}
                   className="edu-blog blog-style-list"
                   data-aos-delay="150"
                   data-aos="fade-up"
@@ -26,7 +25,7 @@ const DiplomaArea = ({ title }) => {
                   <div className="inner">
                     <div className="thumbnail">
                       <Link
-                        href={`/diploma/10`}
+                        href={`/course-player/${cour.courseId}`}
                       >
                         <img
                           src={"/assets/images/blog/blog-25.jpg"}
@@ -43,9 +42,9 @@ const DiplomaArea = ({ title }) => {
                     <div className="content">
                       <h5 className="title">
                         <Link
-                          href={`/diploma/10`}
+                          href={`/course-player/${cour.courseId}`}
                         >
-                          {title}...
+                          {cour.titleAr}...
                         </Link>
                       </h5>
                       {/* <ul className="blog-meta">
@@ -57,10 +56,10 @@ const DiplomaArea = ({ title }) => {
                           <i className="icon-28"></i>Com {comment}
                         </li>
                       </ul> */}
-                      <p>{course_desc}</p>
+                      <p>{cour.shortDescriptionAr}</p>
                       <div className="read-more-btn">
                         <Link
-                          href={`/course-player/c84e7902-1205-426f-a857-922bedd84bdf}`}
+                          href={`/course-player/${cour.courseId}`}
                           className="edu-btn btn-border btn-medium"
                         >
                           ابدا الان <i className="icon-4"></i>
@@ -74,26 +73,26 @@ const DiplomaArea = ({ title }) => {
           </div>
         </div>
 
-        <div className="row g-5 mobile ">
-            {course_data.slice(0, 1).map((course) => {
+        {/* <div className="row g-5 mobile ">
+            {data.map((cour,idx) => {
               return (
                 <div
                   className="col-md-6 col-lg-4"
                   data-aos-delay="150"
                   data-aos="fade-up"
                   data-aos-duration="800"
-                  key={course.id}
+                  key={idx}
                 >
                   <CourseDiploma
                     bg="#f5f1eb"
                     my={true}
-                    data={course}
+                    data={cour}
                     image_location_path="02"
                   />
                 </div>
               );
             })}
-          </div>
+          </div> */}
       </div>
     </section>
   );
