@@ -71,7 +71,7 @@ const Content = ({ data, courseId , links}) => {
     }
   }, [ask]);
 
-  console.log(data)
+  // console.log(data)
   const sendAsk = async () => {
     try {
       setLoadSubmitAsk(true);
@@ -248,6 +248,8 @@ const Content = ({ data, courseId , links}) => {
           </button>
         </div>
       </Modal>
+
+      
       <div style={{ position: "relative" }}>
         <div
           className={`${showPlayerSide ? "show" : "hide"} player-side`}
