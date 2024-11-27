@@ -259,7 +259,8 @@ const Page = () => {
                         data-aos="fade-up"
                         data-aos-duration="800"
                       >
-                        <div className="inner">
+                        <div>{cour.titleAr}</div>
+                        {/* <div className="inner">
                           <div className="thumbnail">
                             <Link
                               href={`/course-player/${cour.courseId}`}
@@ -272,7 +273,6 @@ const Page = () => {
                             <div className="time-top">
                               <span className="duration_1">
                                 45%
-                                {/* <i className="icon-61"></i> */}
                               </span>
                             </div>
                           </div>
@@ -284,15 +284,7 @@ const Page = () => {
                                 {cour.titleAr}...
                               </Link>
                             </h5>
-                            {/* <ul className="blog-meta">
-                        <li>
-                          <i className="icon-27"></i>
-                          {date}
-                        </li>
-                        <li>
-                          <i className="icon-28"></i>Com {comment}
-                        </li>
-                      </ul> */}
+                            
                             <p>{cour.shortDescriptionAr}</p>
                             <div className="read-more-btn">
                               <Link
@@ -303,7 +295,7 @@ const Page = () => {
                               </Link>
                             </div>
                           </div>
-                        </div>
+                        </div> */}
                       </div>
                     );
                   })}
