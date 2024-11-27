@@ -257,7 +257,7 @@ const Page =  () => {
             ))}
 
       {/* Render diploma sections dynamically */}
-      <DiplomaArea data={course.courses} title="مرحلة ما قبل التعلم" />
+      {/* <DiplomaArea data={course.courses} title="مرحلة ما قبل التعلم" /> */}
       <DiplomaArea title="مرحلة التأسيس" />
       <DiplomaArea title="مرحلة التأهيل لسوق العمل" />
 
