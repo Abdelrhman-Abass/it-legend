@@ -70,7 +70,7 @@
 // const Page = () => {
 //   const router = useRouter();
 //   const dispatch = useDispatch();
-  
+
 //   // Get the dynamic 'id' from the URL
 //   const { id } = router.query;
 
@@ -80,7 +80,7 @@
 //   // Get the courses and status from Redux
 //   // const courses = useSelector(selectDiplomaCourses);
 //   // const status = useSelector(selectDiplomaStatus);
-  
+
 //   // Fetch courses whenever the ID changes
 //   // useEffect(() => {
 //   //   if (id) {
@@ -153,7 +153,7 @@
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCoursesByCategory, selectDiplomaCourses ,selectDiplomaCoursesStatus, selectDiplomaCoursesError } from "../../../../../store/features/diploma-slice";
+import { fetchCoursesByCategory, selectDiplomaCourses, selectDiplomaCoursesStatus, selectDiplomaCoursesError } from "../../../../../store/features/diploma-slice";
 
 import BreadcrumbTwo from "@/components/breadcrumb/breadcrumb-2";
 import SwitchThemeButton from "@/components/common/SwitchThemeButton";
@@ -163,7 +163,7 @@ import ListArea from "@/components/my-path/list-area";
 import { UserHeader } from "@/layout";
 import { Progress, Tooltip } from "antd";
 
-const Page =  () => {
+const Page = () => {
   const dispatch = useDispatch();
 
   const url = "http://localhost:3000/en/diploma/60b97d2e-63af-412e-8b4a-c262f6eb77b2";
@@ -172,7 +172,7 @@ const Page =  () => {
     const parts = new URL(url).pathname.split('/');
     return parts[parts.length - 1];
   };
-  
+
   const id = extractId(url);
   console.log("Extracted ID:", id);
 
@@ -189,8 +189,8 @@ const Page =  () => {
 
   // Optionally, fetch courses by category when 'id' changes
   useEffect(() => {
-      dispatch(fetchCoursesByCategory(id));
-      // console.log("Courses Data:", course);
+    dispatch(fetchCoursesByCategory(id));
+    // console.log("Courses Data:", course);
   }, [id]);
 
 
@@ -244,22 +244,100 @@ const Page =  () => {
 
       <CounterArea />
       {status === "succeeded" &&
-            course.courses.map((cour, idx) => (
-              <div
-                className="col-md-6 col-lg-4"
-                data-aos-delay="150"
-                data-aos="fade-up"
-                data-aos-duration="800"
-                key={idx}
-              >
-                <p>{cour.titleAr}</p>
+        course.courses.map((cour, idx) => (
+          <section >
+            <div className="container">
+              <h4 className="title">{title}</h4>
+              <div className="pr-[70px] pl-[70px] row row--30 desktop" style={{ justifyContent: "center" }}>
+                <div className=" px-[60px]">
+                  {data.map((cour, idx) => {
+                    return (
+                      <div
+                        key={idx}
+                        className="edu-blog blog-style-list"
+                        data-aos-delay="150"
+                        data-aos="fade-up"
+                        data-aos-duration="800"
+                      >
+                        <div className="inner">
+                          <div className="thumbnail">
+                            <Link
+                              href={`/course-player/${cour.courseId}`}
+                            >
+                              <img
+                                src={"/assets/images/blog/blog-25.jpg"}
+                                alt="Blog Images"
+                              />
+                            </Link>
+                            <div className="time-top">
+                              <span className="duration_1">
+                                45%
+                                {/* <i className="icon-61"></i> */}
+                              </span>
+                            </div>
+                          </div>
+                          <div className="content">
+                            <h5 className="title">
+                              <Link
+                                href={`/course-player/${cour.courseId}`}
+                              >
+                                {cour.titleAr}...
+                              </Link>
+                            </h5>
+                            {/* <ul className="blog-meta">
+                        <li>
+                          <i className="icon-27"></i>
+                          {date}
+                        </li>
+                        <li>
+                          <i className="icon-28"></i>Com {comment}
+                        </li>
+                      </ul> */}
+                            <p>{cour.shortDescriptionAr}</p>
+                            <div className="read-more-btn">
+                              <Link
+                                href={`/course-player/${cour.courseId}`}
+                                className="edu-btn btn-border btn-medium"
+                              >
+                                ابدا الان <i className="icon-4"></i>
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            ))}
+
+              <div className="row g-5 mobile ">
+                {/* {data.map((course) => {
+                  return (
+                    <div
+                      className="col-md-6 col-lg-4"
+                      data-aos-delay="150"
+                      data-aos="fade-up"
+                      data-aos-duration="800"
+                      key={course.id}
+                    >
+                      <CourseDiploma
+                        bg="#f5f1eb"
+                        my={true}
+                        data={course}
+                        image_location_path="02"
+                      />
+                    </div>
+                  );
+                })} */}
+              </div>
+            </div>
+          </section>
+        ))}
 
       {/* Render diploma sections dynamically */}
       {/* <DiplomaArea data={course.courses} title="مرحلة ما قبل التعلم" /> */}
-      <DiplomaArea title="مرحلة التأسيس" />
-      <DiplomaArea title="مرحلة التأهيل لسوق العمل" />
+      {/* <DiplomaArea title="مرحلة التأسيس" />
+      <DiplomaArea title="مرحلة التأهيل لسوق العمل" /> */}
 
       {/* Render the course list */}
       {/* <ListArea title="الدورات المتاحة" /> */}

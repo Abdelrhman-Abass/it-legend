@@ -13,14 +13,7 @@ const DiplomaArea = ({ title ,data }) => {
         <h4 className="title">{title}</h4>
         <div className="pr-[70px] pl-[70px] row row--30 desktop" style={{ justifyContent: "center" }}>
           <div className=" px-[60px]">
-            {data.map((cour,idx)=>{
-              return (
-                <div key={idx}>
-                  <p>{cour.titleAr}</p>
-                </div>
-              )
-            })}
-            {/* {data.map((cour, idx) => {
+            {data.slice(0, 1).map((cour, idx) => {
               return (
                 <div
                   key={idx}
@@ -32,7 +25,7 @@ const DiplomaArea = ({ title ,data }) => {
                   <div className="inner">
                     <div className="thumbnail">
                       <Link
-                        href={`/course-player/${cour.courseId}`}
+                        href={`/course-player/${data.courseId}`}
                       >
                         <img
                           src={"/assets/images/blog/blog-25.jpg"}
@@ -42,19 +35,19 @@ const DiplomaArea = ({ title ,data }) => {
                         <div className="time-top">
                           <span className="duration_1">
                             45%
-                            <i className="icon-61"></i>
+                            {/* <i className="icon-61"></i> */}
                           </span>
                         </div>
                     </div>
                     <div className="content">
                       <h5 className="title">
                         <Link
-                          href={`/course-player/${cour.courseId}`}
+                          href={`/course-player/${data.courseId}`}
                         >
-                          {cour.titleAr}...
+                          {data.titleAr}...
                         </Link>
                       </h5>
-                      <ul className="blog-meta">
+                      {/* <ul className="blog-meta">
                         <li>
                           <i className="icon-27"></i>
                           {date}
@@ -62,11 +55,11 @@ const DiplomaArea = ({ title ,data }) => {
                         <li>
                           <i className="icon-28"></i>Com {comment}
                         </li>
-                      </ul>
-                      <p>{cour.shortDescriptionAr}</p>
+                      </ul> */}
+                      <p>{data.shortDescriptionAr}</p>
                       <div className="read-more-btn">
                         <Link
-                          href={`/course-player/${cour.courseId}`}
+                          href={`/course-player/${data.courseId}`}
                           className="edu-btn btn-border btn-medium"
                         >
                           ابدا الان <i className="icon-4"></i>
@@ -76,30 +69,30 @@ const DiplomaArea = ({ title ,data }) => {
                   </div>
                 </div>
               );
-            })} */}
+            })}
           </div>
         </div>
 
-        {/* <div className="row g-5 mobile ">
-            {data.map((cour,idx) => {
+        <div className="row g-5 mobile ">
+            {data.map((course) => {
               return (
                 <div
                   className="col-md-6 col-lg-4"
                   data-aos-delay="150"
                   data-aos="fade-up"
                   data-aos-duration="800"
-                  key={idx}
+                  key={course.id}
                 >
                   <CourseDiploma
                     bg="#f5f1eb"
                     my={true}
-                    data={cour}
+                    data={course}
                     image_location_path="02"
                   />
                 </div>
               );
             })}
-          </div> */}
+          </div>
       </div>
     </section>
   );
