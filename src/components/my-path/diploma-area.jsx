@@ -13,7 +13,14 @@ const DiplomaArea = ({ title ,data }) => {
         <h4 className="title">{title}</h4>
         <div className="pr-[70px] pl-[70px] row row--30 desktop" style={{ justifyContent: "center" }}>
           <div className=" px-[60px]">
-            {data.map((cour, idx) => {
+            {data.map((cour,idx)=>{
+              return (
+                <div key={idx}>
+                  <p>{cour.titleAr}</p>
+                </div>
+              )
+            })}
+            {/* {data.map((cour, idx) => {
               return (
                 <div
                   key={idx}
@@ -35,7 +42,7 @@ const DiplomaArea = ({ title ,data }) => {
                         <div className="time-top">
                           <span className="duration_1">
                             45%
-                            {/* <i className="icon-61"></i> */}
+                            <i className="icon-61"></i>
                           </span>
                         </div>
                     </div>
@@ -47,7 +54,7 @@ const DiplomaArea = ({ title ,data }) => {
                           {cour.titleAr}...
                         </Link>
                       </h5>
-                      {/* <ul className="blog-meta">
+                      <ul className="blog-meta">
                         <li>
                           <i className="icon-27"></i>
                           {date}
@@ -55,7 +62,7 @@ const DiplomaArea = ({ title ,data }) => {
                         <li>
                           <i className="icon-28"></i>Com {comment}
                         </li>
-                      </ul> */}
+                      </ul>
                       <p>{cour.shortDescriptionAr}</p>
                       <div className="read-more-btn">
                         <Link
@@ -69,7 +76,7 @@ const DiplomaArea = ({ title ,data }) => {
                   </div>
                 </div>
               );
-            })}
+            })} */}
           </div>
         </div>
 
