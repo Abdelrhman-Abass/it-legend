@@ -225,7 +225,7 @@ const Page = () => {
         >
           <h4 className="title">مستوي التقدم في الدبلومة</h4>
           <Tooltip title={"Your Progress"}>
-            <Progress percent={course.categoryProgress.tofixed(2)} strokeColor="#080264" showInfo={false} />
+            <Progress percent={course.categoryProgress} strokeColor="#080264" showInfo={false} />
           </Tooltip>
           <div
             className="percent-label"
@@ -237,7 +237,7 @@ const Page = () => {
               transition: "all 0.1s",
             }}
           >
-            {course.categoryProgress.tofixed(2)}%
+            {course.categoryProgress}%
           </div>
         </div>
       </div>
@@ -259,8 +259,8 @@ const Page = () => {
                         data-aos="fade-up"
                         data-aos-duration="800"
                       >
-                        <div>{cour.titleAr}</div>
-                        {/* <div className="inner">
+                        {/* <div>{cour.titleAr}</div> */}
+                        <div className="inner">
                           <div className="thumbnail">
                             <Link
                               href={`/course-player/${cour.courseId}`}
@@ -295,7 +295,7 @@ const Page = () => {
                               </Link>
                             </div>
                           </div>
-                        </div> */}
+                        </div>
                       </div>
                     );
                   })}
