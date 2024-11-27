@@ -257,8 +257,8 @@ const Page = () => {
                     data-aos="fade-up"
                     data-aos-duration="800"
                   >
-                    {/* <div>{cour.titleAr}</div> */}
-                    <div className="inner">
+                    <div>{cour.titleAr}</div>
+                    {/* <div className="inner">
                       <div className="thumbnail">
                         <Link
                           href={`/course-player/${cour.courseId}`}
@@ -292,8 +292,8 @@ const Page = () => {
                             ابدا الان <i className="icon-4"></i>
                           </Link>
                         </div>
-                      </div>
-                    </div>
+                      </div> 
+                    </div>*/}
                   </div>
                 </div>
               </div>
