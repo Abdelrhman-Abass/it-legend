@@ -1,5 +1,5 @@
 "use client";
-import { usePathname, useRouter } from "@/navigation";
+import { Link, usePathname, useRouter } from "@/navigation";
 import { FilePen, FileText, FileVideo, Paperclip } from "lucide-react";
 import { useLocale } from "next-intl";
 import { useSearchParams } from "next/navigation";
@@ -81,12 +81,12 @@ const CourseModules = ({
     }
   };
 
-  useEffect(() => {
-    const params = new URLSearchParams(searchParams);
-    if (!params.get("contentId")) {
-      getCurrentVideo();
-    }
-  }, [modules]);
+  // useEffect(() => {
+  //   const params = new URLSearchParams(searchParams);
+  //   if (!params.get("contentId")) {
+  //     getCurrentVideo();
+  //   }
+  // }, [modules]);
 
   return (
     <>
@@ -120,8 +120,9 @@ const CourseModules = ({
                     nodeId,
                     type,
                     isWatched,
+                    isPassed,
                     duration,
-                    questionsNumber,
+                    questionCount,
                     contentId,
                     playerType,
                     disable, // if exam not solve
@@ -133,14 +134,17 @@ const CourseModules = ({
                           contentId == params.get("contentId") && "active"
                         }
                         key={nodeId}
-                        onClick={() => {
-                          if (disable) {
-                            const { contentId, type, playerType } = currentExam;
-                            examSwal({ contentId, type, playerType });
-                          } else {
-                            handleSearch({ contentId, type, playerType });
-                          }
-                        }}
+                        
+
+                        // this is the suppose to be the link
+                        // onClick={() => {
+                        //   if (disable) {
+                        //     const { contentId, type, playerType } = currentExam;
+                        //     examSwal({ contentId, type, playerType });
+                        //   } else {
+                        //     handleSearch({ contentId, type, playerType });
+                        //   }
+                        // }}
                       >
                         <div className="text d-flex align-items-center">
                           <span style={{ margin: "0 4px 4px" }}>
@@ -172,10 +176,10 @@ const CourseModules = ({
                         {type == 0 && (
                           <span className="duration-node">{duration}</span>
                         )}
-                        {type == 1 && (
+                        {type == 4 && (
                           <div className="badge-list">
                             <span className="badge badge-secondary">
-                              {questionsNumber}{" "}
+                              {questionCount}{" "}
                               {locale == "ar" ? "أسئلة" : "Questions"}
                             </span>
                           </div>

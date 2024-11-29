@@ -28,7 +28,11 @@ const page = async ({ params }) => {
   console.log(links)
 
   const courseNode = await CoursePlayerNode(params.id)
-  console.log(courseNode.data)
+  // await courseNode.data.map((mode,index)=>{
+  //   mode.nodes.map((node, i) =>{
+  //     console.log(node.titleAr)
+  //   })
+  // })
 
 
   const mockData = {
@@ -88,13 +92,13 @@ const page = async ({ params }) => {
       stoppedIndex: 0
     }
   };
-  // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImE4YzhlMGQ1LTU5MmYtNDdhZC1hYWIyLTA2OWM2MjEwNmVkOCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhbGFhbXVoYW1lZDk3QGdtYWlsLmNvbSIsImp0aSI6ImMwYmJkNTVhLTY5OTgtNDdhNS05N2M1LWZiY2VhOGFjNmU1YiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6InVzZXIiLCJleHAiOjE3MzI3MDU2MDgsImlzcyI6Imh0dHBzOi8vd3d3Lml0bGVnZW5kLm5ldC8iLCJhdWQiOiJodHRwczovL3d3dy5pdGxlZ2VuZC5uZXQvIn0.K9pIEWP7FY98a7YmDJYWYS8Hp7GrbTqw5YWWdKPKyEg
+  // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImE4YzhlMGQ1LTU5MmYtNDdhZC1hYWIyLTA2OWM2MjEwNmVkOCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhbGFhbXVoYW1lZDk3QGdtYWlsLmNvbSIsImp0aSI6Ijk5M2YxMzA1LWQxODctNGJiNS04MDBmLTA2YWJmZTA4ZWMxMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6InVzZXIiLCJleHAiOjE3MzI4OTYwNTgsImlzcyI6Imh0dHBzOi8vd3d3Lml0bGVnZW5kLm5ldC8iLCJhdWQiOiJodHRwczovL3d3dy5pdGxlZ2VuZC5uZXQvIn0.WGtRmW9YIlDC8xcI-sNx5Vkin2MquHTIIKIJNY5mEhg
   // http://localhost:3000/en/course-player/c7f5bfef-8117-4021-b83e-448051bced9a?contentId=video1&type=0&playerType=0
   // console.log("data", mockData);
 
   return (
     <div className="w-full px-3">
-      <Content data={mockData?.data } courseId={params.id} links={links} />
+      <Content data={mockData?.data } testData={courseNode.data} courseId={params.id} links={links} />
     </div>
   );
 };
