@@ -32,12 +32,12 @@ const CourseAccordion = ({
   //     })),
   //   };
   // });
-  {data.map((item, index) => (
-    <div key={index}>
-      <h3>{item.titleAr}</h3>
-      <p>{item.contentId}</p>
-    </div>
-  ))}
+  // {data.map((item, index) => (
+  //   <div key={index}>
+  //     <h3>{item.titleAr}</h3>
+  //     <p>{item.contentId}</p>
+  //   </div>
+  // ))}
   // console.log("from accordion : " + data)
   return (
     <div className="accordion edu-accordion" id="accordionExample">
