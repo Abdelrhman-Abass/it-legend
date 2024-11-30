@@ -57,12 +57,15 @@ export const CoursePlayerVideo = async (courseId , nodeId) => {
             timeout: 3000000,
         };
 
+        
         const response = await axios.get(
             `http://49.13.77.125:1118/Endpoint/api/CourseVideo/${courseId}/videos/${nodeId}`,
             config
         );
+        // console.log(response.data.data.video)
+        const res = response.data.data.video
+        return res;
 
-        return response.data;
     } catch (error) {
         console.error("Error fetching course data:", error.message);
         return {

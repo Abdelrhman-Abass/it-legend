@@ -40,8 +40,8 @@ const Player = ({ nodes, moduleId }) => {
     dispatch(UserCoursePlayerNode(courseId, nodeId))
     console.log("video : " + video)
 
-    const res = async() => await CoursePlayerVideo(courseId, nodeId)
-    console.log("res " + res())
+    // const res = async(courseId, nodeId) => await CoursePlayerVideo(courseId, nodeId)
+    // console.log("res " + JSON.stringify(res()))
     
   },[dispatch])
 
