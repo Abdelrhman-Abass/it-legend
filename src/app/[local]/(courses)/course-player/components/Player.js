@@ -12,6 +12,8 @@ import PublitioPlayer from "./players/PublitioPlayer";
 import VdocipherPlayer from "./players/VdocipherPlayer";
 import ExamPlayer from "./players/ExamPlayer";
 import Problem from "./players/Problem";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCoursesPlayerVideo ,UserCoursePlayerNode} from "@/store/features/course-slice";
 
 const Player = ({ nodes, moduleId }) => {
   const [node, setNode] = useState(null);
@@ -20,10 +22,20 @@ const Player = ({ nodes, moduleId }) => {
   const params = new URLSearchParams(searchParams);
   const contentId = params.get("contentId");
   const type = params.get("type");
-  const playerType = params.get("playerType");
+  const playerType = params.get("no");
   const courseId = useParams().id;
   const { replace } = useRouter();
   const pathname = usePathname();
+
+  const video = useSelector(selectCoursesPlayerVideo)
+
+
+  useEffect(()=>{
+    console.log("type "+type)
+    console.log("node id " +playerType)
+    useDispatch(UserCoursePlayerNode(moduleId, playerType))
+    console.log(video)
+  },[video])
 
   const handleIsWatched = async () => {
     console.log("moduleId", moduleId);
