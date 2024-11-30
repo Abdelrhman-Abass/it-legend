@@ -14,6 +14,7 @@ import ExamPlayer from "./players/ExamPlayer";
 import Problem from "./players/Problem";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCoursesPlayerVideo ,UserCoursePlayerNode} from "@/store/features/course-slice";
+import { CoursePlayerVideo } from "@/hooks/PlayerHandler";
 
 const Player = ({ nodes, moduleId }) => {
   const [node, setNode] = useState(null);
@@ -22,21 +23,27 @@ const Player = ({ nodes, moduleId }) => {
   const params = new URLSearchParams(searchParams);
   const contentId = params.get("contentId");
   const type = params.get("type");
-  const playerType = params.get("no");
-  const courseId = useParams().id;
+  const nodeId = params.get("no");
+  // const courseId = useParams().id;
   const { replace } = useRouter();
   const pathname = usePathname();
   const dispatch = useDispatch();
+  const courseId = moduleId
 
   const video = useSelector(selectCoursesPlayerVideo)
 
 
   useEffect(()=>{
     console.log("type "+type)
-    console.log("node id " +playerType)
-    dispatch(UserCoursePlayerNode(moduleId, playerType))
-    console.log("video" + video)
-  },[video])
+    console.log("node id " +nodeId)
+    console.log(courseId)
+    dispatch(UserCoursePlayerNode(courseId, nodeId))
+    console.log("video : " + video)
+
+    const res = async() => await CoursePlayerVideo(courseId, nodeId)
+    console.log("res " + res())
+    
+  },[dispatch])
 
   const handleIsWatched = async () => {
     console.log("moduleId", moduleId);
