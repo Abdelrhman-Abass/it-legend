@@ -26,6 +26,7 @@ const Player = ({ nodes, moduleId }) => {
   const courseId = useParams().id;
   const { replace } = useRouter();
   const pathname = usePathname();
+  const dispatch = useDispatch();
 
   const video = useSelector(selectCoursesPlayerVideo)
 
@@ -33,8 +34,8 @@ const Player = ({ nodes, moduleId }) => {
   useEffect(()=>{
     console.log("type "+type)
     console.log("node id " +playerType)
-    useDispatch(UserCoursePlayerNode(moduleId, playerType))
-    console.log(video)
+    dispatch(UserCoursePlayerNode(moduleId, playerType))
+    console.log("video" + video)
   },[video])
 
   const handleIsWatched = async () => {

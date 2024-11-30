@@ -9,7 +9,7 @@ const initialState = {
   statusV: "idle", // 'idle' | 'loading' | 'succeeded' | 'failed'
   error: null,
   errorV: null,
-  video:[]
+  video:{}
 };
 
 // Async action to fetch courses
@@ -76,7 +76,8 @@ export const UserCoursePlayerNode = createAsyncThunk(
       //   return {}; // Return an empty object or handle this case appropriately
       // }
 
-      return response; // Return the actual data if it's not null
+      return data; // Return the actual data if it's not null
+      
     } catch (error) {
       console.error(error);
       return rejectWithValue(error.message); // Return error if any
