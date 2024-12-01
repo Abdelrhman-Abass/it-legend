@@ -234,7 +234,7 @@ const PublitioPlayer = ({ node, handleIsVideoEnd , nextNode}) => {
           const watchedPercentage = (video.currentTime / video.duration) * 100;
           if (watchedPercentage >= 80 && !hasWatched80Percent) {
             setHasWatched80Percent(true);
-            console.log("user reached more than 80%")
+            // console.log("user reached more than 80%")
             // handleIsWatched();
           }
           
