@@ -20,6 +20,8 @@ import { selectCourseError, selectCourseLinks, selectCourseStatus, UserCoursePla
 const Player = ({ nodes, moduleId , modules}) => {
   const [node, setNode] = useState(null);
   const [nextNode, setNextNode] = useState(null);
+  const [nextNodeId, setNextNodeId] = useState(null);
+  
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
   const contentId = params.get("contentId");
@@ -48,14 +50,11 @@ const Player = ({ nodes, moduleId , modules}) => {
 
   useEffect(() => {
     console.log("video Status:", status);
-    console.log(modules)
+    // console.log(modules)
     const r = getNextNodeId(modules , nodeId)
+    setNextNodeId(r)
     console.log("next node : " + r)
-    // if (status === "succeeded") {
-    //   console.log("video Data:", video);
-    //   // const { data } = video;  // Assuming `courses` has a `data` property that holds the array
-    //   // console.log("Data array:", video);  // Log the actual array
-    // }
+    
     if (status === "failed") {
       console.log("Error:", error);
     }
@@ -200,6 +199,7 @@ const Player = ({ nodes, moduleId , modules}) => {
             node={video}
             handleIsWatched={handleIsWatched}
             handleIsVideoEnd={handleIsVideoEnd}
+            nextNode={nextNodeId}
           />
          ) 
         // : type == 0 ? (

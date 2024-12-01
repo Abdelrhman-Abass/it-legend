@@ -1,8 +1,8 @@
 "use client"
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import YouTube from "react-youtube";
 
-const YouTubePlayer = ({ node, handleIsWatched, handleIsVideoEnd }) => {
+const YouTubePlayer = ({ node, handleIsWatched, handleIsVideoEnd ,nextNode }) => {
   
   const [player, setPlayer] = useState(null);
   const [hasReached80, setHasReached80] = useState(false);
@@ -10,7 +10,21 @@ const YouTubePlayer = ({ node, handleIsWatched, handleIsVideoEnd }) => {
   const [intervalId, setIntervalId] = useState(null);
 
   // console.log("Node data:", node);
+  const changeNoParam = (newNoValue) => {
+    // Get the current URL
+    const currentUrl = new URL(window.location.href);
 
+    // Update the 'no' parameter
+    currentUrl.searchParams.set('no', newNoValue); // Change 'no' to the new value
+
+    // Update the browser's URL without reloading the page
+    window.history.pushState({}, '', currentUrl);
+    window.location.reload();
+
+  };
+  // useEffect(()=>{
+  //   const res = changeNoParam(nextNode)
+  // },[])
   
   const opts = {
     playerVars: {
@@ -54,6 +68,11 @@ const YouTubePlayer = ({ node, handleIsWatched, handleIsVideoEnd }) => {
           setHasReached80(true);
           console.log("Video has reached 80% of the viewership.");
           await handleIsWatched();
+        }
+        if (currentTime / duration == 1) {
+          setHasReached80(true);
+          console.log("Video has reached 100% of the viewership.");
+          changeNoParam(nextNode);
         }
 
         if (event.data === 1) {
