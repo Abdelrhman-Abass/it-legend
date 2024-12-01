@@ -261,7 +261,7 @@ const PublitioPlayer = ({ node, handleIsVideoEnd , nextNode}) => {
       }
       document.body.removeChild(script);
     };
-  }, [node?.path, handleIsVideoEnd, handleIsWatched, hasWatched80Percent]);
+  }, [node?.path, handleIsVideoEnd, hasWatched80Percent]);
 
   return (
     <div className="video-container w-full h-full">
