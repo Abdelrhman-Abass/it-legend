@@ -110,14 +110,14 @@ export const courseSlice = createSlice({
       })
       
       .addCase(UserCoursePlayerNode.pending, (state) => {
-        state.statusV = "loading";
+        state.status = "loading";
       })
       .addCase(UserCoursePlayerNode.fulfilled, (state, action) => {
-        state.statusV = "succeeded";
+        state.status = "succeeded";
         state.video = action.payload; // Store the fetched courses
       })
       .addCase(UserCoursePlayerNode.rejected, (state, action) => {
-        state.statusV = "failed";
+        state.status = "failed";
         state.errorV = action.payload; // Store the error message
       });
   },
