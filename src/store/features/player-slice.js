@@ -1,51 +1,41 @@
 import { CoursePlayerVideoComments, CoursePlayerVideo } from "@/hooks/PlayerHandler";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+// Initial state
 const initialState = {
   playerLinks: [], // Assuming courses are an array
   course: [], // Assuming course is an array (if you want a single course, modify this accordingly)
   status: "idle", // 'idle' | 'loading' | 'succeeded' | 'failed'
   error: null,
-  comments:[]
+  comments: [] // Comments will be stored here
 };
 
-// Async action to fetch courses
+// Async action to fetch course player links
 export const UserCoursePlayerLinks = createAsyncThunk(
-  "user/courses",
-  async ({courseId , nodeId}, { rejectWithValue }) => {
+  "user/courses", // Action type
+  async ({ courseId, nodeId }, { rejectWithValue }) => {
     try {
-
-      console.log(courseId , nodeId)
-      const response = await CoursePlayerVideo(courseId ,nodeId);
-
-      // Handle the response to safely access `data`
-      // const { data } = response; // Get data from the response (either null or actual data)
-
-      // if (data === null) {
-      //   console.log("No data found.");
-      //   return {}; // Return an empty object or handle this case appropriately
-      // }
-
-      return response; // Return the actual data if it's not null
+      console.log(courseId, nodeId);
+      const response = await CoursePlayerVideo(courseId, nodeId);
+      return response; // Return the actual data
     } catch (error) {
       console.error(error);
-      return rejectWithValue(error.message); // Return error if any
+      return rejectWithValue(error.message); // Return error message if any
     }
   }
 );
+
+// Async action to fetch course comments
 export const UserCoursePlayerComments = createAsyncThunk(
-  "user/courses/comments",
-  async ({nodeId}, { rejectWithValue }) => {
+  "user/courses/comments", // Action type
+  async ({ nodeId }, { rejectWithValue }) => {
     try {
-
-      console.log(courseId , nodeId)
+      console.log(nodeId);
       const response = await CoursePlayerVideoComments(nodeId);
-
-
-      return response; // Return the actual data if it's not null
+      return response; // Return the actual data
     } catch (error) {
       console.error(error);
-      return rejectWithValue(error.message); // Return error if any
+      return rejectWithValue(error.message); // Return error message if any
     }
   }
 );
@@ -55,39 +45,44 @@ export const courseSlicePlayer = createSlice({
   name: "player",
   initialState,
   reducers: {
+    // Additional reducers if needed
     single_product: (state, { payload }) => {
       // Handle single product logic if needed
     },
   },
   extraReducers: (builder) => {
     builder
+      // Handling UserCoursePlayerLinks async action
       .addCase(UserCoursePlayerLinks.pending, (state) => {
         state.status = "loading";
       })
       .addCase(UserCoursePlayerLinks.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.playerLinks = action.payload; // Store the fetched courses
+        state.playerLinks = action.payload; // Store the fetched player links
       })
       .addCase(UserCoursePlayerLinks.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload; // Store the error message
       })
-      .addCase(UserCoursePlayerLinks.pending, (state) => {
+      
+      // Handling UserCoursePlayerComments async action
+      .addCase(UserCoursePlayerComments.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(UserCoursePlayerLinks.fulfilled, (state, action) => {
+      .addCase(UserCoursePlayerComments.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.comments = action.payload; // Store the fetched courses
+        state.comments = action.payload; // Store the fetched comments
       })
-      .addCase(UserCoursePlayerLinks.rejected, (state, action) => {
+      .addCase(UserCoursePlayerComments.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload; // Store the error message
       });
   },
 });
 
-export const selectCourseLinks = (state) => state.player.playerLinks; // Use the correct slice path
-export const selectCourseComments = (state) => state.player.comments; // Use the correct slice path
+// Selectors to retrieve data from the store
+export const selectCourseLinks = (state) => state.player.playerLinks;
+export const selectCourseComments = (state) => state.player.comments;
 export const selectCourseStatus = (state) => state.player.status;
 export const selectCourseError = (state) => state.player.error;
 
