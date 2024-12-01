@@ -845,10 +845,99 @@ const Content = ({ data, courseId, links, testData }) => {
                   {percent}%
                 </div>
               </div>
-              <CourseAccordion
-                nodes={data?.nodes}
-                stoppedIndex={data?.stoppedIndex}
-              />
+              {
+                modules.map((course, idx) => (
+                  // <Test testData={course} key={idx}/> https://it-legend-rrkg.vercel.app/ar/course-player/c84e7902-1205-426f-a857-922bedd84bdf?type=0&no=fef68bd2-7540-44d4-b8fd-c35b9f2dd839
+                  <div className="accordion edu-accordion" id="accordionExample" key={idx}>
+                    <div className="accordion-item">
+                      <h3 className="accordion-header" id={`heading-${idx}`}>
+                        <button
+                          className={`accordion-button ${openAccordion === idx ? "" : "collapsed"}`}
+                          type="button"
+                          onClick={() => setOpenAccordion(openAccordion === idx ? null : idx)}
+                          aria-expanded={openAccordion === idx ? "true" : "false"}
+                        >
+                          <span style={{ textAlign: "start" }}>
+                            {course.moduleTitleAr}
+                          </span>
+                        </button>
+                      </h3>
+                      <div
+                        id={`module-${course.moduleId}`}
+                        className={`accordion-collapse  ${"show"}`}
+                        data-bs-parent="#faq-accordion"
+                      >
+                        <div className="accordion-body">
+                          <div className="course-lesson">
+                            <ul>
+                              {course.nodes.map((node, i) => {
+                                const {
+                                  titleAr = "No Title Available",
+                                  titleEn = "No English Title",
+                                  nodeId = `node-${i}`,
+                                  type = 0,
+                                  isWatched = false,
+                                  isPassed = false,
+                                  duration = "Unknown Duration",
+                                  questionCount = 0,
+                                  contentId = null,
+                                } = node || {}; // Handle null or undefined `node`
+
+                                return (
+                                  <li
+                                    style={{ color: isWatched ? "#6ABD8A" : undefined }}
+                                    className={contentId == params.get("contentId") ? "active" : ""}
+                                    key={nodeId}
+                                  >
+                                    <div className="text d-flex align-items-center">
+                                      <span style={{ margin: "0 4px 4px" }}>
+                                        {isWatched ? (
+                                          <svg
+                                            width="24"
+                                            height="24"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                          >
+                                            <path
+                                              d="M9 16.172l-4.95-4.95a1.25 1.25 0 0 1 1.768-1.768L9 13.634l8.95-8.95a1.25 1.25 0 0 1 1.768 1.768L9 16.172z"
+                                              fill="#6ABD8A"
+                                            />
+                                          </svg>
+                                        ) : type == 1 || type == 2 ? (
+                                          <FilePen size={20} />
+                                        ) : type == 3 ? (
+                                          <Paperclip size={20} />
+                                        ) : type == 4 ? (
+                                          <FileText size={20} />
+                                        ) : (
+                                          <FileVideo size={20} />
+                                        )}
+                                      </span>
+                                      <span>
+                                        <a href={`/ar/course-player/${course.courseId}?type=${type}&no=${nodeId}`}>
+                                          {titleAr}
+                                        </a>
+                                      </span>
+                                    </div>
+                                    {type == 0 && <span className="duration-node">{duration}</span>}
+                                    {type == 4 && (
+                                      <div className="badge-list">
+                                        <span className="badge badge-secondary">
+                                          {questionCount} أسئلة
+                                        </span>
+                                      </div>
+                                    )}
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
             </div>
             {/* links */}
             {links && (

@@ -40,7 +40,7 @@ const YouTubePlayer = ({ node, handleIsWatched, handleIsVideoEnd }) => {
     if (player) {
       const currentTime = player.getCurrentTime();
       setWatchedDuration((prevDuration) => prevDuration + 1); // Increment by 1 second
-      console.log(`Watched duration: ${currentTime} seconds`);
+      // console.log(`Watched duration: ${currentTime} seconds`);
     }
   }, [player]);
 
