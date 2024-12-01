@@ -15,9 +15,9 @@ import Problem from "./players/Problem";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCoursesPlayerVideo ,UserCoursePlayerNode} from "@/store/features/course-slice";
 import { CoursePlayerVideo } from "@/hooks/PlayerHandler";
-import { selectCourseError, selectCourseLinks, selectCourseStatus, UserCoursePlayerLinks } from "@/store/features/player-slice";
+import { selectCourseError, selectCourseLinks, selectCourseStatus,selectCourseComments, UserCoursePlayerComments, UserCoursePlayerLinks } from "@/store/features/player-slice";
 
-const Player = ({ nodes, moduleId , modules}) => {
+const Player = ({ nodes, moduleId , modules , setComments}) => {
   const [node, setNode] = useState(null);
   const [nextNode, setNextNode] = useState(null);
   const [nextNodeId, setNextNodeId] = useState(null);
@@ -36,17 +36,20 @@ const Player = ({ nodes, moduleId , modules}) => {
   const video = useSelector(selectCourseLinks)
   const status = useSelector(selectCourseStatus)
   const error = useSelector(selectCourseError)
+  const comments = useSelector(selectCourseComments)
 
-  // console.log("type "+type)
-  // console.log("node id " +nodeId)
-  // console.log(courseId)
 
-  // const res = async(courseId, nodeId) => await CoursePlayerVideo(courseId, nodeId) http://localhost:3000/en/course-player/c7f5bfef-8117-4021-b83e-448051bced9a?type=0&no=8f6f7c08-ed89-4c9e-85aa-a35f744a578d
-  // console.log("res " + JSON.stringify(res()))
+ 
   
   useEffect(()=>{
     dispatch(UserCoursePlayerLinks({courseId ,nodeId} ))
   },[dispatch])
+
+  useEffect(()=>{
+    dispatch(UserCoursePlayerComments({ nodeId} ))
+  },[dispatch])
+
+
 
   useEffect(() => {
     console.log("video Status:", status);
@@ -54,7 +57,9 @@ const Player = ({ nodes, moduleId , modules}) => {
     const r = getNextNodeId(modules , nodeId)
     setNextNodeId(r)
     console.log("next node : " + r)
-    
+
+    setComments(comments)
+    console.log(comments)
     if (status === "failed") {
       console.log("Error:", error);
     }

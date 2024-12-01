@@ -77,7 +77,7 @@ export const CoursePlayerVideo = async (courseId , nodeId) => {
 };
 
 
-export const CoursePlayerVideoComments = async (courseId ,videoId) => {
+export const CoursePlayerVideoComments = async (nodeId) => {
     try {
         const token = cookies().get("token")?.value;
         if (!token) throw new Error("Token is not available");
@@ -91,11 +91,11 @@ export const CoursePlayerVideoComments = async (courseId ,videoId) => {
         };
 
         const response = await axios.get(
-            `http://49.13.77.125:1118/Endpoint/api/CourseVideo/${courseId}/videos/${videoId}`,
+            `http://49.13.77.125:1118/Endpoint/api/VideoComment/${nodeId}/comments`,
             config
         );
 
-        return response.data;
+        return response.data.data;
     } catch (error) {
         console.error("Error fetching course data:", error.message);
         return {

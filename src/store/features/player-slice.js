@@ -1,4 +1,4 @@
-import { CoursePlayerLinks, CoursePlayerVideo } from "@/hooks/PlayerHandler";
+import { CoursePlayerVideoComments, CoursePlayerVideo } from "@/hooks/PlayerHandler";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -6,6 +6,7 @@ const initialState = {
   course: [], // Assuming course is an array (if you want a single course, modify this accordingly)
   status: "idle", // 'idle' | 'loading' | 'succeeded' | 'failed'
   error: null,
+  comments:[]
 };
 
 // Async action to fetch courses
@@ -24,6 +25,22 @@ export const UserCoursePlayerLinks = createAsyncThunk(
       //   console.log("No data found.");
       //   return {}; // Return an empty object or handle this case appropriately
       // }
+
+      return response; // Return the actual data if it's not null
+    } catch (error) {
+      console.error(error);
+      return rejectWithValue(error.message); // Return error if any
+    }
+  }
+);
+export const UserCoursePlayerComments = createAsyncThunk(
+  "user/courses/comments",
+  async ({nodeId}, { rejectWithValue }) => {
+    try {
+
+      console.log(courseId , nodeId)
+      const response = await CoursePlayerVideoComments(nodeId);
+
 
       return response; // Return the actual data if it's not null
     } catch (error) {
@@ -54,11 +71,23 @@ export const courseSlicePlayer = createSlice({
       .addCase(UserCoursePlayerLinks.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload; // Store the error message
+      })
+      .addCase(UserCoursePlayerLinks.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(UserCoursePlayerLinks.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.comments = action.payload; // Store the fetched courses
+      })
+      .addCase(UserCoursePlayerLinks.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload; // Store the error message
       });
   },
 });
 
 export const selectCourseLinks = (state) => state.player.playerLinks; // Use the correct slice path
+export const selectCourseComments = (state) => state.player.comments; // Use the correct slice path
 export const selectCourseStatus = (state) => state.player.status;
 export const selectCourseError = (state) => state.player.error;
 
