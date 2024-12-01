@@ -48,11 +48,11 @@ const Player = ({ nodes, moduleId }) => {
 
   useEffect(() => {
     console.log("video Status:", status);
-    if (status === "succeeded") {
-      console.log("video Data:", video);
-      // const { data } = video;  // Assuming `courses` has a `data` property that holds the array
-      // console.log("Data array:", video);  // Log the actual array
-    }
+    // if (status === "succeeded") {
+    //   console.log("video Data:", video);
+    //   // const { data } = video;  // Assuming `courses` has a `data` property that holds the array
+    //   // console.log("Data array:", video);  // Log the actual array
+    // }
     if (status === "failed") {
       console.log("Error:", error);
     }
