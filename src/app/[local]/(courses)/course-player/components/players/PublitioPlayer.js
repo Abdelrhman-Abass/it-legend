@@ -80,7 +80,7 @@
 "use client"; // Ensures the component runs on the client side
 import { useEffect, useRef, useState } from "react";
 
-const PublitioPlayer = ({ node, handleIsWatched, handleIsVideoEnd }) => {
+const PublitioPlayer = ({ node, handleIsVideoEnd }) => {
   const [poster, setPoster] = useState(null); // Use state for poster dynamically
   const [hasWatched80Percent, setHasWatched80Percent] = useState(false); // Track 80% watched via state
   const videoRef = useRef(null); // Create a ref for the video element
@@ -112,7 +112,7 @@ const PublitioPlayer = ({ node, handleIsWatched, handleIsVideoEnd }) => {
       if (watchedPercentage >= 80 && !hasWatched80Percent) {
         console.log("the user has reached 80% " + watchedPercentage)
         setHasWatched80Percent(true); // Update state when 80% is watched
-        await handleIsWatched(); // Call the function when 80% is watched
+        // await handleIsWatched(); // Call the function when 80% is watched
       }
     }
   };

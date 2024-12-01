@@ -67,7 +67,7 @@ const Player = ({ nodes, moduleId , modules , setComments}) => {
 
 
   const handleIsWatched = async () => {
-    console.log("moduleId", moduleId);
+    // console.log("moduleId", moduleId);
     const body = {
       VideoId: contentId,
       IsEnded: false,
