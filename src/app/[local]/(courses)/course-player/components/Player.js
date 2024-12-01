@@ -17,7 +17,7 @@ import { selectCoursesPlayerVideo ,UserCoursePlayerNode} from "@/store/features/
 import { CoursePlayerVideo } from "@/hooks/PlayerHandler";
 import { selectCourseError, selectCourseLinks, selectCourseStatus, UserCoursePlayerLinks } from "@/store/features/player-slice";
 
-const Player = ({ nodes, moduleId }) => {
+const Player = ({ nodes, moduleId , modules}) => {
   const [node, setNode] = useState(null);
   const [nextNode, setNextNode] = useState(null);
   const searchParams = useSearchParams();
@@ -48,6 +48,9 @@ const Player = ({ nodes, moduleId }) => {
 
   useEffect(() => {
     console.log("video Status:", status);
+    console.log(modules)
+    const r = getNextNodeId(modules , nodeId)
+    console.log("next node : " + r)
     // if (status === "succeeded") {
     //   console.log("video Data:", video);
     //   // const { data } = video;  // Assuming `courses` has a `data` property that holds the array
@@ -92,6 +95,23 @@ const Player = ({ nodes, moduleId }) => {
     }
   };
 
+  const getNextNodeId = (modules, nodeId) => {
+    // Find the module that contains the nodes
+    const module = modules.find((mod) => mod.nodes);
+  
+    if (!module) return null; // If no module found, return null
+  
+    // Find the index of the current node
+    const currentNodeIndex = module.nodes.findIndex((node) => node.nodeId === nodeId);
+  
+    if (currentNodeIndex === -1) return null; // If nodeId is not found, return null
+  
+    // Get the next node
+    const nextNode = module.nodes[currentNodeIndex + 1];
+  
+    return nextNode ? nextNode.nodeId : null; // Return the nodeId of the next node or null if there's no next node
+  };
+  
   // get current node
   useEffect(() => {
     // get node if type == 0 (video) or type == 4 (pdf)

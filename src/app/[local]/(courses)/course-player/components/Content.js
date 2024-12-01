@@ -709,7 +709,7 @@ const Content = ({ data, courseId, links, testData }) => {
                 <ArrowRight size={28} />
               )}
             </div>
-            <Player nodes={data?.nodes} moduleId={courseId} />
+            <Player nodes={data?.nodes} moduleId={courseId} modules={modules} />
           </div>
           <div className="course-details-content">
             <div className="nav-tab-wrap">

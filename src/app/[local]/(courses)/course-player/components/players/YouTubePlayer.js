@@ -9,7 +9,7 @@ const YouTubePlayer = ({ node, handleIsWatched, handleIsVideoEnd }) => {
   const [watchedDuration, setWatchedDuration] = useState(0);
   const [intervalId, setIntervalId] = useState(null);
 
-  console.log("Node data:", node);
+  // console.log("Node data:", node);
 
   
   const opts = {
