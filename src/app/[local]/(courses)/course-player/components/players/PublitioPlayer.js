@@ -190,8 +190,19 @@ const deriveVideoAssets = (path) => {
     posterPath: path.replace(".m3u8", ".jpg"),
   };
 };
+const changeNoParam = (newNoValue) => {
+  // Get the current URL
+  const currentUrl = new URL(window.location.href);
 
-const PublitioPlayer = ({ node, handleIsVideoEnd, handleIsWatched = () => {} }) => {
+  // Update the 'no' parameter
+  currentUrl.searchParams.set('no', newNoValue); // Change 'no' to the new value
+
+  // Update the browser's URL without reloading the page
+  window.history.pushState({}, '', currentUrl);
+  window.location.reload();
+
+};
+const PublitioPlayer = ({ node, handleIsVideoEnd , nextNode}) => {
   const [poster, setPoster] = useState(null);
   const [hasWatched80Percent, setHasWatched80Percent] = useState(false);
   const videoRef = useRef(null);
@@ -223,8 +234,16 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, handleIsWatched = () => {} }) 
           const watchedPercentage = (video.currentTime / video.duration) * 100;
           if (watchedPercentage >= 80 && !hasWatched80Percent) {
             setHasWatched80Percent(true);
-            handleIsWatched();
+            console.log("user reached more than 80%")
+            // handleIsWatched();
           }
+          
+          if (watchedPercentage == 100 && !hasWatched80Percent) {
+            // setHasWatched80Percent(true);
+            // handleIsWatched();
+            changeNoParam(nextNode)
+          }
+
         });
       } else {
         console.error("Hls.js is not supported in this browser.");

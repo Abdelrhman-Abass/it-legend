@@ -211,8 +211,9 @@ const Player = ({ nodes, moduleId , modules , setComments}) => {
         type == 0 ? (
           <PublitioPlayer
             node={video}
-            handleIsWatched={handleIsWatched}
             handleIsVideoEnd={handleIsVideoEnd}
+            nextNode={nextNodeId}
+
           />
         ) 
         : playerType == 2 ? (
