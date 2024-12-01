@@ -15,6 +15,7 @@ import Problem from "./players/Problem";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCoursesPlayerVideo ,UserCoursePlayerNode} from "@/store/features/course-slice";
 import { CoursePlayerVideo } from "@/hooks/PlayerHandler";
+import { selectCourseLinks, UserCoursePlayerLinks } from "@/store/features/player-slice";
 
 const Player = ({ nodes, moduleId }) => {
   const [node, setNode] = useState(null);
@@ -30,20 +31,20 @@ const Player = ({ nodes, moduleId }) => {
   const dispatch = useDispatch();
   const courseId = moduleId
 
-  const video = useSelector(selectCoursesPlayerVideo)
+  const video = useSelector(selectCourseLinks)
 
 
   useEffect(()=>{
     console.log("type "+type)
     console.log("node id " +nodeId)
     console.log(courseId)
-    dispatch(UserCoursePlayerNode(courseId, nodeId))
-    console.log("video : " + video)
+    dispatch(UserCoursePlayerLinks(courseId, nodeId))
+    console.log("video  " + video)
 
-    // const res = async(courseId, nodeId) => await CoursePlayerVideo(courseId, nodeId)
-    // console.log("res " + JSON.stringify(res()))
+    const res = async(courseId, nodeId) => await CoursePlayerVideo(courseId, nodeId)
+    console.log("res " + JSON.stringify(res()))
     
-  },[dispatch])
+  },[video])
 
   const handleIsWatched = async () => {
     console.log("moduleId", moduleId);

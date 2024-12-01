@@ -102,7 +102,7 @@ export const courseSlice = createSlice({
       })
       .addCase(UserCourses.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.courses = action.payload; // Store the fetched courses
+        state.courses = action.payload; // Store the fetched courses https://it-legend-rrkg.vercel.app/ar/course-player/c7f5bfef-8117-4021-b83e-448051bced9a?type=0&no=8f6f7c08-ed89-4c9e-85aa-a35f744a578d
       })
       .addCase(UserCourses.rejected, (state, action) => {
         state.status = "failed";
@@ -118,7 +118,7 @@ export const courseSlice = createSlice({
       })
       .addCase(UserCoursePlayerNode.rejected, (state, action) => {
         state.status = "failed";
-        state.errorV = action.payload; // Store the error message
+        state.error = action.payload; // Store the error message
       });
   },
 });

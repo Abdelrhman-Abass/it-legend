@@ -62,7 +62,7 @@ export const CoursePlayerVideo = async (courseId , nodeId) => {
             `http://49.13.77.125:1118/Endpoint/api/CourseVideo/${courseId}/videos/${nodeId}`,
             config
         );
-        // console.log(response.data.data.video)
+        console.log(response.data.data.video)
         const res = response.data.data.video
         return res;
 
