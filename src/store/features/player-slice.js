@@ -15,7 +15,6 @@ export const UserCoursePlayerLinks = createAsyncThunk(
   "user/courses", // Action type
   async ({ courseId, nodeId }, { rejectWithValue }) => {
     try {
-      console.log(courseId, nodeId);
       const response = await CoursePlayerVideo(courseId, nodeId);
       return response; // Return the actual data
     } catch (error) {

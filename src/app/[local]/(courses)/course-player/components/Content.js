@@ -38,7 +38,7 @@ const Content = ({ data, courseId, links, testData }) => {
   const local = useLocale();
   const [moduleId, setModuleId] = useState(null);
   const [showPlayerSide, setShowPlayerSide] = useState(true);
-  const [commetns, setComments] = useState([]);
+  const [comments, setComments] = useState([]);
 
   const [percent, setPercent] = useState(33);
   const searchParams = useSearchParams();
@@ -63,6 +63,8 @@ const Content = ({ data, courseId, links, testData }) => {
   const handleDataComments = (fetchedData) => {
     setComments(fetchedData); // Store the fetched data in the parent state
   };
+
+  console.log(" comments from content : "+ comments)
 
   // get current contentId
   useEffect(() => {

@@ -56,10 +56,10 @@ const Player = ({ nodes, moduleId , modules , setComments}) => {
     // console.log(modules)
     const r = getNextNodeId(modules , nodeId)
     setNextNodeId(r)
-    console.log("next node : " + r)
+    // console.log("next node : " + r)
 
     setComments(comments)
-    console.log(comments)
+    console.log(" comments : "+comments)
     if (status === "failed") {
       console.log("Error:", error);
     }
@@ -199,21 +199,22 @@ const Player = ({ nodes, moduleId , modules , setComments}) => {
     <>
       {/* type == 0 video */}
       {type == 0 ? (
+        // type == 0 ? (
+        //   <YouTubePlayer
+        //     node={video}
+        //     handleIsWatched={handleIsWatched}
+        //     handleIsVideoEnd={handleIsVideoEnd}
+        //     nextNode={nextNodeId}
+        //   />
+        //  ) 
+        // : 
         type == 0 ? (
-          <YouTubePlayer
+          <PublitioPlayer
             node={video}
             handleIsWatched={handleIsWatched}
             handleIsVideoEnd={handleIsVideoEnd}
-            nextNode={nextNodeId}
           />
-         ) 
-        // : type == 0 ? (
-        //   <PublitioPlayer
-        //     node={video.path}
-        //     handleIsWatched={handleIsWatched}
-        //     handleIsVideoEnd={handleIsVideoEnd}
-        //   />
-        // ) 
+        ) 
         : playerType == 2 ? (
           <VdocipherPlayer
             node={node}
