@@ -1,3 +1,4 @@
+"use client"
 import React, { useCallback, useState } from "react";
 import YouTube from "react-youtube";
 
@@ -5,6 +6,7 @@ const YouTubePlayer = ({ node, handleIsWatched, handleIsVideoEnd }) => {
   const [player, setPlayer] = useState(null);
   const [hasReached80, setHasReached80] = useState(false);
 
+  console.log("from youtube " + node)
   const opts = {
     playerVars: {
       autoplay: 1,

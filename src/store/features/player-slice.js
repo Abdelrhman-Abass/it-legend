@@ -11,8 +11,10 @@ const initialState = {
 // Async action to fetch courses
 export const UserCoursePlayerLinks = createAsyncThunk(
   "user/courses",
-  async (courseId , nodeId, { rejectWithValue }) => {
+  async ({courseId , nodeId}, { rejectWithValue }) => {
     try {
+
+      console.log(courseId , nodeId)
       const response = await CoursePlayerVideo(courseId ,nodeId);
 
       // Handle the response to safely access `data`

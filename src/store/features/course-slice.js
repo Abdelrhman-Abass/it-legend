@@ -64,8 +64,11 @@ export const UserCourses = createAsyncThunk(
 );
 export const UserCoursePlayerNode = createAsyncThunk(
   "user/courses/player",
-  async (courseId ,nodeId, { rejectWithValue }) => {
+  async ({courseId ,nodeId }, { rejectWithValue }) => {
     try {
+      // const nodeId="8f6f7c08-ed89-4c9e-85aa-a35f744a578d"
+
+      console.log(courseId , nodeId)
       const response = await CoursePlayerVideo(courseId, nodeId);
 
       // Handle the response to safely access `data`
@@ -75,7 +78,7 @@ export const UserCoursePlayerNode = createAsyncThunk(
       //   console.log("No data found.");
       //   return {}; // Return an empty object or handle this case appropriately
       // }
-      console.log(response)
+      console.log("res from slice " +response)
 
       return response; // Return the actual data if it's not null
 
@@ -125,7 +128,7 @@ export const courseSlice = createSlice({
 
 export const { single_product } = courseSlice.actions;
 export const selectCourses = (state) => state.courses.courses; // Use the correct slice path
-export const selectCoursesPlayerVideo = (state) => state.courses.courses; // Use the correct slice path
+export const selectCoursesPlayerVideo = (state) => state.courses.video; // Use the correct slice path
 export const selectCourseStatus = (state) => state.courses.status;
 export const selectCourseError = (state) => state.courses.error;
 

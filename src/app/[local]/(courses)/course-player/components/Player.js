@@ -15,7 +15,7 @@ import Problem from "./players/Problem";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCoursesPlayerVideo ,UserCoursePlayerNode} from "@/store/features/course-slice";
 import { CoursePlayerVideo } from "@/hooks/PlayerHandler";
-import { selectCourseLinks, UserCoursePlayerLinks } from "@/store/features/player-slice";
+import { selectCourseError, selectCourseLinks, selectCourseStatus, UserCoursePlayerLinks } from "@/store/features/player-slice";
 
 const Player = ({ nodes, moduleId }) => {
   const [node, setNode] = useState(null);
@@ -32,19 +32,32 @@ const Player = ({ nodes, moduleId }) => {
   const courseId = moduleId
 
   const video = useSelector(selectCourseLinks)
+  const status = useSelector(selectCourseStatus)
+  const error = useSelector(selectCourseError)
 
+  // console.log("type "+type)
+  // console.log("node id " +nodeId)
+  // console.log(courseId)
 
+  // const res = async(courseId, nodeId) => await CoursePlayerVideo(courseId, nodeId) http://localhost:3000/en/course-player/c7f5bfef-8117-4021-b83e-448051bced9a?type=0&no=8f6f7c08-ed89-4c9e-85aa-a35f744a578d
+  // console.log("res " + JSON.stringify(res()))
+  
   useEffect(()=>{
-    console.log("type "+type)
-    console.log("node id " +nodeId)
-    console.log(courseId)
-    dispatch(UserCoursePlayerLinks(courseId, nodeId))
-    console.log("video  " + video)
+    dispatch(UserCoursePlayerLinks({courseId ,nodeId} ))
+  },[dispatch])
 
-    const res = async(courseId, nodeId) => await CoursePlayerVideo(courseId, nodeId)
-    console.log("res " + JSON.stringify(res()))
-    
-  },[video])
+  useEffect(() => {
+    console.log("video Status:", status);
+    if (status === "succeeded") {
+      console.log("video Data:", video);
+      // const { data } = video;  // Assuming `courses` has a `data` property that holds the array
+      // console.log("Data array:", video);  // Log the actual array
+    }
+    if (status === "failed") {
+      console.log("Error:", error);
+    }
+  }, [status, video, error, dispatch]);
+
 
   const handleIsWatched = async () => {
     console.log("moduleId", moduleId);
@@ -161,20 +174,22 @@ const Player = ({ nodes, moduleId }) => {
   return (
     <>
       {/* type == 0 video */}
-      {type == 0 && node ? (
-        playerType == 0 ? (
+      {type == 0 ? (
+        type == 0 ? (
           <YouTubePlayer
-            node={node}
+            node={video}
             handleIsWatched={handleIsWatched}
             handleIsVideoEnd={handleIsVideoEnd}
           />
-        ) : playerType == 1 ? (
-          <PublitioPlayer
-            node={node}
-            handleIsWatched={handleIsWatched}
-            handleIsVideoEnd={handleIsVideoEnd}
-          />
-        ) : playerType == 2 ? (
+         ) 
+        // : type == 0 ? (
+        //   <PublitioPlayer
+        //     node={video.path}
+        //     handleIsWatched={handleIsWatched}
+        //     handleIsVideoEnd={handleIsVideoEnd}
+        //   />
+        // ) 
+        : playerType == 2 ? (
           <VdocipherPlayer
             node={node}
             handleIsWatched={handleIsWatched}
