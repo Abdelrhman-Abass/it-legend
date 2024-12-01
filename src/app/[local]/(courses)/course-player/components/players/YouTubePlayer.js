@@ -3,10 +3,15 @@ import React, { useCallback, useState } from "react";
 import YouTube from "react-youtube";
 
 const YouTubePlayer = ({ node, handleIsWatched, handleIsVideoEnd }) => {
+  
   const [player, setPlayer] = useState(null);
   const [hasReached80, setHasReached80] = useState(false);
+  const [watchedDuration, setWatchedDuration] = useState(0);
+  const [intervalId, setIntervalId] = useState(null);
 
-  console.log("from youtube " + node)
+  console.log("Node data:", node);
+
+  
   const opts = {
     playerVars: {
       autoplay: 1,
@@ -31,20 +36,56 @@ const YouTubePlayer = ({ node, handleIsWatched, handleIsVideoEnd }) => {
     setPlayer(event.target);
   };
 
+  const trackWatchedDuration = useCallback(() => {
+    if (player) {
+      const currentTime = player.getCurrentTime();
+      setWatchedDuration((prevDuration) => prevDuration + 1); // Increment by 1 second
+      console.log(`Watched duration: ${currentTime} seconds`);
+    }
+  }, [player]);
+
   const onStateChange = useCallback(
     async (event) => {
       if (player) {
         const duration = player.getDuration();
         const currentTime = player.getCurrentTime();
+
         if (!hasReached80 && currentTime / duration >= 0.8) {
           setHasReached80(true);
           console.log("Video has reached 80% of the viewership.");
           await handleIsWatched();
         }
+
+        if (event.data === 1) {
+          // Video is playing
+          if (!intervalId) {
+            const id = setInterval(trackWatchedDuration, 1000); // Track every second
+            setIntervalId(id);
+          }
+        } else {
+          // Video is paused or ended
+          clearInterval(intervalId);
+          setIntervalId(null);
+        }
       }
     },
-    [player, hasReached80]
+    [player, hasReached80, intervalId, trackWatchedDuration]
   );
+
+  // const onStateChange = useCallback(
+  //   async (event) => {
+  //     if (player) {
+  //       const duration = player.getDuration();
+  //       const currentTime = player.getCurrentTime();
+  //       if (!hasReached80 && currentTime / duration >= 0.8) {
+  //         setHasReached80(true);
+  //         console.log("Video has reached 80% of the viewership.");
+  //         await handleIsWatched();
+  //       }
+  //     }
+  //   },
+  //   [player, hasReached80]
+  // );
 
   return (
     <YouTube
