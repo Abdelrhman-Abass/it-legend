@@ -52,7 +52,7 @@ const CourseDiploma = ({
           </Link>
           <div className="time-top">
             <span className="duration_1">
-               <span>45%</span>
+               <span>{data.progressPercentage}%</span>
             </span>
           </div>
         </div>
