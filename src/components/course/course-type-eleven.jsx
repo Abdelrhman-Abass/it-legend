@@ -4,6 +4,7 @@ import { Link } from "@/navigation";
 // import { useDispatch, useSelector } from "react-redux";
 // import { cart_course } from "@/store/features/cart-slice";
 import { useLocale } from "next-intl";
+import { Progress } from 'antd';
 
 const CourseTypeEleven = ({ data, classes, my, idx }) => {
   // const { cartCourses } = useSelector((state) => state.cart);

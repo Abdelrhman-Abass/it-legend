@@ -4,6 +4,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cart_course } from "@/store/features/cart-slice";
 import Image from "next/image";
+import { Progress } from 'antd';
 
 const CourseDiploma = ({
   data,
