@@ -1,8 +1,7 @@
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from "@/navigation";
 
 export default function Error() {
-  const direction = "ltr"
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <Image src={"/assets/images/others/404.png"} width={350} height={350} />
