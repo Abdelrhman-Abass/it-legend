@@ -187,7 +187,7 @@ const Page = () => {
   // }, [id]);
   const course = useSelector(selectDiplomaCourses) || []; // Ensure it's always an array
   // const status = useSelector(selectDiplomaCoursesStatus);
-  const status = "loading";
+  const status = "succeeded";
   const error = useSelector(selectDiplomaCoursesError);
 
   // Optionally, fetch courses by category when 'id' changes
