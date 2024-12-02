@@ -174,6 +174,7 @@
 // export default PublitioPlayer;
 
 "use client";
+
 import { useEffect, useRef, useState } from "react";
 
 // Helper function to derive path and poster
