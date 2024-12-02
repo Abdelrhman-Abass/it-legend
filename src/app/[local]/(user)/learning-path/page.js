@@ -60,7 +60,7 @@ const page = () => {
         </span>
       </div>
       {/* Recommend Course */}
-      {/* <CourseElevenArea my={true} /> */}
+      <CourseElevenArea my={true} />
       {/* <CourseTwoArea my={true} coursePerView={3}  />
       <CourseTwoArea my={true} coursePerView={3}  />
       <CourseTwoArea my={true} coursePerView={3} /> */}
