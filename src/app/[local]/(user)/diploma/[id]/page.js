@@ -166,7 +166,8 @@ import { Progress, Tooltip } from "antd";
 const Page = () => {
   const dispatch = useDispatch();
 
-  const url = "http://localhost:3000/en/diploma/60b97d2e-63af-412e-8b4a-c262f6eb77b2";
+  // const url = "http://localhost:3000/en/diploma/60b97d2e-63af-412e-8b4a-c262f6eb77b2";
+  const url = window.location.href;
 
   const extractId = (url) => {
     const parts = new URL(url).pathname.split('/');
@@ -213,7 +214,8 @@ const Page = () => {
       <UserHeader />
       {/* Optional Breadcrumb */}
       {/* <BreadcrumbTwo subtitle={"تطوير تطبيقات الويب"} /> */}
-
+      {status === "succeeded" ? 
+      <>
       <div className="container">
         <div
           style={{
@@ -321,6 +323,10 @@ const Page = () => {
             </div>
           </section>
         ))}
+      </>
+      : 
+      <p>There is error</p>
+      }
 
       {/* Render diploma sections dynamically */}
       {/* <DiplomaArea data={course.courses} title="مرحلة ما قبل التعلم" /> */}
