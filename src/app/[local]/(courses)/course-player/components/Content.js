@@ -436,7 +436,7 @@ const Content = ({ data, courseId, links, testData }) => {
             paddingLeft: local == "en" && showPlayerSide && 405,
           }}
         >
-          <UserHeader />
+          <UserHeader player={true}/>
           {/* <BreadcrumbTwo subtitle={"تطوير تطبيقات الويب"} /> */}
           <div className={`video-player type-${type}`}>
             <div
@@ -593,6 +593,7 @@ const Content = ({ data, courseId, links, testData }) => {
               </div>
               {
                 modules.map((course, idx) => (
+
                   // <Test testData={course} key={idx}/> https://it-legend-rrkg.vercel.app/ar/course-player/c84e7902-1205-426f-a857-922bedd84bdf?type=0&no=fef68bd2-7540-44d4-b8fd-c35b9f2dd839
                   <div className="accordion edu-accordion" id="accordionExample" key={idx}>
                     <div className="accordion-item">
@@ -600,7 +601,7 @@ const Content = ({ data, courseId, links, testData }) => {
                         <button
                           className={`accordion-button ${openAccordion === idx ? "" : "collapsed"}`}
                           type="button"
-                          onClick={() => setOpenAccordion(openAccordion === idx ? null : idx)}
+                          onClick={() => handleAccordionToggle(idx)}
                           aria-expanded={openAccordion === idx ? "true" : "false"}
                         >
                           <span style={{ textAlign: "start" }}>
@@ -610,8 +611,8 @@ const Content = ({ data, courseId, links, testData }) => {
                       </h3>
                       <div
                         id={`module-${idx}`}
-                        className={`accordion-collapse  ${openAccordion === idx ? "show" : "collapse"}`}
-                        data-bs-parent="#faq-accordion"
+                        className={`accordion-collapse ${openAccordion === idx ? "show" : "collapse"}`}
+                        data-bs-parent="#accordionExample"
                       >
                         <div className="accordion-body">
                           <div className="course-lesson">
@@ -632,7 +633,7 @@ const Content = ({ data, courseId, links, testData }) => {
                                 return (
                                   <li
                                     style={{ color: isWatched ? "#6ABD8A" : undefined }}
-                                    className={contentId == params.get("contentId") ? "active" : ""}
+                                    className={nodeId == params.get("no") ? "active" : ""}
                                     key={nodeId}
                                   >
                                     <div className="text d-flex align-items-center">
@@ -650,11 +651,11 @@ const Content = ({ data, courseId, links, testData }) => {
                                               fill="#6ABD8A"
                                             />
                                           </svg>
-                                        ) : type == 1 || type == 2 ? (
+                                        ) : type === 1 || type === 2 ? (
                                           <FilePen size={20} />
-                                        ) : type == 3 ? (
+                                        ) : type === 3 ? (
                                           <Paperclip size={20} />
-                                        ) : type == 4 ? (
+                                        ) : type === 4 ? (
                                           <FileText size={20} />
                                         ) : (
                                           <FileVideo size={20} />
@@ -666,8 +667,8 @@ const Content = ({ data, courseId, links, testData }) => {
                                         </a>
                                       </span>
                                     </div>
-                                    {type == 0 && <span className="duration-node">{duration}</span>}
-                                    {type == 4 && (
+                                    {type === 0 && <span className="duration-node">{duration}</span>}
+                                    {type === 4 && (
                                       <div className="badge-list">
                                         <span className="badge badge-secondary">
                                           {questionCount} أسئلة

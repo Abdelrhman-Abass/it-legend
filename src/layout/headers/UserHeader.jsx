@@ -19,6 +19,7 @@ const UserHeader = ({
   disable_full_width = false,
   isSticky = true,
   inSign = false,
+  player=false,
 }) => {
   const router = useRouter();
 
@@ -87,7 +88,7 @@ const UserHeader = ({
             <div id="edu-sticky-placeholder"></div>
             <div
               className={`header-mainmenu ${sticky && isSticky ? "edu-sticky" : undefined
-                }`}
+                } ${player ? "relative" : ""}`}
             >
               <div className="container-fluid">
                 <div className="header-navbar">
