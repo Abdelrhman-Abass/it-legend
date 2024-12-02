@@ -43,6 +43,36 @@ export const courseUSerData = async () => {
         };
     }
 };
+export const latestNodeOpend = async (courseId) => {
+    try {
+        const token = cookies().get("token")?.value;
+        if (!token) throw new Error("Token is not available");
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            timeout: 3000000,
+        };
+
+        const response = await fetchWithRetry(
+            `http://49.13.77.125:1118/Endpoint/api/MemberCourse`,
+            config
+        );
+
+        if (response) {
+            cookies().set("latestNode", response.data,{ httpOnly: true, secure: true } );
+        }
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching course data:", error.message);
+        return {
+            data: null,
+            message: error.response?.data?.message || error.message,
+        };
+    }
+};
 
 // export const courseUSerData = async () => {
 //     try {

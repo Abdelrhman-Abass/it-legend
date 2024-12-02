@@ -73,15 +73,15 @@ html[lang="en"] body {
   visibility: hidden;
 }
 
- @media (max-width: 991px) { /* Small and Medium screens */
+ /* @media (max-width: 991px) { 
   .edu-course .thumbnail a img {
-    width: auto !important; /* Set width to auto */
+    width: auto !important; 
   }}
  
- @media (min-width: 992px) { /* Large screens */
+ @media (min-width: 992px) { 
   .edu-course .thumbnail a img {
-    width: 280px !important; /* Set width to 280px */
-  }}
+    width: 280px !important; 
+  }} */
 
 .player-side.show {
   opacity: 1;
