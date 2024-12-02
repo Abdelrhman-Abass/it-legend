@@ -162,20 +162,25 @@ import DiplomaArea from "@/components/my-path/diploma-area";
 import ListArea from "@/components/my-path/list-area";
 import { UserHeader } from "@/layout";
 import { Progress, Tooltip } from "antd";
+import { useRouter } from 'next/router';
+
 import Error from "@/components/event-grid/error";
 
 const Page = () => {
   const dispatch = useDispatch();
 
+  const router = useRouter();
+  const { id } = router.query; //
+
   // const url = "http://localhost:3000/en/diploma/60b97d2e-63af-412e-8b4a-c262f6eb77b2";
-  const url = window.location.href;
+  // const url = window.location.href;
 
   const extractId = (url) => {
     const parts = new URL(url).pathname.split('/');
     return parts[parts.length - 1];
   };
 
-  const id = extractId(url);
+  // const id = extractId(url);
   console.log("Extracted ID:", id);
 
   // console.log(window.SharedArrayBuffer.pathna)
