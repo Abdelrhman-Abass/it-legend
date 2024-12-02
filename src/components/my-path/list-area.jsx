@@ -77,7 +77,6 @@ const ListArea = ({ title }) => {
                     <div className="time-top">
                       <span className="duration_1">
                       {course?.progressPercentage ? `${course.progressPercentage.toFixed(0)}%` : "0%"}
-                      %
                       </span>
                     </div>
                   </div>
