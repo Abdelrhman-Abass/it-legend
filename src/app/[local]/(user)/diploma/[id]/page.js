@@ -162,6 +162,7 @@ import DiplomaArea from "@/components/my-path/diploma-area";
 import ListArea from "@/components/my-path/list-area";
 import { UserHeader } from "@/layout";
 import { Progress, Tooltip } from "antd";
+import Error from "@/components/event-grid/error";
 
 const Page = () => {
   const dispatch = useDispatch();
@@ -199,7 +200,6 @@ const Page = () => {
     console.log("Courses Status:", status);
     if (status === "succeeded") {
       console.log("Courses Data from diploma :", course);
-
     }
     if (status === "failed") {
       console.log("Error:", error);
@@ -214,79 +214,90 @@ const Page = () => {
       <UserHeader />
       {/* Optional Breadcrumb */}
       {/* <BreadcrumbTwo subtitle={"تطوير تطبيقات الويب"} /> */}
-      {status === "succeeded" ? 
-      <>
-      <div className="container">
-        <div
-          style={{
-            position: "relative",
-            padding: "20px 0 40px",
-            width: "100%",
-            margin: "32px 0",
-          }}
-        >
-          <h4 className="title">مستوي التقدم في الدبلومة</h4>
-          <Tooltip title={"Your Progress"}>
-            <Progress percent={course.categoryProgress} strokeColor="#080264" showInfo={false} />
-          </Tooltip>
-          <div
-            className="percent-label"
-            style={{
-              position: "absolute",
-              right: `${33 - 5}%`,
-              left: "auto",
-              top: "35px",
-              transition: "all 0.1s",
-            }}
-          >
-            {course.categoryProgress}%
+      {status === "loading" &&
+        <div class="relative flex w-64 animate-pulse gap-2 p-4">
+          <div class="h-12 w-12 rounded-full bg-slate-400"></div>
+          <div class="flex-1">
+            <div class="mb-1 h-5 w-3/5 rounded-lg bg-slate-400 text-lg"></div>
+            <div class="h-5 w-[90%] rounded-lg bg-slate-400 text-sm"></div>
           </div>
+          <div class="absolute bottom-5 right-0 h-4 w-4 rounded-full bg-slate-400"></div>
         </div>
-      </div>
+      }
 
-      <CounterArea />
       {status === "succeeded" &&
-        course.courses.map((cour, idx) => (
-          <section >
-            <div className="container">
-              {/* <h4 className="title">{cour.title}</h4> */}
-              <div className="pr-[70px] pl-[70px] row row--30 desktop" style={{ justifyContent: "center" }}>
-                <div className=" px-[60px]">
-                  <div
-                    key={idx}
-                    className="edu-blog blog-style-list"
-                    data-aos-delay="150"
-                    data-aos="fade-up"
-                    data-aos-duration="800"
-                  >
-                    <div>{cour.titleAr}</div>
-                    <div className="inner">
-                      <div className="thumbnail">
-                        <Link
-                          href={`/course-player/${cour.courseId}`}
-                        >
-                          <img
-                            src={"/assets/images/blog/blog-25.jpg"}
-                            alt="Blog Images"
-                          />
-                        </Link>
-                        <div className="time-top">
-                          <span className="duration_1">
-                            45%
-                          </span>
-                        </div>
-                      </div>
-                      <div className="content">
-                        <h5 className="title">
-                          <Link
-                            href={`/course-player/${cour.courseId}`}
-                          >
-                            {cour.titleAr}...
-                          </Link>
-                        </h5>
+        <>
+          <div className="container">
+            <div
+              style={{
+                position: "relative",
+                padding: "20px 0 40px",
+                width: "100%",
+                margin: "32px 0",
+              }}
+            >
+              <h4 className="title">مستوي التقدم في الدبلومة</h4>
+              <Tooltip title={"Your Progress"}>
+                <Progress percent={course.categoryProgress} strokeColor="#080264" showInfo={false} />
+              </Tooltip>
+              <div
+                className="percent-label"
+                style={{
+                  position: "absolute",
+                  right: `${33 - 5}%`,
+                  left: "auto",
+                  top: "35px",
+                  transition: "all 0.1s",
+                }}
+              >
+                {course.categoryProgress}%
+              </div>
+            </div>
+          </div>
 
-                        {/* <p>{cour.shortDescriptionAr}</p> */}
-                        {/* <div className="read-more-btn">
+          <CounterArea />
+          {status === "succeeded" &&
+            course.courses.map((cour, idx) => (
+              <section >
+                <div className="container">
+                  {/* <h4 className="title">{cour.title}</h4> */}
+                  <div className="pr-[70px] pl-[70px] row row--30 desktop" style={{ justifyContent: "center" }}>
+                    <div className=" px-[60px]">
+                      <div
+                        key={idx}
+                        className="edu-blog blog-style-list"
+                        data-aos-delay="150"
+                        data-aos="fade-up"
+                        data-aos-duration="800"
+                      >
+                        <div>{cour.titleAr}</div>
+                        <div className="inner">
+                          <div className="thumbnail">
+                            <Link
+                              href={`/course-player/${cour.courseId}`}
+                            >
+                              <img
+                                src={"/assets/images/blog/blog-25.jpg"}
+                                alt="Blog Images"
+                              />
+                            </Link>
+                            <div className="time-top">
+                              <span className="duration_1">
+                                45%
+                              </span>
+                            </div>
+                          </div>
+                          <div className="content">
+                            <h5 className="title">
+                              <Link
+                                href={`/course-player/${cour.courseId}`}
+                              >
+                                {cour.titleAr}...
+                              </Link>
+                            </h5>
+
+                            {/* <p>{cour.shortDescriptionAr}</p> */}
+                            {/* <div className="read-more-btn">
                           <Link
                             href={`/course-player/${cour.courseId}`}
                             className="edu-btn btn-border btn-medium"
@@ -294,14 +305,14 @@ const Page = () => {
                             ابدا الان <i className="icon-4"></i>
                           </Link>
                         </div> */}
-                      </div> 
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
 
-              <div className="row g-5 mobile ">
-                {/* {data.map((course) => {
+                  <div className="row g-5 mobile ">
+                    {/* {data.map((course) => {
                   return (
                     <div
                       className="col-md-6 col-lg-4"
@@ -319,14 +330,13 @@ const Page = () => {
                     </div>
                   );
                 })} */}
-              </div>
-            </div>
-          </section>
-        ))}
-      </>
-      : 
-      <p>There is error</p>
+                  </div>
+                </div>
+              </section>
+            ))}
+        </>
       }
+      {status === "failed" && <Error />}
 
       {/* Render diploma sections dynamically */}
       {/* <DiplomaArea data={course.courses} title="مرحلة ما قبل التعلم" /> */}
