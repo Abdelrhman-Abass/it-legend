@@ -43,7 +43,7 @@ const CourseTypeEleven = ({ data, classes, my, idx }) => {
             }
           >
             <img
-              src={`/assets/images/course/course-04/course-01.jpg`}
+              src={`https://www.itlegend.net/Content/Uploads/CategoryMedia/${data.image}`}
               alt="Course Meta"
             />
           </Link>

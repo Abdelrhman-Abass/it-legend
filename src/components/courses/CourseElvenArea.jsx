@@ -238,7 +238,7 @@ const CourseElevenArea = ({
           )}
           {status === "succeeded" &&
             // cour.map((course, idx) => (
-            courseTest.map((course, idx) => (
+            cour.map((course, idx) => (
               <div key={idx} className="col-md-6 col-lg-4">
                 <CourseTypeEleven
                   my={my}

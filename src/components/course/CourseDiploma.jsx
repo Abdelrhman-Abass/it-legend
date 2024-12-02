@@ -42,8 +42,8 @@ const CourseDiploma = ({
             href={my ? `/diploma/${data.categoryId}` : `/diploma-details/${data.categoryId}`}
           >
             <Image
-              // src={`http://49.13.77.125:1118/Content/Uploads/CategoryMedia/${data.image}`}
-              src={`/assets/images/course/course-01/course-01.jpg`}
+              src={`https://www.itlegend.net/Content/Uploads/CategoryMedia/${data.image}`}
+              // src={`/assets/images/course/course-01/course-01.jpg`}
               alt="Course Meta"
               width={370}
               height={220}

@@ -139,8 +139,7 @@ const ListArea = ({ title }) => {
             {status === "loading" && (
               <p className="loading-text">Loading...</p>
             )}
-            {/* {status === "succeeded" && diploma.map((course, idx) => ( */}
-            {courseTest.map((course, idx) => (
+            {status === "succeeded" && diploma.map((course, idx) => (
               <div
                 key={idx}
                 className="edu-blog blog-style-list"
@@ -152,14 +151,14 @@ const ListArea = ({ title }) => {
                   <div className="thumbnail">
                     <Link href={`/course-player/c84e7902-1205-426f-a857-922bedd84bdf}`}>
                       <img
-                        // src={`http://49.13.77.125:1118/Content/Uploads/CategoryMedia/${course.image}`}
-                        src={`/assets/images/course/course-01/course-01.jpg`}
+                        src={`https://www.itlegend.net/Content/Uploads/CategoryMedia/${course.image}`}
+                        // src={`/assets/images/course/course-01/course-01.jpg`}
                         alt="Blog Images"
                       />
                     </Link>
                     <div className="time-top">
                       <span className="duration_1">
-                        45%
+                        {course.progressPercentage}%
                       </span>
                     </div>
                   </div>
@@ -195,10 +194,8 @@ const ListArea = ({ title }) => {
           )}
 
 
-          {/* {status === "succeeded" &&
-            diploma.map((course, idx) => ( */}
-          {
-            courseTest.map((course, idx) => (
+          {status === "succeeded" &&
+            diploma.map((course, idx) => (
               <div
                 className="col-md-6 col-lg-4"
                 data-aos-delay="150"
