@@ -111,6 +111,9 @@ const Content = ({ data, courseId, links, testData }) => {
       setLoadSubmitAsk(false);
     }
   };
+  const handleAccordionToggle = (idx) => {
+    setOpenAccordion((prevIndex) => (prevIndex === idx ? null : idx));
+  };
 
   const editAskUser = async () => {
     if (isEdit) {
