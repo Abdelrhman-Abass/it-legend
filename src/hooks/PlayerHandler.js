@@ -57,11 +57,12 @@ export const CoursePlayerLatestNode = async (courseId) => {
         };
 
         const response = await axios.get(
-            `http://49.13.77.125:1118/Endpoint/api/api/MemberCoursePlayer/${courseId}`,
+            `http://49.13.77.125:1118/Endpoint/api/MemberCoursePlayer/${courseId}`,
             config
         );
-        cookies().set("latestNode", response.data);
-        return response.data;
+        console.log(response.data.data)
+        cookies().set("latestNode", response.data.data);
+        return response.data.data;
     } catch (error) {
         console.error("Error fetching course data:", error.message);
         return {
