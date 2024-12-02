@@ -44,7 +44,7 @@ const Content = ({ data, courseId, links, testData }) => {
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
   const type = params.get("type");
-  const contentId = params.get("contentId");
+  const contentId = params.get("no");
   const [board, setBoard] = useState(false);
   const [ask, setAsk] = useState(false);
   const [askData, setAskData] = useState([]);
@@ -90,7 +90,18 @@ const Content = ({ data, courseId, links, testData }) => {
       getdata();
     }
   }, [ask]);
+  useEffect(() => {
+    if (contentId) {
+      // Find the module index that contains the target contentId
+      const moduleIndex = modules.findIndex((module) =>
+        module.nodes.some((node) => node.nodeId === contentId)
+      );
 
+      if (moduleIndex !== -1) {
+        setOpenAccordion(moduleIndex);
+      }
+    }
+  }, [contentId, modules]);
   // console.log(data)
   const sendAsk = async () => {
     try {
@@ -320,37 +331,6 @@ const Content = ({ data, courseId, links, testData }) => {
               stoppedIndex={data?.stoppedIndex}
             />
             <div>
-              {/* <div className="accordion edu-accordion" id="accordionExample">
-                {modules.map((module, idx) => (
-                  <div className="accordion-item" key={module.moduleId}>
-                    <h3 className="accordion-header" id={`heading-${idx}`}>
-                      <button
-                        className={`accordion-button ${openAccordion === idx ? "" : "collapsed"}`}
-                        type="button"
-                        onClick={() => setOpenAccordion(openAccordion === idx ? null : idx)}
-                        aria-expanded={openAccordion === idx ? "true" : "false"}
-                      >
-                        {module.moduleTitleAr} 
-                      </button>
-                    </h3>
-                    <div
-                      id={`module-${module.moduleId}`}
-                      className={`accordion-collapse collapses ${openAccordion === idx ? "show" : ""}`}
-                      data-bs-parent="#accordionExample"
-                    >
-                      <div className="accordion-body">
-                          {nodeModule.map((node) => (
-                            <li key={node.nodeId} className="d-flex justify-content-between align-items-center">
-                              <span className="node-title">{node.titleAr}</span>
-                              {node.type === 0 && <span className="duration-node">{node.duration}</span>}
-                            </li>
-                          ))}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div> */}
-
               {
                 modules.map((course, idx) => (
 
@@ -393,7 +373,7 @@ const Content = ({ data, courseId, links, testData }) => {
                                 return (
                                   <li
                                     style={{ color: isWatched ? "#6ABD8A" : undefined }}
-                                    className={contentId == params.get("contentId") ? "active" : ""}
+                                    className={nodeId == params.get("no") ? "active" : ""}
                                     key={nodeId}
                                   >
                                     <div className="text d-flex align-items-center">
