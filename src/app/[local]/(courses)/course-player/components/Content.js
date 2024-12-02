@@ -370,8 +370,8 @@ const Content = ({ data, courseId, links, testData }) => {
                         </button>
                       </h3>
                       <div
-                        id={`module-${course.moduleId}`}
-                        className={`accordion-collapse ${openAccordion === idx ? "show" : ""}`}
+                        id={`module-${idx}`}
+                        className={`accordion-collapse ${openAccordion === idx ? "show" : "collapse"}`}
                         data-bs-parent="#accordionExample"
                       >
                         <div className="accordion-body">
@@ -629,8 +629,8 @@ const Content = ({ data, courseId, links, testData }) => {
                         </button>
                       </h3>
                       <div
-                        id={`module-${course.moduleId}`}
-                        className={`accordion-collapse  ${"show"}`}
+                        id={`module-${idx}`}
+                        className={`accordion-collapse  ${openAccordion === idx ? "show" : "collapse"}`}
                         data-bs-parent="#faq-accordion"
                       >
                         <div className="accordion-body">
