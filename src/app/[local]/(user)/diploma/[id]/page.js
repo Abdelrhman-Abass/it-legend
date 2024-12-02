@@ -191,12 +191,7 @@ const Page = () => {
 
   const levelsOrder = ["مبتدئ", "متوسط", 'متقدم'];
 
-  const groupedCourses = levelsOrder.map(level => {
-    return {
-      level,
-      courses: data.filter(course => course.level === level),
-    };
-  });
+  
 
   // console.log(window.SharedArrayBuffer.pathna)
   // Extract the dynamic 'id' from the URL
