@@ -73,6 +73,16 @@ html[lang="en"] body {
   visibility: hidden;
 }
 
+ @media (max-width: 991px) { /* Small and Medium screens */
+  .edu-course .thumbnail a img {
+    width: auto !important; /* Set width to auto */
+  }}
+ 
+ @media (min-width: 992px) { /* Large screens */
+  .edu-course .thumbnail a img {
+    width: 280px !important; /* Set width to 280px */
+  }}
+
 .player-side.show {
   opacity: 1;
   visibility: visible;
