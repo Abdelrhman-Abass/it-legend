@@ -286,8 +286,8 @@ const Page = () => {
 
           //   ))
           // }
-            // course.courses.map((cour, idx) => (
-            courseTest.map((cour, idx) => (
+            course.courses.map((cour, idx) => (
+            // courseTest.map((cour, idx) => (
           <section >
             <div className="container">
               {/* <h4 className="title">{cour.title}</h4> */}
