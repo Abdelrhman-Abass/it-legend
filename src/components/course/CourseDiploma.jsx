@@ -44,6 +44,8 @@ const CourseDiploma = ({
             <Image
               src={`https://www.itlegend.net/Content/Uploads/CategoryMedia/${data.image}`}
               // src={`/assets/images/course/course-01/course-01.jpg`}
+              className="w-auto lg:w-[280px]"
+
               alt="Course Meta"
               width={370}
               height={220}
@@ -52,7 +54,8 @@ const CourseDiploma = ({
           </Link>
           <div className="time-top">
             <span className="duration_1">
-               <span>{data.progressPercentage}%</span>
+               <span>{data?.progressPercentage ? `${data.progressPercentage.toFixed(0)}%` : "0%"}
+               </span>
             </span>
           </div>
         </div>

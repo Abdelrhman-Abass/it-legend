@@ -38,13 +38,14 @@ const CourseTypeEleven = ({ data, classes, my, idx }) => {
           <Link
             href={
               my
-                ? `/course-player/c84e7902-1205-426f-a857-922bedd84bdf`
-                : `/course-details/${data.courseId}`
+              ?`/course-details/${data.courseId}`
+                : `/course-player/c84e7902-1205-426f-a857-922bedd84bdf`
             }
           >
             <img
               src={`https://www.itlegend.net/Content/Uploads/CoursesMedia/${data.image}`}
               alt="Course Meta"
+              className="w-auto lg:w-[280px]"
             />
           </Link>
           <div className="time-top">
@@ -52,7 +53,7 @@ const CourseTypeEleven = ({ data, classes, my, idx }) => {
               "--progress-color": data.progressPercentage > 50 ? "green" : "red",
               "--progress-rotate": `${(data.progressPercentage / 100) * 360}deg`,
             }} >
-              {data?.progressPercentage ? `${data.progressPercentage.toFixed(2)}%` : "0%"}
+              {data?.progressPercentage ? `${data.progressPercentage.toFixed(0)}%` : "0%"}
               {/* <i className="icon-61"></i> */}
             </span>
           </div>
