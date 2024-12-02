@@ -140,7 +140,7 @@ const ListArea = ({ title }) => {
               <p className="loading-text">Loading...</p>
             )}
             {/* {status === "succeeded" && diploma.map((course, idx) => ( */}
-            {status === "succeeded" && courseTest.map((course, idx) => (
+            {courseTest.map((course, idx) => (
               <div
                 key={idx}
                 className="edu-blog blog-style-list"
@@ -195,8 +195,10 @@ const ListArea = ({ title }) => {
           )}
 
 
-          {status === "succeeded" &&
-            diploma.map((course, idx) => (
+          {/* {status === "succeeded" &&
+            diploma.map((course, idx) => ( */}
+          {
+            courseTest.map((course, idx) => (
               <div
                 className="col-md-6 col-lg-4"
                 data-aos-delay="150"
