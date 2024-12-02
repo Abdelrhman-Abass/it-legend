@@ -38,7 +38,7 @@ const CourseTypeEleven = ({ data, classes, my, idx }) => {
           <Link
             href={
               my
-              ?`/course-details/${data.courseId}`
+                ? `/course-details/${data.courseId}`
                 : `/course-player/c84e7902-1205-426f-a857-922bedd84bdf`
             }
           >
@@ -49,13 +49,14 @@ const CourseTypeEleven = ({ data, classes, my, idx }) => {
             />
           </Link>
           <div className="time-top">
-            <span className="duration_1" style={{
+            {/* <span className="duration_1" style={{
               "--progress-color": data.progressPercentage > 50 ? "green" : "red",
               "--progress-rotate": `${(data.progressPercentage / 100) * 360}deg`,
             }} >
               {data?.progressPercentage ? `${data.progressPercentage.toFixed(0)}%` : "0%"}
-              {/* <i className="icon-61"></i> */}
-            </span>
+            </span> */}
+            <Progress type="circle" percent={data?.progressPercentage ? data.progressPercentage.toFixed(0) : 0} />
+
           </div>
         </div>
 

@@ -11,6 +11,8 @@ import {
   selectDiplomaStatus,
   selectDiplomaError,
 } from "../../store/features/diploma-slice";
+import { Progress } from 'antd';
+
 
 const ListArea = ({ title }) => {
   const [cour, setCour] = useState([]);
@@ -75,9 +77,10 @@ const ListArea = ({ title }) => {
                       />
                     </Link>
                     <div className="time-top">
-                      <span className="duration_1">
+                      <Progress type="circle" percent={course?.progressPercentage ? course.progressPercentage.toFixed(0) : 0} />
+                      {/* <span className="duration_1">
                       {course?.progressPercentage ? `${course.progressPercentage.toFixed(0)}%` : "0%"}
-                      </span>
+                      </span> */}
                     </div>
                   </div>
                   <div className="content">

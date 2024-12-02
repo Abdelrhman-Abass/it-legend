@@ -14,8 +14,8 @@ const CourseDiploma = ({
 }) => {
   const { cartCourses } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  
-  
+
+
 
   // handle add to cart
   const handleAddToCart = (course) => {
@@ -32,9 +32,8 @@ const CourseDiploma = ({
   return (
     <div
       // style={{ backgroundColor: bg }}
-      className={`edu-course course-style-1 ${
-        classes ? classes : undefined
-      } hover-button-bg-white`}
+      className={`edu-course course-style-1 ${classes ? classes : undefined
+        } hover-button-bg-white`}
     >
       <div className="inner">
         <div className="thumbnail" >
@@ -53,10 +52,12 @@ const CourseDiploma = ({
             />
           </Link>
           <div className="time-top">
-            <span className="duration_1">
+            {/* <span className="duration_1">
                <span>{data?.progressPercentage ? `${data.progressPercentage.toFixed(0)}%` : "0%"}
                </span>
-            </span>
+            </span> */}
+            <Progress type="circle" percent={data?.progressPercentage ? data.progressPercentage.toFixed(0) : 0} />
+
           </div>
         </div>
         <div className="content">
@@ -77,18 +78,18 @@ const CourseDiploma = ({
               <i className="icon-24"></i> <span>{data.lectures}</span>{" "}
               <span>المحاضرات</span>
             </li>
-            
+
           </ul>
         </div>
       </div>
 
       <div className="course-hover-content-wrapper">
-        
+
       </div>
 
       <div className="course-hover-content">
         <div className="content">
-          
+
           {/* <span className="course-level">{data.level}</span> */}
           <h6 className="title">
             <Link
@@ -97,7 +98,7 @@ const CourseDiploma = ({
               {data.titleAr}
             </Link>
           </h6>
-          
+
           <p>{data.shortDescriptionAr ? data.shortDescriptionAr : "No description available"}</p>
           <ul className="course-meta">
             <li
@@ -110,7 +111,7 @@ const CourseDiploma = ({
               <i className="icon-24"></i> <span>{data.lectures}</span>{" "}
               <span>المحاضرات</span>
             </li>
-            
+
           </ul>
           <Link
             href={my ? `/diploma/${data.categoryId}` : `/diploma-details/${data.categoryId}`}
