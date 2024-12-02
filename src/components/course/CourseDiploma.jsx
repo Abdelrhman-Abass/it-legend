@@ -61,7 +61,8 @@ const CourseDiploma = ({
           <h6 className="title">
             <a href="#">{data.titleAr}</a>
           </h6>
-          
+          <p className="truncate-text">{data.shortDescriptionAr ? data.shortDescriptionAr : "No description available"}</p>
+
           <ul className="course-meta">
             <li
               style={{
