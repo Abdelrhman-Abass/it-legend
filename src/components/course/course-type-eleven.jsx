@@ -45,7 +45,7 @@ const CourseTypeEleven = ({ data, classes, my, idx }) => {
             <img
               src={`https://www.itlegend.net/Content/Uploads/CoursesMedia/${data.image}`}
               alt="Course Meta"
-              className="w-auto lg:w-[280px]"
+              className="lg:w-[280px]"
             />
           </Link>
           <div className="time-top">

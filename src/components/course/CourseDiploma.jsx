@@ -44,7 +44,7 @@ const CourseDiploma = ({
             <Image
               src={`https://www.itlegend.net/Content/Uploads/CategoryMedia/${data.image}`}
               // src={`/assets/images/course/course-01/course-01.jpg`}
-              className="w-auto lg:w-[280px]"
+              className=" lg:w-[280px]"
 
               alt="Course Meta"
               width={370}

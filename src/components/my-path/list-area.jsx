@@ -71,7 +71,7 @@ const ListArea = ({ title }) => {
                         src={`https://www.itlegend.net/Content/Uploads/CategoryMedia/${course.image}`}
                         // src={`/assets/images/course/course-01/course-01.jpg`}
                         alt="Blog Images"
-                        className="w-auto lg:w-[280px]"
+                        className="lg:w-[280px]"
                       />
                     </Link>
                     <div className="time-top">
