@@ -57,14 +57,25 @@ export const latestNodeOpend = async (courseId) => {
         };
 
         const response = await fetchWithRetry(
-            `http://49.13.77.125:1118/Endpoint/api/MemberCourse`,
+            `http://49.13.77.125:1118/Endpoint/api/MemberCoursePlayer/${courseId}`,
             config
         );
 
-        if (response) {
-            cookies().set("latestNode", response.data,{ httpOnly: true, secure: true } );
-        }
-        return response.data;
+        // if (response) {
+        //     cookies().set("latestNode", JSON.stringify(data),{ httpOnly: true, secure: true } );
+        // }
+        if (response?.data?.success) {
+            const { data } = response.data; // Extract the 'data' from the response      
+            
+            // Store tokens and user data in cookies
+            
+            cookies().set("latestNode", JSON.stringify(data));
+            
+            return data;
+          } else {
+            // If the response is not successful, return an error
+            return null;
+          }
     } catch (error) {
         console.error("Error fetching course data:", error.message);
         return {
@@ -73,7 +84,42 @@ export const latestNodeOpend = async (courseId) => {
         };
     }
 };
-
+export const authHandler = async (url, body) => {
+    try {
+      // Send the POST request using Axios
+      const response = await axios.post(
+        `http://49.13.77.125:1118/Endpoint/api/${url}`,
+        body,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+  
+      // Check if the response is successful
+      if (response?.data?.success) {
+        const { data } = response.data; // Extract the 'data' from the response
+        const { token, refreshToken } = data;
+  
+        
+        // Store tokens and user data in cookies
+        cookies().set("token", token,{ httpOnly: true, secure: true } );
+        cookies().set("refreshToken", refreshToken ,{ httpOnly: true, secure: true });
+        // cookies().set("user_id", data.id);
+        cookies().set("user", JSON.stringify(data));
+        // Return the user data and tokens (matching Redux expectations)
+        return { user: data, accessToken: token, refreshToken };
+      } else {
+        // If the response is not successful, return an error
+        return null;
+      }
+    } catch (error) {
+      // Handle error in case of failure (e.g., network issues, server errors)
+      console.error("Error in authHandler:", error.message);
+      return null;
+    }
+  };
 // export const courseUSerData = async () => {
 //     try {
 //         const token = cookies().get("token")?.value;

@@ -29,7 +29,7 @@ const page = async ({ params }) => {
   console.log(links)
 
   const latestNode = await latestNodeOpend(params.id)
-  console.log(latestNode)
+  console.log("latestNode : " + latestNode)
   
   const courseNode = await CoursePlayerNode(params.id)
   // await courseNode.data.map((mode,index)=>{
