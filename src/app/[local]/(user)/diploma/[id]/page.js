@@ -149,7 +149,7 @@ const Page = () => {
           {Array.isArray(course.courses) &&
             course.courses.map((cour, idx) => (
               <div
-                className="col-md-6 col-lg-4"
+                className="col-md-6 col-lg-4 lg:hidden"
                 data-aos-delay="150"
                 data-aos="fade-up"
                 data-aos-duration="800"

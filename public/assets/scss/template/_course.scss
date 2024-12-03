@@ -158,24 +158,24 @@
             }
         }
 
-        .duration_1::before {
-            content: "";
-            /* Create a visual element */
-            position: absolute;
-            /* Position it over the border */
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: conic-gradient(red 0% 30%,
-                    /* Red from 0% to 30% */
-                    transparent 30% 100%
-                    /* Transparent from 30% to 100% */
-                );
-            border-radius: 50%;
-            /* Make it a circle */
-            z-index: -1;
-        }
+        // .duration_1::before {
+        //     content: "";
+        //     /* Create a visual element */
+        //     position: absolute;
+        //     /* Position it over the border */
+        //     top: 0;
+        //     left: 0;
+        //     right: 0;
+        //     bottom: 0;
+        //     background: conic-gradient(red 0% 30%,
+        //             /* Red from 0% to 30% */
+        //             transparent 30% 100%
+        //             /* Transparent from 30% to 100% */
+        //         );
+        //     border-radius: 50%;
+        //     /* Make it a circle */
+        //     z-index: -1;
+        // }
     }
 
     .content {

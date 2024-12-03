@@ -345,7 +345,7 @@ const Content = ({ data, courseId, links, testData }) => {
                   transition: "all 0.1s",
                 }}
               >
-                {percent}%
+                {JSON.stringify(latestVideo)?.progressPercentage ? JSON.stringify(latestVideo).progressPercentage.toFixed(0) : 0}%
               </div>
             </div>
             <CourseAccordion
