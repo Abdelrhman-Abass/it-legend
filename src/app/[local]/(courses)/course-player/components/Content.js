@@ -76,7 +76,7 @@ const Content = ({ data, courseId, links, testData }) => {
   useEffect(() => {
     console.log(activeNode)
     console.log(activeNodeType)
-    console.log("Latest from Content : " +latestVideo)
+    console.log("Latest from Content : " +JSON.stringify(latestVideo))
   },[activeNode, activeNodeType , latestVideo])
   
   const handleDataComments = (fetchedData) => {
