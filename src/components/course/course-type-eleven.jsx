@@ -39,8 +39,8 @@ const CourseTypeEleven = ({ data, classes, my, idx }) => {
           <Link
             href={
               my
-                ? `/course-details/${data.courseId}`
-                : `/course-player/c84e7902-1205-426f-a857-922bedd84bdf`
+                ? `/course-player/${data.courseId}`
+                : `/course-details/${data.courseId}`
             }
           >
             <img
@@ -69,7 +69,7 @@ const CourseTypeEleven = ({ data, classes, my, idx }) => {
             <Link
               href={
                 my
-                  ? `/diploma/${data.courseId}`
+                  ? `/course-player/${data.courseId}`
                   : `/course-details/${data.courseId}`
               }
             >
