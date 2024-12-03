@@ -78,7 +78,7 @@ const ListArea = ({ title }) => {
                     </Link>
                     <div className="time-top">
                       <span className="duration_1">
-                      <Progress type="circle"  percent={course?.progressPercentage ? course.progressPercentage.toFixed(0) : 0}  size={30} status="exception" format={(percent) => `${percent}%`} />
+                      <Progress type="circle"  percent={course?.progressPercentage ? course.progressPercentage.toFixed(0) : 0}  size={45} status="exception" format={(percent) => `${percent}%`} />
                       {/* {course?.progressPercentage ? `${course.progressPercentage.toFixed(0)}%` : "0%"} */}
                       </span>
                     </div>
@@ -92,7 +92,7 @@ const ListArea = ({ title }) => {
                     <p>{course.shortDescriptionAr ? course.shortDescriptionAr : "No description available"}</p>
                     <div className="read-more-btn">
                       <Link
-                        href={`/course-player/c84e7902-1205-426f-a857-922bedd84bdf}`}
+                        href={`/diploma/${course.categoryId}`}
                         className="edu-btn btn-border btn-medium"
                       >
                         ابدا الان <i className="icon-4"></i>

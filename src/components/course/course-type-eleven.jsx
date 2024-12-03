@@ -55,7 +55,7 @@ const CourseTypeEleven = ({ data, classes, my, idx }) => {
               "--progress-rotate": `${(data.progressPercentage / 100) * 360}deg`,
             }} >
               {/* {data?.progressPercentage ? `${data.progressPercentage.toFixed(0)}%` : "0%"} */}
-            <Progress type="circle"  percent={data?.progressPercentage ? data.progressPercentage.toFixed(0) : 0} size={30} status="exception" format={(percent) => `${percent}%`}/>
+            <Progress type="circle"  percent={data?.progressPercentage ? data.progressPercentage.toFixed(0) : 0} size={45} status="exception" format={(percent) => `${percent}%`}/>
             </span>
 
           </div>

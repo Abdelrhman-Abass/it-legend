@@ -54,10 +54,10 @@ const CourseDiploma = ({
           </Link>
           <div className="time-top">
             <span className="duration_1">
-               <span>
+              <span>
                 {/* {data?.progressPercentage ? `${data.progressPercentage.toFixed(0)}%` : "0%"} */}
-            <Progress type="circle"  percent={data?.progressPercentage ? data.progressPercentage.toFixed(0) : 0}  size={30} status="exception" format={(percent) => `${percent}%`} />
-               </span>
+                <Progress type="circle" percent={data?.progressPercentage ? data.progressPercentage.toFixed(0) : 0} size={45} status="exception" format={(percent) => `${percent}%`} />
+              </span>
             </span>
 
           </div>
@@ -65,7 +65,10 @@ const CourseDiploma = ({
         <div className="content">
           {/* <span className="course-level">{data.level}</span> */}
           <h6 className="title">
-            <a href="#">{data.titleAr}</a>
+            {/* <a href="#">{data.titleAr}</a> */}
+            <Link href={`/diploma/${course.categoryId}`}>
+              {data.titleAr}...
+            </Link>
           </h6>
           <p className="truncate-text">{data.shortDescriptionAr ? data.shortDescriptionAr : "No description available"}</p>
 
