@@ -83,7 +83,11 @@ const Content = ({ data, courseId, links, testData }) => {
     console.log(activeNodeType)
     console.log("Latest from Content : " +JSON.stringify(latestVideo))
     console.log("Latest from Content latestP : " + latestVideo.progressPercentage)
-    setLatestPercantage(Number(latestVideo.progressPercentage.toFixed(0)))
+    setLatestPercantage(latestVideo.progressPercentage)
+    if (latestVideo && typeof latestVideo.progressPercentage === 'number') {
+      const roundedPercentage = Number(latestVideo.progressPercentage.toFixed(0));
+      setLatestPercantage(roundedPercentage);
+  } 
     setPlayerType(latestVideo.playerType)
 
   },[activeNode, activeNodeType , latestVideo])
