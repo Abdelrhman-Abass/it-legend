@@ -66,7 +66,7 @@ const CourseDiploma = ({
           {/* <span className="course-level">{data.level}</span> */}
           <h6 className="title">
             {/* <a href="#">{data.titleAr}</a> */}
-            <Link href={`/diploma/${course.categoryId}`}>
+            <Link href={`/diploma/${data.categoryId}`}>
               {data.titleAr}...
             </Link>
           </h6>
