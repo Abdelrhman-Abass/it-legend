@@ -58,7 +58,7 @@ const Content = ({ data, courseId, links, testData }) => {
   const [watch, setWatch] = useState(false);
   const [playerType, setPlayerType] = useState(0);
   const [latestP, setLatestP] = useState();
-  const [latestPercantage, setLatestPercantage] = useState();
+  const [latestPercantage, setLatestPercantage] = useState(0);
   
   const [modules, setModules] = useState([])
   const [openAccordion, setOpenAccordion] = useState(null);
@@ -83,7 +83,7 @@ const Content = ({ data, courseId, links, testData }) => {
     console.log(activeNodeType)
     console.log("Latest from Content : " +JSON.stringify(latestVideo))
     console.log("Latest from Content latestP : " + latestVideo.progressPercentage)
-    setLatestPercantage(latestVideo.progressPercentage)
+    setLatestPercantage(Number(latestVideo.progressPercentage.toFixed(0)))
     setPlayerType(latestVideo.playerType)
 
   },[activeNode, activeNodeType , latestVideo])
@@ -334,7 +334,7 @@ const Content = ({ data, courseId, links, testData }) => {
             >
               <Tooltip title={"Your Progress"}>
                 <Progress
-                  percent={latestPercantage ? latestPercantage.toFixed(2) : 0}
+                  percent={latestPercantage ? latestPercantage : 0}
                   strokeColor="#6ABD8A"
                   showInfo={false}
                 />
@@ -350,7 +350,7 @@ const Content = ({ data, courseId, links, testData }) => {
                   transition: "all 0.1s",
                 }}
               >
-                {latestPercantage ? latestPercantage.toFixed(2) : 0}%
+                {latestPercantage ? latestPercantage : 0}%
               </div>
             </div>
             <CourseAccordion
@@ -617,7 +617,7 @@ const Content = ({ data, courseId, links, testData }) => {
                     transition: "all 0.1s",
                   }}
                 >
-                  {latestPercantage.toFixed(2)}%
+                  {latestPercantage}%
                 </div>
               </div>
               {
