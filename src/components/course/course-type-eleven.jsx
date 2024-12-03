@@ -84,7 +84,7 @@ const CourseTypeEleven = ({ data, classes, my, idx }) => {
             <Link
               href={
                 my &&
-                `/diploma/${data.courseId}`
+                `/course-player/${data.courseId}`
               }
               className="edu-btn btn-small btn-secondary"
               style={{ cursor: "pointer" }}
