@@ -76,7 +76,8 @@ export const CoursePlayerVideo = async (courseId , nodeId) => {
     try {
         const token = cookies().get("token")?.value;
         if (!token) throw new Error("Token is not available");
-
+        
+        console.log(courseId + " " + nodeId)
         const config = {
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -85,7 +86,6 @@ export const CoursePlayerVideo = async (courseId , nodeId) => {
             timeout: 3000000,
         };
 
-        console.log(courseId + " " + nodeId)
         
         const response = await axios.get(
             `http://49.13.77.125:1118/Endpoint/api/CourseVideo/${courseId}/videos/${nodeId}`,

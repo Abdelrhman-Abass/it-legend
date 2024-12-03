@@ -44,7 +44,7 @@ const Content = ({ data, courseId, links, testData }) => {
   const params = new URLSearchParams(searchParams);
   const type = params.get("type");
   const contentId = params.get("no");
-  const [activeNode , setActiveNode] = useState(contentId)
+  const [activeNode , setActiveNode] = useState(null)
   const [board, setBoard] = useState(false);
   const [ask, setAsk] = useState(false);
   const [askData, setAskData] = useState([]);
