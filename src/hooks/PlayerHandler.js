@@ -75,7 +75,7 @@ export const CoursePlayerLatestNode = async (courseId) => {
         // cookies().set("latestNode", JSON.stringify(response.data.data) ,{ httpOnly: true, secure: true }); 
         // return JSON.stringify(response.data.data);
     } catch (error) {
-        console.error("Error fetching course data:", error.message);
+        console.error("Error fetching latest data:", error.message);
         return {
             data: null,
             message: error.response?.data?.message || error.message,
