@@ -40,7 +40,7 @@ const Player = ({ nodes, moduleId , modules ,activeNode, setComments}) => {
 
   useEffect(() => {
     if (activeNode) {
-      dispatch(UserCoursePlayerLinks({ courseId, activeNode }));
+      dispatch(UserCoursePlayerLinks({ courseId, nodeId:activeNode }));
       console.log("Dispatched UserCoursePlayerLinks with activeNode:", activeNode);
     }
   }, [activeNode, dispatch]);
