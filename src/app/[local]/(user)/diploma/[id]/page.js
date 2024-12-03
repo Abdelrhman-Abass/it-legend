@@ -76,7 +76,7 @@ const Page = () => {
               <h4 className="title">مستوي التقدم في الدبلومة</h4>
               <Tooltip title={"Your Progress"}>
                 <Progress
-                  percent={course.categoryProgress || 0}
+                  percent={course.categoryProgress.toFixed(0) || 0}
                   strokeColor="#080264"
                   showInfo={false}
                 />

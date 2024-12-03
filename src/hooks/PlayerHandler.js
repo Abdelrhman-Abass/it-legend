@@ -62,7 +62,7 @@ export const CoursePlayerLatestNode = async (courseId) => {
         );
         console.log("Ltest from handler" + JSON.stringify(response.data.data))
         // cookies().set("latestNode", response.data.data); http://localhost:3000/en/course-player/602d090f-ef57-464a-b724-0bf57ae9cdc3
-        cookies().set("latestNode", JSON.stringify(response.data.data)); 
+        cookies().set("latestNode", JSON.stringify(response.data.data) ,{ httpOnly: true, secure: true }); 
         return JSON.stringify(response.data.data);
     } catch (error) {
         console.error("Error fetching course data:", error.message);
