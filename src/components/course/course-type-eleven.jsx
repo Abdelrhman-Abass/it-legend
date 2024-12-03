@@ -50,13 +50,13 @@ const CourseTypeEleven = ({ data, classes, my, idx }) => {
             />
           </Link>
           <div className="time-top">
-            {/* <span className="duration_1" style={{
+            <span className="duration_1" style={{
               "--progress-color": data.progressPercentage > 50 ? "green" : "red",
               "--progress-rotate": `${(data.progressPercentage / 100) * 360}deg`,
             }} >
-              {data?.progressPercentage ? `${data.progressPercentage.toFixed(0)}%` : "0%"}
-            </span> */}
-            <Progress type="circle" percent={data?.progressPercentage ? data.progressPercentage.toFixed(0) : 0} />
+              {/* {data?.progressPercentage ? `${data.progressPercentage.toFixed(0)}%` : "0%"} */}
+            <Progress type="circle" status="exception" percent={data?.progressPercentage ? data.progressPercentage.toFixed(0) : 0} />
+            </span>
 
           </div>
         </div>

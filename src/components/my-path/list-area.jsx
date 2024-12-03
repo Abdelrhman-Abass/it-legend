@@ -77,10 +77,10 @@ const ListArea = ({ title }) => {
                       />
                     </Link>
                     <div className="time-top">
-                      <Progress type="circle" percent={course?.progressPercentage ? course.progressPercentage.toFixed(0) : 0} />
-                      {/* <span className="duration_1">
-                      {course?.progressPercentage ? `${course.progressPercentage.toFixed(0)}%` : "0%"}
-                      </span> */}
+                      <span className="duration_1">
+                      <Progress type="circle" status="exception" percent={course?.progressPercentage ? course.progressPercentage.toFixed(0) : 0} />
+                      {/* {course?.progressPercentage ? `${course.progressPercentage.toFixed(0)}%` : "0%"} */}
+                      </span>
                     </div>
                   </div>
                   <div className="content">
