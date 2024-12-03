@@ -110,7 +110,7 @@ const Page = () => {
                 >
                   <div className="inner">
                     <div className="thumbnail">
-                      <Link href={`/course-player/c84e7902-1205-426f-a857-922bedd84bdf}`}>
+                      <Link href={`/course-player/${cour.courseId}`}>
                         <img
                           src={`https://www.itlegend.net/Content/Uploads/CoursesMedia/${cour.image}`}
                           // src={`/assets/images/course/course-01/course-01.jpg`}
@@ -128,7 +128,7 @@ const Page = () => {
                     <div className="content">
                       <h5 className="title">
                         <Link href={`/course-player/${cour.courseId}`}>
-                          {cour.titleAr}...
+                          {cour.titleAr}
                         </Link>
                       </h5>
                       <p>{cour.shortDescriptionAr ? cour.shortDescriptionAr : "No description available"}</p>

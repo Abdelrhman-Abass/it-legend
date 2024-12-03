@@ -86,7 +86,7 @@ const ListArea = ({ title }) => {
                   <div className="content">
                     <h5 className="title">
                       <Link href={`/diploma/${course.categoryId}`}>
-                        {course.titleAr}...
+                        {course.titleAr}
                       </Link>
                     </h5>
                     <p>{course.shortDescriptionAr ? course.shortDescriptionAr : "No description available"}</p>
@@ -118,7 +118,7 @@ const ListArea = ({ title }) => {
           {status === "succeeded" &&
             diploma.map((course, idx) => (
               <div
-                className="col-md-6 col-lg-4"
+                className="col-md-6 col-lg-4 mobile"
                 data-aos-delay="150"
                 data-aos="fade-up"
                 data-aos-duration="800"

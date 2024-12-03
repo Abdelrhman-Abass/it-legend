@@ -42,7 +42,7 @@ const CourseDiploma = ({
             href={my ? `/diploma/${data.categoryId}` : `/diploma-details/${data.categoryId}`}
           >
             <Image
-              src={`https://www.itlegend.net/Content/Uploads/CategoryMedia/${data.image}`}
+              src={`https://www.itlegend.net/Content/Uploads/CourseMedia/${data.image}`}
               // src={`/assets/images/course/course-01/course-01.jpg`}
               className=" lg:w-[280px]"
 
@@ -67,7 +67,7 @@ const CourseDiploma = ({
           <h6 className="title">
             {/* <a href="#">{data.titleAr}</a> */}
             <Link href={`/diploma/${data.categoryId}`}>
-              {data.titleAr}...
+              {data.titleAr}
             </Link>
           </h6>
           <p className="truncate-text">{data.shortDescriptionAr ? data.shortDescriptionAr : "No description available"}</p>
