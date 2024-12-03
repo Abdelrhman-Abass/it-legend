@@ -60,9 +60,10 @@ export const CoursePlayerLatestNode = async (courseId) => {
             `http://49.13.77.125:1118/Endpoint/api/MemberCoursePlayer/${courseId}`,
             config
         );
-        console.log("Ltest from handler" + response.data.data)
-        // cookies().set("latestNode", response.data.data);
-        return response.data.data;
+        console.log("Ltest from handler" + JSON.stringify(response.data.data))
+        // cookies().set("latestNode", response.data.data); http://localhost:3000/en/course-player/602d090f-ef57-464a-b724-0bf57ae9cdc3
+        cookies().set("latestNode", JSON.stringify(response.data.data)); 
+        return JSON.stringify(response.data.data);
     } catch (error) {
         console.error("Error fetching course data:", error.message);
         return {
