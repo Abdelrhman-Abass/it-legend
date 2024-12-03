@@ -80,7 +80,7 @@ const Content = ({ data, courseId, links, testData }) => {
     console.log(activeNode)
     console.log(activeNodeType)
     console.log("Latest from Content : " +JSON.stringify(latestVideo))
-    console.log("Latest from Content latestP : " + JSON.stringify(latestVideo).progressPercentage)
+    console.log("Latest from Content latestP : " + latestVideo.progressPercentage)
 
   },[activeNode, activeNodeType , latestVideo])
   
