@@ -10,7 +10,6 @@ import {
 } from "../../../../../store/features/diploma-slice";
 
 import { Progress, Tooltip } from "antd";
-import { Link } from "@/navigation";
 import CounterArea from "@/components/my-path/counter-area";
 import Error from "@/components/event-grid/error";
 import { UserHeader } from "@/layout";
