@@ -78,7 +78,7 @@ const ListArea = ({ title }) => {
                     </Link>
                     <div className="time-top">
                       <span className="duration_1">
-                      <Progress type="circle" status="exception" percent={course?.progressPercentage ? course.progressPercentage.toFixed(0) : 0} />
+                      <Progress type="circle"  percent={course?.progressPercentage ? course.progressPercentage.toFixed(0) : 0}  size={30} status="exception" format={(percent) => `${percent}%`} />
                       {/* {course?.progressPercentage ? `${course.progressPercentage.toFixed(0)}%` : "0%"} */}
                       </span>
                     </div>

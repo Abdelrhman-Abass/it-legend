@@ -56,7 +56,7 @@ const CourseDiploma = ({
             <span className="duration_1">
                <span>
                 {/* {data?.progressPercentage ? `${data.progressPercentage.toFixed(0)}%` : "0%"} */}
-            <Progress type="circle"  status="exception" percent={data?.progressPercentage ? data.progressPercentage.toFixed(0) : 0} />
+            <Progress type="circle"  percent={data?.progressPercentage ? data.progressPercentage.toFixed(0) : 0}  size={30} status="exception" format={(percent) => `${percent}%`} />
                </span>
             </span>
 
