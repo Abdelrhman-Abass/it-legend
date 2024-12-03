@@ -82,7 +82,7 @@ const Content = ({ data, courseId, links, testData }) => {
     console.log(activeNodeType)
     console.log("Latest from Content : " +JSON.stringify(latestVideo))
     console.log("Latest from Content latestP : " + latestVideo.progressPercentage)
-    setLatestPercantage(latestVideo.progressPercentage.tofixed(0))
+    setLatestPercantage(latestVideo.progressPercentage)
 
   },[activeNode, activeNodeType , latestVideo])
   
