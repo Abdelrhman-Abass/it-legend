@@ -1,14 +1,18 @@
 import { courseUSerData } from "@/hooks/courseHandler";
 import { diplomaUSerData ,getCoursesByCategory } from "@/hooks/diplomaHandler";
+import { CoursePlayerLatestNode } from "@/hooks/PlayerHandler";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
   diploma: [], // Assuming courses are an array
   courses: [], // Assuming course is an array (if you want a single course, modify this accordingly)
+  latest: {}, // Assuming course is an array (if you want a single course, modify this accordingly)
   status: "idle", // 'idle' | 'loading' | 'succeeded' | 'failed'
   error: null,
   errorCourse:null,
   statusCourses:"idle",
+  errorLatest:null,
+  statuLatest:"idle",
 };
 
 // Async action to fetch courses
@@ -52,6 +56,24 @@ export const fetchCoursesByCategory = createAsyncThunk(
     }
   }
 );
+export const LatestVideoNode = createAsyncThunk(
+  ".user/diploma/latestVideoNode",
+  async ({videoId}, { rejectWithValue }) => {
+    try {
+      const response = await CoursePlayerLatestNode(videoId);
+      const { data } = response;
+
+      if (!data) {
+        return rejectWithValue("No latest found for the category.");
+      }
+
+      return data;
+    } catch (error) {
+      console.error(error);
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 // Create the slice
 export const diplomaSlice = createSlice({
@@ -85,6 +107,18 @@ export const diplomaSlice = createSlice({
       .addCase(fetchCoursesByCategory.rejected, (state, action) => {
         state.statusCourses = "failed";
         state.errorCourse = action.payload;
+      })
+
+      .addCase(LatestVideoNode.pending, (state) => {
+        state.statuLatest = "loading";
+      })
+      .addCase(LatestVideoNode.fulfilled, (state, action) => {
+        state.statuLatest = "succeeded";
+        state.latest = action.payload;
+      })
+      .addCase(LatestVideoNode.rejected, (state, action) => {
+        state.statuLatest = "failed";
+        state.errorLatest = action.payload;
       });
   },
 });
@@ -95,6 +129,9 @@ export const selectDiplomaStatus = (state) => state.diploma.status;
 export const selectDiplomaCourses = (state) => state.diploma.courses;
 export const selectDiplomaCoursesStatus = (state) => state.diploma.statusCourses;
 export const selectDiplomaCoursesError = (state) => state.diploma.errorCourse;
+export const selectLatestStatus = (state) => state.diploma.statuLatest;
+export const selectLatestVideo = (state) => state.diploma.latest;
+export const selectLatestError = (state) => state.diploma.errorLatest;
 
 export const selectDiplomaError = (state) => state.diploma.error;
 
