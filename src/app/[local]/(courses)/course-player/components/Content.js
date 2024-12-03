@@ -444,7 +444,7 @@ const Content = ({ data, courseId, links, testData }) => {
         >
           <UserHeader player={true}/>
           {/* <BreadcrumbTwo subtitle={"تطوير تطبيقات الويب"} /> */}
-          <div className={`video-player type-${type}`}>
+          <div className={`video-player type-${activeNodeType}`}>
             <div
               onClick={() => setShowPlayerSide(!showPlayerSide)}
               className="player-arrow"
@@ -461,7 +461,7 @@ const Content = ({ data, courseId, links, testData }) => {
                 <ArrowRight size={28} />
               )}
             </div>
-            <Player nodes={data?.nodes} moduleId={courseId} modules={modules} activeNode={activeNode} typeActiveNode={type} setComments={handleDataComments} />
+            <Player nodes={data?.nodes} moduleId={courseId} modules={modules} activeNode={activeNode} typeActiveNode={activeNodeType} setComments={handleDataComments} />
           </div>
           <div className="course-details-content">
             <div className="nav-tab-wrap">
@@ -669,9 +669,9 @@ const Content = ({ data, courseId, links, testData }) => {
                                         )}
                                       </span>
                                       <span>
-                                        <a href={`/ar/course-player/${course.courseId}?type=${type}&no=${nodeId}`}>
+                                        {/* <a href={`/ar/course-player/${course.courseId}?type=${type}&no=${nodeId}`}> */}
                                           {titleAr}
-                                        </a>
+                                        {/* </a> */}
                                       </span>
                                     </div>
                                     {type === 0 && <span className="duration-node">{duration}</span>}
