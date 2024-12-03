@@ -91,7 +91,7 @@ const Page = () => {
                   transition: "all 0.1s",
                 }}
               >
-                {course.categoryProgress || 0}%
+                {course.categoryProgress.toFixed(0) || 0}%
               </div>
             </div>
           </div>
