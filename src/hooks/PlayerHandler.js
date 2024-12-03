@@ -150,9 +150,7 @@ export const CoursePlayerVideoType = async (courseId) => {
             // If the response is not successful, return an error
             return null;
           }
-        // console.log("Ltest from handler" + JSON.stringify(response.data.data))
-        // cookies().set("latestNode", JSON.stringify(response.data.data) ,{ httpOnly: true, secure: true }); 
-        // return JSON.stringify(response.data.data);
+        
     } catch (error) {
         console.error("Error fetching latest data:", error.message);
         return {

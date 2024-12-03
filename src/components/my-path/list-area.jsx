@@ -68,7 +68,7 @@ const ListArea = ({ title }) => {
               >
                 <div className="inner">
                   <div className="thumbnail">
-                    <Link href={`/course-player/c84e7902-1205-426f-a857-922bedd84bdf}`}>
+                    <Link href={`/diploma/${course.categoryId}`}>
                       <img
                         src={`https://www.itlegend.net/Content/Uploads/CategoryMedia/${course.image}`}
                         // src={`/assets/images/course/course-01/course-01.jpg`}

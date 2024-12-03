@@ -76,7 +76,7 @@ const Page = () => {
               <h4 className="title">مستوي التقدم في الدبلومة</h4>
               <Tooltip title={"Your Progress"}>
                 <Progress
-                  percent={course.categoryProgress.toFixed(0) || 0}
+                  percent={course.categoryProgress.toFixed(2) || 0}
                   strokeColor="#080264"
                   showInfo={false}
                 />
@@ -119,10 +119,10 @@ const Page = () => {
                         />
                       </Link>
                       <div className="time-top">
-                        <Progress type="circle" percent={cour?.progressPercentage ? cour.progressPercentage.toFixed(0) : 0} />
-                        {/* <span className="duration_1">
-                      {course?.progressPercentage ? `${course.progressPercentage.toFixed(0)}%` : "0%"}
-                      </span> */}
+                        <span className="duration_1">
+                        <Progress type="circle" percent={cour?.progressPercentage ? cour.progressPercentage.toFixed(0) : 0} size={45} status="exception" format={(percent) => `${percent}%`} />
+                      {/* {course?.progressPercentage ? `${course.progressPercentage.toFixed(0)}%` : "0%"} */}
+                      </span>
                       </div>
                     </div>
                     <div className="content">
