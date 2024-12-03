@@ -43,6 +43,7 @@ export const courseUSerData = async () => {
         };
     }
 };
+
 export const latestNodeOpend = async (courseId) => {
     try {
         const token = cookies().get("token")?.value;

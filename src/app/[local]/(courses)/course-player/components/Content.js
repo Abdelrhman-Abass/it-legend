@@ -59,7 +59,8 @@ const Content = ({ data, courseId, links, testData }) => {
 
   useEffect(() => {
     setModules(testData)
-  })
+  },[modules])
+  
   useEffect(() => {
     console.log(activeNode)
     console.log(activeNodeType)
