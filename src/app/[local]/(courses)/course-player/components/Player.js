@@ -17,15 +17,15 @@ import { selectCoursesPlayerVideo ,UserCoursePlayerNode} from "@/store/features/
 import { CoursePlayerVideo } from "@/hooks/PlayerHandler";
 import { selectCourseError, selectCourseLinks, selectCourseStatus,selectCourseComments, UserCoursePlayerComments, UserCoursePlayerLinks } from "@/store/features/player-slice";
 
-const Player = ({ nodes, moduleId , modules ,activeNode, setComments}) => {
+const Player = ({ nodes, moduleId , modules ,activeNode, typeActiveNode,  setComments}) => {
   const [node, setNode] = useState(null);
   const [nextNode, setNextNode] = useState(null);
   const [nextNodeId, setNextNodeId] = useState(null);
-  
+  const [type , setType] = useState(typeActiveNode)
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
   const contentId = params.get("contentId");
-  const type = params.get("type");
+  // const type = params.get("type");
   const nodeId = params.get("no");
   // const courseId = useParams().id;
   const { replace } = useRouter();
@@ -43,7 +43,7 @@ const Player = ({ nodes, moduleId , modules ,activeNode, setComments}) => {
       dispatch(UserCoursePlayerLinks({ courseId, nodeId:activeNode }));
       console.log("Dispatched UserCoursePlayerLinks with activeNode:", activeNode);
     }
-  }, [activeNode, dispatch]);
+  }, [activeNode, type,dispatch]);
 
   useEffect(()=>{
     dispatch(UserCoursePlayerComments({activeNode} ))
@@ -65,7 +65,7 @@ const Player = ({ nodes, moduleId , modules ,activeNode, setComments}) => {
     if (status === "failed") {
       console.log("Error:", error);
     }
-  }, [status, video, error, activeNode,dispatch]);
+  }, [status, video, error, activeNode, typeActiveNode,dispatch]);
 
 
   const handleIsWatched = async () => {

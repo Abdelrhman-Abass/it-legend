@@ -45,6 +45,7 @@ const Content = ({ data, courseId, links, testData }) => {
   const type = params.get("type");
   const contentId = params.get("no");
   const [activeNode , setActiveNode] = useState("")
+  const [activeNodeType , setActiveNodeType] = useState(0)
   const [board, setBoard] = useState(false);
   const [ask, setAsk] = useState(false);
   const [askData, setAskData] = useState([]);
@@ -61,7 +62,7 @@ const Content = ({ data, courseId, links, testData }) => {
   })
   useEffect(() => {
     console.log(activeNode)
-  },[activeNode])
+  },[activeNode, activeNodeType])
   
   const handleDataComments = (fetchedData) => {
     setComments(fetchedData); // Store the fetched data in the parent state
@@ -378,7 +379,7 @@ const Content = ({ data, courseId, links, testData }) => {
                                     style={{ color: isWatched ? "#6ABD8A" : undefined }}
                                     className={nodeId == activeNode ? "active" : ""}
                                     key={nodeId}
-                                    onClick={() => setActiveNode(nodeId)}
+                                    onClick={() => {setActiveNode(nodeId) ; setActiveNodeType(type)}}
                                   >
                                     <div className="text d-flex align-items-center">
                                       <span style={{ margin: "0 4px 4px" }}>
@@ -459,7 +460,7 @@ const Content = ({ data, courseId, links, testData }) => {
                 <ArrowRight size={28} />
               )}
             </div>
-            <Player nodes={data?.nodes} moduleId={courseId} modules={modules} activeNode={activeNode} setComments={handleDataComments} />
+            <Player nodes={data?.nodes} moduleId={courseId} modules={modules} activeNode={activeNode} typeActiveNode={type} setComments={handleDataComments} />
           </div>
           <div className="course-details-content">
             <div className="nav-tab-wrap">
