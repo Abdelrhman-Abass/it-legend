@@ -329,7 +329,8 @@ const Content = ({ data, courseId, links, testData }) => {
             >
               <Tooltip title={"Your Progress"}>
                 <Progress
-                  percent={latestP.progressPercentage.tofixed(2)}
+                  // percent={latestP.progressPercentage.tofixed(2)}
+                  percent={45}
                   strokeColor="#6ABD8A"
                   showInfo={false}
                 />
