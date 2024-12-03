@@ -17,7 +17,7 @@ import { selectCoursesPlayerVideo ,UserCoursePlayerNode} from "@/store/features/
 import { CoursePlayerVideo } from "@/hooks/PlayerHandler";
 import { selectCourseError, selectCourseLinks, selectCourseStatus,selectCourseComments, UserCoursePlayerComments, UserCoursePlayerLinks } from "@/store/features/player-slice";
 
-const Player = ({ nodes, moduleId , modules , setComments}) => {
+const Player = ({ nodes, moduleId , modules ,activeNode, setComments}) => {
   const [node, setNode] = useState(null);
   const [nextNode, setNextNode] = useState(null);
   const [nextNodeId, setNextNodeId] = useState(null);
@@ -42,13 +42,14 @@ const Player = ({ nodes, moduleId , modules , setComments}) => {
   },[dispatch])
 
   useEffect(()=>{
-    dispatch(UserCoursePlayerComments({nodeId} ))
+    dispatch(UserCoursePlayerComments({activeNode} ))
   },[dispatch])
 
 
 
   useEffect(() => {
     console.log("video Status:", status);
+    console.log("activeNode Status:", activeNode);
     // console.log(modules)
     const r = getNextNodeId(modules , nodeId)
     setNextNodeId(r)
@@ -59,7 +60,7 @@ const Player = ({ nodes, moduleId , modules , setComments}) => {
     if (status === "failed") {
       console.log("Error:", error);
     }
-  }, [status, video, error, dispatch]);
+  }, [status, video, error, activeNode,dispatch]);
 
 
   const handleIsWatched = async () => {
@@ -195,23 +196,23 @@ const Player = ({ nodes, moduleId , modules , setComments}) => {
     <>
       {/* type == 0 video */}
       {type == 0 ? (
-        // type == 0 ? (
-        //   <YouTubePlayer
-        //     node={video}
-        //     handleIsWatched={handleIsWatched}
-        //     handleIsVideoEnd={handleIsVideoEnd}
-        //     nextNode={nextNodeId}
-        //   />
-        //  ) 
-        // : 
         type == 0 ? (
-          <PublitioPlayer
+          <YouTubePlayer
             node={video}
+            handleIsWatched={handleIsWatched}
             handleIsVideoEnd={handleIsVideoEnd}
             nextNode={nextNodeId}
-
           />
-        ) 
+         ) 
+        // : 
+        // type == 0 ? (
+        //   <PublitioPlayer
+        //     node={video}
+        //     handleIsVideoEnd={handleIsVideoEnd}
+        //     nextNode={nextNodeId}
+
+        //   />
+        // ) 
         : playerType == 2 ? (
           <VdocipherPlayer
             node={node}

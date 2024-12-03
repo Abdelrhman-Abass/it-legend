@@ -39,7 +39,7 @@ const Content = ({ data, courseId, links, testData }) => {
   const [moduleId, setModuleId] = useState(null);
   const [showPlayerSide, setShowPlayerSide] = useState(true);
   const [comments, setComments] = useState([]);
-
+  const [activeNode , setActiveNode] = useState(null)
   const [percent, setPercent] = useState(33);
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
@@ -59,7 +59,10 @@ const Content = ({ data, courseId, links, testData }) => {
   useEffect(() => {
     setModules(testData)
   })
-
+  useEffect(() => {
+    console.log(activeNode)
+  },[activeNode])
+  
   const handleDataComments = (fetchedData) => {
     setComments(fetchedData); // Store the fetched data in the parent state
   };
@@ -373,8 +376,9 @@ const Content = ({ data, courseId, links, testData }) => {
                                 return (
                                   <li
                                     style={{ color: isWatched ? "#6ABD8A" : undefined }}
-                                    className={nodeId == params.get("no") ? "active" : ""}
+                                    className={nodeId == activeNode ? "active" : ""}
                                     key={nodeId}
+                                    onClick={() => setActiveNode(nodeId)}
                                   >
                                     <div className="text d-flex align-items-center">
                                       <span style={{ margin: "0 4px 4px" }}>
@@ -401,10 +405,10 @@ const Content = ({ data, courseId, links, testData }) => {
                                           <FileVideo size={20} />
                                         )}
                                       </span>
-                                      <span>
-                                        <a href={`/ar/course-player/${course.courseId}?type=${type}&no=${nodeId}`}>
+                                      <span >
+                                        {/* <a href={`/ar/course-player/${course.courseId}?type=${type}&no=${nodeId}`}> */}
                                           {titleAr}
-                                        </a>
+                                        {/* </a> */}
                                       </span>
                                     </div>
                                     {type === 0 && <span className="duration-node">{duration}</span>}
@@ -455,7 +459,7 @@ const Content = ({ data, courseId, links, testData }) => {
                 <ArrowRight size={28} />
               )}
             </div>
-            <Player nodes={data?.nodes} moduleId={courseId} modules={modules} setComments={handleDataComments} />
+            <Player nodes={data?.nodes} moduleId={courseId} modules={modules} activeNode={activeNode} setComments={handleDataComments} />
           </div>
           <div className="course-details-content">
             <div className="nav-tab-wrap">
@@ -635,6 +639,7 @@ const Content = ({ data, courseId, links, testData }) => {
                                     style={{ color: isWatched ? "#6ABD8A" : undefined }}
                                     className={nodeId == params.get("no") ? "active" : ""}
                                     key={nodeId}
+                                    onClick={() => setActiveNode(nodeId)}
                                   >
                                     <div className="text d-flex align-items-center">
                                       <span style={{ margin: "0 4px 4px" }}>
