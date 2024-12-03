@@ -52,14 +52,9 @@ const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNod
     dispatch(UserCoursePlayerComments({activeNode} ))
   },[dispatch,activeNode])
 
- useEffect(()=>{
-    dispatch(LatestVideoNode({videoId : video.videoId} ))
-    console.log("Dispatched Latest Course :", latest);
-
-  },[dispatch,activeNode])
-
-
-
+  
+  
+  
   useEffect(() => {
     console.log("video Status:", status);
     console.log("activeNode Status:", activeNode);
@@ -69,15 +64,20 @@ const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNod
     const r = getNextNodeId(modules , nodeId)
     setNextNodeId(r)
     // console.log("next node : " + r)
-
+    
     setComments(comments)
     console.log(" comments : "+comments)
     if (status === "failed") {
       console.log("Error:", error);
     }
   }, [status, video, error, activeNode, typeActiveNode,dispatch]);
-
-
+  
+  useEffect(()=>{
+     dispatch(LatestVideoNode({videoId : video.videoId} ))
+     console.log("Dispatched Latest Course :", JSON.stringify(video).videoId);
+ 
+   },[dispatch,activeNode])
+  
   const handleIsWatched = async () => {
     // console.log("moduleId", moduleId);
     const body = {
