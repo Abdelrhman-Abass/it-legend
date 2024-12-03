@@ -127,14 +127,14 @@ const Page = () => {
                     </div>
                     <div className="content">
                       <h5 className="title">
-                        <Link href={`/diploma/${cour.categoryId}`}>
+                        <Link href={`/course-player/${cour.courseId}`}>
                           {cour.titleAr}...
                         </Link>
                       </h5>
                       <p>{cour.shortDescriptionAr ? cour.shortDescriptionAr : "No description available"}</p>
                       <div className="read-more-btn">
                         <Link
-                          href={`/course-player/c84e7902-1205-426f-a857-922bedd84bdf}`}
+                          href={`/course-player/${cour.courseId}`}
                           className="edu-btn btn-border btn-medium"
                         >
                           ابدا الان <i className="icon-4"></i>

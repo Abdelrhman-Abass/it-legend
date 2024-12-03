@@ -134,12 +134,14 @@ export const CoursePlayerVideo = async (courseId, nodeId) => {
         };
 
         // Send POST request
-        await axios.post(
+        const response = await axios.post(
             `http://49.13.77.125:1118/Endpoint/api/MemberVideo/${videoId}/watch`,
             {}, // No request body
             config
         );
-
+        if(response.success){
+            console.log("Video marked as watched successfully.")
+        }
         // Return success confirmation since the API has no response body
         return { success: true, message: "Video marked as watched successfully." };
     } catch (error) {

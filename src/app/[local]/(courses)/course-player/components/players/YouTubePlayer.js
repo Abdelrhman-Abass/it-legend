@@ -1,4 +1,5 @@
 "use client"
+import { CoursePlayerVideoIsWatched } from "@/hooks/PlayerHandler";
 import React, { useCallback, useEffect, useState } from "react";
 import YouTube from "react-youtube";
 
@@ -71,7 +72,7 @@ const YouTubePlayer = ({ node, handleIsWatched, handleIsVideoEnd ,nextNode }) =>
         if (!hasReached80 && currentTime / duration >= 0.8) {
           setHasReached80(true);
           console.log("Video has reached 80% of the viewership.");
-          await handleIsWatched(node.videoId)
+          await handleVideoWatched(node.videoId)
         }
         if (currentTime / duration == 1) {
           setHasReached80(true);
