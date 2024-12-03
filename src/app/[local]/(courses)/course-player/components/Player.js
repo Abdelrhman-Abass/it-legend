@@ -56,17 +56,17 @@ const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNod
   
   
   useEffect(() => {
-    console.log("video Status:", status);
-    console.log("activeNode Status:", activeNode);
-    console.log("type Status:", type);
-    console.log("video " +JSON.stringify(video))
+    // console.log("video Status:", status);
+    // console.log("activeNode Status:", activeNode);
+    // console.log("type Status:", type);
+    // console.log("video " +JSON.stringify(video))
     // console.log(modules)
     const r = getNextNodeId(modules , nodeId)
     setNextNodeId(r)
     // console.log("next node : " + r)
     
     setComments(comments)
-    console.log(" comments : "+comments)
+    // console.log(" comments : "+comments)
     if (status === "failed") {
       console.log("Error:", error);
     }

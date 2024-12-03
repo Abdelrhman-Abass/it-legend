@@ -56,6 +56,7 @@ const Content = ({ data, courseId, links, testData }) => {
   const [loadSubmitAsk, setLoadSubmitAsk] = useState(false);
   const [isEdit, setIsEdit] = useState(null);
   const [watch, setWatch] = useState(false);
+  const [latestP, setLatestP] = useState();
 
   const [modules, setModules] = useState([])
   const [openAccordion, setOpenAccordion] = useState(null);
@@ -73,10 +74,13 @@ const Content = ({ data, courseId, links, testData }) => {
 
   const latestVideo = useSelector(selectLatestVideo) 
 
+
   useEffect(() => {
     console.log(activeNode)
     console.log(activeNodeType)
-    console.log("Latest from Content : " +JSON.stringify(latestVideo))
+    setLatestP(JSON.stringify(latestVideo))
+    console.log("Latest from Content : " +latestP)
+
   },[activeNode, activeNodeType , latestVideo])
   
   const handleDataComments = (fetchedData) => {
@@ -325,7 +329,7 @@ const Content = ({ data, courseId, links, testData }) => {
             >
               <Tooltip title={"Your Progress"}>
                 <Progress
-                  percent={percent}
+                  percent={latestP.progressPercentage.tofixed(2)}
                   strokeColor="#6ABD8A"
                   showInfo={false}
                 />
