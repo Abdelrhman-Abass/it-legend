@@ -32,12 +32,16 @@ const YouTubePlayer = ({ node, handleIsWatched, handleIsVideoEnd ,nextNode }) =>
     },
   };
 
-  // const YoutubeParser = (url = "") => {
-  //   var regExp =
-  //     /^https?\:\/\/(?:www\.youtube(?:\-nocookie)?\.com\/|m\.youtube\.com\/|youtube\.com\/)?(?:ytscreeningroom\?vi?=|youtu\.be\/|vi?\/|user\/.+\/u\/\w{1,2}\/|embed\/|watch\?(?:.\&)?vi?=|\&vi?=|\?(?:.\&)?vi?=)([^#\&\?\n\/<>"']*)/i;
-  //   var match = url?.match(regExp);
-  //   return match && match[1]?.length == 11 ? match[1] : false;
-  // };
+  const handleVideoWatched = async (videoId) => {
+    const result = await CoursePlayerVideoIsWatched(videoId);
+
+    if (result.success) {
+        console.log(result.message);
+    } else {
+        console.error("Error:", result.message);
+    }
+};
+
 
   const YoutubeParser = (url = "") => {
     const regExp =
@@ -67,7 +71,7 @@ const YouTubePlayer = ({ node, handleIsWatched, handleIsVideoEnd ,nextNode }) =>
         if (!hasReached80 && currentTime / duration >= 0.8) {
           setHasReached80(true);
           console.log("Video has reached 80% of the viewership.");
-          await handleIsWatched();
+          await handleIsWatched(node.videoId)
         }
         if (currentTime / duration == 1) {
           setHasReached80(true);

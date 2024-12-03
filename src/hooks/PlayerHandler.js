@@ -60,8 +60,8 @@ export const CoursePlayerLatestNode = async (courseId) => {
             `http://49.13.77.125:1118/Endpoint/api/MemberCoursePlayer/${courseId}`,
             config
         );
-        console.log(response.data.data)
-        cookies().set("latestNode", response.data.data);
+        console.log("Ltest from handler" + response.data.data)
+        // cookies().set("latestNode", response.data.data);
         return response.data.data;
     } catch (error) {
         console.error("Error fetching course data:", error.message);
@@ -108,38 +108,38 @@ export const CoursePlayerVideo = async (courseId, nodeId) => {
   };
   
 
-// export const CoursePlayerVideo = async (courseId , nodeId) => {
-//     try {
-//         const token = cookies().get("token")?.value;
-//         if (!token) throw new Error("Token is not available");
-        
-//         console.log(courseId + " " + nodeId)
-//         const config = {
-//             headers: {
-//                 Authorization: `Bearer ${token}`,
-//                 "Content-Type": "application/json",
-//             },
-//             timeout: 3000000,
-//         };
+  export const CoursePlayerVideoIsWatched = async (videoId) => {
+    try {
+        const token = cookies().get("token")?.value;
+        if (!token) throw new Error("Token is not available");
 
-        
-//         const response = await axios.get(
-//             `http://49.13.77.125:1118/Endpoint/api/CourseVideo/${courseId}/videos/${nodeId}`,
-//             config
-//         );
-//         // console.log(response.data.data.video)
-//         const res = response.data.data.video
-//         return res;
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            timeout: 30000, // 30 seconds timeout.
+        };
 
-//     } catch (error) {
-//         console.error("Error fetching course data:", error.message);
-//         return {
-//             data: null,
-//             message: error.response?.data?.message || error.message,
-//         };
-//     }
-// };
+        // Send POST request
+        await axios.post(
+            `http://49.13.77.125:1118/Endpoint/api/MemberVideo/${videoId}/watch`,
+            {}, // No request body
+            config
+        );
 
+        // Return success confirmation since the API has no response body
+        return { success: true, message: "Video marked as watched successfully." };
+    } catch (error) {
+        console.error("Error marking video as watched:", error);
+
+        // Return structured error response
+        return {
+            success: false,
+            message: error.response?.data?.message || "Failed to mark video as watched",
+        };
+    }
+};
 
 export const CoursePlayerVideoComments = async (nodeId) => {
     try {
