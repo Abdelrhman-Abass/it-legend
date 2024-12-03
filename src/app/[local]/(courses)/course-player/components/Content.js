@@ -39,12 +39,12 @@ const Content = ({ data, courseId, links, testData }) => {
   const [moduleId, setModuleId] = useState(null);
   const [showPlayerSide, setShowPlayerSide] = useState(true);
   const [comments, setComments] = useState([]);
-  const [activeNode , setActiveNode] = useState(null)
   const [percent, setPercent] = useState(33);
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
   const type = params.get("type");
   const contentId = params.get("no");
+  const [activeNode , setActiveNode] = useState(contentId)
   const [board, setBoard] = useState(false);
   const [ask, setAsk] = useState(false);
   const [askData, setAskData] = useState([]);

@@ -39,7 +39,7 @@ const Player = ({ nodes, moduleId , modules ,activeNode, setComments}) => {
   const comments = useSelector(selectCourseComments)  
   useEffect(()=>{
     dispatch(UserCoursePlayerLinks({courseId ,activeNode} ))
-  },[dispatch, activeNode])
+  },[activeNode])
 
   useEffect(()=>{
     dispatch(UserCoursePlayerComments({activeNode} ))
