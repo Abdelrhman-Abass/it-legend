@@ -100,7 +100,7 @@ const Page = () => {
 
           {Array.isArray(course.courses) &&
             course.courses.map((cour, idx) => (
-              <section key={idx}>
+              <section key={idx} className="pr-[70px] pl-[70px] row desktop" style={{ justifyContent: "center" }}>
                 <div
                   key={idx}
                   className="edu-blog blog-style-list"
@@ -112,7 +112,7 @@ const Page = () => {
                     <div className="thumbnail">
                       <Link href={`/course-player/c84e7902-1205-426f-a857-922bedd84bdf}`}>
                         <img
-                          src={`https://www.itlegend.net/Content/Uploads/CategoryMedia/${cour.image}`}
+                          src={`https://www.itlegend.net/Content/Uploads/CoursesMedia/${cour.image}`}
                           // src={`/assets/images/course/course-01/course-01.jpg`}
                           alt="Blog Images"
                           className="lg:w-[280px]"
