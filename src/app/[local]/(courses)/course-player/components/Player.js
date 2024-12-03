@@ -18,7 +18,7 @@ import { CoursePlayerVideo } from "@/hooks/PlayerHandler";
 import { selectCourseError, selectCourseLinks, selectCourseStatus,selectCourseComments, UserCoursePlayerComments, UserCoursePlayerLinks } from "@/store/features/player-slice";
 import { LatestVideoNode, selectLatestVideo } from "@/store/features/diploma-slice";
 
-const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNode,  setComments}) => {
+const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNode,playerType,  setComments}) => {
   const [node, setNode] = useState(null);
   const [nextNode, setNextNode] = useState(null);
   const [nextNodeId, setNextNodeId] = useState(null);
@@ -211,7 +211,7 @@ const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNod
     <>
       {/* type == 0 video */}
       {type == 0 ? (
-        type == 0 ? (
+        playerType == 1 ? (
           <YouTubePlayer
             node={video}
             setWatch={setWatch}
@@ -219,15 +219,15 @@ const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNod
             nextNode={nextNodeId}
           />
          ) 
-        // : 
-        // type == 0 ? (
-        //   <PublitioPlayer
-        //     node={video}
-        //     handleIsVideoEnd={handleIsVideoEnd}
-        //     nextNode={nextNodeId}
+        : 
+        playerType == 0 ? (
+          <PublitioPlayer
+            node={video}
+            handleIsVideoEnd={handleIsVideoEnd}
+            nextNode={nextNodeId}
 
-        //   />
-        // ) 
+          />
+        ) 
         : playerType == 2 ? (
           <VdocipherPlayer
             node={node}

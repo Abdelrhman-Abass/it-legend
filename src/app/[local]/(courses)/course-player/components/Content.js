@@ -56,6 +56,7 @@ const Content = ({ data, courseId, links, testData }) => {
   const [loadSubmitAsk, setLoadSubmitAsk] = useState(false);
   const [isEdit, setIsEdit] = useState(null);
   const [watch, setWatch] = useState(false);
+  const [playerType, setPlayerType] = useState(0);
   const [latestP, setLatestP] = useState();
   const [latestPercantage, setLatestPercantage] = useState();
   
@@ -83,6 +84,7 @@ const Content = ({ data, courseId, links, testData }) => {
     console.log("Latest from Content : " +JSON.stringify(latestVideo))
     console.log("Latest from Content latestP : " + latestVideo.progressPercentage)
     setLatestPercantage(latestVideo.progressPercentage)
+    setPlayerType(latestVideo.playerType)
 
   },[activeNode, activeNodeType , latestVideo])
   
@@ -332,7 +334,7 @@ const Content = ({ data, courseId, links, testData }) => {
             >
               <Tooltip title={"Your Progress"}>
                 <Progress
-                  percent={latestPercantage ? latestPercantage : 0}
+                  percent={latestPercantage ? latestPercantage.toFixed(2) : 0}
                   strokeColor="#6ABD8A"
                   showInfo={false}
                 />
@@ -348,7 +350,7 @@ const Content = ({ data, courseId, links, testData }) => {
                   transition: "all 0.1s",
                 }}
               >
-                {latestPercantage ? latestPercantage : 0}%
+                {latestPercantage ? latestPercantage.toFixed(2) : 0}%
               </div>
             </div>
             <CourseAccordion
@@ -482,7 +484,7 @@ const Content = ({ data, courseId, links, testData }) => {
                 <ArrowRight size={28} />
               )}
             </div>
-            <Player nodes={data?.nodes} moduleId={courseId} setWatch={setWatch} modules={modules} activeNode={activeNode} typeActiveNode={activeNodeType} setComments={handleDataComments} />
+            <Player nodes={data?.nodes} moduleId={courseId} playerType={playerType} setWatch={setWatch} modules={modules} activeNode={activeNode} typeActiveNode={activeNodeType} setComments={handleDataComments} />
           </div>
           <div className="course-details-content">
             <div className="nav-tab-wrap">
@@ -615,7 +617,7 @@ const Content = ({ data, courseId, links, testData }) => {
                     transition: "all 0.1s",
                   }}
                 >
-                  {latestPercantage}%
+                  {latestPercantage.toFixed(2)}%
                 </div>
               </div>
               {
