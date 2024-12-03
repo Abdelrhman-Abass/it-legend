@@ -8,6 +8,7 @@ import Breadcrumb from "@/components/breadcrumb/breadcrumb";
 import BreadcrumbTwo from "@/components/breadcrumb/breadcrumb-2";
 import { CoursePlayerLatestNode, CoursePlayerLinks , CoursePlayerNode } from "@/hooks/PlayerHandler";
 import { latestNodeOpend } from "@/hooks/courseHandler";
+import { PlayerLatestNode } from "@/app/[local]/auth/authHandler";
 
 const page = async ({ params }) => {
   // {{itlegend}}/api/NodesApi/GetCourseNodes?courseId=78a34224-b9b3-424b-bd5a-137e891326ca&userId=54d739c2-228e-4f64-8808-678a56a8da45s
@@ -28,7 +29,7 @@ const page = async ({ params }) => {
   const links = data
   console.log(links)
 
-  const { latestNode } = await CoursePlayerLatestNode(params.id)
+  const { latestNode } = await PlayerLatestNode(params.id)
   console.log("latestNode : " + latestNode)
   
   const courseNode = await CoursePlayerNode(params.id)
