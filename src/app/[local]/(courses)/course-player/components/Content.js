@@ -79,7 +79,7 @@ const Content = ({ data, courseId, links, testData }) => {
     console.log(activeNode)
     console.log(activeNodeType)
     setLatestP(JSON.stringify(latestVideo))
-    console.log("Latest from Content : " +latestP)
+    console.log("Latest from Content : " +JSON.stringify(latestVideo))
 
   },[activeNode, activeNodeType , latestVideo])
   
@@ -329,8 +329,7 @@ const Content = ({ data, courseId, links, testData }) => {
             >
               <Tooltip title={"Your Progress"}>
                 <Progress
-                  // percent={latestP.progressPercentage.tofixed(2)}
-                  percent={45}
+                  percent={latestP.progressPercentage.tofixed(2)}
                   strokeColor="#6ABD8A"
                   showInfo={false}
                 />
