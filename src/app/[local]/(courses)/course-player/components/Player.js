@@ -38,10 +38,12 @@ const Player = ({ nodes, moduleId , modules ,activeNode, setComments}) => {
   const error = useSelector(selectCourseError)
   const comments = useSelector(selectCourseComments)  
 
-  useEffect(()=>{
-      dispatch(UserCoursePlayerLinks({courseId ,activeNode} ))
-      console.log("made dispatch")
-  },[activeNode,dispatch])
+  useEffect(() => {
+    if (activeNode) {
+      dispatch(UserCoursePlayerLinks({ courseId, activeNode }));
+      console.log("Dispatched UserCoursePlayerLinks with activeNode:", activeNode);
+    }
+  }, [activeNode, dispatch]);
 
   useEffect(()=>{
     dispatch(UserCoursePlayerComments({activeNode} ))

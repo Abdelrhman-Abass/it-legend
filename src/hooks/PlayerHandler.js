@@ -72,37 +72,73 @@ export const CoursePlayerLatestNode = async (courseId) => {
     }
 };
 
-export const CoursePlayerVideo = async (courseId , nodeId) => {
+export const CoursePlayerVideo = async (courseId, nodeId) => {
     try {
-        const token = cookies().get("token")?.value;
-        if (!token) throw new Error("Token is not available");
-        
-        console.log(courseId + " " + nodeId)
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-            timeout: 3000000,
-        };
-
-        
-        const response = await axios.get(
-            `http://49.13.77.125:1118/Endpoint/api/CourseVideo/${courseId}/videos/${nodeId}`,
-            config
-        );
-        // console.log(response.data.data.video)
-        const res = response.data.data.video
-        return res;
-
+      console.log("Starting CoursePlayerVideo:", courseId, nodeId);
+      const token = cookies().get("token")?.value;
+      if (!token) throw new Error("Token is not available");
+      
+      console.log("Token Retrieved:", token);
+  
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        timeout: 3000000,
+      };
+  
+      console.log("Making API Request to:", `http://49.13.77.125:1118/Endpoint/api/CourseVideo/${courseId}/videos/${nodeId}`);
+  
+      const response = await axios.get(
+        `http://49.13.77.125:1118/Endpoint/api/CourseVideo/${courseId}/videos/${nodeId}`,
+        config
+      );
+  
+      console.log("API Response:", response.data);
+      const res = response.data.data.video;
+      return res;
     } catch (error) {
-        console.error("Error fetching course data:", error.message);
-        return {
-            data: null,
-            message: error.response?.data?.message || error.message,
-        };
+      console.error("Error fetching course data:", error.message);
+      return {
+        data: null,
+        message: error.response?.data?.message || error.message,
+      };
     }
-};
+  };
+  
+
+// export const CoursePlayerVideo = async (courseId , nodeId) => {
+//     try {
+//         const token = cookies().get("token")?.value;
+//         if (!token) throw new Error("Token is not available");
+        
+//         console.log(courseId + " " + nodeId)
+//         const config = {
+//             headers: {
+//                 Authorization: `Bearer ${token}`,
+//                 "Content-Type": "application/json",
+//             },
+//             timeout: 3000000,
+//         };
+
+        
+//         const response = await axios.get(
+//             `http://49.13.77.125:1118/Endpoint/api/CourseVideo/${courseId}/videos/${nodeId}`,
+//             config
+//         );
+//         // console.log(response.data.data.video)
+//         const res = response.data.data.video
+//         return res;
+
+//     } catch (error) {
+//         console.error("Error fetching course data:", error.message);
+//         return {
+//             data: null,
+//             message: error.response?.data?.message || error.message,
+//         };
+//     }
+// };
 
 
 export const CoursePlayerVideoComments = async (nodeId) => {

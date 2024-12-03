@@ -12,14 +12,15 @@ const initialState = {
 
 // Async action to fetch course player links
 export const UserCoursePlayerLinks = createAsyncThunk(
-  "user/courses", // Action type
+  "user/courses",
   async ({ courseId, nodeId }, { rejectWithValue }) => {
+    console.log("Dispatching UserCoursePlayerLinks with:", courseId, nodeId);
     try {
       const response = await CoursePlayerVideo(courseId, nodeId);
-      return response; // Return the actual data
+      return response;
     } catch (error) {
-      console.error(error);
-      return rejectWithValue(error.message); // Return error message if any
+      console.error("Error in UserCoursePlayerLinks:", error.message);
+      return rejectWithValue(error.message);
     }
   }
 );
