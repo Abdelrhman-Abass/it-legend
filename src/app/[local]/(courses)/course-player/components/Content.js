@@ -42,7 +42,7 @@ const Content = ({ data, courseId, links, testData }) => {
   const [percent, setPercent] = useState(33);
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
-  const type = params.get("type");
+  // const type = params.get("type");
   const contentId = params.get("no");
   const [activeNode , setActiveNode] = useState("")
   const [activeNodeType , setActiveNodeType] = useState(0)
@@ -62,6 +62,7 @@ const Content = ({ data, courseId, links, testData }) => {
   })
   useEffect(() => {
     console.log(activeNode)
+    console.log(activeNodeType)
   },[activeNode, activeNodeType])
   
   const handleDataComments = (fetchedData) => {
@@ -379,9 +380,9 @@ const Content = ({ data, courseId, links, testData }) => {
                                     style={{ color: isWatched ? "#6ABD8A" : undefined }}
                                     className={nodeId == activeNode ? "active" : ""}
                                     key={nodeId}
-                                    onClick={() => {setActiveNode(nodeId) ; setActiveNodeType(type)}}
+                                    onClick={() => setActiveNode(nodeId) }
                                   >
-                                    <div className="text d-flex align-items-center">
+                                    <div className="text d-flex align-items-center" onClick={()=> setActiveNodeType(type)}>
                                       <span style={{ margin: "0 4px 4px" }}>
                                         {isWatched ? (
                                           <svg
