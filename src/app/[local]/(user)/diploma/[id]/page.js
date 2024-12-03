@@ -14,6 +14,7 @@ import { Link } from "@/navigation";
 import CounterArea from "@/components/my-path/counter-area";
 import Error from "@/components/event-grid/error";
 import { UserHeader } from "@/layout";
+import CourseDiploma from "@/components/course/CourseDiploma";
 
 const Page = () => {
   const dispatch = useDispatch();
@@ -98,52 +99,67 @@ const Page = () => {
           {Array.isArray(course.courses) &&
             course.courses.map((cour, idx) => (
               <section key={idx}>
-                <div className="container">
-                  <div
-                    className="pr-[70px] pl-[70px] row  desktop"
-                    style={{ justifyContent: "center" }}
-                  >
-                    <div className="px-[60px]">
-                      <div
-                        className="edu-blog blog-style-list"
-                        data-aos-delay="150"
-                        data-aos="fade-up"
-                        data-aos-duration="800"
-                      >
-                        <div className="inner">
-                          <div className="thumbnail">
-                            <Link href={`/course-player/${cour.courseId}`}>
-                              <img
-                                src="/assets/images/blog/blog-25.jpg"
-                                alt="Blog Images"
-                              />
-                            </Link>
-                            <div className="time-top">
-                              <span className="duration_1">45%</span>
-                            </div>
-                          </div>
-                          <div className="content">
-                            <h5 className="title">
-                              <Link href={`/course-player/${cour.courseId}`}>
-                                {cour.titleAr}...
-                              </Link>
-                            </h5>
-                            <p>{cour.shortDescriptionAr}</p>
-                            <div className="read-more-btn">
-                              <Link
-                                href={`/course-player/${cour.courseId}`}
-                                className="edu-btn btn-border btn-medium"
-                              >
-                                ابدا الان <i className="icon-4"></i>
-                              </Link>
-                            </div>
-                          </div>
-                        </div>
+                <div
+                  key={idx}
+                  className="edu-blog blog-style-list"
+                  data-aos-delay="150"
+                  data-aos="fade-up"
+                  data-aos-duration="800"
+                >
+                  <div className="inner">
+                    <div className="thumbnail">
+                      <Link href={`/course-player/c84e7902-1205-426f-a857-922bedd84bdf}`}>
+                        <img
+                          src={`https://www.itlegend.net/Content/Uploads/CategoryMedia/${cour.image}`}
+                          // src={`/assets/images/course/course-01/course-01.jpg`}
+                          alt="Blog Images"
+                          className="lg:w-[280px]"
+                        />
+                      </Link>
+                      <div className="time-top">
+                        <Progress type="circle" percent={cour?.progressPercentage ? cour.progressPercentage.toFixed(0) : 0} />
+                        {/* <span className="duration_1">
+                      {course?.progressPercentage ? `${course.progressPercentage.toFixed(0)}%` : "0%"}
+                      </span> */}
+                      </div>
+                    </div>
+                    <div className="content">
+                      <h5 className="title">
+                        <Link href={`/diploma/${cour.categoryId}`}>
+                          {cour.titleAr}...
+                        </Link>
+                      </h5>
+                      <p>{cour.shortDescriptionAr ? cour.shortDescriptionAr : "No description available"}</p>
+                      <div className="read-more-btn">
+                        <Link
+                          href={`/course-player/c84e7902-1205-426f-a857-922bedd84bdf}`}
+                          className="edu-btn btn-border btn-medium"
+                        >
+                          ابدا الان <i className="icon-4"></i>
+                        </Link>
                       </div>
                     </div>
                   </div>
                 </div>
               </section>
+            ))}
+
+          {Array.isArray(course.courses) &&
+            course.courses.map((cour, idx) => (
+              <div
+                className="col-md-6 col-lg-4"
+                data-aos-delay="150"
+                data-aos="fade-up"
+                data-aos-duration="800"
+                key={idx}
+              >
+                <CourseDiploma
+                  bg="#f5f1eb"
+                  my={true}
+                  data={cour}
+                  image_location_path="02"
+                />
+              </div>
             ))}
         </>
       )}
