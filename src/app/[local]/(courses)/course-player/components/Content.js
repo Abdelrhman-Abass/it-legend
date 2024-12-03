@@ -329,7 +329,7 @@ const Content = ({ data, courseId, links, testData }) => {
             >
               <Tooltip title={"Your Progress"}>
                 <Progress
-                  percent={latestP?.progressPercentage ? latestP.progressPercentage.toFixed(0) : 0}
+                  percent={JSON.stringify(latestVideo)?.progressPercentage ? JSON.stringify(latestVideo).progressPercentage.toFixed(0) : 0}
                   strokeColor="#6ABD8A"
                   showInfo={false}
                 />
