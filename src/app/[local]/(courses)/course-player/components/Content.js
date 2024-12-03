@@ -76,10 +76,11 @@ const Content = ({ data, courseId, links, testData }) => {
 
 
   useEffect(() => {
+    setLatestP(JSON.stringify(latestVideo))
     console.log(activeNode)
     console.log(activeNodeType)
-    setLatestP(JSON.stringify(latestVideo))
     console.log("Latest from Content : " +JSON.stringify(latestVideo))
+    console.log("Latest from Content latestP : " + latestP)
 
   },[activeNode, activeNodeType , latestVideo])
   
