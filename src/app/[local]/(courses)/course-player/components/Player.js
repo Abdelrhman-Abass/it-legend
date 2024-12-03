@@ -39,7 +39,9 @@ const Player = ({ nodes, moduleId , modules ,activeNode, setComments}) => {
   const comments = useSelector(selectCourseComments)  
 
   useEffect(()=>{
-    dispatch(UserCoursePlayerLinks({courseId ,activeNode} ))
+    if(activeNode !== null){
+      dispatch(UserCoursePlayerLinks({courseId ,activeNode} ))
+    }
   },[activeNode])
 
   useEffect(()=>{
@@ -51,7 +53,7 @@ const Player = ({ nodes, moduleId , modules ,activeNode, setComments}) => {
   useEffect(() => {
     console.log("video Status:", status);
     console.log("activeNode Status:", activeNode);
-    console.log("video " +video)
+    console.log("video " +JSON.stringify(video))
     // console.log(modules)
     const r = getNextNodeId(modules , nodeId)
     setNextNodeId(r)
