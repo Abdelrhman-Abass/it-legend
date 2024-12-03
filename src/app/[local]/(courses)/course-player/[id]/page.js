@@ -29,8 +29,8 @@ const page = async ({ params }) => {
   const links = data
   console.log(links)
 
-  const { latestNode } = await PlayerLatestNode(params.id)
-  console.log("latestNode : " + latestNode)
+  // const { latestNode } = await PlayerLatestNode(params.id)
+  // console.log("latestNode : " + latestNode)
   
   const courseNode = await CoursePlayerNode(params.id)
 

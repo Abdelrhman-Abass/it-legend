@@ -43,6 +43,45 @@ export const CoursePlayerLinks = async (courseId) => {
         };
     }
 };
+export const CoursePlayerLatest = async (videoId) => {
+    try {
+        const token = cookies().get("token")?.value;
+        if (!token) throw new Error("Token is not available");
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            timeout: 3000000,
+        };
+
+        const response = await axios.get(
+            `http://49.13.77.125:1118/Endpoint/api/MemberCoursePlayer/${videoId}`,
+            config
+        );
+        
+        if (response?.data?.success) {
+            const { data } = response.data; // Extract the 'data' from the response      
+        
+            cookies().set("latestNode", JSON.stringify(data));
+            // Return the user data and tokens (matching Redux expectations)
+            return { latestNode: data};
+          } else {
+            // If the response is not successful, return an error
+            return null;
+          }
+        // console.log("Ltest from handler" + JSON.stringify(response.data.data))
+        // cookies().set("latestNode", JSON.stringify(response.data.data) ,{ httpOnly: true, secure: true }); 
+        // return JSON.stringify(response.data.data);
+    } catch (error) {
+        console.error("Error fetching latest data:", error.message);
+        return {
+            data: null,
+            message: error.response?.data?.message || error.message,
+        };
+    }
+};
 export const CoursePlayerLatestNode = async (courseId) => {
     try {
         const token = cookies().get("token")?.value;
@@ -66,7 +105,47 @@ export const CoursePlayerLatestNode = async (courseId) => {
         
             cookies().set("latestNode", JSON.stringify(data));
             // Return the user data and tokens (matching Redux expectations)
-            return { latestNode: data, accessToken: token, refreshToken };
+            return { latestNode: data};
+          } else {
+            // If the response is not successful, return an error
+            return null;
+          }
+        // console.log("Ltest from handler" + JSON.stringify(response.data.data))
+        // cookies().set("latestNode", JSON.stringify(response.data.data) ,{ httpOnly: true, secure: true }); 
+        // return JSON.stringify(response.data.data);
+    } catch (error) {
+        console.error("Error fetching latest data:", error.message);
+        return {
+            data: null,
+            message: error.response?.data?.message || error.message,
+        };
+    }
+};
+export const CoursePlayerVideoType = async (courseId) => {
+    try {
+        const token = cookies().get("token")?.value;
+        if (!token) throw new Error("Token is not available");
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            timeout: 3000000,
+        };
+
+        const response = await axios.get(
+            `http://49.13.77.125:1118/Endpoint/api/MemberCoursePlayer/${courseId}`,
+            config
+        );
+        
+        if (response?.data?.success) {
+            const { data } = response.data; // Extract the 'data' from the response      
+            console.log("Return the Player Type and progress " + response)
+
+            cookies().set("latestNode", JSON.stringify(data));
+            // Return the user data and tokens (matching Redux expectations)
+            return data;
           } else {
             // If the response is not successful, return an error
             return null;

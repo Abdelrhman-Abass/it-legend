@@ -1,6 +1,6 @@
 import { courseUSerData } from "@/hooks/courseHandler";
 import { diplomaUSerData ,getCoursesByCategory } from "@/hooks/diplomaHandler";
-import { CoursePlayerLatestNode } from "@/hooks/PlayerHandler";
+import { CoursePlayerLatestNode, CoursePlayerVideoType } from "@/hooks/PlayerHandler";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -58,16 +58,15 @@ export const fetchCoursesByCategory = createAsyncThunk(
 );
 export const LatestVideoNode = createAsyncThunk(
   ".user/diploma/latestVideoNode",
-  async ({videoId}, { rejectWithValue }) => {
+  async (courseId, { rejectWithValue }) => {
     try {
-      const response = await CoursePlayerLatestNode(videoId);
-      const { data } = response;
+      const response = await CoursePlayerVideoType(courseId);
+      // const  data  = response;
 
       if (!data) {
         return rejectWithValue("No latest found for the category.");
       }
-
-      return data;
+      return response;
     } catch (error) {
       console.error(error);
       return rejectWithValue(error.message);

@@ -72,11 +72,11 @@ const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNod
     }
   }, [status, video, error, activeNode, typeActiveNode,dispatch]);
   
-  useEffect(()=>{
-     dispatch(LatestVideoNode({videoId : video.videoId} ))
-     console.log("Dispatched Latest Course :", JSON.stringify(video).videoId);
+  // useEffect(()=>{
+  //    dispatch(LatestVideoNode({videoId : video.videoId} ))
+  //    console.log("Dispatched Latest Course :", JSON.stringify(video).videoId);
  
-   },[dispatch,activeNode])
+  //  },[dispatch,activeNode])
   
   const handleIsWatched = async () => {
     // console.log("moduleId", moduleId);

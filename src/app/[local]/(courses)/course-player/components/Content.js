@@ -33,6 +33,8 @@ import { validateYupSchema } from "formik";
 import BreadcrumbTwo from "@/components/breadcrumb/breadcrumb-2";
 import { UserHeader } from "@/layout";
 import Test from "./Test"
+import { useDispatch , useSelector} from "react-redux";
+import { LatestVideoNode, selectLatestVideo } from "@/store/features/diploma-slice";
 
 const Content = ({ data, courseId, links, testData }) => {
   const local = useLocale();
@@ -57,15 +59,25 @@ const Content = ({ data, courseId, links, testData }) => {
 
   const [modules, setModules] = useState([])
   const [openAccordion, setOpenAccordion] = useState(null);
+  const dispatch = useDispatch()
+
 
   useEffect(() => {
     setModules(testData)
   },[modules , watch])
 
+  useEffect(()=>{
+     dispatch(LatestVideoNode(courseId ))
+     console.log("Dispatched Latest Course :", courseId);
+   },[dispatch])
+
+  const latestVideo = useSelector(selectLatestVideo) 
+
   useEffect(() => {
     console.log(activeNode)
     console.log(activeNodeType)
-  },[activeNode, activeNodeType])
+    console.log("Latest from Content : " +latestVideo)
+  },[activeNode, activeNodeType , latestVideo])
   
   const handleDataComments = (fetchedData) => {
     setComments(fetchedData); // Store the fetched data in the parent state
