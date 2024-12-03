@@ -60,24 +60,20 @@ export const CoursePlayerLatestNode = async (courseId) => {
             `http://49.13.77.125:1118/Endpoint/api/MemberCoursePlayer/${courseId}`,
             config
         );
-        console.log("Ltest from handler: " + JSON.stringify(response.data.data));
-
-        // Manually set the cookie via Set-Cookie header
-        const latestNodeData = JSON.stringify(response.data.data);
-        const cookieOptions = {
-            httpOnly: true,  // Cookie is inaccessible from JavaScript
-            secure: 'production',  // Use Secure cookies in production
-            sameSite: 'Strict',  // Add SameSite policy
-            path: '/',  // Cookie is available throughout the site
-        };
-
-        const cookieHeader = `latestNode=${encodeURIComponent(latestNodeData)}; HttpOnly; Secure=${cookieOptions.secure}; SameSite=${cookieOptions.sameSite}; Path=${cookieOptions.path}`;
         
-        // Set the cookie header
-        const res = cookies();  // You may need to use this in your API handler
-        res.setHeader('Set-Cookie', cookieHeader);
-
-        return latestNodeData;
+        if (response?.data?.success) {
+            const { data } = response.data; // Extract the 'data' from the response      
+        
+            cookies().set("latestNode", JSON.stringify(data));
+            // Return the user data and tokens (matching Redux expectations)
+            return { latestNode: data, accessToken: token, refreshToken };
+          } else {
+            // If the response is not successful, return an error
+            return null;
+          }
+        // console.log("Ltest from handler" + JSON.stringify(response.data.data))
+        // cookies().set("latestNode", JSON.stringify(response.data.data) ,{ httpOnly: true, secure: true }); 
+        // return JSON.stringify(response.data.data);
     } catch (error) {
         console.error("Error fetching course data:", error.message);
         return {
@@ -86,6 +82,7 @@ export const CoursePlayerLatestNode = async (courseId) => {
         };
     }
 };
+
 // cookies().set("latestNode", response.data.data); http://localhost:3000/en/course-player/602d090f-ef57-464a-b724-0bf57ae9cdc3
 export const CoursePlayerVideo = async (courseId, nodeId) => {
     try {
