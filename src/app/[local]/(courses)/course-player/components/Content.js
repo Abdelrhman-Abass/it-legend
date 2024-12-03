@@ -53,14 +53,15 @@ const Content = ({ data, courseId, links, testData }) => {
   const [userAsk, setUserAsk] = useState("");
   const [loadSubmitAsk, setLoadSubmitAsk] = useState(false);
   const [isEdit, setIsEdit] = useState(null);
+  const [watch, setWatch] = useState(false);
 
   const [modules, setModules] = useState([])
   const [openAccordion, setOpenAccordion] = useState(null);
 
   useEffect(() => {
     setModules(testData)
-  },[modules])
-  
+  },[modules , watch])
+
   useEffect(() => {
     console.log(activeNode)
     console.log(activeNodeType)
@@ -462,7 +463,7 @@ const Content = ({ data, courseId, links, testData }) => {
                 <ArrowRight size={28} />
               )}
             </div>
-            <Player nodes={data?.nodes} moduleId={courseId} modules={modules} activeNode={activeNode} typeActiveNode={activeNodeType} setComments={handleDataComments} />
+            <Player nodes={data?.nodes} moduleId={courseId} setWatch={setWatch} modules={modules} activeNode={activeNode} typeActiveNode={activeNodeType} setComments={handleDataComments} />
           </div>
           <div className="course-details-content">
             <div className="nav-tab-wrap">
@@ -640,11 +641,11 @@ const Content = ({ data, courseId, links, testData }) => {
                                 return (
                                   <li
                                     style={{ color: isWatched ? "#6ABD8A" : undefined }}
-                                    className={nodeId == params.get("no") ? "active" : ""}
+                                    className={nodeId == activeNode? "active" : ""}
                                     key={nodeId}
                                     onClick={() => setActiveNode(nodeId)}
                                   >
-                                    <div className="text d-flex align-items-center">
+                                    <div className="text d-flex align-items-center" onClick={()=> setActiveNodeType(type)}>
                                       <span style={{ margin: "0 4px 4px" }}>
                                         {isWatched ? (
                                           <svg

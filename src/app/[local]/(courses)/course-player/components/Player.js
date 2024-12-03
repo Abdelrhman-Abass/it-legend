@@ -17,7 +17,7 @@ import { selectCoursesPlayerVideo ,UserCoursePlayerNode} from "@/store/features/
 import { CoursePlayerVideo } from "@/hooks/PlayerHandler";
 import { selectCourseError, selectCourseLinks, selectCourseStatus,selectCourseComments, UserCoursePlayerComments, UserCoursePlayerLinks } from "@/store/features/player-slice";
 
-const Player = ({ nodes, moduleId , modules ,activeNode, typeActiveNode,  setComments}) => {
+const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNode,  setComments}) => {
   const [node, setNode] = useState(null);
   const [nextNode, setNextNode] = useState(null);
   const [nextNodeId, setNextNodeId] = useState(null);
@@ -205,7 +205,7 @@ const Player = ({ nodes, moduleId , modules ,activeNode, typeActiveNode,  setCom
         type == 0 ? (
           <YouTubePlayer
             node={video}
-            handleIsWatched={handleIsWatched}
+            setWatch={setWatch}
             handleIsVideoEnd={handleIsVideoEnd}
             nextNode={nextNodeId}
           />
