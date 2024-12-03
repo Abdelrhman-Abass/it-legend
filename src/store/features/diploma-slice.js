@@ -66,7 +66,7 @@ export const LatestVideoNode = createAsyncThunk(
       if (!data) {
         return rejectWithValue("No latest found for the category.");
       }
-      return JSON.stringify(data);
+      return data;
     } catch (error) {
       console.error(error);
       return rejectWithValue(error.message);
