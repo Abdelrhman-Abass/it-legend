@@ -16,6 +16,9 @@ import Error from "@/components/event-grid/error";
 import { UserHeader } from "@/layout";
 import CourseDiploma from "@/components/course/CourseDiploma";
 
+import { usePathname, Link } from "@/navigation";
+
+
 const Page = () => {
   const dispatch = useDispatch();
   const pathname = usePathname();
