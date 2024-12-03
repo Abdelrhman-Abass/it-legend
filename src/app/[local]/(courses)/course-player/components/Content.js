@@ -57,7 +57,8 @@ const Content = ({ data, courseId, links, testData }) => {
   const [isEdit, setIsEdit] = useState(null);
   const [watch, setWatch] = useState(false);
   const [latestP, setLatestP] = useState();
-
+  const [latestPercantage, setLatestPercantage] = useState();
+  
   const [modules, setModules] = useState([])
   const [openAccordion, setOpenAccordion] = useState(null);
   const dispatch = useDispatch()
@@ -81,6 +82,7 @@ const Content = ({ data, courseId, links, testData }) => {
     console.log(activeNodeType)
     console.log("Latest from Content : " +JSON.stringify(latestVideo))
     console.log("Latest from Content latestP : " + latestVideo.progressPercentage)
+    setLatestPercantage(latestVideo.progressPercentage.tofixed(0))
 
   },[activeNode, activeNodeType , latestVideo])
   
@@ -330,7 +332,7 @@ const Content = ({ data, courseId, links, testData }) => {
             >
               <Tooltip title={"Your Progress"}>
                 <Progress
-                  percent={JSON.stringify(latestVideo)?.progressPercentage ? JSON.stringify(latestVideo).progressPercentage.toFixed(0) : 0}
+                  percent={latestPercantage ? latestPercantage : 0}
                   strokeColor="#6ABD8A"
                   showInfo={false}
                 />
@@ -346,7 +348,7 @@ const Content = ({ data, courseId, links, testData }) => {
                   transition: "all 0.1s",
                 }}
               >
-                {JSON.stringify(latestVideo)?.progressPercentage ? JSON.stringify(latestVideo).progressPercentage.toFixed(0) : 0}%
+                {latestPercantage ? latestPercantage : 0}%
               </div>
             </div>
             <CourseAccordion
@@ -598,7 +600,7 @@ const Content = ({ data, courseId, links, testData }) => {
               >
                 <Tooltip title="Your Progress">
                   <Progress
-                    percent={percent}
+                    percent={latestPercantage}
                     strokeColor="#6ABD8A"
                     showInfo={false}
                   />
@@ -613,7 +615,7 @@ const Content = ({ data, courseId, links, testData }) => {
                     transition: "all 0.1s",
                   }}
                 >
-                  {percent}%
+                  {latestPercantage}%
                 </div>
               </div>
               {
