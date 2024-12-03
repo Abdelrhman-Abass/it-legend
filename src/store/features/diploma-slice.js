@@ -61,7 +61,7 @@ export const LatestVideoNode = createAsyncThunk(
   async (courseId, { rejectWithValue }) => {
     try {
       const response = await CoursePlayerVideoType(courseId);
-      const data  = response;
+      const {data}  = response;
       
       if (!data) {
         return rejectWithValue("No latest found for the category.");
