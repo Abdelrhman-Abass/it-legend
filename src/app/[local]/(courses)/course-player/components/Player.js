@@ -38,12 +38,12 @@ const Player = ({ nodes, moduleId , modules ,activeNode, setComments}) => {
   const error = useSelector(selectCourseError)
   const comments = useSelector(selectCourseComments)  
   useEffect(()=>{
-    dispatch(UserCoursePlayerLinks({courseId ,nodeId} ))
-  },[dispatch])
+    dispatch(UserCoursePlayerLinks({courseId ,activeNode} ))
+  },[dispatch, activeNode])
 
   useEffect(()=>{
     dispatch(UserCoursePlayerComments({activeNode} ))
-  },[dispatch])
+  },[dispatch,activeNode])
 
 
 
