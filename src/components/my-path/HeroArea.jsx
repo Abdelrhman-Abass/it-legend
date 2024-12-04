@@ -20,16 +20,18 @@ const HeroArea = ({latest}) => {
 
   //   // Assuming `latest` is an object with a `latest` key containing the desired data as JSON.
   // }, [latest]);
+  let parsedLatest
   useEffect(() => {
     try {
       // Parse the string into an object
-      const parsedLatest = JSON.parse(latest);
+      parsedLatest = JSON.parse(latest);
       console.log("Parsed latest from hero area:", parsedLatest);
 
       // Safely access properties and update state
       if (parsedLatest && parsedLatest.courseId) {
         console.log("Parsed course ID:", parsedLatest.courseId);
         setLatestImages(parsedLatest);
+        
       } else {
         console.warn("Parsed latest does not contain a courseId.");
       }
@@ -77,12 +79,12 @@ const HeroArea = ({latest}) => {
                   <div className="thumbnail-wrap ">
                     <div className="thumbnail lg:px-[50px]">
                       <Link
-                        href={`/course-player/${latestImages.courseId}`}
+                        href={`/course-player/${parsedLatest.courseId}`}
                         className="flex justify-center items-center"
                       >
                         <img
                           // src='/assets/images/keep-going.jpg'
-                          src={`https://www.itlegend.net/Content/Uploads/CoursesMedia/${latestImages.image}`}
+                          src={`https://www.itlegend.net/Content/Uploads/CoursesMedia/${parsedLatest.image}`}
                           alt="team images"
                           className="h-[100px] object-cover"
                           width={160}
