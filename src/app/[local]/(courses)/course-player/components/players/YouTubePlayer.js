@@ -2,27 +2,34 @@
 import { CoursePlayerVideoIsWatched } from "@/hooks/PlayerHandler";
 import React, { useCallback, useEffect, useState } from "react";
 import YouTube from "react-youtube";
-
+import { useNodeId } from "../../context/NodeIdContext";
 const YouTubePlayer = ({ node, setWatch, handleIsVideoEnd ,nextNode }) => {
   
   const [player, setPlayer] = useState(null);
   const [hasReached80, setHasReached80] = useState(false);
   const [watchedDuration, setWatchedDuration] = useState(0);
   const [intervalId, setIntervalId] = useState(null);
+  const {setActiveNode} = useNodeId();
 
-  // console.log("Node data:", node);
   const changeNoParam = (newNoValue) => {
     // Get the current URL
-    const currentUrl = new URL(window.location.href);
-
-    // Update the 'no' parameter
-    currentUrl.searchParams.set('no', newNoValue); // Change 'no' to the new value
-
-    // Update the browser's URL without reloading the page
-    window.history.pushState({}, '', currentUrl);
-    window.location.reload();
-
+    setActiveNode(newNoValue)
   };
+  
+
+  // console.log("Node data:", node);
+  // const changeNoParam = (newNoValue) => {
+  //   // Get the current URL
+  //   const currentUrl = new URL(window.location.href);
+
+  //   // Update the 'no' parameter
+  //   currentUrl.searchParams.set('no', newNoValue); // Change 'no' to the new value
+
+  //   // Update the browser's URL without reloading the page
+  //   window.history.pushState({}, '', currentUrl);
+  //   window.location.reload();
+
+  // };
   // useEffect(()=>{
   //   const res = changeNoParam(nextNode)
   // },[])
