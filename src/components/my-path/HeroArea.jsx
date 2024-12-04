@@ -17,7 +17,7 @@ const HeroArea = (latest) => {
   useEffect(()=>{
     console.log("latest from hero area " + JSON.stringify(latest))
     setLatestImages(latest)
-    console.log("latest from hero area 2 " + latest.courseId)
+    console.log("latest from hero area 2 " + latest.latest.courseId)
   },[latest])
 
   return (
