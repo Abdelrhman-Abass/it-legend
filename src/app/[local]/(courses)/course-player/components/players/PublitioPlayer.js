@@ -200,6 +200,7 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
     // Get the current URL
     setActiveNode(newNoValue)
   };
+
   const handleVideoWatched = async (videoId) => {
     const result = await CoursePlayerVideoIsWatched(videoId);
 
@@ -209,6 +210,7 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
       console.error("Error:", result.message);
     }
   };
+  
   useEffect(() => {
     const { videoPath, posterPath } = deriveVideoAssets(node?.path);
     setPoster(posterPath);

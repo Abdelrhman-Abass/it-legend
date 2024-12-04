@@ -62,10 +62,10 @@ const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNod
     // console.log("type Status:", type);
     // console.log("video " +JSON.stringify(video))
     // console.log(modules)
-    const r = getNextNodeId(modules , activeNode)
-    setNextNodeId(r)
-    console.log("next node : " + r)
-    console.log("next node : " + typeof modules)
+    // const r = getNextNodeId(modules , activeNode)
+    // setNextNodeId(r)
+    // console.log("next node : " + r)
+    // console.log("next node : " + typeof modules)
     
     
     setComments(comments)
@@ -135,7 +135,7 @@ const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNod
   useEffect(()=>{
     const r = getNextNodeId(modules , activeNode)
     setNextNodeId(r)
-    console.log("active : " + JSON.stringify(modules))
+    // console.log("active : " + JSON.stringify(modules))
     console.log("next node : " + r)
  
    },[activeNode])

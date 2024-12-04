@@ -136,7 +136,9 @@ const HeroArea = ({latest}) => {
       </ul>
     </section>
     ):(
-      null
+      <section>
+        <div className="pt-[100px]"></div>
+      </section>
     )
   );
 };

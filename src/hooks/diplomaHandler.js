@@ -6,7 +6,14 @@ import { cookies } from "next/headers";
 export const diplomaUSerData = async () => {
     try {
         const token = cookies().get("token")?.value;
-        if (!token) throw new Error("Token is not available");
+        if (!token) {
+            const refreshToken = cookies.get("refreshToken")?.value
+            if (!refreshToken) {
+                return null
+            }else{
+                refreshAuth()
+            }
+        };
 
         const response = await fetch(
             `http://49.13.77.125:1118/Endpoint/api/MemberCategory/categories`,
@@ -44,7 +51,14 @@ export const diplomaUSerData = async () => {
 export const getCoursesByCategory = async (categoryId) => {
     try {
         const token = cookies().get("token")?.value;
-        if (!token) throw new Error("Token is not available");
+        if (!token) {
+            const refreshToken = cookies.get("refreshToken")?.value
+            if (!refreshToken) {
+                return null
+            }else{
+                refreshAuth()
+            }
+        };
 
         const response = await fetch(
             `http://49.13.77.125:1118/Endpoint/api/MemberCategory/${categoryId}/details`,

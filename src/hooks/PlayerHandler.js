@@ -19,7 +19,14 @@ const fetchWithRetry = async (url, config, retries = 3, delay = 1000) => {
 export const CoursePlayerLinks = async (courseId) => {
     try {
         const token = cookies().get("token")?.value;
-        if (!token) throw new Error("Token is not available");
+        if (!token) {
+            const refreshToken = cookies.get("refreshToken")?.value
+            if (!refreshToken) {
+                return null
+            }else{
+                refreshAuth()
+            }
+        };
 
         const config = {
             headers: {
@@ -46,7 +53,14 @@ export const CoursePlayerLinks = async (courseId) => {
 export const CoursePlayerLatest = async (videoId) => {
     try {
         const token = cookies().get("token")?.value;
-        if (!token) throw new Error("Token is not available");
+        if (!token) {
+            const refreshToken = cookies.get("refreshToken")?.value
+            if (!refreshToken) {
+                return null
+            }else{
+                refreshAuth()
+            }
+        };
 
         const config = {
             headers: {
@@ -85,7 +99,14 @@ export const CoursePlayerLatest = async (videoId) => {
 export const CoursePlayerLatestNode = async (courseId) => {
     try {
         const token = cookies().get("token")?.value;
-        if (!token) throw new Error("Token is not available");
+        if (!token) {
+            const refreshToken = cookies.get("refreshToken")?.value
+            if (!refreshToken) {
+                return null
+            }else{
+                refreshAuth()
+            }
+        };
 
         const config = {
             headers: {
@@ -124,7 +145,14 @@ export const CoursePlayerLatestNode = async (courseId) => {
 export const CoursePlayerVideoType = async (courseId) => {
     try {
         const token = cookies().get("token")?.value;
-        if (!token) throw new Error("Token is not available");
+        if (!token) {
+            const refreshToken = cookies.get("refreshToken")?.value
+            if (!refreshToken) {
+                return null
+            }else{
+                refreshAuth()
+            }
+        };
 
         const config = {
             headers: {
@@ -165,7 +193,14 @@ export const CoursePlayerVideo = async (courseId, nodeId) => {
     try {
       console.log("Starting CoursePlayerVideo:", courseId, nodeId);
       const token = cookies().get("token")?.value;
-      if (!token) throw new Error("Token is not available");
+      if (!token) {
+        const refreshToken = cookies.get("refreshToken")?.value
+        if (!refreshToken) {
+            return null
+        }else{
+            refreshAuth()
+        }
+        };
       
       console.log("Token Retrieved:", token);
   
@@ -200,7 +235,14 @@ export const CoursePlayerVideo = async (courseId, nodeId) => {
   export const CoursePlayerVideoIsWatched = async (videoId) => {
     try {
         const token = cookies().get("token")?.value;
-        if (!token) throw new Error("Token is not available");
+        if (!token) {
+            const refreshToken = cookies.get("refreshToken")?.value
+            if (!refreshToken) {
+                return null
+            }else{
+                refreshAuth()
+            }
+        };
 
         const config = {
             headers: {
@@ -235,7 +277,14 @@ export const CoursePlayerVideo = async (courseId, nodeId) => {
 export const CoursePlayerVideoComments = async (nodeId) => {
     try {
         const token = cookies().get("token")?.value;
-        if (!token) throw new Error("Token is not available");
+        if (!token) {
+            const refreshToken = cookies.get("refreshToken")?.value
+            if (!refreshToken) {
+                return null
+            }else{
+                refreshAuth()
+            }
+        };
 
         const config = {
             headers: {
@@ -263,7 +312,14 @@ export const CoursePlayerVideoComments = async (nodeId) => {
 export const CoursePlayerNode = async (courseId ) => {
     try {
         const token = cookies().get("token")?.value;
-        if (!token) throw new Error("Token is not available");
+        if (!token) {
+            const refreshToken = cookies.get("refreshToken")?.value
+            if (!refreshToken) {
+                return null
+            }else{
+                refreshAuth()
+            }
+        };
 
         const config = {
             headers: {

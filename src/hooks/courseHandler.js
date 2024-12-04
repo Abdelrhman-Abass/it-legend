@@ -1,4 +1,5 @@
 "use server";
+import { refreshAuth } from "@/app/[local]/auth/authHandler";
 import axios from "axios";
 import { cookies } from "next/headers";
 
@@ -19,7 +20,14 @@ const fetchWithRetry = async (url, config, retries = 3, delay = 1000) => {
 export const courseUSerData = async () => {
     try {
         const token = cookies().get("token")?.value;
-        if (!token) throw new Error("Token is not available");
+        if (!token) {
+            const refreshToken = cookies.get("refreshToken")?.value
+            if (!refreshToken) {
+                return null
+            }else{
+                refreshAuth()
+            }
+        };
 
         const config = {
             headers: {
@@ -47,7 +55,14 @@ export const courseUSerData = async () => {
 export const latestNodeOpend = async (courseId) => {
     try {
         const token = cookies().get("token")?.value;
-        if (!token) throw new Error("Token is not available");
+        if (!token) {
+            const refreshToken = cookies.get("refreshToken")?.value
+            if (!refreshToken) {
+                return null
+            }else{
+                refreshAuth()
+            }
+        };
 
         const config = {
             headers: {

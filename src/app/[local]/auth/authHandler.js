@@ -19,7 +19,7 @@ export const authHandler = async (url, body) => {
     // Check if the response is successful
     if (response?.data?.success) {
       const { data } = response.data; // Extract the 'data' from the response
-      const { token, refreshToken } = data;
+      const { token, refreshToken ,email} = data;
 
       
       // Store tokens and user data in cookies
@@ -28,7 +28,7 @@ export const authHandler = async (url, body) => {
       // cookies().set("user_id", data.id);
       cookies().set("user", JSON.stringify(data) , {maxAge: 86400});
       // Return the user data and tokens (matching Redux expectations)
-      return { user: data, accessToken: token, refreshToken };
+      return { user: email, accessToken: token, refreshToken };
     } else {
       // If the response is not successful, return an error
       return null;
@@ -39,24 +39,42 @@ export const authHandler = async (url, body) => {
     return null;
   }
 };
-export const refreshAuth = async(body)=>{
-  
+
+export const refreshAuth = async()=>{
   try {
     const refreshToken = cookies.get("refreshToken")?.value
     if (!refreshToken) throw new Error("Token is not available");
 
+    const email = cookies.get("email")?.value
+    if (!refreshToken) throw new Error("Token is not available");
+
     const response = await axios.post(
       `http://49.13.77.125:1118/Endpoint/api/Token/`,
-      body,
+      {
+        "email":email,
+        "refreshToken":refreshToken
+      },
       {
         headers: {
           "Content-Type": "application/json",
         },
       }
     );
+    
+    if (response?.data?.success) {
+      const { data } = response.data; // Extract the 'data' from the response
+      const { token } = data;
 
+      
+      // Store tokens and user data in cookies
+      cookies().set("token", token,{ httpOnly: true, secure: true , maxAge: 3600} );
+      
+    } else {
+      // If the response is not successful, return an error
+      return null;
+    }
 
-    return response.data;
+    return data;
 } catch (error) {
     console.error("Error fetching course data:", error.message);
     return {
@@ -65,6 +83,8 @@ export const refreshAuth = async(body)=>{
     };
 }
 }
+
+
 export const PlayerLatestNode = async (courseId) => {
   try {
       const token = cookies().get("token")?.value;
