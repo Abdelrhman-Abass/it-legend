@@ -42,7 +42,7 @@ const MyCourseDiploma = ({
             href={my ? `/course-player/${data.courseId}` : `/course-player/${data.courseId}`}
           >
             <img
-              src={`https://www.itlegend.net/Content/Uploads/CategoryMedia/${data.image}`}
+              src={`https://www.itlegend.net/Content/Uploads/CoursesMedia/${data.image}`}
               // src={`/assets/images/course/course-01/course-01.jpg`}
               className=" lg:w-[280px]"
 

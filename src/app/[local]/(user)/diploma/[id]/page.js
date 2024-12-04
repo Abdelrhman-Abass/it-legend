@@ -149,9 +149,9 @@ const Page = () => {
 
             {Array.isArray(course.courses) &&
               course.courses.map((cour, idx) => (
-                <section className="row mt-[50px]">
+                <section className="row pt-[50px] mobile">
                   <div
-                    className="col-md-6 col-lg-4 mobile"
+                    className="col-md-6 col-lg-4 "
                     data-aos-delay="150"
                     data-aos="fade-up"
                     data-aos-duration="800"
