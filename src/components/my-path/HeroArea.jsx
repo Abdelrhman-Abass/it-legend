@@ -10,6 +10,7 @@ import SwitchThemeButton from "../common/SwitchThemeButton";
 
 const HeroArea = ({latest}) => {
   const [latestImages , setLatestImages] = useState()
+  const [courseId , setCourseId] = useState()
   const { mouseDirection, mouseReverse } = useMouseMoveUI();
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], [0, 1000]);
@@ -30,7 +31,8 @@ const HeroArea = ({latest}) => {
       // Safely access properties and update state
       if (parsedLatest && parsedLatest.courseId) {
         console.log("Parsed course ID:", parsedLatest.courseId);
-        setLatestImages(parsedLatest);
+        setCourseId(parsedLatest.courseId)
+        setLatestImages(parsedLatest.image);
         
       } else {
         console.warn("Parsed latest does not contain a courseId.");
@@ -40,7 +42,7 @@ const HeroArea = ({latest}) => {
     }
   }, [latest]);
 
-  console.log("Parsed course ID again :", parsedLatest.courseId);
+  console.log("Parsed course ID again :", courseId);
 
 
   return (
