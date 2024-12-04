@@ -212,7 +212,7 @@ const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNod
     <>
       {/* type == 0 video */}
       {type == 0 ? (
-        playerType == 1 ? (
+        playerType == 0 ? (
           <YouTubePlayer
             node={video}
             setWatch={setWatch}
@@ -221,7 +221,7 @@ const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNod
           />
          ) 
         : 
-        playerType == 0 ? (
+        playerType == 1 ? (
           <PublitioPlayer
             node={video}
             handleIsVideoEnd={handleIsVideoEnd}
