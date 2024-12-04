@@ -100,10 +100,10 @@ const Page = () => {
 
           {Array.isArray(course.courses) &&
             course.courses.map((cour, idx) => (
-              <section key={idx} className="pr-[70px] pl-[70px] row desktop" style={{ justifyContent: "center" }}>
+              <section key={idx} className="pr-[120px] pl-[120px] row" style={{ justifyContent: "center" }}>
                 <div
                   key={idx}
-                  className="edu-blog blog-style-list"
+                  className="edu-blog blog-style-list desktop"
                   data-aos-delay="150"
                   data-aos="fade-up"
                   data-aos-duration="800"
@@ -120,9 +120,9 @@ const Page = () => {
                       </Link>
                       <div className="time-top">
                         <span className="duration_1">
-                        <Progress type="circle" percent={cour?.progressPercentage ? cour.progressPercentage.toFixed(0) : 0} size={45} status="exception" format={(percent) => `${percent}%`} />
-                      {/* {course?.progressPercentage ? `${course.progressPercentage.toFixed(0)}%` : "0%"} */}
-                      </span>
+                          <Progress type="circle" percent={cour?.progressPercentage ? cour.progressPercentage.toFixed(0) : 0} size={45} status="exception" format={(percent) => `${percent}%`} />
+                          {/* {course?.progressPercentage ? `${course.progressPercentage.toFixed(0)}%` : "0%"} */}
+                        </span>
                       </div>
                     </div>
                     <div className="content">
@@ -148,24 +148,26 @@ const Page = () => {
 
           {Array.isArray(course.courses) &&
             course.courses.map((cour, idx) => (
-              <div
-                className="col-md-6 col-lg-4 lg:hidden"
-                data-aos-delay="150"
-                data-aos="fade-up"
-                data-aos-duration="800"
-                key={idx}
-              >
-                <CourseDiploma
-                  bg="#f5f1eb"
-                  my={true}
-                  data={cour}
-                  image_location_path="02"
-                />
-              </div>
+              <section className="row">
+                <div
+                  className="col-md-6 col-lg-4 mobile"
+                  data-aos-delay="150"
+                  data-aos="fade-up"
+                  data-aos-duration="800"
+                  key={idx}
+                >
+                  <CourseDiploma
+                    bg="#f5f1eb"
+                    my={true}
+                    data={cour}
+                    image_location_path="02"
+                  />
+                </div>
+              </section>
             ))}
+
         </>
       )}
-
       {status === "failed" && <Error />}
     </>
   );
