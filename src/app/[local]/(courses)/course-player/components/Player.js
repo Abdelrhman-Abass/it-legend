@@ -96,7 +96,7 @@ const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNod
     console.log("Modules:", modules);
   
     // Find the module that contains the nodes
-    const module = modules.find((mod) => mod.nodes);
+    const module = modules.find((mod) => mod.nodes && mod.nodes.some((node) => node.nodeId === activeNode));
   
     if (!module) {
       console.log("No module with nodes found");
