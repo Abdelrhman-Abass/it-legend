@@ -97,79 +97,84 @@ const Page = () => {
           </div>
 
           <CounterArea />
-
-          {Array.isArray(course.courses) &&
-            course.courses.map((cour, idx) => (
-              <section key={idx} className="pr-[120px] pl-[120px] row" style={{ justifyContent: "center" }}>
-                <div
-                  key={idx}
-                  className="edu-blog blog-style-list desktop"
-                  data-aos-delay="150"
-                  data-aos="fade-up"
-                  data-aos-duration="800"
-                >
-                  <div className="inner">
-                    <div className="thumbnail">
-                      <Link href={`/course-player/${cour.courseId}`}>
-                        <img
-                          src={`https://www.itlegend.net/Content/Uploads/CoursesMedia/${cour.image}`}
-                          // src={`/assets/images/course/course-01/course-01.jpg`}
-                          alt="Blog Images"
-                          className="lg:w-[280px]"
-                        />
-                      </Link>
-                      <div className="time-top">
-                        <span className="duration_1">
-                          <Progress type="circle" percent={cour?.progressPercentage ? cour.progressPercentage.toFixed(0) : 0} size={45} status="exception" format={(percent) => `${percent}%`} />
-                          {/* {course?.progressPercentage ? `${course.progressPercentage.toFixed(0)}%` : "0%"} */}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="content">
-                      <h5 className="title">
+          <div className="container">
+            {Array.isArray(course.courses) &&
+              course.courses.map((cour, idx) => (
+                <section key={idx} className="pr-[70px] pl-[70px] row row--30 desktop" style={{ justifyContent: "center" }}>
+                  <div
+                    key={idx}
+                    className="edu-blog blog-style-list"
+                    data-aos-delay="150"
+                    data-aos="fade-up"
+                    data-aos-duration="800"
+                  >
+                    <div className="inner">
+                      <div className="thumbnail">
                         <Link href={`/course-player/${cour.courseId}`}>
-                          {cour.titleAr}
+                          <img
+                            src={`https://www.itlegend.net/Content/Uploads/CoursesMedia/${cour.image}`}
+                            // src={`/assets/images/course/course-01/course-01.jpg`}
+                            alt="Blog Images"
+                            className="lg:w-[280px]"
+                          />
                         </Link>
-                      </h5>
-                      <p>{cour.shortDescriptionAr ? cour.shortDescriptionAr : "No description available"}</p>
-                      <div className="read-more-btn">
-                        <Link
-                          href={`/course-player/${cour.courseId}`}
-                          className="edu-btn btn-border btn-medium"
-                        >
-                          ابدا الان <i className="icon-4"></i>
-                        </Link>
+                        <div className="time-top">
+                          <span className="duration_1">
+                            <Progress type="circle" percent={cour?.progressPercentage ? cour.progressPercentage.toFixed(0) : 0} size={45} status="exception" format={(percent) => `${percent}%`} />
+                            {/* {course?.progressPercentage ? `${course.progressPercentage.toFixed(0)}%` : "0%"} */}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="content">
+                        <h5 className="title">
+                          <Link href={`/course-player/${cour.courseId}`}>
+                            {cour.titleAr}
+                          </Link>
+                        </h5>
+                        <p>{cour.shortDescriptionAr ? cour.shortDescriptionAr : "No description available"}</p>
+                        <div className="read-more-btn">
+                          <Link
+                            href={`/course-player/${cour.courseId}`}
+                            className="edu-btn btn-border btn-medium"
+                          >
+                            ابدا الان <i className="icon-4"></i>
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </section>
-            ))}
+                </section>
+              ))}
 
-          {Array.isArray(course.courses) &&
-            course.courses.map((cour, idx) => (
-              <section className="row">
-                <div
-                  className="col-md-6 col-lg-4 mobile"
-                  data-aos-delay="150"
-                  data-aos="fade-up"
-                  data-aos-duration="800"
-                  key={idx}
-                >
-                  <CourseDiploma
-                    bg="#f5f1eb"
-                    my={true}
-                    data={cour}
-                    image_location_path="02"
-                  />
-                </div>
-              </section>
-            ))}
+            {Array.isArray(course.courses) &&
+              course.courses.map((cour, idx) => (
+                <section className="row">
+                  <div
+                    className="col-md-6 col-lg-4 mobile"
+                    data-aos-delay="150"
+                    data-aos="fade-up"
+                    data-aos-duration="800"
+                    key={idx}
+                  >
+                    <CourseDiploma
+                      bg="#f5f1eb"
+                      my={true}
+                      data={cour}
+                      image_location_path="02"
+                    />
+                  </div>
+                </section>
+              ))}
+
+
+          </div>
 
         </>
       )}
       {status === "failed" && <Error />}
     </>
+
+
   );
 };
 
