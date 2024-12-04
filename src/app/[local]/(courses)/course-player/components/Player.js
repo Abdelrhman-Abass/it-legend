@@ -104,8 +104,13 @@ const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNod
     }
   
     console.log("Module with nodes:", module);
-    console.log("Module with nodes:", activeNode);
-
+    console.log("Active node:", activeNode);
+  
+    // Ensure module.nodes is an array and has nodes
+    if (!Array.isArray(module.nodes) || module.nodes.length === 0) {
+      console.log("No nodes found in module");
+      return null;
+    }
   
     // Find the index of the current node in the module
     const currentNodeIndex = module.nodes.findIndex((node) => node.nodeId === activeNode);
@@ -117,14 +122,13 @@ const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNod
   
     console.log("Current node index:", currentNodeIndex);
   
-    // Get the next node
-    const nextNode = module.nodes[currentNodeIndex + 1];
-  
-    if (nextNode) {
+    // Check if there is a next node within bounds
+    if (currentNodeIndex + 1 < module.nodes.length) {
+      const nextNode = module.nodes[currentNodeIndex + 1];
       console.log("Next node found:", nextNode);
       return nextNode.nodeId; // Return the nodeId of the next node
     } else {
-      console.log("No next node found");
+      console.log("No next node found (out of bounds)");
       return null; // Return null if there's no next node
     }
   };
