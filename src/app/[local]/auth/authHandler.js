@@ -23,10 +23,10 @@ export const authHandler = async (url, body) => {
 
       
       // Store tokens and user data in cookies
-      cookies().set("token", token,{ httpOnly: true, secure: true } );
-      cookies().set("refreshToken", refreshToken ,{ httpOnly: true, secure: true });
+      cookies().set("token", token,{ httpOnly: true, secure: true , maxAge: 3600} );
+      cookies().set("refreshToken", refreshToken ,{ httpOnly: true, secure: true  , maxAge: 86400 });
       // cookies().set("user_id", data.id);
-      cookies().set("user", JSON.stringify(data));
+      cookies().set("user", JSON.stringify(data) , {maxAge: 86400});
       // Return the user data and tokens (matching Redux expectations)
       return { user: data, accessToken: token, refreshToken };
     } else {
@@ -39,7 +39,32 @@ export const authHandler = async (url, body) => {
     return null;
   }
 };
+export const refreshAuth = async(body)=>{
+  
+  try {
+    const refreshToken = cookies.get("refreshToken")?.value
+    if (!refreshToken) throw new Error("Token is not available");
 
+    const response = await axios.post(
+      `http://49.13.77.125:1118/Endpoint/api/Token/`,
+      body,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+
+    return response.data;
+} catch (error) {
+    console.error("Error fetching course data:", error.message);
+    return {
+        data: null,
+        message: error.response?.data?.message || error.message,
+    };
+}
+}
 export const PlayerLatestNode = async (courseId) => {
   try {
       const token = cookies().get("token")?.value;

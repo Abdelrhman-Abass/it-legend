@@ -8,12 +8,13 @@ import SwitchThemeButton from "../common/SwitchThemeButton";
 
 // import SwitchThemeButton from "../common/SwitchThemeButton";
 
-const HeroArea = () => {
+const HeroArea = (latest) => {
   const { mouseDirection, mouseReverse } = useMouseMoveUI();
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], [0, 1000]);
-
+  console.log("latest from her area " + latest)
   return (
+    latest && (
     <section className="why-choose-area-3 edu-section-gap">
       <div className="container">
         <div className="row row--45 ">
@@ -51,11 +52,12 @@ const HeroArea = () => {
                   <div className="thumbnail-wrap ">
                     <div className="thumbnail lg:px-[50px]">
                       <Link
-                        href={`/course-player/c84e7902-1205-426f-a857-922bedd84bdf"`}
+                        href={`/course-player/${latest.courseId}`}
                         className="flex justify-center items-center"
                       >
-                        <Image
-                          src='/assets/images/keep-going.jpg'
+                        <img
+                          // src='/assets/images/keep-going.jpg'
+                          src={`https://www.itlegend.net/Content/Uploads/CoursesMedia/${latest.image}`}
                           alt="team images"
                           className="h-[100px] object-cover"
                           width={160}
@@ -99,6 +101,7 @@ const HeroArea = () => {
         </li>
       </ul>
     </section>
+    )
   );
 };
 

@@ -14,14 +14,16 @@ import CourseElevenArea from "@/components/courses/CourseElvenArea";
 import RecommendedCourses from "@/components/my-path/RecomendedCourses";
 import { cookies } from "next/headers";
 
-const page = () => {
-  const latest = cookies().get("latestNode")?.value
-  console.log("Latest from page " + latest)
+const page = async() => {
+  const latest = await cookies().get("latestNode")?.value
+  const {courseId , image} = latest
+  console.log("Latest from page " + courseId)
+
   return (
     <div style={{ paddingBottom: 92 }}>
 
       <UserHeader />
-      <HeroArea />
+      <HeroArea latest={latest}/>
       <CategoryArea />
       <CounterUpArea />
       <AdsBanner />
