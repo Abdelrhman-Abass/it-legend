@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useMouseMoveUI } from "@/contexts/mouse-move-context";
 import { Link } from "@/navigation";
@@ -12,7 +12,11 @@ const HeroArea = (latest) => {
   const { mouseDirection, mouseReverse } = useMouseMoveUI();
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], [0, 1000]);
-  console.log("latest from her area " + latest)
+
+  useEffect(()=>{
+    console.log("latest from hero area " + JSON.stringify(latest))
+  },[latest])
+
   return (
     latest && (
     <section className="why-choose-area-3 edu-section-gap">
