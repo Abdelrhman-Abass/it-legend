@@ -13,7 +13,7 @@ const intlMiddleware = createMiddleware({
 
 export async function middleware(req) {
   // Access cookies from the request headers
-  const user = req.cookies.get("user")?.value;
+  const user = req.cookies.get("token")?.value;
 
   const { pathname } = req.nextUrl;
 
