@@ -16,7 +16,6 @@ import { cookies } from "next/headers";
 
 const page = async() => {
   const latest = await cookies().get("latestNode")?.value
-  const {courseId , image} = JSON.stringify(latest)
   // console.log("Latest from page " + courseId)
 
   return (

@@ -62,9 +62,10 @@ const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNod
     // console.log("type Status:", type);
     // console.log("video " +JSON.stringify(video))
     // console.log(modules)
-    const r = getNextNodeId(modules , nodeId)
+    const r = getNextNodeId(modules , activeNode)
     setNextNodeId(r)
-    // console.log("next node : " + r)
+    console.log("next node : " + r)
+    
     
     setComments(comments)
     // console.log(" comments : "+comments)
@@ -72,12 +73,29 @@ const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNod
       console.log("Error:", error);
     }
   }, [status, video, error, activeNode, typeActiveNode,dispatch]);
+  const getNextNodeId = (modules, activeNode) => {
+    // Find the module that contains the nodes
+    const module = modules.find((mod) => mod.nodes);
   
-  // useEffect(()=>{
-  //    dispatch(LatestVideoNode({videoId : video.videoId} ))
-  //    console.log("Dispatched Latest Course :", JSON.stringify(video).videoId);
+    if (!module) return null; // If no module found, return null
+  
+    // Find the index of the current node
+    const currentNodeIndex = module.nodes.findIndex((node) => node.nodeId === activeNode);
+  
+    if (currentNodeIndex === -1) return null; // If nodeId is not found, return null eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImE4YzhlMGQ1LTU5MmYtNDdhZC1hYWIyLTA2OWM2MjEwNmVkOCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhbGFhbXVoYW1lZDk3QGdtYWlsLmNvbSIsImp0aSI6Ijg2OWUxNjhjLTZmYmEtNGM1NC1hYjgzLTU2NWJiMTFhOTM1ZCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6InVzZXIiLCJleHAiOjE3MzMzMTYxNTgsImlzcyI6Imh0dHBzOi8vd3d3Lml0bGVnZW5kLm5ldC8iLCJhdWQiOiJodHRwczovL3d3dy5pdGxlZ2VuZC5uZXQvIn0.lC62snsnl_1uRm-hoAtOqz3JF9xv8VaTT3574KHrz8s
+  
+    // Get the next node
+    const nextNode = module.nodes[currentNodeIndex + 1];
+  
+    return nextNode ? nextNode.nodeId : null; // Return the nodeId of the next node or null if there's no next node  http://localhost:3000/en/course-player/602d090f-ef57-464a-b724-0bf57ae9cdc3
+  };
+
+  useEffect(()=>{
+    const r = getNextNodeId(modules , activeNode)
+    setNextNodeId(r)
+    console.log("next node : " + r)
  
-  //  },[dispatch,activeNode])
+   },[activeNode])
   
   const handleIsWatched = async () => {
     // console.log("moduleId", moduleId);
@@ -112,22 +130,7 @@ const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNod
     }
   };
 
-  const getNextNodeId = (modules, nodeId) => {
-    // Find the module that contains the nodes
-    const module = modules.find((mod) => mod.nodes);
-  
-    if (!module) return null; // If no module found, return null
-  
-    // Find the index of the current node
-    const currentNodeIndex = module.nodes.findIndex((node) => node.nodeId === nodeId);
-  
-    if (currentNodeIndex === -1) return null; // If nodeId is not found, return null
-  
-    // Get the next node
-    const nextNode = module.nodes[currentNodeIndex + 1];
-  
-    return nextNode ? nextNode.nodeId : null; // Return the nodeId of the next node or null if there's no next node
-  };
+
   
   // get current node
   useEffect(() => {

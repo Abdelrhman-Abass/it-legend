@@ -6,9 +6,10 @@ import Content from "../components/Content";
 import { cookies } from "next/headers";
 import Breadcrumb from "@/components/breadcrumb/breadcrumb";
 import BreadcrumbTwo from "@/components/breadcrumb/breadcrumb-2";
-import { CoursePlayerLatestNode, CoursePlayerLinks , CoursePlayerNode } from "@/hooks/PlayerHandler";
+import { CoursePlayerLatestNode, CoursePlayerLinks, CoursePlayerNode } from "@/hooks/PlayerHandler";
 import { latestNodeOpend } from "@/hooks/courseHandler";
 import { PlayerLatestNode } from "@/app/[local]/auth/authHandler";
+import { NodeIdProvider } from "../context/NodeIdContext"; // Adjust the path as needed
 
 const page = async ({ params }) => {
   // {{itlegend}}/api/NodesApi/GetCourseNodes?courseId=78a34224-b9b3-424b-bd5a-137e891326ca&userId=54d739c2-228e-4f64-8808-678a56a8da45s
@@ -25,48 +26,19 @@ const page = async ({ params }) => {
   // const courseId = "78a34224-b9b3-424b-bd5a-137e891326ca"
   console.log(params.id)
 
-  const {data} = await CoursePlayerLinks(params.id);
+  const { data } = await CoursePlayerLinks(params.id);
   const links = data
   console.log(links)
 
   // const { latestNode } = await PlayerLatestNode(params.id)
   // console.log("latestNode : " + latestNode)
-  
+
   const courseNode = await CoursePlayerNode(params.id)
 
 
   const mockData = {
     data: {
       nodes: [
-        {
-          moduleId: "module1",
-          title: "Module 1: Introduction",
-          nodes: [
-            {
-              contentId: "video1",
-              title: "Welcome Video",
-              type: 0, // video type
-              playerType: 0, // YouTube player
-              index: 0,
-              isCompleted: false
-            },
-            {
-              contentId: "pdf1",
-              title: "Course Materials",
-              type: 4, // PDF type
-              path: "https://example.com/sample.pdf",
-              index: 1,
-              isCompleted: false
-            },
-            {
-              contentId: "exam1",
-              title: "Module 1 Quiz",
-              type: 1, // exam type
-              index: 2,
-              isCompleted: false
-            }
-          ]
-        },
         {
           moduleId: "module2",
           title: "Module 2: Advanced Topics",
@@ -97,9 +69,12 @@ const page = async ({ params }) => {
   // console.log("data", mockData); http://localhost:3000/en/course-player/602d090f-ef57-464a-b724-0bf57ae9cdc3
 
   return (
-    <div className="w-full px-3">
-      <Content data={mockData?.data } testData={courseNode.data} courseId={params.id} links={links} />
-    </div>
+    <NodeIdProvider>
+      <div className="w-full px-3">
+        <Content data={mockData?.data} testData={courseNode.data} courseId={params.id} links={links} />
+      </div>
+
+    </NodeIdProvider>
   );
 };
 

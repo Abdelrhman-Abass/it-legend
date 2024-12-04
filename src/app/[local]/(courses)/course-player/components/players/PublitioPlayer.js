@@ -176,7 +176,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-
+import { useNodeId } from "../../context/NodeIdContext";
 // Helper function to derive path and poster
 const deriveVideoAssets = (path) => {
   if (!path) return { videoPath: null, posterPath: null };
@@ -191,23 +191,16 @@ const deriveVideoAssets = (path) => {
     posterPath: path.replace(".m3u8", ".jpg"),
   };
 };
-const changeNoParam = (newNoValue) => {
-  // Get the current URL
-  const currentUrl = new URL(window.location.href);
-
-  // Update the 'no' parameter
-  currentUrl.searchParams.set('no', newNoValue); // Change 'no' to the new value
-
-  // Update the browser's URL without reloading the page
-  window.history.pushState({}, '', currentUrl);
-  window.location.reload();
-
-};
 const PublitioPlayer = ({ node, handleIsVideoEnd , nextNode}) => {
   const [poster, setPoster] = useState(null);
   const [hasWatched80Percent, setHasWatched80Percent] = useState(false);
   const videoRef = useRef(null);
-
+  const {setActiveNode} = useNodeId();
+  const changeNoParam = (newNoValue) => {
+    // Get the current URL
+    setActiveNode(newNoValue)
+  };
+  
   useEffect(() => {
     const { videoPath, posterPath } = deriveVideoAssets(node?.path);
     setPoster(posterPath);

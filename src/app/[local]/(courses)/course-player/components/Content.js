@@ -35,6 +35,7 @@ import { UserHeader } from "@/layout";
 import Test from "./Test"
 import { useDispatch , useSelector} from "react-redux";
 import { LatestVideoNode, selectLatestVideo } from "@/store/features/diploma-slice";
+import { useNodeId } from "../context/NodeIdContext";
 
 const Content = ({ data, courseId, links, testData }) => {
   const local = useLocale();
@@ -46,7 +47,7 @@ const Content = ({ data, courseId, links, testData }) => {
   const params = new URLSearchParams(searchParams);
   // const type = params.get("type");
   const contentId = params.get("no");
-  const [activeNode , setActiveNode] = useState("")
+  // const [activeNode , setActiveNode] = useState("")
   const [activeNodeType , setActiveNodeType] = useState(0)
   const [board, setBoard] = useState(false);
   const [ask, setAsk] = useState(false);
@@ -59,6 +60,11 @@ const Content = ({ data, courseId, links, testData }) => {
   const [playerType, setPlayerType] = useState(0);
   const [latestP, setLatestP] = useState();
   const [latestPercantage, setLatestPercantage] = useState(0);
+  const { activeNode, setActiveNode } = useNodeId();
+
+  const handleNodeIdChange = (newId) => {
+    setActiveNode(newId); // Update nodeId in the context
+  };
   
   const [modules, setModules] = useState([])
   const [openAccordion, setOpenAccordion] = useState(null);
@@ -97,7 +103,7 @@ const Content = ({ data, courseId, links, testData }) => {
   };
 
   console.log(" comments from content : "+ JSON.stringify(comments))
-  // course-player/602d090f-ef57-464a-b724-0bf57ae9cdc3
+  // http://localhost:3000/en/course-player/602d090f-ef57-464a-b724-0bf57ae9cdc3
   // get current contentId eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImE4YzhlMGQ1LTU5MmYtNDdhZC1hYWIyLTA2OWM2MjEwNmVkOCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhbGFhbXVoYW1lZDk3QGdtYWlsLmNvbSIsImp0aSI6IjA1NzVmZTFlLTBkNjYtNGZkZC05MGZhLTY5OTUxNDA2NGVhMCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6InVzZXIiLCJleHAiOjE3MzMyNTIyMDcsImlzcyI6Imh0dHBzOi8vd3d3Lml0bGVnZW5kLm5ldC8iLCJhdWQiOiJodHRwczovL3d3dy5pdGxlZ2VuZC5uZXQvIn0.P0QfQoFu5qfJtnh2E-gST4ne1Syj2Z5V4WUGhkemmxg
   useEffect(() => {
     const foundModule = data?.nodes.find((module) =>
@@ -407,7 +413,7 @@ const Content = ({ data, courseId, links, testData }) => {
                                     style={{ color: isWatched ? "#6ABD8A" : undefined }}
                                     className={nodeId == activeNode ? "active" : ""}
                                     key={nodeId}
-                                    onClick={() => setActiveNode(nodeId) }
+                                    onClick={() => handleNodeIdChange(nodeId) }
                                   >
                                     <div className="text d-flex align-items-center" onClick={()=> setActiveNodeType(type)}>
                                       <span style={{ margin: "0 4px 4px" }}>
@@ -668,7 +674,7 @@ const Content = ({ data, courseId, links, testData }) => {
                                     style={{ color: isWatched ? "#6ABD8A" : undefined }}
                                     className={nodeId == activeNode? "active" : ""}
                                     key={nodeId}
-                                    onClick={() => setActiveNode(nodeId)}
+                                    onClick={() => handleNodeIdChange(nodeId)}
                                   >
                                     <div className="text d-flex align-items-center" onClick={()=> setActiveNodeType(type)}>
                                       <span style={{ margin: "0 4px 4px" }}>

@@ -23,30 +23,32 @@ const HeroArea = ({latest}) => {
   // }, [latest]);
   let parsedLatest
   useEffect(() => {
-    try {
-      // Parse the string into an object
-      parsedLatest = JSON.parse(latest);
-      console.log("Parsed latest from hero area:", parsedLatest);
-
-      // Safely access properties and update state
-      if (parsedLatest && parsedLatest.courseId) {
-        console.log("Parsed course ID:", parsedLatest.courseId);
-        setCourseId(parsedLatest.courseId)
-        setLatestImages(parsedLatest.image);
-        
-      } else {
-        console.warn("Parsed latest does not contain a courseId.");
+    if(latest){
+      try {
+        // Parse the string into an object
+        parsedLatest = JSON.parse(latest);
+        console.log("Parsed latest from hero area:", parsedLatest);
+  
+        // Safely access properties and update state
+        if (parsedLatest && parsedLatest.courseId) {
+          console.log("Parsed course ID:", parsedLatest.courseId);
+          setCourseId(parsedLatest.courseId)
+          setLatestImages(parsedLatest.image);
+          
+        } else {
+          console.warn("Parsed latest does not contain a courseId.");
+        }
+      } catch (error) {
+        console.error("Error parsing latest:", error);
       }
-    } catch (error) {
-      console.error("Error parsing latest:", error);
     }
   }, [latest]);
 
-  console.log("Parsed course ID again :", courseId);
+  // console.log("Parsed course ID again :", courseId);
 
 
   return (
-    courseId ? (
+    latest ? (
     <section className="why-choose-area-3 edu-section-gap">
       <div className="container">
         <div className="row row--45 ">
