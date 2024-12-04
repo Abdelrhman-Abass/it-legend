@@ -179,6 +179,7 @@ import { useEffect, useRef, useState } from "react";
 import { useNodeId } from "../../context/NodeIdContext";
 import { CoursePlayerVideoIsWatched } from "@/hooks/PlayerHandler";
 
+// Helper function to derive video path and poster
 const deriveVideoAssets = (path) => {
   if (!path) return { videoPath: null, posterPath: null };
   if (path.includes(".html")) {
@@ -198,7 +199,21 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
   const [hasWatched80Percent, setHasWatched80Percent] = useState(false);
   const videoRef = useRef(null);
   const { setActiveNode } = useNodeId();
-  const lastTimeRef = useRef(0); // Track the last known time of the video
+
+  const handleVideoWatched = async (videoId) => {
+    const result = await CoursePlayerVideoIsWatched(videoId);
+
+    if (result.success) {
+      console.log(result.message);
+    } else {
+      console.error("Error:", result.message);
+    }
+  };
+
+  // Change active node
+  const changeActiveNode = (newNodeValue) => {
+    setActiveNode(newNodeValue);
+  };
 
   useEffect(() => {
     const { videoPath, posterPath } = deriveVideoAssets(node?.path);
@@ -206,33 +221,43 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
 
     if (!videoPath) return;
 
-    const video = videoRef.current;
-
     const script = document.createElement("script");
     script.src = "https://static.publit.io/js/hls.js";
     script.async = true;
 
     const initializePlayer = () => {
-      if (window.Hls && window.Hls.isSupported() && video) {
+      if (window.Hls && window.Hls.isSupported()) {
+        const video = videoRef.current;
+
+        if (!video) return;
+
         const hls = new window.Hls();
         hls.attachMedia(video);
+
         hls.on(window.Hls.Events.MEDIA_ATTACHED, () => {
           hls.loadSource(videoPath);
-          video.play().catch((error) => console.error("Video playback error:", error));
+
+          if (video.readyState >= 2) {
+            // Play only if the video is ready
+            video.play().catch((error) =>
+              console.error("Video playback error:", error)
+            );
+          }
         });
 
-        video.currentTime = lastTimeRef.current; // Resume from the last known time
-
+        // Add event listeners
         video.addEventListener("ended", handleIsVideoEnd);
         video.addEventListener("timeupdate", async () => {
           const watchedPercentage = (video.currentTime / video.duration) * 100;
+
           if (watchedPercentage >= 80 && !hasWatched80Percent) {
             setHasWatched80Percent(true);
-            await CoursePlayerVideoIsWatched(node.videoId);
+            await handleVideoWatched(node.videoId);
           }
 
-          // Update the last known time
-          lastTimeRef.current = video.currentTime;
+          if (watchedPercentage === 100) {
+            changeActiveNode(nextNode);
+          }
         });
       } else {
         console.error("Hls.js is not supported in this browser.");
@@ -242,20 +267,23 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
     script.onload = initializePlayer;
     document.body.appendChild(script);
 
+    // Cleanup
     return () => {
+      const video = videoRef.current;
       if (video) {
         video.removeEventListener("ended", handleIsVideoEnd);
+        video.removeEventListener("timeupdate", () => {});
       }
       document.body.removeChild(script);
     };
-  }, [node?.path, handleIsVideoEnd, hasWatched80Percent]);
+  }, [node?.path, handleIsVideoEnd, hasWatched80Percent, nextNode]);
 
   return (
     <div className="video-container w-full h-full">
       <video
-        ref={videoRef}
         autoPlay
         muted
+        ref={videoRef}
         className="w-full h-full"
         onContextMenu={(e) => e.preventDefault()}
         controlsList="nodownload"
