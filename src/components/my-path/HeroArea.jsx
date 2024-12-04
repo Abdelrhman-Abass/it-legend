@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useMouseMoveUI } from "@/contexts/mouse-move-context";
 import { Link } from "@/navigation";
@@ -9,12 +9,15 @@ import SwitchThemeButton from "../common/SwitchThemeButton";
 // import SwitchThemeButton from "../common/SwitchThemeButton";
 
 const HeroArea = (latest) => {
+  const [latestImages , setLatestImages] = useState()
   const { mouseDirection, mouseReverse } = useMouseMoveUI();
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], [0, 1000]);
 
   useEffect(()=>{
     console.log("latest from hero area " + JSON.stringify(latest))
+    setLatestImages(latest)
+    console.log("latest from hero area 2 " + latestImages)
   },[latest])
 
   return (
