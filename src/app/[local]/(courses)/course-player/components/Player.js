@@ -62,7 +62,7 @@ const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNod
     // console.log("type Status:", type);
     // console.log("video " +JSON.stringify(video))
     // console.log(modules)
-    const r = getNextNodeId(modules , activeNode)
+    const r = getNextNodeId(JSON.stringify(modules) , activeNode)
     setNextNodeId(r)
     console.log("next node : " + r)
     
