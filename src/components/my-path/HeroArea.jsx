@@ -15,22 +15,10 @@ const HeroArea = ({latest}) => {
   const y = useTransform(scrollYProgress, [0, 1], [0, 1000]);
 
   useEffect(() => {
-    console.log("latest from hero area:", latest);
+    console.log("latest from hero area:", typeof latest);
     console.log("latest from hero area course :", latest.courseId);
 
     // Assuming `latest` is an object with a `latest` key containing the desired data as JSON.
-    if (latest?.latest) {
-      try {
-        const parsedData = typeof latest.latest === "string" 
-          ? JSON.parse(latest.latest) // Parse if it's a JSON string
-          : latest.latest; // Use directly if it's already an object
-
-        setLatestImages(parsedData);
-        console.log("latest from hero area 2:", parsedData.courseId);
-      } catch (error) {
-        console.error("Failed to parse latest data:", error);
-      }
-    }
   }, [latest]);
 
   return (
