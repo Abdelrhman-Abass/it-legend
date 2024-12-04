@@ -77,12 +77,12 @@ const HeroArea = ({latest}) => {
                   <div className="thumbnail-wrap ">
                     <div className="thumbnail lg:px-[50px]">
                       <Link
-                        href={`/course-player/${parsedLatest.courseId}`}
+                        href={`/course-player/${latestImages.courseId}`}
                         className="flex justify-center items-center"
                       >
                         <img
                           // src='/assets/images/keep-going.jpg'
-                          src={`https://www.itlegend.net/Content/Uploads/CoursesMedia/${parsedLatest.image}`}
+                          src={`https://www.itlegend.net/Content/Uploads/CoursesMedia/${latestImages.image}`}
                           alt="team images"
                           className="h-[100px] object-cover"
                           width={160}
