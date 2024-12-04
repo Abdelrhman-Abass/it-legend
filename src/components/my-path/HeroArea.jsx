@@ -46,7 +46,7 @@ const HeroArea = ({latest}) => {
 
 
   return (
-    latest && (
+    courseId ? (
     <section className="why-choose-area-3 edu-section-gap">
       <div className="container">
         <div className="row row--45 ">
@@ -133,6 +133,8 @@ const HeroArea = ({latest}) => {
         </li>
       </ul>
     </section>
+    ):(
+      null
     )
   );
 };
