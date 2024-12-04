@@ -40,6 +40,9 @@ const HeroArea = ({latest}) => {
     }
   }, [latest]);
 
+  console.log("Parsed course ID again :", parsedLatest.courseId);
+
+
   return (
     latest && (
     <section className="why-choose-area-3 edu-section-gap">
