@@ -214,29 +214,28 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
   const changeActiveNode = (newNodeValue) => {
     setActiveNode(newNodeValue);
   };
-
   useEffect(() => {
     const { videoPath, posterPath } = deriveVideoAssets(node?.path);
     setPoster(posterPath);
-
+  
     if (!videoPath) return;
-
+  
     const script = document.createElement("script");
     script.src = "https://static.publit.io/js/hls.js";
     script.async = true;
-
+  
     const initializePlayer = () => {
       if (window.Hls && window.Hls.isSupported()) {
         const video = videoRef.current;
-
+  
         if (!video) return;
-
+  
         const hls = new window.Hls();
         hls.attachMedia(video);
-
+  
         hls.on(window.Hls.Events.MEDIA_ATTACHED, () => {
           hls.loadSource(videoPath);
-
+  
           if (video.readyState >= 2) {
             // Play only if the video is ready
             video.play().catch((error) =>
@@ -244,39 +243,111 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
             );
           }
         });
-
+  
         // Add event listeners
         video.addEventListener("ended", handleIsVideoEnd);
         video.addEventListener("timeupdate", async () => {
           const watchedPercentage = (video.currentTime / video.duration) * 100;
-
+  
           if (watchedPercentage >= 80 && !hasWatched80Percent) {
             setHasWatched80Percent(true);
             await handleVideoWatched(node.videoId);
           }
-
+  
           if (watchedPercentage === 100) {
             changeActiveNode(nextNode);
           }
         });
+  
+        // Attach the hls object to the video element for cleanup
+        video.hls = hls;
       } else {
         console.error("Hls.js is not supported in this browser.");
       }
     };
-
+  
     script.onload = initializePlayer;
     document.body.appendChild(script);
-
+  
     // Cleanup
     return () => {
       const video = videoRef.current;
       if (video) {
         video.removeEventListener("ended", handleIsVideoEnd);
         video.removeEventListener("timeupdate", () => {});
+        
+        // Destroy the HLS instance to free resources
+        if (video.hls) {
+          video.hls.destroy();
+        }
       }
       document.body.removeChild(script);
     };
   }, [node?.path, handleIsVideoEnd, hasWatched80Percent, nextNode]);
+  
+
+  // useEffect(() => {
+  //   const { videoPath, posterPath } = deriveVideoAssets(node?.path);
+  //   setPoster(posterPath);
+
+  //   if (!videoPath) return;
+
+  //   const script = document.createElement("script");
+  //   script.src = "https://static.publit.io/js/hls.js";
+  //   script.async = true;
+
+  //   const initializePlayer = () => {
+  //     if (window.Hls && window.Hls.isSupported()) {
+  //       const video = videoRef.current;
+
+  //       if (!video) return;
+
+  //       const hls = new window.Hls();
+  //       hls.attachMedia(video);
+
+  //       hls.on(window.Hls.Events.MEDIA_ATTACHED, () => {
+  //         hls.loadSource(videoPath);
+
+  //         if (video.readyState >= 2) {
+  //           // Play only if the video is ready
+  //           video.play().catch((error) =>
+  //             console.error("Video playback error:", error)
+  //           );
+  //         }
+  //       });
+
+  //       // Add event listeners
+  //       video.addEventListener("ended", handleIsVideoEnd);
+  //       video.addEventListener("timeupdate", async () => {
+  //         const watchedPercentage = (video.currentTime / video.duration) * 100;
+
+  //         if (watchedPercentage >= 80 && !hasWatched80Percent) {
+  //           setHasWatched80Percent(true);
+  //           await handleVideoWatched(node.videoId);
+  //         }
+
+  //         if (watchedPercentage === 100) {
+  //           changeActiveNode(nextNode);
+  //         }
+  //       });
+  //     } else {
+  //       console.error("Hls.js is not supported in this browser.");
+  //     }
+  //   };
+
+  //   script.onload = initializePlayer;
+  //   document.body.appendChild(script);
+
+  //   // Cleanup
+  //   return () => {
+  //     const video = videoRef.current;
+  //     if (video) {
+  //       video.removeEventListener("ended", handleIsVideoEnd);
+  //       video.removeEventListener("timeupdate", () => {});
+  //     }
+  //     document.body.removeChild(script);
+  //   };
+  // }, [node?.path, handleIsVideoEnd, hasWatched80Percent, nextNode]);
 
   return (
     <div className="video-container w-full h-full">
