@@ -6,7 +6,7 @@ import { cart_course } from "@/store/features/cart-slice";
 import Image from "next/image";
 import { Progress } from 'antd';
 
-const CourseDiploma = ({
+const MyCourseDiploma = ({
   data,
   classes,
   image_location_path = "01",
@@ -39,7 +39,7 @@ const CourseDiploma = ({
       <div className="inner">
         <div className="thumbnail" >
           <Link
-            href={my ? `/diploma/${data.categoryId}` : `/diploma-details/${data.categoryId}`}
+            href={my ? `/course-player/${data.courseId}` : `/course-player/${data.courseId}`}
           >
             <img
               src={`https://www.itlegend.net/Content/Uploads/CategoryMedia/${data.image}`}
@@ -66,7 +66,7 @@ const CourseDiploma = ({
           {/* <span className="course-level">{data.level}</span> */}
           <h6 className="title">
             {/* <a href="#">{data.titleAr}</a> */}
-            <Link href={`/diploma/${data.categoryId}`}>
+            <Link href={`/course-player/${data.courseId}`}>
               {data.titleAr}
             </Link>
           </h6>
@@ -98,7 +98,7 @@ const CourseDiploma = ({
           {/* <span className="course-level">{data.level}</span> */}
           <h6 className="title">
             <Link
-              href={my ? `/diploma/${data.categoryId}` : `/diploma-details/${data.categoryId}`}
+              href={my ? `/course-player/${data.courseId}` : `/diploma-details/${data.categoryId}`}
             >
               {data.titleAr}
             </Link>
@@ -119,7 +119,7 @@ const CourseDiploma = ({
 
           </ul>
           <Link
-            href={my ? `/diploma/${data.categoryId}` : `/diploma-details/${data.categoryId}`}
+            href={my ? `/course-player/${data.courseId}` : `/diploma-details/${data.categoryId}`}
             className="edu-btn btn-secondary btn-small"
           >
             {my ? <>ابدأ</> : <> مزيد من المعلومات</>}
@@ -131,4 +131,4 @@ const CourseDiploma = ({
   );
 };
 
-export default CourseDiploma;
+export default MyCourseDiploma;

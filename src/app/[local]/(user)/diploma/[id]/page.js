@@ -16,6 +16,7 @@ import { UserHeader } from "@/layout";
 import CourseDiploma from "@/components/course/CourseDiploma";
 
 import { usePathname, Link } from "@/navigation";
+import MyCourseDiploma from "@/components/course/MyCourseDiploma";
 
 
 const Page = () => {
@@ -96,11 +97,11 @@ const Page = () => {
             </div>
           </div>
 
-          <CounterArea />
+          <CounterArea  my={true}  codeChallenges={course.codeChallenges} level={course.level} score={course.score} />
           <div className="container">
             {Array.isArray(course.courses) &&
               course.courses.map((cour, idx) => (
-                <section key={idx} className="pr-[70px] pl-[70px] row row--30 desktop" style={{ justifyContent: "center" }}>
+                <section key={idx} className="pr-[20px] pl-[20px] row row--30 desktop" style={{ justifyContent: "center" }}>
                   <div
                     key={idx}
                     className="edu-blog blog-style-list"
@@ -148,7 +149,7 @@ const Page = () => {
 
             {Array.isArray(course.courses) &&
               course.courses.map((cour, idx) => (
-                <section className="row">
+                <section className="row mt-[50px]">
                   <div
                     className="col-md-6 col-lg-4 mobile"
                     data-aos-delay="150"
@@ -156,7 +157,7 @@ const Page = () => {
                     data-aos-duration="800"
                     key={idx}
                   >
-                    <CourseDiploma
+                    <MyCourseDiploma
                       bg="#f5f1eb"
                       my={true}
                       data={cour}

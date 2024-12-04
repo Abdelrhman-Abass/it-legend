@@ -1,7 +1,7 @@
 import React from "react";
 import Counter from "@/layout/Counter";
 
-const counter_data = [
+const static_counter_data = [
   {
     color: "primary-color",
     count: 29.3,
@@ -34,7 +34,39 @@ const counter_data = [
   },
 ];
 
-const CounterArea = ({ about_p_3 }) => {
+const CounterArea = ({ about_p_3 , my=false , codeChallenges ,level , score}) => {
+
+  const dynamic_counter_data = [
+    score && {
+      color: "primary-color",
+      count: score,
+      icon: "48",
+      title: "مجموع الدرجات",
+    },
+    level && {
+      color: "secondary-color",
+      count: level,
+      icon: "47",
+      title: "المستوي",
+    },
+    codeChallenges && {
+      color: "extra08-color",
+      count: codeChallenges,
+      icon: "2",
+      title: "التحدي اليومي",
+    },
+    {
+      color: "extra05-color",
+      count: 354,
+      icon: "50",
+      // text: "%",
+      title: "التقيم الحالي",
+    },
+  ].filter(Boolean); // Remove undefined entries
+
+  const counter_data = my == true ? dynamic_counter_data : static_counter_data;
+
+
   return (
     <div
       className={`${
