@@ -8,17 +8,29 @@ import SwitchThemeButton from "../common/SwitchThemeButton";
 
 // import SwitchThemeButton from "../common/SwitchThemeButton";
 
-const HeroArea = (latest) => {
+const HeroArea = ({latest}) => {
   const [latestImages , setLatestImages] = useState()
   const { mouseDirection, mouseReverse } = useMouseMoveUI();
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], [0, 1000]);
 
-  useEffect(()=>{
-    console.log("latest from hero area " + JSON.stringify(latest))
-    setLatestImages(latest)
-    console.log("latest from hero area 2 " + latest.latest.courseId)
-  },[latest])
+  useEffect(() => {
+    console.log("latest from hero area:", latest);
+
+    // Assuming `latest` is an object with a `latest` key containing the desired data as JSON.
+    if (latest?.latest) {
+      try {
+        const parsedData = typeof latest.latest === "string" 
+          ? JSON.parse(latest.latest) // Parse if it's a JSON string
+          : latest.latest; // Use directly if it's already an object
+
+        setLatestImages(parsedData);
+        console.log("latest from hero area 2:", parsedData.courseId);
+      } catch (error) {
+        console.error("Failed to parse latest data:", error);
+      }
+    }
+  }, [latest]);
 
   return (
     latest && (
