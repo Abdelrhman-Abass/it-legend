@@ -191,16 +191,24 @@ const deriveVideoAssets = (path) => {
     posterPath: path.replace(".m3u8", ".jpg"),
   };
 };
-const PublitioPlayer = ({ node, handleIsVideoEnd , nextNode}) => {
+const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
   const [poster, setPoster] = useState(null);
   const [hasWatched80Percent, setHasWatched80Percent] = useState(false);
   const videoRef = useRef(null);
-  const {setActiveNode} = useNodeId();
+  const { setActiveNode } = useNodeId();
   const changeNoParam = (newNoValue) => {
     // Get the current URL
     setActiveNode(newNoValue)
   };
-  
+  const handleVideoWatched = async (videoId) => {
+    const result = await CoursePlayerVideoIsWatched(videoId);
+
+    if (result.success) {
+      console.log(result.message);
+    } else {
+      console.error("Error:", result.message);
+    }
+  };
   useEffect(() => {
     const { videoPath, posterPath } = deriveVideoAssets(node?.path);
     setPoster(posterPath);
@@ -224,14 +232,14 @@ const PublitioPlayer = ({ node, handleIsVideoEnd , nextNode}) => {
         });
 
         video.addEventListener("ended", handleIsVideoEnd);
-        video.addEventListener("timeupdate", () => {
+        video.addEventListener("timeupdate", async () => {
           const watchedPercentage = (video.currentTime / video.duration) * 100;
           if (watchedPercentage >= 80 && !hasWatched80Percent) {
             setHasWatched80Percent(true);
             // console.log("user reached more than 80%")
-            // handleIsWatched();
+            await handleVideoWatched(node.videoId)
           }
-          
+
           if (watchedPercentage == 100 && !hasWatched80Percent) {
             // setHasWatched80Percent(true);
             // handleIsWatched();
@@ -251,7 +259,7 @@ const PublitioPlayer = ({ node, handleIsVideoEnd , nextNode}) => {
       const video = videoRef.current;
       if (video) {
         video.removeEventListener("ended", handleIsVideoEnd);
-        video.removeEventListener("timeupdate", () => {});
+        video.removeEventListener("timeupdate", () => { });
       }
       document.body.removeChild(script);
     };

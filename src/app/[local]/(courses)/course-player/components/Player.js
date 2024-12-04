@@ -75,27 +75,61 @@ const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNod
     }
   }, [status, video, error, activeNode, typeActiveNode,dispatch]);
 
+  // const getNextNodeId = (modules, activeNode) => {
+  //   // Find the module that contains the nodes
+  //   const module = modules.find((mod) => mod.nodes);
+  
+  //   if (!module) return null; // If no module found, return null
+  
+  //   // Find the index of the current node
+  //   const currentNodeIndex = module.nodes.findIndex((node) => node.nodeId === activeNode);
+  
+  //   if (currentNodeIndex === -1) return null; // If nodeId is not found, return null eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImE4YzhlMGQ1LTU5MmYtNDdhZC1hYWIyLTA2OWM2MjEwNmVkOCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhbGFhbXVoYW1lZDk3QGdtYWlsLmNvbSIsImp0aSI6Ijg2OWUxNjhjLTZmYmEtNGM1NC1hYjgzLTU2NWJiMTFhOTM1ZCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6InVzZXIiLCJleHAiOjE3MzMzMTYxNTgsImlzcyI6Imh0dHBzOi8vd3d3Lml0bGVnZW5kLm5ldC8iLCJhdWQiOiJodHRwczovL3d3dy5pdGxlZ2VuZC5uZXQvIn0.lC62snsnl_1uRm-hoAtOqz3JF9xv8VaTT3574KHrz8s
+  
+  //   // Get the next node
+  //   const nextNode = module.nodes[currentNodeIndex + 1];
+  
+  //   return nextNode ? nextNode.nodeId : null; // Return the nodeId of the next node or null if there's no next node  http://localhost:3000/en/course-player/602d090f-ef57-464a-b724-0bf57ae9cdc3
+  // };
   const getNextNodeId = (modules, activeNode) => {
+    // Log to check the structure of the modules
+    console.log("Modules:", modules);
+  
     // Find the module that contains the nodes
     const module = modules.find((mod) => mod.nodes);
   
-    if (!module) return null; // If no module found, return null
+    if (!module) {
+      console.log("No module with nodes found");
+      return null; // If no module found, return null
+    }
   
-    // Find the index of the current node
+    console.log("Module with nodes:", module);
+  
+    // Find the index of the current node in the module
     const currentNodeIndex = module.nodes.findIndex((node) => node.nodeId === activeNode);
   
-    if (currentNodeIndex === -1) return null; // If nodeId is not found, return null eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImE4YzhlMGQ1LTU5MmYtNDdhZC1hYWIyLTA2OWM2MjEwNmVkOCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhbGFhbXVoYW1lZDk3QGdtYWlsLmNvbSIsImp0aSI6Ijg2OWUxNjhjLTZmYmEtNGM1NC1hYjgzLTU2NWJiMTFhOTM1ZCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6InVzZXIiLCJleHAiOjE3MzMzMTYxNTgsImlzcyI6Imh0dHBzOi8vd3d3Lml0bGVnZW5kLm5ldC8iLCJhdWQiOiJodHRwczovL3d3dy5pdGxlZ2VuZC5uZXQvIn0.lC62snsnl_1uRm-hoAtOqz3JF9xv8VaTT3574KHrz8s
+    if (currentNodeIndex === -1) {
+      console.log("Current node not found in module nodes");
+      return null; // If nodeId is not found, return null
+    }
+  
+    console.log("Current node index:", currentNodeIndex);
   
     // Get the next node
     const nextNode = module.nodes[currentNodeIndex + 1];
   
-    return nextNode ? nextNode.nodeId : null; // Return the nodeId of the next node or null if there's no next node  http://localhost:3000/en/course-player/602d090f-ef57-464a-b724-0bf57ae9cdc3
+    if (nextNode) {
+      console.log("Next node found:", nextNode);
+      return nextNode.nodeId; // Return the nodeId of the next node
+    } else {
+      console.log("No next node found");
+      return null; // Return null if there's no next node
+    }
   };
-
   useEffect(()=>{
-    const r = getNextNodeId(modules , activeNode)
+    const r = getNextNodeId(JSON.stringify(modules) , activeNode)
     setNextNodeId(r)
-    console.log("active : " + JSON.stringify(modules))
+    // console.log("active : " + JSON.stringify(modules))
     console.log("next node : " + r)
  
    },[activeNode])
