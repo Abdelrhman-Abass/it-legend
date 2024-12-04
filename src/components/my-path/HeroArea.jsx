@@ -16,6 +16,7 @@ const HeroArea = ({latest}) => {
 
   useEffect(() => {
     console.log("latest from hero area:", latest);
+    console.log("latest from hero area course :", latest.courseId);
 
     // Assuming `latest` is an object with a `latest` key containing the desired data as JSON.
     if (latest?.latest) {
