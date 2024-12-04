@@ -127,9 +127,9 @@ const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNod
     }
   };
   useEffect(()=>{
-    const r = getNextNodeId(JSON.stringify(modules) , activeNode)
+    const r = getNextNodeId(modules , activeNode)
     setNextNodeId(r)
-    // console.log("active : " + JSON.stringify(modules))
+    console.log("active : " + JSON.stringify(modules))
     console.log("next node : " + r)
  
    },[activeNode])
