@@ -52,15 +52,14 @@ const CourseDiploma = ({
               loading="lazy"
             />
           </Link>
-          <div className="time-top">
+          {/* <div className="time-top">
             <span className="duration_1">
               <span>
-                {/* {data?.progressPercentage ? `${data.progressPercentage.toFixed(0)}%` : "0%"} */}
                 <Progress type="circle" percent={data?.progressPercentage ? data.progressPercentage.toFixed(0) : 0} size={45} status="exception" format={(percent) => `${percent}%`} />
               </span>
             </span>
 
-          </div>
+          </div> */}
         </div>
         <div className="content">
           {/* <span className="course-level">{data.level}</span> */}

@@ -76,12 +76,11 @@ const ListArea = ({ title }) => {
                         className="lg:w-[280px]"
                       />
                     </Link>
-                    <div className="time-top">
+                    {/* <div className="time-top">
                       <span className="duration_1">
                       <Progress type="circle"  percent={course?.progressPercentage ? course.progressPercentage.toFixed(0) : 0}  size={45} status="exception" format={(percent) => `${percent}%`} />
-                      {/* {course?.progressPercentage ? `${course.progressPercentage.toFixed(0)}%` : "0%"} */}
                       </span>
-                    </div>
+                    </div> */}
                   </div>
                   <div className="content">
                     <h5 className="title">
