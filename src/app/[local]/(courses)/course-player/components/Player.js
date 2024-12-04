@@ -73,6 +73,7 @@ const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNod
       console.log("Error:", error);
     }
   }, [status, video, error, activeNode, typeActiveNode,dispatch]);
+
   const getNextNodeId = (modules, activeNode) => {
     // Find the module that contains the nodes
     const module = modules.find((mod) => mod.nodes);
@@ -93,6 +94,7 @@ const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNod
   useEffect(()=>{
     const r = getNextNodeId(modules , activeNode)
     setNextNodeId(r)
+    console.log("active : " + modules)
     console.log("next node : " + r)
  
    },[activeNode])
