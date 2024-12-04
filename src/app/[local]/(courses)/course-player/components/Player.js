@@ -104,6 +104,8 @@ const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNod
     }
   
     console.log("Module with nodes:", module);
+    console.log("Module with nodes:", activeNode);
+
   
     // Find the index of the current node in the module
     const currentNodeIndex = module.nodes.findIndex((node) => node.nodeId === activeNode);
