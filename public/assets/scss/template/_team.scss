@@ -46,26 +46,26 @@
                 border-radius: 10px;
                 width: calc(100px * 1.6);
             }
-            &:after {
-                content: "";
-                height: 100%;
-                width: calc(100px * 1.6);
-                // background-color: rgba(26,182,157, .6);
-                background-color:rgb(78 87 189 / 60%);
-                border-radius: 10px;
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                left: 15%;
-                right: 4%;
-                visibility: hidden;
-                opacity: 0;
-                transition: var(--transition);
+            // &:after {
+            //     content: "";
+            //     height: 100%;
+            //     width: calc(100px * 1.6);
+            //     // background-color: rgba(26,182,157, .6);
+            //     background-color:rgb(78 87 189 / 60%);
+            //     border-radius: 10px;
+            //     position: absolute;
+            //     top: 0;
+            //     bottom: 0;
+            //     left: 15%;
+            //     right: 4%;
+            //     visibility: hidden;
+            //     opacity: 0;
+            //     transition: var(--transition);
 
-                @media #{$small-mobile} {
-					right: 31%;
-				}
-            }
+            //     @media #{$small-mobile} {
+			// 		right: 31%;
+			// 	}
+            // }
         }
     }
     .content {

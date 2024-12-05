@@ -716,7 +716,7 @@ const Content = ({ data, courseId, links, testData }) => {
 
                                 return (
                                   <li
-                                    style={{ color: isWatched ? "#6ABD8A" : undefined }}
+                                    style={{ color: isWatched || watchedNodes[nodeId] ? "#6ABD8A" : undefined }}
                                     className={nodeId == activeNode? "active" : ""}
                                     key={nodeId}
                                     onClick={() => handleNodeIdChange(nodeId)}
