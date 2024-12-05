@@ -367,7 +367,6 @@
 // };
 
 // export default PublitioPlayer;
-
 'use client';
 
 import { useEffect, useRef, useState } from "react";
@@ -392,35 +391,22 @@ const deriveVideoAssets = (path) => {
 const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
   const [poster, setPoster] = useState(null);
   const [hasWatched80Percent, setHasWatched80Percent] = useState(false);
-  const [videoCurrentTime, setVideoCurrentTime] = useState(0); // To store the video current time
   const videoRef = useRef(null);
   const { setActiveNode } = useNodeId();
 
-  const handleVideoWatched = async (videoId) => {
-    const result = await CoursePlayerVideoIsWatched(videoId);
-
-    if (result.success) {
-      console.log(result.message);
-    } else {
-      console.error("Error:", result.message);
-    }
-  };
-
-  // Change active node
-  const changeActiveNode = (newNodeValue) => {
-    setActiveNode(newNodeValue);
-  };
-
+  // Store the video current time in localStorage for persistence
   useEffect(() => {
     const { videoPath, posterPath } = deriveVideoAssets(node?.path);
     setPoster(posterPath);
 
     if (!videoPath) return;
 
-    // Check if there's saved time from localStorage
     const savedTime = localStorage.getItem(`video_${node.videoId}_time`);
-    if (savedTime) {
-      setVideoCurrentTime(Number(savedTime)); // Set the saved time for the video
+    const video = videoRef.current;
+
+    if (savedTime && video) {
+      // Set the saved time when the component first mounts
+      video.currentTime = Number(savedTime);
     }
 
     const script = document.createElement("script");
@@ -430,7 +416,6 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
     const initializePlayer = () => {
       if (window.Hls && window.Hls.isSupported()) {
         const video = videoRef.current;
-
         if (!video) return;
 
         const hls = new window.Hls();
@@ -444,9 +429,6 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
             video.play().catch((error) =>
               console.error("Video playback error:", error)
             );
-
-            // Set the current time if there was any previous playback
-            video.currentTime = videoCurrentTime;
           }
         });
 
@@ -455,18 +437,19 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
         video.addEventListener("timeupdate", async () => {
           const watchedPercentage = (video.currentTime / video.duration) * 100;
 
+          // Mark video as watched when 80% is reached
           if (watchedPercentage >= 80 && !hasWatched80Percent) {
             setHasWatched80Percent(true);
             await handleVideoWatched(node.videoId);
           }
 
+          // Change node when video reaches 100%
           if (watchedPercentage === 100) {
             changeActiveNode(nextNode);
           }
 
-          // Save the current time on every time update
-          setVideoCurrentTime(video.currentTime);
-          localStorage.setItem(`video_${node.videoId}_time`, video.currentTime); // Store current time in localStorage
+          // Save current playback time
+          localStorage.setItem(`video_${node.videoId}_time`, video.currentTime);
         });
 
         // Attach the hls object to the video element for cleanup
@@ -485,15 +468,29 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
       if (video) {
         video.removeEventListener("ended", handleIsVideoEnd);
         video.removeEventListener("timeupdate", () => {});
-        
-        // Destroy the HLS instance to free resources
+
         if (video.hls) {
           video.hls.destroy();
         }
       }
       document.body.removeChild(script);
     };
-  }, [node?.path, handleIsVideoEnd, hasWatched80Percent, nextNode, videoCurrentTime]);
+  }, [node?.path, handleIsVideoEnd, hasWatched80Percent, nextNode]);
+
+  const handleVideoWatched = async (videoId) => {
+    const result = await CoursePlayerVideoIsWatched(videoId);
+
+    if (result.success) {
+      console.log(result.message);
+    } else {
+      console.error("Error:", result.message);
+    }
+  };
+
+  // Change active node
+  const changeActiveNode = (newNodeValue) => {
+    setActiveNode(newNodeValue);
+  };
 
   return (
     <div className="video-container w-full h-full">
