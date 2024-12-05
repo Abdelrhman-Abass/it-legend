@@ -43,10 +43,10 @@ export const authHandler = async (url, body) => {
 
 export const refreshAuth = async()=>{
   try {
-    const refreshToken = cookies.get("refreshToken")?.value
+    const refreshToken = cookies().get("refreshToken")?.value
     if (!refreshToken) throw new Error("Token is not available");
 
-    const email = cookies.get("user")?.value
+    const email = cookies().get("user")?.value
     if (!email) throw new Error("email is not available");
     console.log(typeof email)
     

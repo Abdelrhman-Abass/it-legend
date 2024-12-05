@@ -7,7 +7,7 @@ export const diplomaUSerData = async () => {
     try {
         const token = cookies().get("token")?.value;
         if (!token) {
-            const refreshToken = cookies.get("refreshToken")?.value
+            const refreshToken = cookies().get("refreshToken")?.value
             if (!refreshToken) {
                 return null
             }else{
@@ -52,7 +52,7 @@ export const getCoursesByCategory = async (categoryId) => {
     try {
         const token = cookies().get("token")?.value;
         if (!token) {
-            const refreshToken = cookies.get("refreshToken")?.value
+            const refreshToken = cookies().get("refreshToken")?.value
             if (!refreshToken) {
                 return null
             }else{

@@ -20,7 +20,7 @@ export const CoursePlayerLinks = async (courseId) => {
     try {
         const token = cookies().get("token")?.value;
         if (!token) {
-            const refreshToken = cookies.get("refreshToken")?.value
+            const refreshToken = cookies().get("refreshToken")?.value
             if (!refreshToken) {
                 return null
             }else{
@@ -54,7 +54,7 @@ export const CoursePlayerLatest = async (videoId) => {
     try {
         const token = cookies().get("token")?.value;
         if (!token) {
-            const refreshToken = cookies.get("refreshToken")?.value
+            const refreshToken = cookies().get("refreshToken")?.value
             if (!refreshToken) {
                 return null
             }else{
@@ -100,7 +100,7 @@ export const CoursePlayerLatestNode = async (courseId) => {
     try {
         const token = cookies().get("token")?.value;
         if (!token) {
-            const refreshToken = cookies.get("refreshToken")?.value
+            const refreshToken = cookies().get("refreshToken")?.value
             if (!refreshToken) {
                 return null
             }else{
@@ -146,7 +146,7 @@ export const CoursePlayerVideoType = async (courseId) => {
     try {
         const token = cookies().get("token")?.value;
         if (!token) {
-            const refreshToken = cookies.get("refreshToken")?.value
+            const refreshToken = cookies().get("refreshToken")?.value
             if (!refreshToken) {
                 return null
             }else{
@@ -194,7 +194,7 @@ export const CoursePlayerVideo = async (courseId, nodeId) => {
       console.log("Starting CoursePlayerVideo:", courseId, nodeId);
       const token = cookies().get("token")?.value;
       if (!token) {
-        const refreshToken = cookies.get("refreshToken")?.value
+        const refreshToken = cookies().get("refreshToken")?.value
         if (!refreshToken) {
             return null
         }else{
@@ -236,7 +236,7 @@ export const CoursePlayerVideo = async (courseId, nodeId) => {
     try {
         const token = cookies().get("token")?.value;
         if (!token) {
-            const refreshToken = cookies.get("refreshToken")?.value
+            const refreshToken = cookies().get("refreshToken")?.value
             if (!refreshToken) {
                 return null
             }else{
@@ -278,7 +278,7 @@ export const CoursePlayerVideoComments = async (nodeId) => {
     try {
         const token = cookies().get("token")?.value;
         if (!token) {
-            const refreshToken = cookies.get("refreshToken")?.value
+            const refreshToken = cookies().get("refreshToken")?.value
             if (!refreshToken) {
                 return null
             }else{
@@ -313,7 +313,7 @@ export const CoursePlayerNode = async (courseId ) => {
     try {
         const token = cookies().get("token")?.value;
         if (!token) {
-            const refreshToken = cookies.get("refreshToken")?.value
+            const refreshToken = cookies().get("refreshToken")?.value
             if (!refreshToken) {
                 return null
             }else{
