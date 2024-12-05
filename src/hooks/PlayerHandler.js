@@ -43,7 +43,7 @@ export const CoursePlayerLinks = async (courseId) => {
 
         return response.data;
     } catch (error) {
-        console.error("Error fetching course data:", error.message);
+        console.error("Error fetching course Player Links data:", error.message);
         return {
             data: null,
             message: error.response?.data?.message || error.message,
@@ -223,7 +223,7 @@ export const CoursePlayerVideo = async (courseId, nodeId) => {
       const res = response.data.data.video;
       return res;
     } catch (error) {
-      console.error("Error fetching course data:", error.message);
+      console.error("Error fetching course data player video:", error.message);
       return {
         data: null,
         message: error.response?.data?.message || error.message,
@@ -301,7 +301,7 @@ export const CoursePlayerVideoComments = async (nodeId) => {
 
         return response.data.data;
     } catch (error) {
-        console.error("Error fetching course data:", error.message);
+        console.error("Error fetching course video comments data:", error.message);
         return {
             data: null,
             message: error.response?.data?.message || error.message,
@@ -336,7 +336,7 @@ export const CoursePlayerNode = async (courseId ) => {
 
         return response.data;
     } catch (error) {
-        console.error("Error fetching course data:", error.message);
+        console.error("Error fetching course player node data:", error.message);
         return {
             data: null,
             message: error.response?.data?.message || error.message,

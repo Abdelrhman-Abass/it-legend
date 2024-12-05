@@ -113,7 +113,7 @@ export const PlayerLatestNode = async (courseId) => {
           return null;
         }
   } catch (error) {
-      console.error("Error fetching course data:", error.message);
+      console.error("Error fetching user latest nodes data:", error.message);
       return {
           data: null,
           message: error.response?.data?.message || error.message,
