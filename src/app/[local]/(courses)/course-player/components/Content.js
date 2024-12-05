@@ -101,6 +101,8 @@ const Content = ({ data, courseId, links, testData }) => {
     setComments(fetchedData); // Store the fetched data in the parent state
   };
 
+  
+
   // console.log(" comments from content : "+ JSON.stringify(comments))
   // http://localhost:3000/en/course-player/602d090f-ef57-464a-b724-0bf57ae9cdc3
 
