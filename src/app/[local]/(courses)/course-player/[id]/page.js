@@ -64,7 +64,6 @@ const page = async ({ params }) => {
       stoppedIndex: 0
     }
   };
-  // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImE4YzhlMGQ1LTU5MmYtNDdhZC1hYWIyLTA2OWM2MjEwNmVkOCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhbGFhbXVoYW1lZDk3QGdtYWlsLmNvbSIsImp0aSI6ImYzYjgyMDYxLWM3YzctNDlmZC05MDhlLWUwYWU3NjE4NTJmYyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6InVzZXIiLCJleHAiOjE3MzI5OTAwMzAsImlzcyI6Imh0dHBzOi8vd3d3Lml0bGVnZW5kLm5ldC8iLCJhdWQiOiJodHRwczovL3d3dy5pdGxlZ2VuZC5uZXQvIn0.cYhXXdXnSqtMBGmxjQSX5PPoOq4NpU74T8TzqROs64c
   // http://localhost:3000/en/course-player/c7f5bfef-8117-4021-b83e-448051bced9a?contentId=video1&type=0&playerType=0  https://ant.design/components/progress
   // console.log("data", mockData); http://localhost:3000/en/course-player/602d090f-ef57-464a-b724-0bf57ae9cdc3
 

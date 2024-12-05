@@ -32,7 +32,6 @@ import {
 import { validateYupSchema } from "formik";
 import BreadcrumbTwo from "@/components/breadcrumb/breadcrumb-2";
 import { UserHeader } from "@/layout";
-import Test from "./Test"
 import { useDispatch , useSelector} from "react-redux";
 import { LatestVideoNode, selectLatestVideo } from "@/store/features/diploma-slice";
 import { useNodeId } from "../context/NodeIdContext";
@@ -102,9 +101,9 @@ const Content = ({ data, courseId, links, testData }) => {
     setComments(fetchedData); // Store the fetched data in the parent state
   };
 
-  console.log(" comments from content : "+ JSON.stringify(comments))
+  // console.log(" comments from content : "+ JSON.stringify(comments))
   // http://localhost:3000/en/course-player/602d090f-ef57-464a-b724-0bf57ae9cdc3
-  // get current contentId eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImE4YzhlMGQ1LTU5MmYtNDdhZC1hYWIyLTA2OWM2MjEwNmVkOCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhbGFhbXVoYW1lZDk3QGdtYWlsLmNvbSIsImp0aSI6IjA1NzVmZTFlLTBkNjYtNGZkZC05MGZhLTY5OTUxNDA2NGVhMCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6InVzZXIiLCJleHAiOjE3MzMyNTIyMDcsImlzcyI6Imh0dHBzOi8vd3d3Lml0bGVnZW5kLm5ldC8iLCJhdWQiOiJodHRwczovL3d3dy5pdGxlZ2VuZC5uZXQvIn0.P0QfQoFu5qfJtnh2E-gST4ne1Syj2Z5V4WUGhkemmxg
+
   useEffect(() => {
     const foundModule = data?.nodes.find((module) =>
       module.nodes.some((node) => node.contentId === activeNode)
@@ -128,6 +127,7 @@ const Content = ({ data, courseId, links, testData }) => {
       getdata();
     }
   }, [ask]);
+
   useEffect(() => {
     if (contentId) {
       // Find the module index that contains the target contentId
@@ -163,6 +163,35 @@ const Content = ({ data, courseId, links, testData }) => {
   const handleAccordionToggle = (idx) => {
     setOpenAccordion((prevIndex) => (prevIndex === idx ? null : idx));
   };
+  useEffect(() => {
+    if (modules.length > 0) {
+      // Find the index of the last module containing a watched node
+      const lastWatchedIndex = modules.findIndex((module) =>
+        module.nodes.some((node) => node.isWatched)
+      );
+
+      // If a watched module is found, set its index as the open accordion
+      if (lastWatchedIndex !== -1) {
+        setOpenAccordion(lastWatchedIndex);
+
+        // Find the first watched node in that module and set it as active
+        const lastWatchedNode = modules[lastWatchedIndex].nodes.find(
+          (node) => node.isWatched
+        );
+        setActiveNode(lastWatchedNode?.nodeId || null);
+      }
+    }
+  }, [modules]);
+
+
+  useEffect(() => {
+    if (openAccordion !== null) {
+      // Smoothly scroll to the opened accordion
+      document
+        .getElementById(`module-${openAccordion}`)
+        ?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [openAccordion]);
 
   const editAskUser = async () => {
     if (isEdit) {

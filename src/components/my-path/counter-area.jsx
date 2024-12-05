@@ -40,19 +40,19 @@ const CounterArea = ({ about_p_3 , my=false , codeChallenges ,level , score}) =>
     score && {
       color: "primary-color",
       count: score,
-      icon: "48",
+      icon: "7",
       title: "مجموع الدرجات",
     },
     level && {
       color: "secondary-color",
       count: level,
-      icon: "47",
+      icon: "6",
       title: "المستوي",
     },
     codeChallenges && {
       color: "extra08-color",
       count: codeChallenges,
-      icon: "2",
+      icon: "34",
       title: "التحدي اليومي",
     },
     {

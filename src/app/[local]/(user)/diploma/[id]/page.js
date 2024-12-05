@@ -86,7 +86,7 @@ const Page = () => {
                 className="percent-label"
                 style={{
                   position: "absolute",
-                  right: `${33 - 5}%`,
+                  right: `${50}%`,
                   left: "auto",
                   top: "35px",
                   transition: "all 0.1s",
