@@ -47,7 +47,8 @@ export const refreshAuth = async()=>{
 
     const email = cookies.get("user")?.value
     if (!email) throw new Error("email is not available");
-
+    console.log(typeof email)
+    
     const response = await axios.post(
       `http://49.13.77.125:1118/Endpoint/api/Token/`,
       {
@@ -68,15 +69,13 @@ export const refreshAuth = async()=>{
       
       // Store tokens and user data in cookies
       cookies().set("token", token,{ httpOnly: true, secure: true , maxAge: 3600} );
-      
+      return token;
     } else {
       // If the response is not successful, return an error
       return null;
     }
-
-    return data;
 } catch (error) {
-    console.error("Error fetching course data:", error.message);
+    console.error("Error fetching user data:", error.message);
     return {
         data: null,
         message: error.response?.data?.message || error.message,
