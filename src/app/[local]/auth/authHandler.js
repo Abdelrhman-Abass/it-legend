@@ -21,15 +21,14 @@ export const authHandler = async (url, body) => {
       const { data } = response.data; // Extract the 'data' from the response
       const { token, refreshToken ,email} = data;
 
-      const mail = {"user" : email}
       
       // Store tokens and user data in cookies
       cookies().set("token", token,{ httpOnly: true, secure: true , maxAge: 3600} );
       cookies().set("refreshToken", refreshToken ,{ httpOnly: true, secure: true  , maxAge: 86400 });
       // cookies().set("user_id", data.id);
-      cookies().set("user", mail , {maxAge: 86400});
+      cookies().set("user", email , {maxAge: 86400});
       // Return the user data and tokens (matching Redux expectations)
-      return { user: mail, accessToken: token, refreshToken };
+      return { user: email, accessToken: token, refreshToken };
     } else {
       // If the response is not successful, return an error
       return null;
