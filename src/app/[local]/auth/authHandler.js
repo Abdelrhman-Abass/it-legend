@@ -27,7 +27,7 @@ export const authHandler = async (url, body) => {
       cookies().set("token", token,{ httpOnly: true, secure: true , maxAge: 3600} );
       cookies().set("refreshToken", refreshToken ,{ httpOnly: true, secure: true  , maxAge: 86400 });
       // cookies().set("user_id", data.id);
-      cookies().set("user", email , {maxAge: 86400});
+      cookies().set("user", mail , {maxAge: 86400});
       // Return the user data and tokens (matching Redux expectations)
       return { user: mail, accessToken: token, refreshToken };
     } else {
