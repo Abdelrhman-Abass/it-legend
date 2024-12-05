@@ -170,15 +170,21 @@ const Content = ({ data, courseId, links, testData }) => {
         module.nodes.some((node) => node.isWatched)
       );
 
-      // If a watched module is found, set its index as the open accordion
       if (lastWatchedIndex !== -1) {
+        // Open the last watched module
         setOpenAccordion(lastWatchedIndex);
 
-        // Find the first watched node in that module and set it as active
-        const lastWatchedNode = modules[lastWatchedIndex].nodes.find(
-          (node) => node.isWatched
-        );
-        setActiveNode(lastWatchedNode?.nodeId || null);
+        // Find the first unwatched node in the module or default to the first node
+        const firstUnwatchedNode =
+          modules[lastWatchedIndex].nodes.find((node) => !node.isWatched) ||
+          modules[lastWatchedIndex].nodes[0];
+        setActiveNode(firstUnwatchedNode.nodeId);
+      } else {
+        // No watched modules; default to the first module and first node
+        setOpenAccordion(0);
+        if (modules[0]?.nodes?.length > 0) {
+          setActiveNode(modules[0].nodes[0].nodeId);
+        }
       }
     }
   }, [modules]);
