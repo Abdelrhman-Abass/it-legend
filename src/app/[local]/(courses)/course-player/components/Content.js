@@ -163,32 +163,42 @@ const Content = ({ data, courseId, links, testData }) => {
   const handleAccordionToggle = (idx) => {
     setOpenAccordion((prevIndex) => (prevIndex === idx ? null : idx));
   };
+  
   useEffect(() => {
     if (modules.length > 0) {
-      // Find the index of the last module containing a watched node
-      const lastWatchedIndex = modules.findIndex((module) =>
-        module.nodes.some((node) => node.isWatched)
-      );
+      // Find the first module with an unwatched node
+      let foundUnwatched = false;
+      let firstUnwatchedNode = null;
+      let accordionIndexToOpen = null;
 
-      if (lastWatchedIndex !== -1) {
-        // Open the last watched module
-        setOpenAccordion(lastWatchedIndex);
+      for (let i = 0; i < modules.length; i++) {
+        const module = modules[i];
+        const unwatchedNode = module.nodes.find((node) => !node.isWatched);
 
-        // Find the first unwatched node in the module or default to the first node
-        const firstUnwatchedNode =
-          modules[lastWatchedIndex].nodes.find((node) => !node.isWatched) ||
-          modules[lastWatchedIndex].nodes[0];
+        if (unwatchedNode) {
+          foundUnwatched = true;
+          firstUnwatchedNode = unwatchedNode;
+          accordionIndexToOpen = i;
+          break;
+        }
+      }
+
+      if (foundUnwatched) {
+        // Open the module with the first unwatched node
+        setOpenAccordion(accordionIndexToOpen);
         setActiveNode(firstUnwatchedNode.nodeId);
       } else {
-        // No watched modules; default to the first module and first node
-        setOpenAccordion(0);
-        if (modules[0]?.nodes?.length > 0) {
-          setActiveNode(modules[0].nodes[0].nodeId);
-        }
+        // If all nodes are watched, open the last module and the last node
+        const lastModuleIndex = modules.length - 1;
+        const lastNode =
+          modules[lastModuleIndex]?.nodes[
+            modules[lastModuleIndex].nodes.length - 1
+          ];
+        setOpenAccordion(lastModuleIndex);
+        setActiveNode(lastNode.nodeId);
       }
     }
   }, [modules]);
-
 
   useEffect(() => {
     if (openAccordion !== null) {
