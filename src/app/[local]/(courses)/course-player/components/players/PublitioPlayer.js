@@ -392,7 +392,9 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
   const [poster, setPoster] = useState(null);
   const [hasWatched80Percent, setHasWatched80Percent] = useState(false);
   const videoRef = useRef(null);
-  const { setActiveNode } = useNodeId();
+  // const { setActiveNode } = useNodeId();
+  const {setActiveNode ,activeNode , markNodeAsWatched} = useNodeId();
+
 
   // Store the video current time in localStorage for persistence
   useEffect(() => {
@@ -441,6 +443,7 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
           if (watchedPercentage >= 80 && !hasWatched80Percent) {
             setHasWatched80Percent(true);
             await handleVideoWatched(node.videoId);
+            await markNodeAsWatched(activeNode);
           }
 
           // Change node when video reaches 100%
