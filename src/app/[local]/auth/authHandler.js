@@ -26,7 +26,7 @@ export const authHandler = async (url, body) => {
       cookies().set("token", token,{ httpOnly: true, secure: true , maxAge: 3600} );
       cookies().set("refreshToken", refreshToken ,{ httpOnly: true, secure: true  , maxAge: 86400 });
       // cookies().set("user_id", data.id);
-      cookies().set("user", JSON.stringify(data) , {maxAge: 86400});
+      cookies().set("user", email , {maxAge: 86400});
       // Return the user data and tokens (matching Redux expectations)
       return { user: email, accessToken: token, refreshToken };
     } else {
@@ -45,8 +45,8 @@ export const refreshAuth = async()=>{
     const refreshToken = cookies.get("refreshToken")?.value
     if (!refreshToken) throw new Error("Token is not available");
 
-    const email = cookies.get("email")?.value
-    if (!refreshToken) throw new Error("Token is not available");
+    const email = cookies.get("user")?.value
+    if (!email) throw new Error("email is not available");
 
     const response = await axios.post(
       `http://49.13.77.125:1118/Endpoint/api/Token/`,
