@@ -59,7 +59,7 @@ const Content = ({ data, courseId, links, testData }) => {
   const [playerType, setPlayerType] = useState(0);
   const [latestP, setLatestP] = useState();
   const [latestPercantage, setLatestPercantage] = useState(0);
-  const { activeNode, setActiveNode } = useNodeId();
+  const { activeNode, setActiveNode  , watchedNodes} = useNodeId();
 
   const handleNodeIdChange = (newId) => {
     setActiveNode(newId); // Update nodeId in the context
@@ -95,7 +95,7 @@ const Content = ({ data, courseId, links, testData }) => {
   } 
     setPlayerType(latestVideo.playerType)
 
-  },[activeNode, activeNodeType , latestVideo])
+  },[activeNode, activeNodeType , latestVideo ,watchedNodes])
   
   const handleDataComments = (fetchedData) => {
     setComments(fetchedData); // Store the fetched data in the parent state
@@ -455,7 +455,7 @@ const Content = ({ data, courseId, links, testData }) => {
 
                                 return (
                                   <li
-                                    style={{ color: isWatched ? "#6ABD8A" : undefined }}
+                                    style={{ color: isWatched || watchedNodes[nodeId] ? "#6ABD8A" : undefined }}
                                     className={nodeId == activeNode ? "active" : ""}
                                     key={nodeId}
                                     onClick={() => handleNodeIdChange(nodeId) }

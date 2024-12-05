@@ -9,7 +9,7 @@ const YouTubePlayer = ({ node, setWatch, handleIsVideoEnd ,nextNode }) => {
   const [hasReached80, setHasReached80] = useState(false);
   const [watchedDuration, setWatchedDuration] = useState(0);
   const [intervalId, setIntervalId] = useState(null);
-  const {setActiveNode} = useNodeId();
+  const {setActiveNode ,activeNode , markNodeAsWatched} = useNodeId();
 
   const changeNoParam = (newNoValue) => {
     // Get the current URL
@@ -86,6 +86,7 @@ const YouTubePlayer = ({ node, setWatch, handleIsVideoEnd ,nextNode }) => {
           setHasReached80(true);
           console.log("Video has reached 100% of the viewership.");
           changeNoParam(nextNode);
+          await markNodeAsWatched(activeNode);
         }
 
         if (event.data === 1) {

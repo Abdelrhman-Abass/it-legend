@@ -7,9 +7,17 @@ const NodeIdContext = createContext();
 // Create a provider
 export const NodeIdProvider = ({ children }) => {
   const [activeNode, setActiveNode] = useState(null);
+  const [watchedNodes, setWatchedNodes] = useState({});
 
+  // Function to mark a node as watched
+  const markNodeAsWatched = (nodeId) => {
+    setWatchedNodes((prevState) => ({
+      ...prevState,
+      [nodeId]: true,
+    }));
+  };
   return (
-    <NodeIdContext.Provider value={{ activeNode, setActiveNode }}>
+    <NodeIdContext.Provider value={{ activeNode, setActiveNode , watchedNodes ,markNodeAsWatched }}>
       {children}
     </NodeIdContext.Provider>
   );
