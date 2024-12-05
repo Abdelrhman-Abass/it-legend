@@ -48,11 +48,11 @@ export const refreshAuth = async()=>{
     const email = cookies.get("user")?.value
     if (!email) throw new Error("email is not available");
     console.log(typeof email)
-    
+
     const response = await axios.post(
       `http://49.13.77.125:1118/Endpoint/api/Token/`,
       {
-        "email":email,
+        "email":"alaamuhamed97@gmail.com",
         "refreshToken":refreshToken
       },
       {
