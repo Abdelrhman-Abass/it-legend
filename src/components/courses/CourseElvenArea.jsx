@@ -143,7 +143,9 @@ const CourseElevenArea = ({
     }
   }, [status, courses, error]);
 
-
+  if (!cour || cour.length === 0) {
+    return null; // Show nothing if there are no courses
+  }
   return (
     <div className="edu-course-area course-area-1">
       <div className="container">
