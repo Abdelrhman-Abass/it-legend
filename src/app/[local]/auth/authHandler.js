@@ -52,7 +52,7 @@ export const refreshAuth = async()=>{
     const response = await axios.post(
       `http://49.13.77.125:1118/Endpoint/api/Token/`,
       {
-        "email":"alaamuhamed97@gmail.com",
+        "email":JSON.parse(email),
         "refreshToken":refreshToken
       },
       {
