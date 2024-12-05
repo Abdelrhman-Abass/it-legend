@@ -21,6 +21,7 @@ export const authHandler = async (url, body) => {
       const { data } = response.data; // Extract the 'data' from the response
       const { token, refreshToken ,email} = data;
 
+      const mail = {"user" : email}
       
       // Store tokens and user data in cookies
       cookies().set("token", token,{ httpOnly: true, secure: true , maxAge: 3600} );
@@ -28,7 +29,7 @@ export const authHandler = async (url, body) => {
       // cookies().set("user_id", data.id);
       cookies().set("user", email , {maxAge: 86400});
       // Return the user data and tokens (matching Redux expectations)
-      return { user: email, accessToken: token, refreshToken };
+      return { user: mail, accessToken: token, refreshToken };
     } else {
       // If the response is not successful, return an error
       return null;
@@ -48,11 +49,11 @@ export const refreshAuth = async()=>{
     const email = cookies.get("user")?.value
     if (!email) throw new Error("email is not available");
     console.log(typeof email)
-
+    
     const response = await axios.post(
       `http://49.13.77.125:1118/Endpoint/api/Token/`,
       {
-        "email":JSON.parse(email),
+        "email":email,
         "refreshToken":refreshToken
       },
       {
