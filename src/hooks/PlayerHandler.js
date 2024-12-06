@@ -1,6 +1,7 @@
 "use server";
 import axios from "axios";
 import { cookies } from "next/headers";
+import api from "./axiosInstance";
 
 // Define a function to handle authentication requests with Axios
 const fetchWithRetry = async (url, config, retries = 3, delay = 1000) => {
@@ -18,28 +19,30 @@ const fetchWithRetry = async (url, config, retries = 3, delay = 1000) => {
 // alaamuhamed97@gmail.com
 export const CoursePlayerLinks = async (courseId) => {
     try {
-        const token = cookies().get("token")?.value;
-        if (!token) {
-            const refreshToken = cookies().get("refreshToken")?.value
-            if (!refreshToken) {
-                return null
-            }else{
-                refreshAuth()
-            }
-        };
+        // const token = cookies().get("token")?.value;
+        // if (!token) {
+        //     const refreshToken = cookies().get("refreshToken")?.value
+        //     if (!refreshToken) {
+        //         return null
+        //     }else{
+        //         refreshAuth()
+        //     }
+        // };
 
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-            timeout: 3000000,
-        };
+        // const config = {
+        //     headers: {
+        //         Authorization: `Bearer ${token}`,
+        //         "Content-Type": "application/json",
+        //     },
+        //     timeout: 3000000,
+        // };
 
-        const response = await axios.get(
-            `http://49.13.77.125:1118/Endpoint/api/CourseLink/${courseId}/links`,
-            config
-        );
+        // const response = await axios.get(
+        //     `http://49.13.77.125:1118/Endpoint/api/CourseLink/${courseId}/links`,
+        //     config
+        // );
+        const response = await api.get(`http://49.13.77.125:1118/Endpoint/api/CourseLink/${courseId}/links`);
+
 
         return response.data;
     } catch (error) {
@@ -52,28 +55,30 @@ export const CoursePlayerLinks = async (courseId) => {
 };
 export const CoursePlayerLatest = async (videoId) => {
     try {
-        const token = cookies().get("token")?.value;
-        if (!token) {
-            const refreshToken = cookies().get("refreshToken")?.value
-            if (!refreshToken) {
-                return null
-            }else{
-                refreshAuth()
-            }
-        };
+        // const token = cookies().get("token")?.value;
+        // if (!token) {
+        //     const refreshToken = cookies().get("refreshToken")?.value
+        //     if (!refreshToken) {
+        //         return null
+        //     }else{
+        //         refreshAuth()
+        //     }
+        // };
 
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-            timeout: 3000000,
-        };
+        // const config = {
+        //     headers: {
+        //         Authorization: `Bearer ${token}`,
+        //         "Content-Type": "application/json",
+        //     },
+        //     timeout: 3000000,
+        // };
 
-        const response = await axios.get(
-            `http://49.13.77.125:1118/Endpoint/api/MemberCoursePlayer/${videoId}`,
-            config
-        );
+        // const response = await axios.get(
+        //     `http://49.13.77.125:1118/Endpoint/api/MemberCoursePlayer/${videoId}`,
+        //     config
+        // );
+        const response = await api.get(`http://49.13.77.125:1118/Endpoint/api/MemberCoursePlayer/${videoId}`);
+
         
         if (response?.data?.success) {
             const { data } = response.data; // Extract the 'data' from the response      
@@ -98,28 +103,30 @@ export const CoursePlayerLatest = async (videoId) => {
 };
 export const CoursePlayerLatestNode = async (courseId) => {
     try {
-        const token = cookies().get("token")?.value;
-        if (!token) {
-            const refreshToken = cookies().get("refreshToken")?.value
-            if (!refreshToken) {
-                return null
-            }else{
-                refreshAuth()
-            }
-        };
+        // const token = cookies().get("token")?.value;
+        // if (!token) {
+        //     const refreshToken = cookies().get("refreshToken")?.value
+        //     if (!refreshToken) {
+        //         return null
+        //     }else{
+        //         refreshAuth()
+        //     }
+        // };
 
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-            timeout: 3000000,
-        };
+        // const config = {
+        //     headers: {
+        //         Authorization: `Bearer ${token}`,
+        //         "Content-Type": "application/json",
+        //     },
+        //     timeout: 3000000,
+        // };
 
-        const response = await axios.get(
-            `http://49.13.77.125:1118/Endpoint/api/MemberCoursePlayer/${courseId}`,
-            config
-        );
+        // const response = await axios.get(
+        //     `http://49.13.77.125:1118/Endpoint/api/MemberCoursePlayer/${courseId}`,
+        //     config
+        // );
+        const response = await api.get(`http://49.13.77.125:1118/Endpoint/api/MemberCoursePlayer/${courseId}`);
+
         
         if (response?.data?.success) {
             const { data } = response.data; // Extract the 'data' from the response      
@@ -144,28 +151,30 @@ export const CoursePlayerLatestNode = async (courseId) => {
 };
 export const CoursePlayerVideoType = async (courseId) => {
     try {
-        const token = cookies().get("token")?.value;
-        if (!token) {
-            const refreshToken = cookies().get("refreshToken")?.value
-            if (!refreshToken) {
-                return null
-            }else{
-                refreshAuth()
-            }
-        };
+        // const token = cookies().get("token")?.value;
+        // if (!token) {
+        //     const refreshToken = cookies().get("refreshToken")?.value
+        //     if (!refreshToken) {
+        //         return null
+        //     }else{
+        //         refreshAuth()
+        //     }
+        // };
 
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-            timeout: 3000000,
-        };
+        // const config = {
+        //     headers: {
+        //         Authorization: `Bearer ${token}`,
+        //         "Content-Type": "application/json",
+        //     },
+        //     timeout: 3000000,
+        // };
 
-        const response = await axios.get(
-            `http://49.13.77.125:1118/Endpoint/api/MemberCoursePlayer/${courseId}`,
-            config
-        );
+        // const response = await axios.get(
+        //     `http://49.13.77.125:1118/Endpoint/api/MemberCoursePlayer/${courseId}`,
+        //     config
+        // );
+        const response = await api.get(`http://49.13.77.125:1118/Endpoint/api/MemberCoursePlayer/${courseId}`);
+
         
         if (response?.data?.success) {
             const { data } = response.data; // Extract the 'data' from the response      
@@ -191,33 +200,35 @@ export const CoursePlayerVideoType = async (courseId) => {
 // cookies().set("latestNode", response.data.data); http://localhost:3000/en/course-player/602d090f-ef57-464a-b724-0bf57ae9cdc3
 export const CoursePlayerVideo = async (courseId, nodeId) => {
     try {
-      console.log("Starting CoursePlayerVideo:", courseId, nodeId);
-      const token = cookies().get("token")?.value;
-      if (!token) {
-        const refreshToken = cookies().get("refreshToken")?.value
-        if (!refreshToken) {
-            return null
-        }else{
-            refreshAuth()
-        }
-        };
+    //   console.log("Starting CoursePlayerVideo:", courseId, nodeId);
+    //   const token = cookies().get("token")?.value;
+    //   if (!token) {
+    //     const refreshToken = cookies().get("refreshToken")?.value
+    //     if (!refreshToken) {
+    //         return null
+    //     }else{
+    //         refreshAuth()
+    //     }
+    //     };
       
-      console.log("Token Retrieved:", token);
+    //   console.log("Token Retrieved:", token);
   
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        timeout: 3000000,
-      };
+    //   const config = {
+    //     headers: {
+    //       Authorization: `Bearer ${token}`,
+    //       "Content-Type": "application/json",
+    //     },
+    //     timeout: 3000000,
+    //   };
   
-      console.log("Making API Request to:", `http://49.13.77.125:1118/Endpoint/api/CourseVideo/${courseId}/videos/${nodeId}`);
+    //   console.log("Making API Request to:", `http://49.13.77.125:1118/Endpoint/api/CourseVideo/${courseId}/videos/${nodeId}`);
   
-      const response = await axios.get(
-        `http://49.13.77.125:1118/Endpoint/api/CourseVideo/${courseId}/videos/${nodeId}`,
-        config
-      );
+    //   const response = await axios.get(
+    //     `http://49.13.77.125:1118/Endpoint/api/CourseVideo/${courseId}/videos/${nodeId}`,
+    //     config
+    //   );
+      const response = await api.get(`http://49.13.77.125:1118/Endpoint/api/CourseVideo/${courseId}/videos/${nodeId}`);
+
   
       console.log("API Response:", response.data);
       const res = response.data.data.video;
@@ -235,14 +246,14 @@ export const CoursePlayerVideo = async (courseId, nodeId) => {
   export const CoursePlayerVideoIsWatched = async (videoId) => {
     try {
         const token = cookies().get("token")?.value;
-        if (!token) {
-            const refreshToken = cookies().get("refreshToken")?.value
-            if (!refreshToken) {
-                return null
-            }else{
-                refreshAuth()
-            }
-        };
+        // if (!token) {
+        //     const refreshToken = cookies().get("refreshToken")?.value
+        //     if (!refreshToken) {
+        //         return null
+        //     }else{
+        //         refreshAuth()
+        //     }
+        // };
 
         const config = {
             headers: {
@@ -276,28 +287,30 @@ export const CoursePlayerVideo = async (courseId, nodeId) => {
 
 export const CoursePlayerVideoComments = async (nodeId) => {
     try {
-        const token = cookies().get("token")?.value;
-        if (!token) {
-            const refreshToken = cookies().get("refreshToken")?.value
-            if (!refreshToken) {
-                return null
-            }else{
-                refreshAuth()
-            }
-        };
+        // const token = cookies().get("token")?.value;
+        // if (!token) {
+        //     const refreshToken = cookies().get("refreshToken")?.value
+        //     if (!refreshToken) {
+        //         return null
+        //     }else{
+        //         refreshAuth()
+        //     }
+        // };
 
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-            timeout: 3000000,
-        };
+        // const config = {
+        //     headers: {
+        //         Authorization: `Bearer ${token}`,
+        //         "Content-Type": "application/json",
+        //     },
+        //     timeout: 3000000,
+        // };
 
-        const response = await axios.get(
-            `http://49.13.77.125:1118/Endpoint/api/VideoComment/${nodeId}/comments`,
-            config
-        );
+        // const response = await axios.get(
+        //     `http://49.13.77.125:1118/Endpoint/api/VideoComment/${nodeId}/comments`,
+        //     config
+        // );
+        const response = await api.get(`http://49.13.77.125:1118/Endpoint/api/VideoComment/${nodeId}/comments`);
+
 
         return response.data.data;
     } catch (error) {
@@ -311,28 +324,29 @@ export const CoursePlayerVideoComments = async (nodeId) => {
 
 export const CoursePlayerNode = async (courseId ) => {
     try {
-        const token = cookies().get("token")?.value;
-        if (!token) {
-            const refreshToken = cookies().get("refreshToken")?.value
-            if (!refreshToken) {
-                return null
-            }else{
-                refreshAuth()
-            }
-        };
+        // const token = cookies().get("token")?.value;
+        // if (!token) {
+        //     const refreshToken = cookies().get("refreshToken")?.value
+        //     if (!refreshToken) {
+        //         return null
+        //     }else{
+        //         refreshAuth()
+        //     }
+        // };
 
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-            timeout: 3000000,
-        };
+        // const config = {
+        //     headers: {
+        //         Authorization: `Bearer ${token}`,
+        //         "Content-Type": "application/json",
+        //     },
+        //     timeout: 3000000,
+        // };
 
-        const response = await axios.get(
-            `http://49.13.77.125:1118/Endpoint/api/CourseNode/${courseId}/nodes`,
-            config
-        );
+        // const response = await axios.get(
+        //     `http://49.13.77.125:1118/Endpoint/api/CourseNode/${courseId}/nodes`,
+        //     config
+        // );
+        const response = await api.get(`http://49.13.77.125:1118/Endpoint/api/CourseNode/${courseId}/nodes`);
 
         return response.data;
     } catch (error) {

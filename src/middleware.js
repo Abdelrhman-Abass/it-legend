@@ -23,14 +23,14 @@ export async function middleware(req) {
   const isUserLoggedIn = Boolean(user);
 
   // If user is authenticated and trying to access login paths, redirect to homepage
-  if (
-    isUserLoggedIn &&
-    (loginPaths.some((path) => pathname.includes(path)) ||
-      pathname == "/ar" ||
-      pathname == "/en")
-  ) {
-    return NextResponse.redirect(new URL("/learning-path", req.url));
-  }
+  // if (
+  //   isUserLoggedIn &&
+  //   (loginPaths.some((path) => pathname.includes(path)) ||
+  //     pathname == "/ar" ||
+  //     pathname == "/en")
+  // ) {
+  //   return NextResponse.redirect(new URL("/learning-path", req.url));
+  // }
 
   // If user is not logged in and trying to access private paths, redirect to login
   // if (!isUserLoggedIn && privatePaths.some((path) => pathname.includes(path)) ||

@@ -1,5 +1,6 @@
 "use server";
 import { refreshAuth } from "@/app/[local]/auth/authHandler";
+import api from "./axiosInstance";
 import axios from "axios";
 import { cookies } from "next/headers";
 
@@ -17,65 +18,80 @@ const fetchWithRetry = async (url, config, retries = 3, delay = 1000) => {
 };
 
 // alaamuhamed97@gmail.com
+
+
 export const courseUSerData = async () => {
-    try {
-        const token = cookies().get("token")?.value;
-        if (!token) {
-            const refreshToken = cookies().get("refreshToken")?.value
-            if (!refreshToken) {
-                return null
-            }else{
-                refreshAuth()
-            }
-        };
 
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-            timeout: 3000000,
-        };
-
-        const response = await fetchWithRetry(
-            `http://49.13.77.125:1118/Endpoint/api/MemberCourse`,
-            config
-        );
-
-        return response.data;
-    } catch (error) {
-        console.error("Error fetching course data:", error.message);
-        return {
-            data: null,
-            message: error.response?.data?.message || error.message,
-        };
-    }
+  try {
+    const response = await api.get("http://49.13.77.125:1118/Endpoint/api/MemberCourse");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching course data:", error.message);
+    return { data: null, message: error.response?.data?.message || error.message };
+  }
 };
+
+// export const courseUSerData = async () => {
+//     try {
+//         const token = cookies().get("token")?.value;
+//         if (!token) {
+//             const refreshToken = cookies().get("refreshToken")?.value
+//             if (!refreshToken) {
+//                 return null
+//             }else{
+//                 refreshAuth()
+//             }
+//         };
+
+//         const config = {
+//             headers: {
+//                 Authorization: `Bearer ${token}`,
+//                 "Content-Type": "application/json",
+//             },
+//             timeout: 3000000,
+//         };
+
+//         const response = await fetchWithRetry(
+//             `http://49.13.77.125:1118/Endpoint/api/MemberCourse`,
+//             config
+//         );
+
+//         return response.data;
+//     } catch (error) {
+//         console.error("Error fetching course data:", error.message);
+//         return {
+//             data: null,
+//             message: error.response?.data?.message || error.message,
+//         };
+//     }
+// };
 
 export const latestNodeOpend = async (courseId) => {
     try {
-        const token = cookies().get("token")?.value;
-        if (!token) {
-            const refreshToken = cookies().get("refreshToken")?.value
-            if (!refreshToken) {
-                return null
-            }else{
-                refreshAuth()
-            }
-        };
+        // const token = cookies().get("token")?.value;
+        // if (!token) {
+        //     const refreshToken = cookies().get("refreshToken")?.value
+        //     if (!refreshToken) {
+        //         return null
+        //     }else{
+        //         refreshAuth()
+        //     }
+        // };
 
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-            timeout: 3000000,
-        };
+        // const config = {
+        //     headers: {
+        //         Authorization: `Bearer ${token}`,
+        //         "Content-Type": "application/json",
+        //     },
+        //     timeout: 3000000,
+        // };
 
-        const response = await fetchWithRetry(
-            `http://49.13.77.125:1118/Endpoint/api/MemberCoursePlayer/${courseId}`,
-            config
-        );
+        // const response = await fetchWithRetry(
+        //     `http://49.13.77.125:1118/Endpoint/api/MemberCoursePlayer/${courseId}`,
+        //     config
+        // );
+        const response = await api.get(`http://49.13.77.125:1118/Endpoint/api/MemberCoursePlayer/${courseId}`);
+
 
         // if (response) {
         //     cookies().set("latestNode", JSON.stringify(data),{ httpOnly: true, secure: true } );

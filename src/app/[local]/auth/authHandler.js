@@ -1,44 +1,68 @@
 "use server";
 import axios from "axios";
 import { cookies } from "next/headers";
+import api from "../../../hooks/axiosInstance"
+import { setAccessToken, setRefreshToken } from "../../../hooks/tokenUtils";
 
 // Define a function to handle authentication requests with Axios
 export const authHandler = async (url, body) => {
   try {
-    // Send the POST request using Axios
-    const response = await axios.post(
-      `http://49.13.77.125:1118/Endpoint/api/${url}`,
-      body,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await api.post(`http://49.13.77.125:1118/Endpoint/api/${url}`, body);
 
-    // Check if the response is successful
     if (response?.data?.success) {
-      const { data } = response.data; // Extract the 'data' from the response
-      const { token, refreshToken ,email} = data;
-
-      
-      // Store tokens and user data in cookies
+      const { token, refreshToken, email } = response.data.data;
       cookies().set("token", token,{ httpOnly: true, secure: true , maxAge: 3600} );
       cookies().set("refreshToken", refreshToken ,{ httpOnly: true, secure: true  , maxAge: 86400 });
-      // cookies().set("user_id", data.id);
-      cookies().set("user", JSON.stringify(email) , {maxAge: 86400});
-      // Return the user data and tokens (matching Redux expectations)
+
+      // setAccessToken(token);
+      // setRefreshToken(refreshToken);
+
+      cookies().set("user", JSON.stringify(email), { maxAge: 86400 });
       return { user: email, accessToken: token, refreshToken };
-    } else {
-      // If the response is not successful, return an error
-      return null;
     }
+
+    return null;
   } catch (error) {
-    // Handle error in case of failure (e.g., network issues, server errors)
     console.error("Error in authHandler:", error.message);
     return null;
   }
 };
+// export const authHandler = async (url, body) => {
+//   try {
+//     // Send the POST request using Axios
+//     const response = await axios.post(
+//       `http://49.13.77.125:1118/Endpoint/api/${url}`,
+//       body,
+//       {
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//       }
+//     );
+
+//     // Check if the response is successful
+//     if (response?.data?.success) {
+//       const { data } = response.data; // Extract the 'data' from the response
+//       const { token, refreshToken ,email} = data;
+
+      
+//       // Store tokens and user data in cookies
+//       cookies().set("token", token,{ httpOnly: true, secure: true , maxAge: 3600} );
+//       cookies().set("refreshToken", refreshToken ,{ httpOnly: true, secure: true  , maxAge: 86400 });
+//       // cookies().set("user_id", data.id);
+//       cookies().set("user", JSON.stringify(email) , {maxAge: 86400});
+//       // Return the user data and tokens (matching Redux expectations)
+//       return { user: email, accessToken: token, refreshToken };
+//     } else {
+//       // If the response is not successful, return an error
+//       return null;
+//     }
+//   } catch (error) {
+//     // Handle error in case of failure (e.g., network issues, server errors)
+//     console.error("Error in authHandler:", error.message);
+//     return null;
+//   }
+// };
 
 export const refreshAuth = async()=>{
   try {
@@ -47,13 +71,13 @@ export const refreshAuth = async()=>{
 
     const email = cookies().get("user")?.value
     if (!email) throw new Error("email is not available");
-    console.log(typeof email)
+    console.log(email)
     
     const response = await axios.post(
       `http://49.13.77.125:1118/Endpoint/api/Token/`,
       {
-        "email":email,
-        "refreshToken":refreshToken
+        email,
+        refreshToken
       },
       {
         headers: {
@@ -69,7 +93,7 @@ export const refreshAuth = async()=>{
       
       // Store tokens and user data in cookies
       cookies().set("token", token,{ httpOnly: true, secure: true , maxAge: 3600} );
-      return token;
+      return {token};
     } else {
       // If the response is not successful, return an error
       return null;

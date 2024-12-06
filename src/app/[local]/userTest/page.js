@@ -125,32 +125,14 @@ const page = ({
       <div className="container">
         {title && <h3 className="title">{title}</h3>}
         
-        <div className="row g-5 ">
-          {course?.slice(0, next)?.map((course, idx) => (
+        {/* <div className="row g-5 ">
+          {course?.map((course, idx) => (
             <div key={course.courseId} className="col-md-6 col-lg-4">
-              <CourseTypeEleven
-                my={my}
-                title={title}
-                data={course}
-                classes="course-box-shadow"
-                idx={idx}
-              />
+              
             </div>
           ))}
-        </div>
-        {/* {next < courses.length && (
-          <div
-            onClick={handleLoadData}
-            className="load-more-btn"
-            data-aos-delay="100"
-            data-aos="fade-up"
-            data-aos-duration="1200"
-          >
-            <a className="edu-btn" style={{ cursor: "pointer" }}>
-              المزيد <i className="icon-56"></i>
-            </a>
-          </div>
-        )} */}
+        </div> */}
+        
       </div>
     </div>
   );
