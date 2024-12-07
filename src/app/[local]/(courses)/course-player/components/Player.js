@@ -72,7 +72,7 @@ const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNod
     
     
     setComments(comments)
-    console.log(" comments : " +comments)
+    console.log(" comments : " + JSON.stringify(comments))
     if (status === "failed") {
       console.log("Error:", error);
     }

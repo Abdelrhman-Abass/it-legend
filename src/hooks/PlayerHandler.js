@@ -309,8 +309,8 @@ export const CoursePlayerVideoComments = async (videoId) => {
         //     `http://49.13.77.125:1118/Endpoint/api/VideoComment/${nodeId}/comments`,
         //     config
         // );
-        const response = await api.get(`http://49.13.77.125:1118/Endpoint/api/VideoComment/${videoId}/comments`);
         console.log(videoId + " video id from server handler ")
+        const response = await api.get(`http://49.13.77.125:1118/Endpoint/api/VideoComment/${videoId}/comments`);
 
         return response.data.data;
     } catch (error) {
