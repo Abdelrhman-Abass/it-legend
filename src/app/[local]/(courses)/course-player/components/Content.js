@@ -835,8 +835,8 @@ const Content = ({ data, courseId, links, testData }) => {
                                      
                                       <div className="comment-content">
                                        
-                                        <h5 className="title">{review?.message}</h5>
-                                        <span className="date">{review?.videoMinute}</span>
+                                        <h5 className="title">{message}</h5>
+                                        <span className="date">{videoMinute}</span>
                                       </div>
                                     </div>
                                   </li>
