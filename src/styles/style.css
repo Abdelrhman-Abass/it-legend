@@ -641,10 +641,10 @@ h1 p {
   background-color: #f0f0f0; /* Track color (background) */
 }
 
-.comment {
+/* .comment {
   border-bottom: 1px solid #808080;
   padding-bottom: 6px;
-}
+} */
 
 .comment p {
   margin-bottom: 0 !important;

@@ -817,7 +817,7 @@ const Content = ({ data, courseId, links, testData }) => {
               </div>
             )}
             {/* comments */}
-            <div id="comments" className="tab-pane">
+            <div id="comments" className="tab-pane pt-[50px]">
               <div className="course-tab-content">
                 <div className="course-review">
                   {comment.length >= 1 && (
