@@ -821,13 +821,39 @@ const Content = ({ data, courseId, links, testData }) => {
               <div className="course-tab-content">
                 <div className="course-review">
                   {comment.length >= 1 && (
-                    <div className="comment-area">
-                      <div className="comment-list-wrapper">
-                        {comment?.map((review, i) => (
-                          <SingleComment key={i} review={review} />
-                        ))}
+                    <div id="links" className="course-sidebar-3">
+                      <div className="edu-course-widget widget-course-summery">
+                        <div className="inner">
+                          <div className="content">
+                            <h4 className="widget-title"> الكومنتات</h4>
+                            <ul className="course-item">
+                              {/* [data?.courseLinks] */}
+                              {comment.map(({ message, videoMinute }, idx) => {
+                                return (
+                                  <li key={idx}>
+                                    <div className="comment">
+                                     
+                                      <div className="comment-content">
+                                       
+                                        <h5 className="title">{review?.message}</h5>
+                                        <span className="date">{review?.videoMinute}</span>
+                                      </div>
+                                    </div>
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          </div>
+                        </div>
                       </div>
                     </div>
+                    // <div className="comment-area">
+                    //   <div className="comment-list-wrapper">
+                    //     {comment?.map((review, i) => (
+                    //       <SingleComment key={i} review={review} />
+                    //     ))}
+                    //   </div>
+                    // </div>
                   )}
 
                   <div className="comment-form-area">
