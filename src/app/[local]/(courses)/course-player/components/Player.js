@@ -15,7 +15,7 @@ import Problem from "./players/Problem";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCoursesPlayerVideo ,UserCoursePlayerNode} from "@/store/features/course-slice";
 import { CoursePlayerVideo } from "@/hooks/PlayerHandler";
-import { selectCourseError, selectCourseLinks, selectCourseStatus,selectCourseComments, UserCoursePlayerComments, UserCoursePlayerLinks } from "@/store/features/player-slice";
+import { selectCourseError, selectCourseLinks, selectCourseStatus,selectCourseComments, UserCoursePlayerComments, UserCoursePlayerLinks, selectCourseCommentStatus ,selectCourseCommentError } from "@/store/features/player-slice";
 import { LatestVideoNode, selectLatestVideo } from "@/store/features/diploma-slice";
 
 const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNode,playerType,  setComments}) => {
@@ -40,6 +40,9 @@ const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNod
   const comments = useSelector(selectCourseComments)  
   const latest = useSelector(selectLatestVideo)
 
+  const commentStatus = useSelector(selectCourseCommentStatus)
+  const commentError = useSelector(selectCourseCommentError)
+
   useEffect(() => {
     if (activeNode) {
       dispatch(UserCoursePlayerLinks({ courseId, nodeId:activeNode }));
@@ -55,6 +58,16 @@ const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNod
     console.log("Dispatched UserComments with videoPath :", video?.videoId);
   }
   },[dispatch,video])
+  
+  useEffect(() => {
+    if (commentStatus === "loading") {
+      console.log("Loading comments...");
+    } else if (commentStatus === "succeeded") {
+      console.log("Comments loaded successfully!");
+    } else if (commentStatus === "failed") {
+      console.error("Failed to load comments:", commentError);
+    }
+  }, [commentStatus, commentError]);
 
   
   

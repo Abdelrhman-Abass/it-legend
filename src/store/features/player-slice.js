@@ -87,5 +87,7 @@ export const selectCourseLinks = (state) => state.player.playerLinks;
 export const selectCourseComments = (state) => state.player.comments;
 export const selectCourseStatus = (state) => state.player.status;
 export const selectCourseError = (state) => state.player.error;
+export const selectCourseCommentStatus = (state) => state.player.statusComment;
+export const selectCourseCommentError = (state) => state.player.errorComments;
 
 export default courseSlicePlayer.reducer;
