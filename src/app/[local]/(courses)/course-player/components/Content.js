@@ -817,7 +817,7 @@ const Content = ({ data, courseId, links, testData }) => {
               </div>
             )}
             {/* comments */}
-            {comment ? (
+            {comment.length >= 1 && (
               <div id="comments" className="tab-pane">
                 <div className="course-tab-content">
                   <div className="course-review">
@@ -837,8 +837,6 @@ const Content = ({ data, courseId, links, testData }) => {
                 </div>
               </div>
 
-            ):(
-              null
             )}
           </div>
         </div>
