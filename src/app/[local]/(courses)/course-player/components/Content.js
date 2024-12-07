@@ -35,6 +35,7 @@ import { UserHeader } from "@/layout";
 import { useDispatch , useSelector} from "react-redux";
 import { LatestVideoNode, selectLatestVideo } from "@/store/features/diploma-slice";
 import { useNodeId } from "../context/NodeIdContext";
+import { selectCourseComments } from "@/store/features/player-slice";
 
 const Content = ({ data, courseId, links, testData }) => {
   const local = useLocale();
@@ -79,15 +80,17 @@ const Content = ({ data, courseId, links, testData }) => {
      console.log("Dispatched Latest Course :", courseId);
    },[dispatch])
 
-  const latestVideo = useSelector(selectLatestVideo) 
+  const latestVideo = useSelector(selectLatestVideo)
+  const comment = useSelector(selectCourseComments)  
+ 
 
 
   useEffect(() => {
     setLatestP(JSON.stringify(latestVideo))
-    console.log(activeNode)
-    console.log(activeNodeType)
+    // console.log(activeNode)
+    // console.log(activeNodeType)
     console.log("Latest from Content : " +JSON.stringify(latestVideo))
-    console.log("Latest from Content latestP : " + latestVideo.progressPercentage)
+    console.log("Latest from Content latestP : " + JSON.stringify(comment))
     setLatestPercantage(latestVideo.progressPercentage)
     if (latestVideo && typeof latestVideo.progressPercentage === 'number') {
       const roundedPercentage = Number(latestVideo.progressPercentage.toFixed(0));

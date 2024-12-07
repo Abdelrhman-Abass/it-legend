@@ -285,7 +285,7 @@ export const CoursePlayerVideo = async (courseId, nodeId) => {
     }
 };
 
-export const CoursePlayerVideoComments = async (nodeId) => {
+export const CoursePlayerVideoComments = async (videoId) => {
     try {
         // const token = cookies().get("token")?.value;
         // if (!token) {
@@ -309,8 +309,8 @@ export const CoursePlayerVideoComments = async (nodeId) => {
         //     `http://49.13.77.125:1118/Endpoint/api/VideoComment/${nodeId}/comments`,
         //     config
         // );
-        const response = await api.get(`http://49.13.77.125:1118/Endpoint/api/VideoComment/${nodeId}/comments`);
-
+        const response = await api.get(`http://49.13.77.125:1118/Endpoint/api/VideoComment/${videoId}/comments`);
+        console.log(videoId + " video id from server handler ")
 
         return response.data.data;
     } catch (error) {

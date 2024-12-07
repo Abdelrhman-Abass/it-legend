@@ -7,7 +7,9 @@ const initialState = {
   course: [], // Assuming course is an array (if you want a single course, modify this accordingly)
   status: "idle", // 'idle' | 'loading' | 'succeeded' | 'failed'
   error: null,
-  comments: [] // Comments will be stored here
+  comments: [], // Comments will be stored here
+  statusComment:"idle",
+  errorComments:null
 };
 
 // Async action to fetch course player links
@@ -28,10 +30,10 @@ export const UserCoursePlayerLinks = createAsyncThunk(
 // Async action to fetch course comments
 export const UserCoursePlayerComments = createAsyncThunk(
   "user/courses/comments", // Action type
-  async ({ nodeId }, { rejectWithValue }) => {
+  async ({ videoId }, { rejectWithValue }) => {
     try {
-      console.log(nodeId);
-      const response = await CoursePlayerVideoComments(nodeId);
+      console.log("video ID from server : " + videoId);
+      const response = await CoursePlayerVideoComments(videoId);
       return response; // Return the actual data
     } catch (error) {
       console.error(error);
@@ -67,15 +69,15 @@ export const courseSlicePlayer = createSlice({
       
       // Handling UserCoursePlayerComments async action
       .addCase(UserCoursePlayerComments.pending, (state) => {
-        state.status = "loading";
+        state.statusComment = "loading";
       })
       .addCase(UserCoursePlayerComments.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.statusComment = "succeeded";
         state.comments = action.payload; // Store the fetched comments
       })
       .addCase(UserCoursePlayerComments.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.payload; // Store the error message
+        state.statusComment = "failed";
+        state.errorComments = action.payload; // Store the error message
       });
   },
 });

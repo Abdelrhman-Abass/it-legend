@@ -50,8 +50,9 @@ const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNod
  // https://it-legend-rrkg.vercel.app/ar/course-player/c84e7902-1205-426f-a857-922bedd84bdf?type=0  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImE4YzhlMGQ1LTU5MmYtNDdhZC1hYWIyLTA2OWM2MjEwNmVkOCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhbGFhbXVoYW1lZDk3QGdtYWlsLmNvbSIsImp0aSI6IjZiNTQ3YWQ2LWRlZWMtNDYxMS1hMWM3LThjOWRmZTJlMTRhNiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6InVzZXIiLCJleHAiOjE3MzMyMjcyMzQsImlzcyI6Imh0dHBzOi8vd3d3Lml0bGVnZW5kLm5ldC8iLCJhdWQiOiJodHRwczovL3d3dy5pdGxlZ2VuZC5uZXQvIn0.2vkb3XSr9f7GSsrxrqp0hDzVNyJni7Cc7cmjiYoS3mw
   
  useEffect(()=>{
-    dispatch(UserCoursePlayerComments({activeNode} ))
-  },[dispatch,activeNode])
+    dispatch(UserCoursePlayerComments({videoId : video?.videoId} ))
+    console.log("Dispatched UserComments with videoPath :", video?.videoId);
+  },[dispatch,video])
 
   
   
@@ -69,7 +70,7 @@ const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNod
     
     
     setComments(comments)
-    // console.log(" comments : "+comments)
+    console.log(" comments : " +comments)
     if (status === "failed") {
       console.log("Error:", error);
     }

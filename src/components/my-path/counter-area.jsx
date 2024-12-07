@@ -40,27 +40,27 @@ const CounterArea = ({ about_p_3 , my=false , codeChallenges ,level , score}) =>
     score && {
       color: "primary-color",
       count: score,
-      icon: "7",
-      title: "مجموع الدرجات",
+      icon: "23",
+      title: " النقاط",
     },
     level && {
       color: "secondary-color",
       count: level,
-      icon: "6",
+      icon: "7",
       title: "المستوي",
     },
     codeChallenges && {
       color: "extra08-color",
       count: codeChallenges,
-      icon: "34",
+      icon: "27",
       title: "التحدي اليومي",
     },
     {
       color: "extra05-color",
       count: 354,
-      icon: "50",
+      icon: "65",
       // text: "%",
-      title: "التقيم الحالي",
+      title: "الملخصات",
     },
   ].filter(Boolean); // Remove undefined entries
 

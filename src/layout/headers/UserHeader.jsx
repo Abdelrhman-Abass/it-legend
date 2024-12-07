@@ -87,7 +87,7 @@ const UserHeader = ({
           >
             <div id="edu-sticky-placeholder"></div>
             <div
-              className={`header-mainmenu ${sticky && isSticky ? "edu-sticky" : undefined
+              className={`header-mainmenu ${sticky && isSticky && player == false ? "edu-sticky" : undefined
                 } ${player ? "relative" : ""}`}
             >
               <div className="container-fluid">
