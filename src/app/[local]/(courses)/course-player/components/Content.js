@@ -32,7 +32,7 @@ import {
 import { validateYupSchema } from "formik";
 import BreadcrumbTwo from "@/components/breadcrumb/breadcrumb-2";
 import { UserHeader } from "@/layout";
-import { useDispatch , useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { LatestVideoNode, selectLatestVideo } from "@/store/features/diploma-slice";
 import { useNodeId } from "../context/NodeIdContext";
 import { selectCourseComments } from "@/store/features/player-slice";
@@ -48,7 +48,7 @@ const Content = ({ data, courseId, links, testData }) => {
   // const type = params.get("type");
   const contentId = params.get("no");
   // const [activeNode , setActiveNode] = useState("")
-  const [activeNodeType , setActiveNodeType] = useState(0)
+  const [activeNodeType, setActiveNodeType] = useState(0)
   const [board, setBoard] = useState(false);
   const [ask, setAsk] = useState(false);
   const [askData, setAskData] = useState([]);
@@ -60,12 +60,12 @@ const Content = ({ data, courseId, links, testData }) => {
   const [playerType, setPlayerType] = useState(0);
   const [latestP, setLatestP] = useState();
   const [latestPercantage, setLatestPercantage] = useState(0);
-  const { activeNode, setActiveNode  , watchedNodes} = useNodeId();
+  const { activeNode, setActiveNode, watchedNodes } = useNodeId();
 
   const handleNodeIdChange = (newId) => {
     setActiveNode(newId); // Update nodeId in the context
   };
-  
+
   const [modules, setModules] = useState([])
   const [openAccordion, setOpenAccordion] = useState(null);
   const dispatch = useDispatch()
@@ -73,38 +73,38 @@ const Content = ({ data, courseId, links, testData }) => {
 
   useEffect(() => {
     setModules(testData)
-  },[modules , watch])
+  }, [modules, watch])
 
-  useEffect(()=>{
-     dispatch(LatestVideoNode(courseId ))
-     console.log("Dispatched Latest Course :", courseId);
-   },[dispatch])
+  useEffect(() => {
+    dispatch(LatestVideoNode(courseId))
+    console.log("Dispatched Latest Course :", courseId);
+  }, [dispatch])
 
   const latestVideo = useSelector(selectLatestVideo)
-  const comment = useSelector(selectCourseComments)  
- 
+  const comment = useSelector(selectCourseComments)
+
 
 
   useEffect(() => {
     setLatestP(JSON.stringify(latestVideo))
     // console.log(activeNode)
     // console.log(activeNodeType)
-    console.log("Latest from Content : " +JSON.stringify(latestVideo))
+    console.log("Latest from Content : " + JSON.stringify(latestVideo))
     console.log("Latest from Content latestP : " + JSON.stringify(comment))
     setLatestPercantage(latestVideo.progressPercentage)
     if (latestVideo && typeof latestVideo.progressPercentage === 'number') {
       const roundedPercentage = Number(latestVideo.progressPercentage.toFixed(0));
       setLatestPercantage(roundedPercentage);
-  } 
+    }
     setPlayerType(latestVideo.playerType)
 
-  },[activeNode, activeNodeType , latestVideo ,watchedNodes])
-  
+  }, [activeNode, activeNodeType, latestVideo, watchedNodes])
+
   const handleDataComments = (fetchedData) => {
     setComments(fetchedData); // Store the fetched data in the parent state
   };
 
-  
+
 
   // console.log(" comments from content : "+ JSON.stringify(comments))
   // http://localhost:3000/en/course-player/602d090f-ef57-464a-b724-0bf57ae9cdc3
@@ -168,7 +168,7 @@ const Content = ({ data, courseId, links, testData }) => {
   const handleAccordionToggle = (idx) => {
     setOpenAccordion((prevIndex) => (prevIndex === idx ? null : idx));
   };
-  
+
   useEffect(() => {
     if (modules.length > 0) {
       // Find the first module with an unwatched node
@@ -197,7 +197,7 @@ const Content = ({ data, courseId, links, testData }) => {
         const lastModuleIndex = modules.length - 1;
         const lastNode =
           modules[lastModuleIndex]?.nodes[
-            modules[lastModuleIndex].nodes.length - 1
+          modules[lastModuleIndex].nodes.length - 1
           ];
         setOpenAccordion(lastModuleIndex);
         setActiveNode(lastNode.nodeId);
@@ -382,37 +382,37 @@ const Content = ({ data, courseId, links, testData }) => {
             width: 416,
             paddingTop: 64,
           }}
-        >
-          <div className="course-curriculam mb--90">
-            <h3 className="heading-title">محتوي الكورس</h3>
+        ><h3 className="heading-title">محتوي الكورس</h3>
+          <div
+            style={{
+              position: "relative",
+              padding: "20px 0 40px",
+              width: "100%",
+            }}
+          >
+            <Tooltip title={"Your Progress"}>
+              <Progress
+                percent={latestPercantage ? latestPercantage : 0}
+                strokeColor="#6ABD8A"
+                showInfo={false}
+              />
+            </Tooltip>
+            {/* Custom percentage text below the bar */}
             <div
+              className="percent-label"
               style={{
-                position: "relative",
-                padding: "20px 0 40px",
-                width: "100%",
+                position: "absolute",
+                right: local == "ar" ? `${percent - 5}%` : "auto",
+                left: local == "en" ? `${percent - 5}%` : "auto",
+                top: "35px",
+                transition: "all 0.1s",
               }}
             >
-              <Tooltip title={"Your Progress"}>
-                <Progress
-                  percent={latestPercantage ? latestPercantage : 0}
-                  strokeColor="#6ABD8A"
-                  showInfo={false}
-                />
-              </Tooltip>
-              {/* Custom percentage text below the bar */}
-              <div
-                className="percent-label"
-                style={{
-                  position: "absolute",
-                  right: local == "ar" ? `${percent - 5}%` : "auto",
-                  left: local == "en" ? `${percent - 5}%` : "auto",
-                  top: "35px",
-                  transition: "all 0.1s",
-                }}
-              >
-                {latestPercantage ? latestPercantage : 0}%
-              </div>
+              {latestPercantage ? latestPercantage : 0}%
             </div>
+          </div>
+          <div className="course-curriculam mb--90">
+
             <CourseAccordion
               moduleId={moduleId}
               nodes={data?.nodes}
@@ -463,9 +463,9 @@ const Content = ({ data, courseId, links, testData }) => {
                                     style={{ color: isWatched || watchedNodes[nodeId] ? "#6ABD8A" : undefined }}
                                     className={nodeId == activeNode ? "active" : ""}
                                     key={nodeId}
-                                    onClick={() => handleNodeIdChange(nodeId) }
+                                    onClick={() => handleNodeIdChange(nodeId)}
                                   >
-                                    <div className="text d-flex align-items-center" onClick={()=> setActiveNodeType(type)}>
+                                    <div className="text d-flex align-items-center" onClick={() => setActiveNodeType(type)}>
                                       <span style={{ margin: "0 4px 4px" }}>
                                         {isWatched ? (
                                           <svg
@@ -492,7 +492,7 @@ const Content = ({ data, courseId, links, testData }) => {
                                       </span>
                                       <span >
                                         {/* <a href={`/ar/course-player/${course.courseId}?type=${type}&no=${nodeId}`}> */}
-                                          {titleAr}
+                                        {titleAr}
                                         {/* </a> */}
                                       </span>
                                     </div>
@@ -525,7 +525,7 @@ const Content = ({ data, courseId, links, testData }) => {
             paddingLeft: local == "en" && showPlayerSide && 405,
           }}
         >
-          <UserHeader player={true}/>
+          <UserHeader player={true} />
           {/* <BreadcrumbTwo subtitle={"تطوير تطبيقات الويب"} /> */}
           <div className={`video-player type-${activeNodeType}`}>
             <div
@@ -722,11 +722,11 @@ const Content = ({ data, courseId, links, testData }) => {
                                 return (
                                   <li
                                     style={{ color: isWatched || watchedNodes[nodeId] ? "#6ABD8A" : undefined }}
-                                    className={nodeId == activeNode? "active" : ""}
+                                    className={nodeId == activeNode ? "active" : ""}
                                     key={nodeId}
                                     onClick={() => handleNodeIdChange(nodeId)}
                                   >
-                                    <div className="text d-flex align-items-center" onClick={()=> setActiveNodeType(type)}>
+                                    <div className="text d-flex align-items-center" onClick={() => setActiveNodeType(type)}>
                                       <span style={{ margin: "0 4px 4px" }}>
                                         {isWatched ? (
                                           <svg
@@ -753,7 +753,7 @@ const Content = ({ data, courseId, links, testData }) => {
                                       </span>
                                       <span>
                                         {/* <a href={`/ar/course-player/${course.courseId}?type=${type}&no=${nodeId}`}> */}
-                                          {titleAr}
+                                        {titleAr}
                                         {/* </a> */}
                                       </span>
                                     </div>
