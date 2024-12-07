@@ -72,7 +72,7 @@ const CommentFormCourse = () => {
           {touched.msg && <ErrorMsg error={errors.msg} />}
         </div>
 
-        <div className="form-group col-12">
+        <div className="form-group col-12 pb-[50px]">
           <button type="submit" className="edu-btn submit-btn">
             تعليق <i className="icon-4"></i>
           </button>

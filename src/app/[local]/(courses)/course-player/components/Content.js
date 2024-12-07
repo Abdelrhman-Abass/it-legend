@@ -573,47 +573,47 @@ const Content = ({ data, courseId, links, testData }) => {
                     <span> محتوي الكورس</span>
                   </button>
                 </li>
-                    {links ? (
+                {links ? (
 
-                <li className="nav-item" role="presentation">
-                  <a
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyItems: "center",
-                      alignItems: "center",
-                      gap: 4,
-                    }}
-                    className={`nav-link ${showPlayerSide && "active"}`}
-                    href="#links"
-                    type="button"
-                  >
-                    <Link />
-                    <span>روابط مهمة</span>
-                  </a>
-                </li>
+                  <li className="nav-item" role="presentation">
+                    <a
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyItems: "center",
+                        alignItems: "center",
+                        gap: 4,
+                      }}
+                      className={`nav-link ${showPlayerSide && "active"}`}
+                      href="#links"
+                      type="button"
+                    >
+                      <Link />
+                      <span>روابط مهمة</span>
+                    </a>
+                  </li>
 
-                    ) : null}
-                  {comment ? (
+                ) : null}
+                {comment.length >= 1 && (
 
-                <li className="nav-item" role="presentation">
-                  <a
-                    href="#comments"
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyItems: "center",
-                      alignItems: "center",
-                      gap: 4,
-                    }}
-                    className="nav-link"
-                    type="button"
-                  >
-                    <MessageCircleMore />
-                    <span>الكومنتات</span>
-                  </a>
-                </li>
-                  ): null}
+                  <li className="nav-item" role="presentation">
+                    <a
+                      href="#comments"
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyItems: "center",
+                        alignItems: "center",
+                        gap: 4,
+                      }}
+                      className="nav-link"
+                      type="button"
+                    >
+                      <MessageCircleMore />
+                      <span>الكومنتات</span>
+                    </a>
+                  </li>
+                )}
                 <li className="nav-item" role="presentation">
                   <button
                     style={{
@@ -726,7 +726,7 @@ const Content = ({ data, courseId, links, testData }) => {
 
                                 return (
                                   <li
-                                    style={{ color: isWatched || watchedNodes[nodeId] || isPassed? "#6ABD8A" : undefined }}
+                                    style={{ color: isWatched || watchedNodes[nodeId] || isPassed ? "#6ABD8A" : undefined }}
                                     className={nodeId == activeNode ? "active" : ""}
                                     key={nodeId}
                                     onClick={() => handleNodeIdChange(nodeId)}
@@ -817,10 +817,10 @@ const Content = ({ data, courseId, links, testData }) => {
               </div>
             )}
             {/* comments */}
-              <div id="comments" className="tab-pane">
-                <div className="course-tab-content">
-                  <div className="course-review">
-            {comment.length >= 1 && (
+            <div id="comments" className="tab-pane">
+              <div className="course-tab-content">
+                <div className="course-review">
+                  {comment.length >= 1 && (
                     <div className="comment-area">
                       <div className="comment-list-wrapper">
                         {comment?.map((review, i) => (
@@ -828,15 +828,15 @@ const Content = ({ data, courseId, links, testData }) => {
                         ))}
                       </div>
                     </div>
-                    )}
+                  )}
 
-                    <div className="comment-form-area">
-                      <h3 className="heading-title">اترك تعليق</h3>
-                      <CommentFormCourse />
-                    </div>
+                  <div className="comment-form-area">
+                    <h3 className="heading-title">اترك تعليق</h3>
+                    <CommentFormCourse />
                   </div>
                 </div>
               </div>
+            </div>
 
           </div>
         </div>
