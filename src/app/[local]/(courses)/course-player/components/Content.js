@@ -817,10 +817,10 @@ const Content = ({ data, courseId, links, testData }) => {
               </div>
             )}
             {/* comments */}
-            {comment.length >= 1 && (
               <div id="comments" className="tab-pane">
                 <div className="course-tab-content">
                   <div className="course-review">
+            {comment.length >= 1 && (
                     <div className="comment-area">
                       <div className="comment-list-wrapper">
                         {comment?.map((review, i) => (
@@ -828,6 +828,7 @@ const Content = ({ data, courseId, links, testData }) => {
                         ))}
                       </div>
                     </div>
+                    )}
 
                     <div className="comment-form-area">
                       <h3 className="heading-title">اترك تعليق</h3>
@@ -837,7 +838,6 @@ const Content = ({ data, courseId, links, testData }) => {
                 </div>
               </div>
 
-            )}
           </div>
         </div>
       </div>
