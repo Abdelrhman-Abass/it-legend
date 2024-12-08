@@ -18,7 +18,7 @@ export async function middleware(req) {
   const { pathname } = req.nextUrl;
 
   // Define login-only and private paths
-  const loginPaths = ["/auth", "/diploma-details/"]; // Public pages when not logged in
+  const loginPaths = ["/auth", "/diploma-details/", "/" , "/diploma-sales/" , "/course/" , "/cart/"]; // Public pages when not logged in
   const privatePaths = ["/course-player/", "/diploma/", "/learning-path"]; // Pages for logged-in users
   const isUserLoggedIn = Boolean(user);
 
