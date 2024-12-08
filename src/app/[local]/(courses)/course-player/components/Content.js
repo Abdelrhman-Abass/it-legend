@@ -36,6 +36,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { LatestVideoNode, selectLatestVideo } from "@/store/features/diploma-slice";
 import { useNodeId } from "../context/NodeIdContext";
 import { selectCourseComments } from "@/store/features/player-slice";
+import { getLastPlayedNode } from "../../utils/cookies";
 
 const Content = ({ data, courseId, links, testData }) => {
   const local = useLocale();
@@ -83,7 +84,10 @@ const Content = ({ data, courseId, links, testData }) => {
   const latestVideo = useSelector(selectLatestVideo)
   const comment = useSelector(selectCourseComments)
 
-
+  useEffect(()=>{
+    const lat = getLastPlayedNode(activeNode)
+    console("lat : " + lat)
+  },[activeNode])
 
   useEffect(() => {
     setLatestP(JSON.stringify(latestVideo))
