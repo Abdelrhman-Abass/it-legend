@@ -17,7 +17,7 @@ export const authHandler = async (url, body) => {
       // setAccessToken(token);
       // setRefreshToken(refreshToken);
 
-      cookies().set("user", JSON.stringify(email), { maxAge: 86400 });
+      cookies().set("user", JSON.stringify(email), { expires: expirationDate });
       return { user: email, accessToken: token, refreshToken };
     }
 
