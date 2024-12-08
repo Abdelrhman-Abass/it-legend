@@ -2,14 +2,29 @@
 import { cookies } from "next/headers"; // For Next.js cookies
 
 // Save video playback time
+"use server";
+import { cookies } from "next/headers"; // For Next.js cookies
+
+// Save video playback time
 export const savePlaybackState = async (courseId, nodeId, videoId, timestamp) => {
     const playbackState = JSON.parse(cookies().get("playbackState")?.value || "{}");
 
-    if (!playbackState[courseId]) playbackState[courseId] = {};
-    if (!playbackState[courseId][nodeId]) playbackState[courseId][nodeId] = {};
+    // Ensure courseId is a string
+    const courseKey = String(courseId);
 
-    playbackState[courseId][nodeId][videoId] = timestamp;
+    // Initialize courseId if not present
+    if (!playbackState[courseKey]) {
+        playbackState[courseKey] = {}; // Add new course property
+    }
 
+    // Update or add the nodeId and videoId
+    playbackState[courseKey] = {
+        [nodeId]: {
+            [videoId]: timestamp,
+        },
+    };
+
+    // Update cookies with the new playbackState
     cookies().set("playbackState", JSON.stringify(playbackState), {
         httpOnly: false, // Accessible on the client
         secure: true,
