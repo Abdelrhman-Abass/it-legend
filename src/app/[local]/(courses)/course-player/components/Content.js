@@ -235,7 +235,7 @@ const Content = ({ data, courseId, links, testData }) => {
     };
   
     fetchLastPlayedNode();
-  }, [modules, courseId , activeNode]);
+  }, [modules, courseId ]);
 
   // useEffect(() => {
   //   if (modules.length > 0) {
