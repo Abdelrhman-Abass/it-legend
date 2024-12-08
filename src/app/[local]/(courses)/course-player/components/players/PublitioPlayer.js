@@ -628,7 +628,7 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
       if (video) {
         video.removeEventListener("ended", handleIsVideoEnd);
         video.removeEventListener("timeupdate", () => {});
-        video.removeEventListener("pause", handlePause);
+        video.removeEventListener("pause", savePlaybackState(courseId, activeNode, node?.videoId, video.currentTime));
 
 
         if (video.hls) {
