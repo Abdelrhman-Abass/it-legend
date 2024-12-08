@@ -45,7 +45,7 @@ export const getLastPlayedNode = async (courseId) => {
     const nodeId = nodeIds[0];
     console.log(`Last played node for courseId ${courseKey}:`, nodeId);
 
-    return nodeId || null;
+    return Number(nodeId) || null;
     // return courseKey;
 };
 // Retrieve the last played video and timestamp for a node
