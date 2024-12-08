@@ -87,7 +87,7 @@ const Content = ({ data, courseId, links, testData }) => {
   useEffect(() => {
     const fetchLastPlayedNode = async () => {
       try {
-        const lat = await getLastPlayedNode(activeNode);
+        const lat = await getLastPlayedNode(courseId);
         console.log("lat : " + JSON.stringify(lat));
       } catch (error) {
         console.error("Error fetching last played node:", error);
