@@ -86,8 +86,9 @@ const Content = ({ data, courseId, links, testData }) => {
 
   useEffect(()=>{
     const lat = getLastPlayedNode(activeNode)
-    console.log("lat : " + lat)
+    console.log("lat : " + JSON.stringify(lat))
   },[activeNode])
+
 
   useEffect(() => {
     setLatestP(JSON.stringify(latestVideo))
