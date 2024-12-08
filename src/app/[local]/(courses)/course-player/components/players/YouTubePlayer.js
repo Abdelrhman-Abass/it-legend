@@ -3,6 +3,7 @@ import { CoursePlayerVideoIsWatched } from "@/hooks/PlayerHandler";
 import React, { useCallback, useEffect, useState } from "react";
 import YouTube from "react-youtube";
 import { useNodeId } from "../../context/NodeIdContext";
+import { savePlaybackState } from "../../../utils/cookies";
 const YouTubePlayer = ({ node, setWatch, handleIsVideoEnd ,nextNode }) => {
   
   const [player, setPlayer] = useState(null);
