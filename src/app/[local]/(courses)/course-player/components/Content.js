@@ -90,7 +90,7 @@ const Content = ({ data, courseId, links, testData }) => {
     // console.log(activeNode)
     // console.log(activeNodeType)
     console.log("Latest from Content : " + JSON.stringify(latestVideo))
-    console.log("Latest from Content latestP : " + JSON.stringify(comment))
+    // console.log("Latest from Content latestP : " + JSON.stringify(comment))
     setLatestPercantage(latestVideo.progressPercentage)
     if (latestVideo && typeof latestVideo.progressPercentage === 'number') {
       const roundedPercentage = Number(latestVideo.progressPercentage.toFixed(0));
