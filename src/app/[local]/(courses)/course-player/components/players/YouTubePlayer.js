@@ -36,10 +36,10 @@ const YouTubePlayer = ({ node, setWatch, handleIsVideoEnd ,nextNode }) => {
   //   window.location.reload();
 
   // };
-  useEffect(()=>{
-    const {timestamp} = getLastPlayedVideo(courseId , activeNode)
-    console.log(timestamp)
-  },[])
+  // useEffect(()=>{
+  //   const {timestamp} = getLastPlayedVideo(courseId , activeNode)
+  //   console.log(timestamp)
+  // },[])
   
   const opts = {
     playerVars: {
