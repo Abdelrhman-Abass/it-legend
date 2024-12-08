@@ -86,7 +86,7 @@ const Content = ({ data, courseId, links, testData }) => {
 
   useEffect(()=>{
     const lat = getLastPlayedNode(activeNode)
-    console("lat : " + lat)
+    console.log("lat : " + lat)
   },[activeNode])
 
   useEffect(() => {
