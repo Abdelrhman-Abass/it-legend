@@ -51,6 +51,7 @@ const Content = ({ data, courseId, links, testData }) => {
   // const [activeNode , setActiveNode] = useState("")
   const [activeNodeType, setActiveNodeType] = useState(0)
   const [board, setBoard] = useState(false);
+  const [latNode, setLatNode] = useState(false);
   const [ask, setAsk] = useState(false);
   const [askData, setAskData] = useState([]);
   const [getAskLoad, setGetAskLoad] = useState(false);
@@ -84,18 +85,19 @@ const Content = ({ data, courseId, links, testData }) => {
   const latestVideo = useSelector(selectLatestVideo)
   const comment = useSelector(selectCourseComments)
 
-  useEffect(() => {
-    const fetchLastPlayedNode = async () => {
-      try {
-        const lat = await getLastPlayedNode(courseId);
-        console.log("lat : " + JSON.stringify(lat));
-      } catch (error) {
-        console.error("Error fetching last played node:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchLastPlayedNode = async () => {
+  //     try {
+  //       const lat = await getLastPlayedNode(courseId);
+  //       console.log("lat : " + JSON.stringify(lat));
+  //       setLatNode(JSON.stringify(lat))
+  //     } catch (error) {
+  //       console.error("Error fetching last played node:", error);
+  //     }
+  //   };
   
-    fetchLastPlayedNode();
-  }, [activeNode]);
+  //   fetchLastPlayedNode();
+  // }, [activeNode]);
 
 
   useEffect(() => {
@@ -181,42 +183,95 @@ const Content = ({ data, courseId, links, testData }) => {
   const handleAccordionToggle = (idx) => {
     setOpenAccordion((prevIndex) => (prevIndex === idx ? null : idx));
   };
-
   useEffect(() => {
-    if (modules.length > 0) {
-      // Find the first module with an unwatched node
-      let foundUnwatched = false;
-      let firstUnwatchedNode = null;
-      let accordionIndexToOpen = null;
-
-      for (let i = 0; i < modules.length; i++) {
-        const module = modules[i];
-        const unwatchedNode = module.nodes.find((node) => !node.isWatched);
-
-        if (unwatchedNode) {
-          foundUnwatched = true;
-          firstUnwatchedNode = unwatchedNode;
-          accordionIndexToOpen = i;
-          break;
+    const fetchLastPlayedNode = async () => {
+      const lat = await getLastPlayedNode(courseId); // Fetch the last played node
+  
+      if (lat) {
+        // If 'lat' exists, set it as the activeNode
+        setActiveNode(lat);
+        const foundModuleIndex = modules.findIndex((module) =>
+          module.nodes.some((node) => node.nodeId === lat)
+        );
+  
+        if (foundModuleIndex !== -1) {
+          setOpenAccordion(foundModuleIndex); // Open the module containing 'lat'
+        }
+      } else {
+        // If 'lat' doesn't exist, find the first unwatched node or the last node
+        if (modules.length > 0) {
+          let foundUnwatched = false;
+          let firstUnwatchedNode = null;
+          let accordionIndexToOpen = null;
+  
+          for (let i = 0; i < modules.length; i++) {
+            const module = modules[i];
+            const unwatchedNode = module.nodes.find((node) => !node.isWatched);
+  
+            if (unwatchedNode) {
+              foundUnwatched = true;
+              firstUnwatchedNode = unwatchedNode;
+              accordionIndexToOpen = i;
+              break;
+            }
+          }
+  
+          if (foundUnwatched) {
+            // Open the module with the first unwatched node
+            setOpenAccordion(accordionIndexToOpen);
+            setActiveNode(firstUnwatchedNode.nodeId);
+          } else {
+            // If all nodes are watched, open the last module and the last node
+            const lastModuleIndex = modules.length - 1;
+            const lastNode =
+              modules[lastModuleIndex]?.nodes[
+                modules[lastModuleIndex].nodes.length - 1
+              ];
+            setOpenAccordion(lastModuleIndex);
+            setActiveNode(lastNode.nodeId);
+          }
         }
       }
+    };
+  
+    fetchLastPlayedNode();
+  }, [modules, courseId , activeNode]);
 
-      if (foundUnwatched) {
-        // Open the module with the first unwatched node
-        setOpenAccordion(accordionIndexToOpen);
-        setActiveNode(firstUnwatchedNode.nodeId);
-      } else {
-        // If all nodes are watched, open the last module and the last node
-        const lastModuleIndex = modules.length - 1;
-        const lastNode =
-          modules[lastModuleIndex]?.nodes[
-          modules[lastModuleIndex].nodes.length - 1
-          ];
-        setOpenAccordion(lastModuleIndex);
-        setActiveNode(lastNode.nodeId);
-      }
-    }
-  }, [modules]);
+  // useEffect(() => {
+  //   if (modules.length > 0) {
+  //     // Find the first module with an unwatched node
+  //     let foundUnwatched = false;
+  //     let firstUnwatchedNode = null;
+  //     let accordionIndexToOpen = null;
+
+  //     for (let i = 0; i < modules.length; i++) {
+  //       const module = modules[i];
+  //       const unwatchedNode = module.nodes.find((node) => !node.isWatched);
+
+  //       if (unwatchedNode) {
+  //         foundUnwatched = true;
+  //         firstUnwatchedNode = unwatchedNode;
+  //         accordionIndexToOpen = i;
+  //         break;
+  //       }
+  //     }
+
+  //     if (foundUnwatched) {
+  //       // Open the module with the first unwatched node
+  //       setOpenAccordion(accordionIndexToOpen);
+  //       setActiveNode(firstUnwatchedNode.nodeId);
+  //     } else {
+  //       // If all nodes are watched, open the last module and the last node
+  //       const lastModuleIndex = modules.length - 1;
+  //       const lastNode =
+  //         modules[lastModuleIndex]?.nodes[
+  //         modules[lastModuleIndex].nodes.length - 1
+  //         ];
+  //       setOpenAccordion(lastModuleIndex);
+  //       setActiveNode(lastNode.nodeId);
+  //     }
+  //   }
+  // }, [modules]);
 
   useEffect(() => {
     if (openAccordion !== null) {
