@@ -100,13 +100,14 @@ const YouTubePlayer = ({ node, setWatch, handleIsVideoEnd ,nextNode }) => {
             const id = setInterval(trackWatchedDuration, 1000); // Track every second
             setIntervalId(id);
           }
-        }else if (event.data === 2) {
-          savePlaybackState(courseId, activeNode, node?.videoId, currentTime); // Save playback state on pause
+          else {
+            // Video is paused or ended
+            clearInterval(intervalId);
+            setIntervalId(null);
+          }
         }
-         else {
-          // Video is paused or ended
-          clearInterval(intervalId);
-          setIntervalId(null);
+        if (event.data === 2) {
+          savePlaybackState(courseId, activeNode, node?.videoId, currentTime); // Save playback state on pause
         }
       }
     },
