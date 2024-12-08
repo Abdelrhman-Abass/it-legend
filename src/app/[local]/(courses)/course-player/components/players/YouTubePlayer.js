@@ -15,7 +15,12 @@ const YouTubePlayer = ({ node, setWatch, handleIsVideoEnd ,nextNode }) => {
     // Get the current URL
     setActiveNode(newNoValue)
   };
-  
+  const getCourseIdFromUrl = () => {
+    const currentUrl = new URL(window.location.href);
+    return currentUrl.pathname.split("/").pop(); // Assumes courseId is the last part of the URL
+  };
+
+  const courseId = getCourseIdFromUrl();
 
   // console.log("Node data:", node);
   // const changeNoParam = (newNoValue) => {
@@ -95,7 +100,10 @@ const YouTubePlayer = ({ node, setWatch, handleIsVideoEnd ,nextNode }) => {
             const id = setInterval(trackWatchedDuration, 1000); // Track every second
             setIntervalId(id);
           }
-        } else {
+        }else if (event.data === 2) {
+          savePlaybackState(courseId, activeNode, node?.videoId, currentTime); // Save playback state on pause
+        }
+         else {
           // Video is paused or ended
           clearInterval(intervalId);
           setIntervalId(null);
