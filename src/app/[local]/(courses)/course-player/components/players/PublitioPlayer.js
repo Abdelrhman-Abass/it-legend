@@ -521,6 +521,7 @@ import { useEffect, useRef, useState } from "react";
 import { useNodeId } from "../../context/NodeIdContext";
 import { CoursePlayerVideoIsWatched } from "@/hooks/PlayerHandler";
 import debounce from "lodash.debounce";
+import { savePlaybackState } from "../../../utils/cookies";
 
 // Helper function to derive video path and poster
 const deriveVideoAssets = (path) => {
@@ -542,6 +543,12 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
   const [hasWatched80Percent, setHasWatched80Percent] = useState(false);
   const videoRef = useRef(null);
   const { setActiveNode, activeNode, markNodeAsWatched } = useNodeId();
+  const getCourseIdFromUrl = () => {
+    const currentUrl = new URL(window.location.href);
+    return currentUrl.pathname.split("/").pop(); // Assumes courseId is the last part of the URL
+  };
+
+  const courseId = getCourseIdFromUrl();
 
   useEffect(() => {
     const { videoPath, posterPath } = deriveVideoAssets(node?.path);
@@ -576,9 +583,15 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
           if (video.readyState >= 2) {
             video.play().catch((error) =>
               console.error("Video playback error:", error)
-            );
-          }
-        });
+          );
+        }
+      });
+      // const handlePause = () => {
+      //   console.log("Video stopped");
+      //   if (onVideoStop) onVideoStop(); // Trigger custom handler for stop
+      //   savePlaybackState(courseId, activeNode, node?.videoId, video.currentTime); // Save playback state on pause
+  
+      // };
 
         const handleTimeUpdate = debounce(() => {
           const watchedPercentage = (video.currentTime / video.duration) * 100;
@@ -592,12 +605,13 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
           if (watchedPercentage === 100) {
             changeActiveNode(nextNode);
           }
-
+          
           localStorage.setItem(`video_${node.videoId}_time`, video.currentTime);
         }, 500);
 
         video.addEventListener("ended", handleIsVideoEnd);
         video.addEventListener("timeupdate", handleTimeUpdate);
+        video.addEventListener("pause", savePlaybackState(courseId, activeNode, node?.videoId, video.currentTime));
 
         video.hls = hls;
         video.hlsInitialized = true; // Mark as initialized
@@ -606,6 +620,7 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
       }
     };
 
+
     script.onload = initializePlayer;
     document.body.appendChild(script);
 
@@ -613,6 +628,8 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
       if (video) {
         video.removeEventListener("ended", handleIsVideoEnd);
         video.removeEventListener("timeupdate", () => {});
+        video.removeEventListener("pause", handlePause);
+
 
         if (video.hls) {
           video.hls.destroy();
