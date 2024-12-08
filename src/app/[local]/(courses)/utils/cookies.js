@@ -27,10 +27,13 @@ export const getLastPlayedNode = async (courseId) => {
     console.log("playbackState:", playbackState);
     console.log("playbackState:", courseKey);
 
-    // if (!playbackState[courseKey]) {
-    //     console.error(`No playback data found for courseId: ${courseKey}`);
-    //     return null; // No data for this course
-    // }
+    if (!playbackState[courseKey]) {
+        console.error(`No playback data found for courseId: ${courseKey}`);
+        return null; // No data for this course
+    }
+    else{
+        return playbackState[courseKey]
+    }
 
     // // Get the first nodeId
     // const nodeIds = Object.keys(playbackState[courseKey]);
