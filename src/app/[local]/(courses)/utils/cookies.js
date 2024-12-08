@@ -19,17 +19,30 @@ export const savePlaybackState = async (courseId, nodeId, videoId, timestamp) =>
 
 // Get video playback time
 export const getLastPlayedNode = async (courseId) => {
+    // Ensure courseId is a string
+    const courseKey = String(courseId);
+
     const playbackState = JSON.parse(cookies().get("playbackState")?.value || "{}");
 
-    if (!playbackState[courseId]) {
+    console.log("playbackState:", playbackState);
+
+    if (!playbackState[courseKey]) {
+        console.error(`No playback data found for courseId: ${courseKey}`);
         return null; // No data for this course
     }
 
-    // Get the first nodeId (or adapt as needed if multiple nodes are stored)
-    const nodeId = Object.keys(playbackState[courseId])[0];
+    // Get the first nodeId
+    const nodeIds = Object.keys(playbackState[courseKey]);
+    if (nodeIds.length === 0) {
+        console.error(`No nodes found for courseId: ${courseKey}`);
+        return null;
+    }
+
+    const nodeId = nodeIds[0];
+    console.log(`Last played node for courseId ${courseKey}:`, nodeId);
+
     return nodeId || null;
 };
-
 // Retrieve the last played video and timestamp for a node
 export const getLastPlayedVideo = async (courseId, nodeId) => {
     const playbackState = JSON.parse(cookies().get("playbackState")?.value || "{}");
