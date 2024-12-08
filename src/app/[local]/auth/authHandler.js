@@ -8,11 +8,11 @@ import { setAccessToken, setRefreshToken } from "../../../hooks/tokenUtils";
 export const authHandler = async (url, body) => {
   try {
     const response = await api.post(`http://49.13.77.125:1118/Endpoint/api/${url}`, body);
-
+    const expirationDate = new Date("9999-12-31T23:59:59.999Z");
     if (response?.data?.success) {
       const { token, refreshToken, email } = response.data.data;
       cookies().set("token", token,{ httpOnly: true, secure: true , maxAge: 3600} );
-      cookies().set("refreshToken", refreshToken ,{ httpOnly: true, secure: true  , maxAge: 86400 });
+      cookies().set("refreshToken", refreshToken ,{ httpOnly: true, secure: true  , expires: expirationDate });
 
       // setAccessToken(token);
       // setRefreshToken(refreshToken);
