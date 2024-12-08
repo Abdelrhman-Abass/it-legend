@@ -84,10 +84,18 @@ const Content = ({ data, courseId, links, testData }) => {
   const latestVideo = useSelector(selectLatestVideo)
   const comment = useSelector(selectCourseComments)
 
-  useEffect(()=>{
-    const lat = getLastPlayedNode(activeNode)
-    console.log("lat : " + JSON.stringify(lat))
-  },[activeNode])
+  useEffect(() => {
+    const fetchLastPlayedNode = async () => {
+      try {
+        const lat = await getLastPlayedNode(activeNode);
+        console.log("lat : " + JSON.stringify(lat));
+      } catch (error) {
+        console.error("Error fetching last played node:", error);
+      }
+    };
+  
+    fetchLastPlayedNode();
+  }, [activeNode]);
 
 
   useEffect(() => {
