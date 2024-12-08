@@ -93,7 +93,11 @@ const YouTubePlayer = ({ node, setWatch, handleIsVideoEnd ,nextNode }) => {
           changeNoParam(nextNode);
           await markNodeAsWatched(activeNode);
         }
-
+        
+        if (event.data === 2) {
+          console.log(courseId, activeNode, node?.videoId, currentTime)
+          savePlaybackState(courseId, activeNode, node?.videoId, currentTime); // Save playback state on pause
+        }
         if (event.data === 1) {
           // Video is playing
           if (!intervalId) {
@@ -105,9 +109,6 @@ const YouTubePlayer = ({ node, setWatch, handleIsVideoEnd ,nextNode }) => {
             clearInterval(intervalId);
             setIntervalId(null);
           }
-        }
-        if (event.data === 2) {
-          savePlaybackState(courseId, activeNode, node?.videoId, currentTime); // Save playback state on pause
         }
       }
     },
