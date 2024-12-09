@@ -12,6 +12,46 @@ html[lang="en"] body {
   scroll-behavior: smooth;
 
 }
+/* Change the play/pause button background color */
+video::-webkit-media-controls-play-button {
+  background-color: red !important;
+}
+
+/* Change the volume slider background color */
+video::-webkit-media-controls-volume-slider {
+  background-color: red !important;
+}
+
+/* Change the mute/unmute button color */
+video::-webkit-media-controls-mute-button {
+  background-color: red !important;
+}
+
+/* Change the timeline (progress bar) background color */
+video::-webkit-media-controls-timeline {
+  background-color: red !important;
+}
+
+/* Change the fullscreen button background color */
+video::-webkit-media-controls-fullscreen-button {
+  background-color: red !important;
+}
+
+/* Change the timestamp (current time) color */
+video::-webkit-media-controls-timestamp {
+  color: red !important;
+}
+
+/* Change the loading spinner (only in Chrome/Safari) */
+video::-webkit-media-controls-loading-indicator {
+  color: red !important;
+}
+
+/* Change the volume control icon */
+video::-webkit-media-controls-volume-control {
+  color: red !important;
+}
+
 .accordion-item{
   background: transparent !important;
 }
