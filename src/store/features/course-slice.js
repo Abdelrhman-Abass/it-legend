@@ -22,9 +22,6 @@ export const Courses = createAsyncThunk(
     try {
       const response = await fetch('http://49.13.77.125:1118/Endpoint/api/Course', {
         method: 'GET',
-        headers: {
-          'Accept': '*/*',
-        },
       });
 
       if (!response.ok) {
