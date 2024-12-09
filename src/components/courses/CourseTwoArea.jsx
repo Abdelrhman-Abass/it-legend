@@ -1,9 +1,11 @@
 "use client";
 import React from "react";
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import { course_data } from "@/data";
 import CourseTypeSix from "../course/course-type-six";
 import SortingArea from "../course-filter/sorting-area";
+import { useDispatch, useSelector } from "react-redux";
+import { Courses, selectGlobalCourseError, selectGlobalCourses, selectGlobalCourseStatus } from "@/store/features/course-slice";
 
 const CourseTwoArea = ({
   my = false,
@@ -13,8 +15,30 @@ const CourseTwoArea = ({
 }) => {
   const [next, setNext] = useState(coursePerView);
   const [courses, setCourses] = useState(course_data);
+  const dispatch = useDispatch()
 
+  useEffect(()=>{
+    dispatch(Courses)
+    console.log("Dispatched Latest Course :");
+
+  },[dispatch])
+
+  const course = useSelector(selectGlobalCourses)
+  const status = useSelector(selectGlobalCourseStatus)
+  const error = useSelector(selectGlobalCourseError)
+  // console.log("from global course : " + course)
   // handleLoadData
+  useEffect(() => {
+    if (status === "loading") {
+      console.log("Loading comments...");
+    } else if (status === "succeeded") {
+      console.log("Comments loaded successfully!" + course);
+    } else if (status === "failed") {
+      console.error("Failed to load comments:", error);
+    }
+  }, [status, error]);
+
+
   const handleLoadData = () => {
     setNext((value) => value + 3);
   };
@@ -23,12 +47,12 @@ const CourseTwoArea = ({
     <div className="edu-course-area course-area-1 gap-tb-text">
       <div className="container">
         {title && <h3 className="title">{title}</h3>}
-        {/* <SortingArea
+        <SortingArea
           course_items={course_data}
           num={courses?.slice(0, next)?.length}
           setCourses={setCourses}
           courses={courses}
-        /> */}
+        />
         <div className="row g-5 ">
           {courses?.slice(0, next)?.map((course, idx) => (
             <div key={course.id} className="col-md-6 col-lg-4">

@@ -1,4 +1,4 @@
-import { courseUSerData } from "@/hooks/courseHandler";
+import { courseGlobalData, courseUSerData } from "@/hooks/courseHandler";
 import { CoursePlayerVideo } from "@/hooks/PlayerHandler";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -9,36 +9,30 @@ const initialState = {
   statusV: "idle", // 'idle' | 'loading' | 'succeeded' | 'failed'
   error: null,
   errorV: null,
-  video:null
+  video:null,
+  gloabCourse : [],
+  globalCourseStatus:"idle",
+  globalCourseError:null
 };
 
 // Async action to fetch courses
-// export const UserCourses = createAsyncThunk(
-//   "user/courses", // Thunk action type
-//   async (_, { rejectWithValue }) => {
-//     try {
-//       const token = cookies().get('token')?.value;
-//       if (!token) throw new Error("Token is not available");
+export const Courses = createAsyncThunk(
+  "user/courses/global", // Thunk action type
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await courseGlobalData()
+      console.log(response)
 
-//       const response = await fetch(`http://49.13.77.125:1118/Endpoint/api/MemberCourse`, {
-//         method: "GET",
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//           "Content-Type": "application/json",
-//         },
-//       });
+      // if (!response.ok) {
+      //   throw new Error("Failed to fetch data");
+      // }
 
-//       if (!response.ok) {
-//         throw new Error("Failed to fetch data");
-//       }
-
-//       const data = await response.json();
-//       return data;
-//     } catch (error) {
-//       return rejectWithValue(error.message);
-//     }
-//   }
-// );
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 // Async action to fetch courses
 export const UserCourses = createAsyncThunk(
@@ -122,6 +116,17 @@ export const courseSlice = createSlice({
       .addCase(UserCoursePlayerNode.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload; // Store the error message
+      })
+      .addCase(Courses.pending, (state) => {
+        state.globalCourseStatus = "loading";
+      })
+      .addCase(Courses.fulfilled, (state, action) => {
+        state.globalCourseStatus = "succeeded";
+        state.gloabCourse = action.payload; // Store the fetched courses
+      })
+      .addCase(Courses.rejected, (state, action) => {
+        state.globalCourseStatus = "failed";
+        state.globalCourseError = action.payload; // Store the error message
       });
   },
 });
@@ -131,5 +136,8 @@ export const selectCourses = (state) => state.courses.courses; // Use the correc
 export const selectCoursesPlayerVideo = (state) => state.courses.video; // Use the correct slice path
 export const selectCourseStatus = (state) => state.courses.status;
 export const selectCourseError = (state) => state.courses.error;
+export const selectGlobalCourseError = (state) => state.courses.globalCourseError;
+export const selectGlobalCourseStatus = (state) => state.courses.globalCourseStatus;
+export const selectGlobalCourses = (state) => state.courses.gloabCourse;
 
 export default courseSlice.reducer;

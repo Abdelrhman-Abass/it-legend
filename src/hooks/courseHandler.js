@@ -30,6 +30,28 @@ export const courseUSerData = async () => {
     return { data: null, message: error.response?.data?.message || error.message };
   }
 };
+export const courseGlobalData = async () => {
+
+  try {
+    // const response = await axios.get("http://49.13.77.125:1118/Endpoint/api/Course");
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      timeout: 3000000,
+    };
+
+    const response = await fetchWithRetry(
+      `http://49.13.77.125:1118/Endpoint/api/Cours`,
+      config
+    );
+      
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching course data:", error.message);
+    return { data: null, message: error.response?.data?.message || error.message };
+  }
+};
 
 // export const courseUSerData = async () => {
 //     try {

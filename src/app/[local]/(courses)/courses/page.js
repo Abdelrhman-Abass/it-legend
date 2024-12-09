@@ -16,12 +16,12 @@ const Page = () => {
     <Wrapper >
         
       <div className="container">
-      <SortingArea
+      {/* <SortingArea
           course_items={course_data}
           num={courses?.length}
           setCourses={setCourses}
           courses={courses}
-        />
+        /> */}
         <CourseTwoArea />
         {/* <CourseTwoArea  />
         <CourseTwoArea /> */}
