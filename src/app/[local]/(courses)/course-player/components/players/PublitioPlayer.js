@@ -192,6 +192,37 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
 
   const courseId = getCourseIdFromUrl();
 
+  const handleTimeUpdate = debounce((video) => {
+    const watchedPercentage = (video.currentTime / video.duration) * 100;
+
+    if (watchedPercentage >= 80 && !hasWatched80Percent) {
+      setHasWatched80Percent(true);
+      handleVideoWatched(node.videoId);
+      markNodeAsWatched(activeNode);
+    }
+
+    if (watchedPercentage === 100) {
+      changeActiveNode(nextNode);
+    }
+
+    // Save video time to localStorage
+    localStorage.setItem(`video_${node.videoId}_time`, video.currentTime);
+  }, 500);
+
+  const handleVideoWatched = async (videoId) => {
+    const result = await CoursePlayerVideoIsWatched(videoId);
+
+    if (result.success) {
+      console.log(result.message);
+    } else {
+      console.error("Error:", result.message);
+    }
+  };
+
+  const changeActiveNode = (newNodeValue) => {
+    setActiveNode(newNodeValue);
+  };
+
   useEffect(() => {
     const { videoPath, posterPath } = deriveVideoAssets(node?.path);
     setPoster(posterPath);
@@ -229,26 +260,8 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
           }
         });
 
-        // Handle time updates for video playback
-        const handleTimeUpdate = debounce(() => {
-          const watchedPercentage = (video.currentTime / video.duration) * 100;
-
-          if (watchedPercentage >= 80 && !hasWatched80Percent) {
-            setHasWatched80Percent(true);
-            handleVideoWatched(node.videoId);
-            markNodeAsWatched(activeNode);
-          }
-
-          if (watchedPercentage === 100) {
-            changeActiveNode(nextNode);
-          }
-
-          // Save video time to localStorage
-          localStorage.setItem(`video_${node.videoId}_time`, video.currentTime);
-        }, 500);
-
         video.addEventListener("ended", handleIsVideoEnd);
-        video.addEventListener("timeupdate", handleTimeUpdate);
+        video.addEventListener("timeupdate", () => handleTimeUpdate(video));
         video.addEventListener("pause", () =>
           savePlaybackState(courseId, activeNode, node?.videoId, video.currentTime)
         );
@@ -268,7 +281,7 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
     return () => {
       if (video) {
         video.removeEventListener("ended", handleIsVideoEnd);
-        video.removeEventListener("timeupdate", handleTimeUpdate);
+        video.removeEventListener("timeupdate", () => handleTimeUpdate(video));
         video.removeEventListener("pause", () =>
           savePlaybackState(courseId, activeNode, node?.videoId, video.currentTime)
         );
@@ -281,20 +294,6 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
       document.body.removeChild(script);
     };
   }, [node?.path, handleIsVideoEnd, hasWatched80Percent, nextNode, activeNode]);
-
-  const handleVideoWatched = async (videoId) => {
-    const result = await CoursePlayerVideoIsWatched(videoId);
-
-    if (result.success) {
-      console.log(result.message);
-    } else {
-      console.error("Error:", result.message);
-    }
-  };
-
-  const changeActiveNode = (newNodeValue) => {
-    setActiveNode(newNodeValue);
-  };
 
   return (
     <div className="video-container w-full h-full">
