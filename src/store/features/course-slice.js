@@ -1,6 +1,7 @@
 import { courseGlobalData, courseUSerData } from "@/hooks/courseHandler";
 import { CoursePlayerVideo } from "@/hooks/PlayerHandler";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = {
   courses: [], // Assuming courses are an array
@@ -20,9 +21,15 @@ export const Courses = createAsyncThunk(
   'courses/fetchCourses',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch('http://49.13.77.125:1118/Endpoint/api/Course', {
-        method: 'GET',
-      });
+      const response = await axios.get(
+        `http://49.13.77.125:1118/Endpoint/api/Course`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          timeout: 300000, // Set timeout to 30 second
+        }
+      );
 
       if (!response.ok) {
         throw new Error('Failed to fetch courses');
