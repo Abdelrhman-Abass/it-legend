@@ -6,6 +6,7 @@ import CourseTypeSix from "../course/course-type-six";
 import SortingArea from "../course-filter/sorting-area";
 import { useDispatch, useSelector } from "react-redux";
 import { Courses, selectGlobalCourseError, selectGlobalCourses, selectGlobalCourseStatus } from "@/store/features/course-slice";
+import { courseGlobalData } from "@/hooks/courseHandler";
 
 const CourseTwoArea = ({
   my = false,
@@ -15,13 +16,20 @@ const CourseTwoArea = ({
 }) => {
   const [next, setNext] = useState(coursePerView);
   const [courses, setCourses] = useState(course_data);
+  const [glo, setGlo] = useState(course_data);
   const dispatch = useDispatch()
 
   useEffect(()=>{
-    dispatch(Courses)
+    dispatch(Courses())
     console.log("Dispatched Latest Course :");
 
   },[dispatch])
+
+  // useEffect(()=>{
+  //   const res = courseGlobalData()
+  //   console.log("Dispatched Latest res : " + JSON.stringify(res));
+  //   // setGlo(res)
+  // },[])
 
   const course = useSelector(selectGlobalCourses)
   const status = useSelector(selectGlobalCourseStatus)

@@ -17,19 +17,24 @@ const initialState = {
 
 // Async action to fetch courses
 export const Courses = createAsyncThunk(
-  "user/courses/global", // Thunk action type
+  'courses/fetchCourses',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await courseGlobalData()
-      console.log(response)
+      const response = await fetch('http://49.13.77.125:1118/Endpoint/api/Course', {
+        method: 'GET',
+        headers: {
+          'Accept': '*/*',
+        },
+      });
 
-      // if (!response.ok) {
-      //   throw new Error("Failed to fetch data");
-      // }
+      if (!response.ok) {
+        throw new Error('Failed to fetch courses');
+      }
 
-      return response;
+      const {data} = await response.json();
+      return data; // This will be passed to the fulfilled case
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.message); // This will be passed to the rejected case
     }
   }
 );
