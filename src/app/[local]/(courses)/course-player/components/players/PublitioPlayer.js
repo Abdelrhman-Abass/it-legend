@@ -343,6 +343,7 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
   const [hasWatched80Percent, setHasWatched80Percent] = useState(false);
   const videoRef = useRef(null);
   const { setActiveNode, activeNode, markNodeAsWatched } = useNodeId();
+  const [isUserScrubbing, setIsUserScrubbing] = useState(false); // Track if the user is manually scrubbing
 
   const getCourseIdFromUrl = () => {
     const currentUrl = new URL(window.location.href);
@@ -352,6 +353,8 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
   const courseId = getCourseIdFromUrl();
 
   const handleTimeUpdate = debounce((video) => {
+    if (isUserScrubbing) return; // Don't save time if user is scrubbing manually
+
     const watchedPercentage = (video.currentTime / video.duration) * 100;
 
     if (watchedPercentage >= 80 && !hasWatched80Percent) {
@@ -425,6 +428,10 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
           savePlaybackState(courseId, activeNode, node?.videoId, video.currentTime)
         );
 
+        // Add event listener for when the user scrubs the video
+        video.addEventListener("seeking", () => setIsUserScrubbing(true)); // User starts scrubbing
+        video.addEventListener("seeked", () => setIsUserScrubbing(false)); // User finishes scrubbing
+
         video.hls = hls;
         video.hlsInitialized = true; // Mark as initialized
       } else {
@@ -445,6 +452,10 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
           savePlaybackState(courseId, activeNode, node?.videoId, video.currentTime)
         );
 
+        // Remove event listeners for seeking
+        video.removeEventListener("seeking", () => setIsUserScrubbing(true));
+        video.removeEventListener("seeked", () => setIsUserScrubbing(false));
+
         if (video.hls) {
           video.hls.destroy();
           video.hlsInitialized = false; // Reset initialization
@@ -452,12 +463,13 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
       }
       document.body.removeChild(script);
     };
-  }, [node?.path, handleIsVideoEnd, hasWatched80Percent, nextNode, activeNode]);
+  }, [node?.path, handleIsVideoEnd, hasWatched80Percent, nextNode, activeNode, isUserScrubbing]);
 
   return (
     <div className="video-container w-full h-full">
       <video
         muted
+        autoPlay
         ref={videoRef}
         className="w-full h-full"
         onContextMenu={(e) => e.preventDefault()}
@@ -471,3 +483,4 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
 };
 
 export default PublitioPlayer;
+
