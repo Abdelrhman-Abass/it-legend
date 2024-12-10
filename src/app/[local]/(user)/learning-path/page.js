@@ -82,7 +82,7 @@ const page = async() => {
           <i className="icon-19"></i>
         </span>
       </div>
-      <RecommendedCourses my={true}/>
+      {/* <RecommendedCourses my={true}/> */}
     </div>
   );
 };
