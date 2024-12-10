@@ -1,59 +1,43 @@
-"use client";
+"use server";
 import { course_data } from "@/data";
 import CourseTypeOne from "@/components/course/course-type-one";
-import { useTranslations } from "next-intl";
+import Diplomas from "./Diplomas";
+// import { useTranslations } from "next-intl";
 
-const DiplomasArea = () => {
-  const t = useTranslations("home.learningPathsArea");
+const fetchCourses = async () => {
+  try {
+    const response = await fetch("http://49.13.77.125:1118/Endpoint/api/Category", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      cache: "no-store", // Avoid caching if data is dynamic
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch courses: ${response.statusText}`);
+    }
+    const {data} = await response.json();
+    // console.log("response " + JSON.stringify(data))
+    return data; // Return the fetched data
+  } catch (error) {
+    console.error("Error fetching courses:", error.message);
+    return []; // Return an empty array or handle errors appropriately
+  }
+};
+
+const DiplomasArea = async() => {
+  const diploma = await fetchCourses();
+  console.log(diploma)
+
+  // const t = useTranslations("home.learningPathsArea");
   return (
     <div
       id="paths"
       className="edu-course-area course-area-2 gap-tb-text bg-lighten03"
     >
       <div className="container ">
-        <div
-          className="section-title section-center"
-          data-aos-delay="100"
-          data-aos="fade-up"
-          data-aos-duration="800"
-        >
-          <span className="pre-title">{t("learningPaths")}</span>
-          <h2 className="title">{t("title")}</h2>
-          <span className="shape-line">
-            <i className="icon-19"></i>
-          </span>
-        </div>
-        <div className="row g-5 pb-[50px]">
-        {course_data.slice(0, 6).map((course) => {
-              return (
-                <div
-                  className="col-md-6 col-lg-4"
-                  data-aos-delay="150"
-                  data-aos="fade-up"
-                  data-aos-duration="800"
-                  key={course.id}
-                >
-                  <CourseTypeOne
-                    bg="#f5f1eb"
-                    my={true}
-                    data={course}
-                    image_location_path="02"
-                  />
-                </div>
-              );
-            })}
-        </div>
-        {/* <div
-          className="course-view-all"
-          data-aos-delay="100"
-          data-aos="fade-up"
-          data-aos-duration="1200"
-        >
-          <Link href="/course-style-1" className="edu-btn">
-            <i className="icon-4"></i>
-            <span> {t("more")}</span>
-          </Link>
-        </div> */}
+       <Diplomas data={diploma}/>
       </div>
     </div>
   );

@@ -81,7 +81,11 @@
         "learningPathsArea": {
             "learningPaths": "Learning Paths",
             "title": "Paid Diplomas on the Platform",
-            "more": "More Paths"
+            "more": "More Paths",
+            "lectures" : "Lectures",
+            "reviwes":"Reviews",
+            "exams" : "Exams",
+            "summary" : "Summaries"
         },
         "ctaArea": {
             "titleOne": "If You Prefer Learning on Your Phone, Download the Platform App",

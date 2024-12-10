@@ -4,25 +4,44 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cart_course } from "@/store/features/cart-slice";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
+
 
 const CourseTypeOne = ({
   data,
   classes,
   image_location_path = "01",
   bg,
-  my,
+  my=false,
 }) => {
   const { cartCourses } = useSelector((state) => state.cart);
+  const t = useTranslations("home.learningPathsArea");
+
   const dispatch = useDispatch();
   
-  
+  function toFixedNumber(value, decimalPlaces = 2) {
+    if (typeof value === "string") {
+      // Try converting the string to a number
+      value = parseFloat(value);
+      if (isNaN(value)) {
+        throw new Error("Invalid number input");
+      }
+    }
+
+    if (typeof value === "number") {
+      // Return the fixed number with the specified decimal places
+      return parseFloat(value.toFixed(decimalPlaces));
+    }
+
+    throw new Error("Input must be a number or a string representing a number");
+  }
 
   // handle add to cart
   const handleAddToCart = (course) => {
     dispatch(
       cart_course({
         id: course.id,
-        img: `/assets/images/course/course-06/${course.img}`,
+        img: `https://www.itlegend.net/Content/Uploads/CoursesMedia/${course.image}`,
         price: course.course_price,
         title: course.title,
       })
@@ -39,28 +58,30 @@ const CourseTypeOne = ({
       <div className="inner">
         <div className="thumbnail" >
           <Link
-            href={my ? `/diploma/${data.id}` : `/diploma-details/${data.id}`}
+            href={my ? `/diploma/${data.categoryId}` : `/diploma-details/${data.categoryId}`}
           >
             <Image
-              src={`/assets/images/course/course-${image_location_path}/${data.img}`}
+              src={`https://www.itlegend.net/Content/Uploads/CoursesMedia/${data.image}`}
               alt="Course Meta"
               width={370}
               height={220}
               loading="lazy"
             />
           </Link>
-          <div className="time-top">
+          {/* <div className="time-top">
             <span className="duration">
               <i className="icon-61"></i> <span>{data.duration}</span>{" "}
               <span>اسابيع</span>
             </span>
-          </div>
+          </div> */}
         </div>
         <div className="content">
-          <span className="course-level">{data.level}</span>
+          {/* <span className="course-level">{data.titleAr}</span> */}
           <h6 className="title">
-            <a href="#">{data.title}</a>
+            <a href="#">{data.titleAr}</a>
           </h6>
+          <p className="truncate-text">{data.shortDescriptionAr}</p>
+
           <div className="course-rating">
             <div className="rating">
               <i className="icon-23"></i>
@@ -70,32 +91,40 @@ const CourseTypeOne = ({
               <i className="icon-23"></i>
             </div>
             <span className="rating-count">
-              ({data.rating} /{data.rating_count} تقيمات)
+              ({toFixedNumber(data.averageRating)} / 5 {t("reviwes")})
             </span>
           </div>
-          <div className="course-price">${data.course_price}</div>
+          {/* <div className="course-price">${data.course_price}</div> */}
           <ul className="course-meta">
             <li
               style={{
                 display: "inline-flex",
-                gap: 4,
+                gap: 2,
                 alignItems: "center",
               }}
             >
-              <i className="icon-24"></i> <span>{data.lesson}</span>{" "}
-              <span>المحاضرات</span>
+              <i className="icon-24"></i> <span>{data.lectures}</span>{" "}
+              <span>{t("lectures")}</span>
             </li>
             <li
               style={{
                 display: "inline-flex",
-                gap: 4,
+                gap: 2,
                 alignItems: "center",
               }}
             >
-
-              
               <i className="icon-25"></i>
-              {data.student} طالب
+              {data.exams} {t("exams")}
+            </li>
+            <li
+              style={{
+                display: "inline-flex",
+                gap: 1,
+                alignItems: "center",
+              }}
+            >
+              <i className="icon-36"></i>
+              {data.summaries} {t("summary")}
             </li>
           </ul>
         </div>
@@ -108,10 +137,10 @@ const CourseTypeOne = ({
       <div className="course-hover-content">
         <div className="content">
           
-          <span className="course-level">{data.level}</span>
+          {/* <span className="course-level">{data.level}</span> */}
           <h6 className="title">
             <Link
-              href={my ? `/diploma/${data.id}` : `/diploma-details/${data.id}`}
+              href={my ? `/diploma-details/${data.categoryId}` : `/diploma-details/${data.categoryId}`}
             >
               {data.title}
             </Link>
@@ -125,35 +154,45 @@ const CourseTypeOne = ({
               <i className="icon-23"></i>
             </div>
             <span className="rating-count">
-              ({data.rating} /{data.rating_count} تقيمات)
+              ({toFixedNumber(data.averageRating)} / 5 {t("reviwes")})
             </span>
           </div>
-          <div className="course-price">${data.course_price}</div>
-          <p>{data.short_desc}</p>
+          {/* <div className="course-price">${data.course_price}</div> */}
+          <p className="truncate-text">{data.shortDescriptionAr}</p>
           <ul className="course-meta">
             <li
               style={{
                 display: "inline-flex",
-                gap: 4,
+                gap: 2,
                 alignItems: "center",
               }}
             >
-              <i className="icon-24"></i> <span>{data.lesson}</span>{" "}
-              <span>المحاضرات</span>
+              <i className="icon-24"></i> <span>{data.lectures}</span>{" "}
+              <span>{t("lectures")}</span>
             </li>
             <li
               style={{
                 display: "inline-flex",
-                gap: 4,
+                gap: 2,
                 alignItems: "center",
               }}
             >
               <i className="icon-25"></i>
-              {data.student} طالب
+              {data.exams} {t("exams")}
+            </li>
+            <li
+              style={{
+                display: "inline-flex",
+                gap: 2,
+                alignItems: "center",
+              }}
+            >
+              <i className="icon-36"></i>
+              {data.summaries} {t("summary")}
             </li>
           </ul>
           <Link
-            href={my ? `/diploma/${data.id}` : `/diploma-details/${data.id}`}
+            href={my ? `/diploma/${data.categoryId}` : `/diploma-details/${data.categoryId}`}
             className="edu-btn btn-secondary btn-small"
           >
             {my ? <>ابدأ</> : <> مزيد من المعلومات</>}
