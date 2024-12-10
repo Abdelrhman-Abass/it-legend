@@ -69,7 +69,7 @@ const page = async() => {
       <CourseTwoArea my={true} coursePerView={3}  />
       <CourseTwoArea my={true} coursePerView={3} /> */}
 
-      <div
+      {/* <div
         style={{ marginBottom: 30 }}
         className="section-title section-center"
         data-aos-delay="150"
@@ -81,7 +81,7 @@ const page = async() => {
         <span className="shape-line">
           <i className="icon-19"></i>
         </span>
-      </div>
+      </div> */}
       {/* <RecommendedCourses my={true}/> */}
     </div>
   );
