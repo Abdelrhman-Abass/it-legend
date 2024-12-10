@@ -77,7 +77,7 @@
 
 
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { course_data } from "@/data";
 import CourseTypeSix from "../course/course-type-six";
 import SortingArea from "../course-filter/sorting-area";
@@ -117,7 +117,11 @@ const CourseTwoArea = ({
 
     throw new Error("Input must be a number or a string representing a number");
   }
-  
+  useEffect(()=>{
+    if(window.innerWidth < 768){
+      setBoxes("List")
+    }
+  },[boxes])
 
   // handle add to cart
   const handleAddToCart = (course) => {
