@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { cart_course } from "@/store/features/cart-slice";
 import { useLocale } from "next-intl";
 
-const CourseTypeSix = ({ data, classes, my, idx }) => {
+const CourseTypeSix = ({ data, classes, my=false, idx }) => {
   const { cartCourses } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const locale = useLocale();
@@ -14,13 +14,29 @@ const CourseTypeSix = ({ data, classes, my, idx }) => {
   const handleAddToCart = (course) => {
     dispatch(
       cart_course({
-        id: course.id,
-        img: `/assets/images/course/course-06/${course.img}`,
-        price: course.course_price,
-        title: course.title,
-      })
+        id: course.coursId,
+        img: `https://www.itlegend.net/Content/Uploads/CoursesMedia/${course.image}`,
+        price: course.salesPrice,
+        title: locale == "ar" ? course.titleAr : course.titleEn,
+      }) 
     );
   };
+  function toFixedNumber(value, decimalPlaces = 2) {
+    if (typeof value === "string") {
+      // Try converting the string to a number
+      value = parseFloat(value);
+      if (isNaN(value)) {
+        throw new Error("Invalid number input");
+      }
+    }
+    
+    if (typeof value === "number") {
+      // Return the fixed number with the specified decimal places
+      return parseFloat(value.toFixed(decimalPlaces));
+    }
+  
+    throw new Error("Input must be a number or a string representing a number");
+  }
 
   return (
     <div
@@ -35,36 +51,36 @@ const CourseTypeSix = ({ data, classes, my, idx }) => {
             href={
               my
                 ? `/course-player/c84e7902-1205-426f-a857-922bedd84bdf`
-                : `/course-details/${data.id}`
+                : `/course-details/${data.courseId}`
             }
           >
             <img
-              src={`/assets/images/course/course-04/${data.img}`}
+              src={`https://www.itlegend.net/Content/Uploads/CoursesMedia/${data.image}`}
               alt="Course Meta"
             />
           </Link>
-          <div className="time-top">
+          {/* <div className="time-top">
             <span className="duration">
-              {data.course_outline}
+              {data.lectures}
               <i className="icon-61"></i>
             </span>
-          </div>
+          </div> */}
         </div>
 
         <div className="content">
-          <span className="course-level">{data.level}</span>
+          <span className="course-level">{locale == "ar" ? data.levelTitleAr : data.levelTitleEn}</span>
           <h5 className="title">
             <Link
               href={
                 my
                   ? `/course-player/c84e7902-1205-426f-a857-922bedd84bdf`
-                  : `/course-details/${data.id}`
+                  : `/course-details/${data.courseId}`
               }
             >
-              {data.title}
+              {data.titleAr}
             </Link>
           </h5>
-          <p className={`truncate-text h-[50px]`}>{data.short_desc}</p>
+          <p className={`truncate-text h-[50px]`}>{locale == "ar" ? data.shortDescriptionAr : data.shortDescriptionEn}</p>
           <div className="course-rating">
             <div className="rating">
               <i className="icon-23"></i>
@@ -74,7 +90,7 @@ const CourseTypeSix = ({ data, classes, my, idx }) => {
               <i className="icon-23"></i>
             </div>
             <span className="rating-count">
-              ({data.rating} /{data.rating_count} التقيمات)
+              ({toFixedNumber(data.averageRating)} /5 التقيمات)
             </span>
           </div>
 
@@ -92,7 +108,7 @@ const CourseTypeSix = ({ data, classes, my, idx }) => {
                 <>انتقل</>
               ) : (
                 <>
-                  {cartCourses.some((item) => item.id === data.id)
+                  {cartCourses.some((item) => item.id === data.courseId)
                     ? "حذف من السلة"
                     : "اضف الي السلة"}
                   <i className="icon-4"></i>
