@@ -1567,15 +1567,15 @@ html[dir="rtl"]{
             }
             .course-meta {
                 li {
-                    margin-right: 0;
+                    margin-right: 10px;
 
-                    &:last-child {
-                        margin-right: 22px;
-                    }
+                    // &:last-child {
+                    //     margin-right: 22px;
+                    // }
 
                     &::after {
                         right: inherit;
-                        left: -25px;
+                        left: -8px;
                     }
                     i {
                         margin-right: inherit;

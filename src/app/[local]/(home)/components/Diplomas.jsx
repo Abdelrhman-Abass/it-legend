@@ -2,6 +2,7 @@
 import { course_data } from "@/data";
 import CourseTypeOne from "@/components/course/course-type-one";
 import { useTranslations } from "next-intl";
+import { Link } from "@/navigation";
 
 const Diplomas = ({data}) => {
   
@@ -25,7 +26,7 @@ const Diplomas = ({data}) => {
           </span>
         </div>
         <div className="row g-5 pb-[50px]">
-        {data.map((diploma) => {
+        {data.slice(0,6).map((diploma) => {
               return (
                 <div
                   className="col-md-6 col-lg-4"
@@ -36,7 +37,7 @@ const Diplomas = ({data}) => {
                 >
                   <CourseTypeOne
                     bg="#f5f1eb"
-                    my={true}
+                    my={false}
                     data={diploma}
                     image_location_path="02"
                   />
@@ -44,17 +45,17 @@ const Diplomas = ({data}) => {
               );
             })}
         </div>
-        {/* <div
+        <div
           className="course-view-all"
           data-aos-delay="100"
           data-aos="fade-up"
           data-aos-duration="1200"
         >
-          <Link href="/course-style-1" className="edu-btn">
+          <Link href="/diplomas" className="edu-btn">
             <i className="icon-4"></i>
             <span> {t("more")}</span>
           </Link>
-        </div> */}
+        </div>
       </div>
     </div>
   );

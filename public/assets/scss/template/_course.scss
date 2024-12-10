@@ -257,16 +257,16 @@
                 position: relative;
                 transition: var(--transition);
 
-                &:after {
-                    content: "";
-                    height: 19px;
-                    width: 1px;
-                    background-color: #e5e5e5;
-                    position: absolute;
-                    top: 1px;
-                    right: -15px;
-                    transition: var(--transition);
-                }
+                // &:after {
+                //     content: "";
+                //     height: 19px;
+                //     width: 1px;
+                //     background-color: #e5e5e5;
+                //     position: absolute;
+                //     top: 1px;
+                //     right: -15px;
+                //     transition: var(--transition);
+                // }
 
                 &:last-child {
                     margin-right: 0;

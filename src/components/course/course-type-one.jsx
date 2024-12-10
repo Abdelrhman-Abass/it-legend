@@ -192,7 +192,7 @@ const CourseTypeOne = ({
             </li>
           </ul>
           <Link
-            href={my ? `/diploma/${data.categoryId}` : `/diploma-details/${data.categoryId}`}
+            href={my ? `/diploma-details/${data.categoryId}` : `/diploma-details/${data.categoryId}`}
             className="edu-btn btn-secondary btn-small"
           >
             {my ? <>ابدأ</> : <> مزيد من المعلومات</>}
