@@ -41,7 +41,7 @@ const CourseTypeOne = ({
     dispatch(
       cart_course({
         id: course.id,
-        img: `https://www.itlegend.net/Content/Uploads/CoursesMedia/${course.image}`,
+        img: `https://www.itlegend.net/Content/Uploads/CategoryMedia/${course.image}`,
         price: course.course_price,
         title: course.title,
       })
@@ -61,7 +61,7 @@ const CourseTypeOne = ({
             href={my ? `/diploma/${data.categoryId}` : `/diploma-details/${data.categoryId}`}
           >
             <Image
-              src={`https://www.itlegend.net/Content/Uploads/CoursesMedia/${data.image}`}
+              src={`https://www.itlegend.net/Content/Uploads/CategoryMedia/${data.image}`}
               alt="Course Meta"
               width={370}
               height={220}

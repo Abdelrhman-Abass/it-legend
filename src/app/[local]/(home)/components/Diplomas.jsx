@@ -10,7 +10,7 @@ const Diplomas = ({data}) => {
   return (
     <div
       id="paths"
-      className="edu-course-area course-area-2 gap-tb-text bg-lighten03"
+      className="edu-course-area course-area-2 bg-lighten03"
     >
       <div className="container ">
         <div
@@ -46,10 +46,11 @@ const Diplomas = ({data}) => {
             })}
         </div>
         <div
-          className="course-view-all"
+          className="course-view-all pb-[50px]"
           data-aos-delay="100"
           data-aos="fade-up"
           data-aos-duration="1200"
+
         >
           <Link href="/diplomas" className="edu-btn">
             <i className="icon-4"></i>
