@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { cart_course } from "@/store/features/cart-slice";
 import { useLocale } from "next-intl";
 import { Rate } from "antd";
+import Image from "next/image";
 
-const CourseTypeSix = ({ data, classes, my=false, idx }) => {
+const CourseTypeSix = ({ data, classes, my = false, idx }) => {
   const { cartCourses } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const locale = useLocale();
@@ -19,7 +20,7 @@ const CourseTypeSix = ({ data, classes, my=false, idx }) => {
         img: `https://www.itlegend.net/Content/Uploads/CoursesMedia/${course.image}`,
         price: course.salesPrice,
         title: locale == "ar" ? course.titleAr : course.titleEn,
-      }) 
+      })
     );
   };
   function toFixedNumber(value, decimalPlaces = 1) {
@@ -30,12 +31,12 @@ const CourseTypeSix = ({ data, classes, my=false, idx }) => {
         throw new Error("Invalid number input");
       }
     }
-    
+
     if (typeof value === "number") {
       // Return the fixed number with the specified decimal places
       return parseFloat(value.toFixed(decimalPlaces));
     }
-  
+
     throw new Error("Input must be a number or a string representing a number");
   }
 
@@ -55,9 +56,12 @@ const CourseTypeSix = ({ data, classes, my=false, idx }) => {
                 : `/course-details/${data.courseId}`
             }
           >
-            <img
+            <Image
               src={`https://www.itlegend.net/Content/Uploads/CoursesMedia/${data.image}`}
               alt="Course Meta"
+              width={200}
+              height={200}
+              className="h-[200px]"
             />
           </Link>
           {/* <div className="time-top">
@@ -69,7 +73,6 @@ const CourseTypeSix = ({ data, classes, my=false, idx }) => {
         </div>
 
         <div className="content">
-          <span className="course-level">{locale == "ar" ? data.levelTitleAr : data.levelTitleEn}</span>
           <h5 className="title">
             <Link
               href={
@@ -81,7 +84,13 @@ const CourseTypeSix = ({ data, classes, my=false, idx }) => {
               {data.titleAr}
             </Link>
           </h5>
+          <span className="course-level">{locale == "ar" ? data.levelTitleAr : data.levelTitleEn}</span>
           <p className={`truncate-text h-[50px]`}>{locale == "ar" ? data.shortDescriptionAr : data.shortDescriptionEn}</p>
+          {data.price >0 ? (
+            (data.salesPrice ? <><span className="line-through  mx-[10px]">{data.price}$</span>  <span>{data.salesPrice}$</span></> : <p>{data.price}</p>)
+          ) :(
+            <p>Free</p>
+          )}
           <div className="course-rating">
             <div className="rating">
               {/* <i className="icon-23"></i>
@@ -92,6 +101,7 @@ const CourseTypeSix = ({ data, classes, my=false, idx }) => {
               <Rate disabled allowHalf defaultValue={toFixedNumber(data.averageRating)} />
 
             </div>
+
             <span className="rating-count">
               ({toFixedNumber(data.averageRating)} /5 التقيمات)
             </span>

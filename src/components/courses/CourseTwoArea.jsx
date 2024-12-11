@@ -1,81 +1,3 @@
-// "use client";
-// import React from "react";
-// import { useState , useEffect} from "react";
-// import { course_data } from "@/data";
-// import CourseTypeSix from "../course/course-type-six";
-// import SortingArea from "../course-filter/sorting-area";
-// import { useDispatch, useSelector } from "react-redux";
-// import { Courses, selectGlobalCourseError, selectGlobalCourses, selectGlobalCourseStatus } from "@/store/features/course-slice";
-// import { courseGlobalData } from "@/hooks/courseHandler";
-
-// const CourseTwoArea = ({
-//   my = false,
-//   recommend = false,
-//   title = null,
-//   coursePerView = 6,
-//   coursesData=[]
-// }) => {
-//   const [next, setNext] = useState(coursePerView);
-//   const [courses, setCourses] = useState(coursesData);
-//   // const [glo, setGlo] = useState(course_data);
-//   console.log(courses)
-//   if (!courses || courses.length === 0) {
-//     return null; // Show nothing if there are no courses
-//   }
-
-
-//   const handleLoadData = () => {
-//     setNext((value) => value + 3);
-//   };
-
-//   return (
-//     <div className="edu-course-area course-area-1 gap-tb-text">
-//       <div className="container">
-//         {courses.length > 1 ?(
-//           {title && <h3 className="title">{title}</h3>}
-//           <SortingArea
-//             course_items={course_data}
-//             num={courses?.length}
-//             setCourses={setCourses}
-//             courses={courses}
-//           />
-//           <div className="row g-5 ">
-//             {courses?.map((course, idx) => (
-//               <div key={course.id} className="col-md-6 col-lg-4">
-//                 <CourseTypeSix
-//                   my={my}
-//                   title={title}
-//                   data={course}
-//                   classes="course-box-shadow"
-//                   idx={idx}
-//                 />
-//               </div>
-//             ))}
-//           </div>
-//           {next < courses.length && (
-//             <div
-//               onClick={handleLoadData}
-//               className="load-more-btn"
-//               data-aos-delay="100"
-//               data-aos="fade-up"
-//               data-aos-duration="1200"
-//             >
-//               <a className="edu-btn" style={{ cursor: "pointer" }}>
-//                 المزيد <i className="icon-56"></i>
-//               </a>
-//             </div>
-
-//           )}
-
-//         ) : null}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default CourseTwoArea;
-
-
 "use client";
 import React, { useEffect, useState } from "react";
 import { course_data } from "@/data";
@@ -86,6 +8,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { cart_course } from "@/store/features/cart-slice";
 import { useLocale } from "next-intl";
 import { Rate } from 'antd';
+import { Menu, Icon, Switch } from 'antd';
+import { Select } from 'antd';
+
+const { Option, OptGroup } = Select;
+const { SubMenu, Item } = Menu;
 
 const CourseTwoArea = ({
   my = false,
@@ -97,6 +24,7 @@ const CourseTwoArea = ({
 }) => {
   const [next, setNext] = useState(coursePerView);
   const [courses, setCourses] = useState(coursesData);
+  const [filteredCourses, setFilteredCourses] = useState(coursesData);
   const [boxes, setBoxes] = useState("List");
   const { cartCourses } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -118,12 +46,81 @@ const CourseTwoArea = ({
 
     throw new Error("Input must be a number or a string representing a number");
   }
-  useEffect(()=>{
-    if(window.innerWidth < 768){
+  function handleChange(value) {
+    console.log(`selected ${JSON.stringify(value)}`);
+
+    if (!Array.isArray(courses)) {
+      throw new Error("The first argument must be an array.");
+    }
+
+    if (value.value === "free") {
+      const filtered = filteredCourses.filter((item) => item["salesPrice"] === 0);
+      console.log(filtered);
+      if (filtered.length === 0) { setCourses(coursesData); return }
+
+      setCourses(filtered)
+      return filtered;
+    }
+
+    if (value.value === "paid") {
+      const filtered = filteredCourses.filter((item) => item["salesPrice"] !== 0);
+      console.log(filtered);
+      if (filtered.length === 0) { setCourses(coursesData); return }
+
+      setCourses(filtered)
+      return filtered;
+    }
+    if (value.value === "Beginner") {
+      const filtered = filteredCourses.filter((item) => item["levelTitleAr"] === "مبتدئ");
+      console.log(filtered);
+      if (filtered.length === 0) { setCourses(coursesData); return }
+
+      setCourses(filtered)
+      return filtered;
+    }
+    if (value.value === "Medium") {
+      const filtered = filteredCourses.filter((item) => item["levelTitleAr"] === "متوسط");
+      console.log(filtered);
+      if (filtered.length === 0) { setCourses(coursesData); return }
+
+      setCourses(filtered)
+      return filtered;
+    }
+    if (value.value === "Advanced") {
+      const filtered = filteredCourses.filter((item) => item["levelTitleAr"] === "متقدم");
+      console.log(filtered);
+      if (filtered.length === 0) { setCourses(coursesData); return }
+
+      setCourses(filtered)
+      return filtered;
+    }
+    if (value.value === "lowestPrice") {
+      const lowestPriceCourse = [...filteredCourses].sort(
+        (a, b) => a.salesPrice - b.salesPrice
+      );
+      console.log(lowestPriceCourse)
+      setCourses(lowestPriceCourse)
+      return
+    }
+    if (value.value === "highestPrice") {
+      const highestPriceCourse = [...filteredCourses].sort(
+        (a, b) => b.salesPrice - a.salesPrice
+      );
+      setCourses(highestPriceCourse)
+      console.log(highestPriceCourse)
+
+      return
+    }
+    // Reset to original courses if no filter is applied
+    setCourses(coursesData)
+  }
+  useEffect(() => {
+    if (window.innerWidth < 768) {
       setBoxes("List")
     }
-  },[boxes])
+  }, [boxes])
 
+  useEffect(() => { }, [courses])
   // handle add to cart
   const handleAddToCart = (course) => {
     dispatch(
@@ -148,7 +145,7 @@ const CourseTwoArea = ({
   return (
     <div className="edu-course-area course-area-1 gap-tb-text">
       <div className="container">
-        {courses.length > 0 && (
+        {courses.length > 0 ? (
           <>
             {title && <h3 className="title">{title}</h3>}
             <div className="edu-sorting-area">
@@ -174,8 +171,8 @@ const CourseTwoArea = ({
                     <li>
                       <Link
                         href="#"
-                        className={boxes=="List" ? "active" : ""}
-                        onClick={()=>{setBoxes("List")}}
+                        className={boxes == "List" ? "active" : ""}
+                        onClick={() => { setBoxes("List") }}
                       >
                         <i className="icon-53"></i>
                       </Link>
@@ -183,8 +180,8 @@ const CourseTwoArea = ({
                     <li>
                       <Link
                         href="#"
-                        className={boxes== "Grid" ? "active" : ""}
-                        onClick={()=>{setBoxes("Grid")}}
+                        className={boxes == "Grid" ? "active" : ""}
+                        onClick={() => { setBoxes("Grid") }}
 
                       >
                         <i className="icon-54"></i>
@@ -193,14 +190,35 @@ const CourseTwoArea = ({
                   </ul>
                 </div>
                 <div className="edu-sorting">
-                  <div className="icon">
-                    <i className="icon-55"></i>
-                  </div>
-                  <select className="edu-select">
+                  {/* <div className="icon">
+                      <i className="icon-55"></i>
+                    </div> */}
+                  <Select labelInValue
+                    defaultValue={{ key: 'All' }}
+                    style={{ width: 160 }}
+                    onChange={handleChange} >
+                    {/* <Icon type="align-center" /> */}
+                    <Option value="All">All</Option>
+                    <OptGroup label="Level">
+                      <Option value="Beginner">Beginner</Option>
+                      <Option value="Medium">Medium</Option>
+                      <Option value="Advanced">Advanced</Option>
+                    </OptGroup>
+                    <OptGroup label="Price">
+                      <Option value="lowestPrice">Lowest</Option>
+                      <Option value="highestPrice">Heighest</Option>
+                    </OptGroup>
+                    <OptGroup label="Paid">
+                      <Option value="free">Free</Option>
+                      <Option value="paid">Paid</Option>
+                    </OptGroup>
+                  </Select>
+                  {/* <select className="edu-select">
+
                     <option>Filters</option>
                     <option>Low To High</option>
                     <option>High To Low</option>
-                  </select>
+                  </select> */}
                 </div>
               </div>
             </div>
@@ -212,7 +230,7 @@ const CourseTwoArea = ({
             /> */}
             <div className="row g-5">
               {courses.slice(0, next).map((course, idx) => {
-                return boxes=="List" ? (
+                return boxes == "List" ? (
                   <div key={idx} className="col-md-6 col-lg-4">
                     <CourseTypeSix
                       my={my}
@@ -251,6 +269,11 @@ const CourseTwoArea = ({
                         <p className="truncate-text">
                           {locale == "ar" ? course.shortDescriptionAr : course.shortDescriptionEn}
                         </p>
+                        {course.price > 0 ? (
+                          (course.salesPrice ? <><span className="line-through  mx-[10px] pt-[10px]">{course.price}$</span>  <span className="pt-[10px]">{course.salesPrice}$</span></> : <p className="pt-[10px]">{course.price}</p>)
+                        ) : (
+                          <p className="pt-[10px]">Free</p>
+                        )}
                         <div className="course-rating">
                           <div className="rating">
                             {/* <i className="icon-23"></i>
@@ -307,9 +330,18 @@ const CourseTwoArea = ({
 
             )}
           </>
+        ) : (
+          <div className="text-center py-20">
+            <h2 className="text-2xl font-bold text-gray-800">
+              We're sorry, we have nothing in this category.
+            </h2>
+            <p className="text-gray-600 mt-4">
+              Try exploring other categories or reset your filters.
+            </p>
+          </div>
         )}
       </div>
-    </div>
+    </div >
   );
 };
 
