@@ -4,7 +4,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cart_course } from "@/store/features/cart-slice";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { Rate } from "antd";
 
 
 const CourseTypeOne = ({
@@ -16,10 +17,11 @@ const CourseTypeOne = ({
 }) => {
   const { cartCourses } = useSelector((state) => state.cart);
   const t = useTranslations("home.learningPathsArea");
+  const locale = useLocale();
 
   const dispatch = useDispatch();
   
-  function toFixedNumber(value, decimalPlaces = 2) {
+  function toFixedNumber(value, decimalPlaces = 1) {
     if (typeof value === "string") {
       // Try converting the string to a number
       value = parseFloat(value);
@@ -78,9 +80,9 @@ const CourseTypeOne = ({
         <div className="content">
           {/* <span className="course-level">{data.titleAr}</span> */}
           <h6 className="title">
-            <a href="#">{data.titleAr}</a>
+            <a href="#">{locale == "ar" ? data.titleAr : data.titleEn}</a>
           </h6>
-          <p className="truncate-text">{data.shortDescriptionAr}</p>
+          <p className="truncate-text">{locale == "ar" ? data.shortDescriptionAr : data.shortDescriptionEn} </p>
 
           <div className="course-rating">
             <div className="rating">
@@ -89,6 +91,8 @@ const CourseTypeOne = ({
               <i className="icon-23"></i>
               <i className="icon-23"></i>
               <i className="icon-23"></i>
+              <Rate disabled allowHalf defaultValue={toFixedNumber(data.averageRating)} />
+
             </div>
             <span className="rating-count">
               ({toFixedNumber(data.averageRating)} / 5 {t("reviwes")})

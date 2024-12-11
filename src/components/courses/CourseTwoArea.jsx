@@ -85,6 +85,7 @@ import { Link } from "@/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { cart_course } from "@/store/features/cart-slice";
 import { useLocale } from "next-intl";
+import { Rate } from 'antd';
 
 const CourseTwoArea = ({
   my = false,
@@ -101,7 +102,7 @@ const CourseTwoArea = ({
   const dispatch = useDispatch();
   const locale = useLocale();
 
-  function toFixedNumber(value, decimalPlaces = 2) {
+  function toFixedNumber(value, decimalPlaces = 1) {
     if (typeof value === "string") {
       // Try converting the string to a number
       value = parseFloat(value);
@@ -243,7 +244,7 @@ const CourseTwoArea = ({
                         <span className="course-level">{locale == "ar" ? course.levelTitleAr : course.levelTitleEn}</span>
 
                         <h5 className="title">
-                          <a href={`/course-details/${course.coursId}`}>
+                          <a href={`/course-details/${course.courseId}`}>
                             {locale == "ar" ? course.titleAr : course.titleEn}
                           </a>
                         </h5>
@@ -252,11 +253,12 @@ const CourseTwoArea = ({
                         </p>
                         <div className="course-rating">
                           <div className="rating">
+                            {/* <i className="icon-23"></i>
                             <i className="icon-23"></i>
                             <i className="icon-23"></i>
                             <i className="icon-23"></i>
-                            <i className="icon-23"></i>
-                            <i className="icon-23"></i>
+                            <i className="icon-23"></i> */}
+                            <Rate disabled allowHalf defaultValue={toFixedNumber(course.averageRating)} />
                           </div>
                           <span className="rating-count">
                             ({toFixedNumber(course.averageRating)} /5 التقيمات)

@@ -4,6 +4,7 @@ import { Link } from "@/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { cart_course } from "@/store/features/cart-slice";
 import { useLocale } from "next-intl";
+import { Rate } from "antd";
 
 const CourseTypeSix = ({ data, classes, my=false, idx }) => {
   const { cartCourses } = useSelector((state) => state.cart);
@@ -21,7 +22,7 @@ const CourseTypeSix = ({ data, classes, my=false, idx }) => {
       }) 
     );
   };
-  function toFixedNumber(value, decimalPlaces = 2) {
+  function toFixedNumber(value, decimalPlaces = 1) {
     if (typeof value === "string") {
       // Try converting the string to a number
       value = parseFloat(value);
@@ -83,11 +84,13 @@ const CourseTypeSix = ({ data, classes, my=false, idx }) => {
           <p className={`truncate-text h-[50px]`}>{locale == "ar" ? data.shortDescriptionAr : data.shortDescriptionEn}</p>
           <div className="course-rating">
             <div className="rating">
+              {/* <i className="icon-23"></i>
               <i className="icon-23"></i>
               <i className="icon-23"></i>
               <i className="icon-23"></i>
-              <i className="icon-23"></i>
-              <i className="icon-23"></i>
+              <i className="icon-23"></i> */}
+              <Rate disabled allowHalf defaultValue={toFixedNumber(data.averageRating)} />
+
             </div>
             <span className="rating-count">
               ({toFixedNumber(data.averageRating)} /5 التقيمات)
