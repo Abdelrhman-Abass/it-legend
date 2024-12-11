@@ -86,11 +86,11 @@ const CourseTypeOne = ({
 
           <div className="course-rating">
             <div className="rating">
+              {/* <i className="icon-23"></i>
               <i className="icon-23"></i>
               <i className="icon-23"></i>
               <i className="icon-23"></i>
-              <i className="icon-23"></i>
-              <i className="icon-23"></i>
+              <i className="icon-23"></i> */}
               <Rate disabled allowHalf defaultValue={toFixedNumber(data.averageRating)} />
 
             </div>
