@@ -151,11 +151,8 @@ const CourseTypeOne = ({
           </h6>
           <div className="course-rating">
             <div className="rating">
-              <i className="icon-23"></i>
-              <i className="icon-23"></i>
-              <i className="icon-23"></i>
-              <i className="icon-23"></i>
-              <i className="icon-23"></i>
+            <Rate disabled allowHalf defaultValue={toFixedNumber(data.averageRating)} />
+
             </div>
             <span className="rating-count">
               ({toFixedNumber(data.averageRating)} / 5 {t("reviwes")})
