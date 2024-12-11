@@ -5,8 +5,8 @@ import { locales, localePrefix } from "./navigation";
 
 // Middleware for i18n (from next-intl)
 const intlMiddleware = createMiddleware({
-  locales,
-  localePrefix,
+  locales: ["ar", "en"],
+  // localePrefix,
   // Used when no locale matches
   defaultLocale: "ar",
 });
