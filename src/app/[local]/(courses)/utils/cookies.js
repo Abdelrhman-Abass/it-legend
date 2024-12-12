@@ -2,7 +2,7 @@
 import { cookies } from "next/headers"; // For Next.js cookies
 
 // Save video playback time
-export const savePlaybackState = async (courseId, nodeId, videoId, timestamp) => {
+export const savePlaybackState = async (courseId, nodeId, videoId, timestamp = 0) => {
     const playbackState = JSON.parse(cookies().get("playbackState")?.value || "{}");
 
     // Ensure courseId is a string

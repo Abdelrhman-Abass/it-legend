@@ -37,7 +37,6 @@ const CourseTypeSix = ({ data, classes, my = false, idx }) => {
       return parseFloat(value.toFixed(decimalPlaces));
     }
 
-    throw new Error("Input must be a number or a string representing a number");
   }
 
   return (

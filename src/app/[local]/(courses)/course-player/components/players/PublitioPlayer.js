@@ -348,9 +348,13 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
     const currentUrl = new URL(window.location.href);
     return currentUrl.pathname.split("/").pop(); // Assumes courseId is the last part of the URL
   };
-
   const courseId = getCourseIdFromUrl();
 
+  useEffect(()=>{
+    savePlaybackState(courseId, activeNode, node?.videoId)
+  },[node?.videoId])
+
+  
   const handleTimeUpdate = debounce((video) => {
     const watchedPercentage = (video.currentTime / video.duration) * 100;
 
