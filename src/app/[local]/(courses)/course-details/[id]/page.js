@@ -8,7 +8,7 @@ import React from "react";
 const course = course_data[0];
 const page = async ({params}) => {
   const courseNode = await CoursePlayerNode(params.id)
-console.log(courseNode)
+console.log("course from CourseDetails : " + courseNode.data)
   return (
     <>
       <CourseBreadcrumb
@@ -16,7 +16,7 @@ console.log(courseNode)
         subtitle="دورة احتراف تصميم التطبيقات"
         style={{paddingTop: 120}}
       />
-      <CourseDetailsArea course={course} />
+      <CourseDetailsArea course={course} courseNodes={courseNode.data} />
       <Testimonial about_p_2={true} />
     </>
   );

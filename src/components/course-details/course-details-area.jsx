@@ -7,7 +7,8 @@ import SingleProgressbar from "./single-progressbar";
 import SingleAccordion from "./single-accordion";
 import Test from "./test";
 
-const CourseDetailsArea = ({ course, isplayer = false }) => {
+const CourseDetailsArea = ({ courseNodes ,course, isplayer = false }) => {
+  console.log("from cours details area : " + courseNodes)
   return (
     <section
       style={{
