@@ -17,6 +17,7 @@ import CourseDiploma from "@/components/course/CourseDiploma";
 
 import { usePathname, Link } from "@/navigation";
 import MyCourseDiploma from "@/components/course/MyCourseDiploma";
+import { LoadingSpinner } from "video-react";
 
 
 const Page = () => {
@@ -52,16 +53,17 @@ const Page = () => {
     <>
       <UserHeader />
 
-      {status === "loading" && (
-        <div className="relative flex w-auto mt-[20%] mr-[20%] animate-pulse gap-2 p-4">
-          <div className="h-12 w-12 rounded-full bg-slate-400"></div>
-          <div className="flex-1">
-            <div className="mb-1 h-5 w-3/5 rounded-lg bg-slate-400 text-lg"></div>
-            <div className="h-5 w-[90%] rounded-lg bg-slate-400 text-sm"></div>
-          </div>
-          <div className="absolute bottom-5 right-0 h-4 w-4 rounded-full bg-slate-400"></div>
-        </div>
-      )}
+      {/* {status === "loading" && (
+        // <div className="relative flex w-auto mt-[20%] mr-[20%] animate-pulse gap-2 p-4">
+        //   <div className="h-12 w-12 rounded-full bg-slate-400"></div>
+        //   <div className="flex-1">
+        //     <div className="mb-1 h-5 w-3/5 rounded-lg bg-slate-400 text-lg"></div>
+        //     <div className="h-5 w-[90%] rounded-lg bg-slate-400 text-sm"></div>
+        //   </div>
+        //   <div className="absolute bottom-5 right-0 h-4 w-4 rounded-full bg-slate-400"></div>
+        // </div>
+        <LoadingSpinner/>
+      )} */}
 
       {status === "succeeded" && (
         <>
