@@ -350,11 +350,11 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
   };
   const courseId = getCourseIdFromUrl();
 
-  useEffect(()=>{
-    savePlaybackState(courseId, activeNode, node?.videoId)
-  },[node?.videoId])
+  // useEffect(()=>{
+  //   savePlaybackState(courseId, activeNode, node?.videoId)
+  // },[node?.videoId])
 
-  
+
   const handleTimeUpdate = debounce((video) => {
     const watchedPercentage = (video.currentTime / video.duration) * 100;
 
@@ -422,7 +422,7 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
             );
           }
         });
-
+        video.addEventListener("play", () => savePlaybackState(courseId, activeNode, node?.videoId));
         video.addEventListener("ended", handleIsVideoEnd);
         video.addEventListener("timeupdate", () => handleTimeUpdate(video));
         video.addEventListener("pause", () =>
@@ -443,6 +443,7 @@ const PublitioPlayer = ({ node, handleIsVideoEnd, nextNode }) => {
     // Cleanup function to remove event listeners and destroy HLS instance
     return () => {
       if (video) {
+        video.removeEventListener("play", savePlaybackState(courseId, activeNode, node?.videoId));
         video.removeEventListener("ended", handleIsVideoEnd);
         video.removeEventListener("timeupdate", () => handleTimeUpdate(video));
         video.removeEventListener("pause", () =>
