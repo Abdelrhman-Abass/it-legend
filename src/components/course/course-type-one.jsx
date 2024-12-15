@@ -13,14 +13,14 @@ const CourseTypeOne = ({
   classes,
   image_location_path = "01",
   bg,
-  my=false,
+  my = false,
 }) => {
   const { cartCourses } = useSelector((state) => state.cart);
   const t = useTranslations("home.learningPathsArea");
   const locale = useLocale();
 
   const dispatch = useDispatch();
-  
+
   function toFixedNumber(value, decimalPlaces = 1) {
     if (typeof value === "string") {
       // Try converting the string to a number
@@ -53,9 +53,8 @@ const CourseTypeOne = ({
   return (
     <div
       // style={{ backgroundColor: bg }}
-      className={`edu-course course-style-1 ${
-        classes ? classes : undefined
-      } hover-button-bg-white`}
+      className={`edu-course course-style-1 ${classes ? classes : undefined
+        } hover-button-bg-white`}
     >
       <div className="inner">
         <div className="thumbnail" >
@@ -135,12 +134,12 @@ const CourseTypeOne = ({
       </div>
 
       <div className="course-hover-content-wrapper">
-        
+
       </div>
 
       <div className="course-hover-content">
         <div className="content">
-          
+
           {/* <span className="course-level">{data.level}</span> */}
           <h6 className="title">
             <Link
@@ -149,7 +148,7 @@ const CourseTypeOne = ({
               {data.title}
             </Link>
           </h6>
-          <div className="course-rating">
+          {/* <div className="course-rating">
             <div className="rating">
             <Rate disabled allowHalf defaultValue={toFixedNumber(data.averageRating)} />
 
@@ -157,7 +156,10 @@ const CourseTypeOne = ({
             <span className="rating-count">
               ({toFixedNumber(data.averageRating)} / 5 {t("reviwes")})
             </span>
-          </div>
+          </div> */}
+            <h6 className="title">
+              <a href={my ? `/diploma-details/${data.categoryId}` : `/diploma-details/${data.categoryId}`}>{locale == "ar" ? data.titleAr : data.titleEn}</a>
+            </h6>
           {/* <div className="course-price">${data.course_price}</div> */}
           <p className="truncate-text">{data.shortDescriptionAr}</p>
           <ul className="course-meta">
