@@ -124,7 +124,7 @@ const FreeDeploma = () => {
                   <li key={i}>{t(l)}</li>
                 ))}{" "}
               </ul>
-              <Link href="/diploma-details/1" className="edu-btn">
+              <Link href="/diploma-details/c1dcd2f4-65ca-4d7c-f4a6-08dc01837709" className="edu-btn">
               {direction == "rtl" ? (
                     <ArrowLeft className="d-inline h-[20px]" />
                   ) : (

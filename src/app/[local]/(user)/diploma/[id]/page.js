@@ -176,7 +176,7 @@ const Page = () => {
 
         </>
       )}
-      {status === "failed" && <Error />}
+      {status === "failed" && <Error my={true}/>}
     </>
 
 

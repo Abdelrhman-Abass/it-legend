@@ -357,3 +357,17 @@ export const CoursePlayerNode = async (courseId ) => {
         };
     }
 };
+export const CourseFeatureDetails = async (courseId ) => {
+    try {
+        
+        const response = await api.get(`http://49.13.77.125:1118/Endpoint/api/CourseFeature/${courseId}/features`);
+
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching course player node data:", error.message);
+        return {
+            data: null,
+            message: error.response?.data?.message || error.message,
+        };
+    }
+};

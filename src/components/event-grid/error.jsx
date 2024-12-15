@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { Link } from "@/navigation";
 
-export default function Error() {
+export default function Error({my = false}) {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <Image src={"/assets/images/others/404.png"} width={350} height={350} />
@@ -13,7 +13,7 @@ export default function Error() {
       >
         Return Home
       </Link> */}
-      <Link className="m-0 edu-btn m-0" href="/learning-path" style={{ cursor: "pointer" }}>
+      <Link className="m-0 edu-btn m-0" href={my ? "/learning-path" : "/"} style={{ cursor: "pointer" }}>
         
           <i className="icon-4 mr-2"></i>
         <span>Return Home</span>

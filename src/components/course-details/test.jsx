@@ -1,7 +1,10 @@
-import React from "react";
+"use client"
 import SingleAccordion from "./single-accordion";
+import { FilePen, FileText, FileVideo, Paperclip } from "lucide-react";
+import { useLocale } from "next-intl";
+import React, { useState } from "react";
 
-const Test = ({ course }) => {
+const Test = ({ course, courses, features }) => {
   const {
     course_desc,
     course_desc_2,
@@ -18,6 +21,12 @@ const Test = ({ course }) => {
     rating,
     rating_count,
   } = course || {};
+  const [openAccordion, setOpenAccordion] = useState(null);
+
+  const handleAccordionToggle = (idx) => {
+    setOpenAccordion((prevIndex) => (prevIndex === idx ? null : idx));
+  };
+  const locale = useLocale()
 
   return (
     <div className="course-details-content course-details-2">
@@ -47,6 +56,7 @@ const Test = ({ course }) => {
             ماذا سوف تتعلم؟
           </h5>
           <div className="row g-5">
+            {/* First column - First half of the features */}
             <div
               className="col-lg-6"
               data-aos-delay="150"
@@ -54,17 +64,15 @@ const Test = ({ course }) => {
               data-aos-duration="800"
             >
               <ul>
-                <li>
-                  أساسيات التصميم: فهم المبادئ الأساسية لتصميم واجهات المستخدم
-                  وتجربة المستخدم.
-                </li>
-                <li>
-                  أدوات التصميم: التعرف على أدوات التصميم الشائعة مثل Figma
-                  وAdobe XD وكيفية استخدامها بكفاءة.
-                </li>
+                {features.slice(0, Math.ceil(features.length / 2)).map((feat, idx) => (
+                  <li key={idx}>
+                    {locale === 'ar' ? feat.featureTextAr : feat.featureTextEn}
+                  </li>
+                ))}
               </ul>
             </div>
 
+            {/* Second column - Second half of the features */}
             <div
               className="col-lg-6"
               data-aos-delay="150"
@@ -72,14 +80,11 @@ const Test = ({ course }) => {
               data-aos-duration="800"
             >
               <ul>
-                <li>
-                  تقنيات التصميم المتجاوب: تعلم كيفية إنشاء تخطيطات متجاوبة تعمل
-                  على مختلف الأجهزة والشاشات.
-                </li>
-                <li>
-                  مشاريع تطبيقية: تطوير مشاريع حقيقية لتطبيق المهارات المكتسبة
-                  وبناء محفظة مهنية قوية.
-                </li>
+                {features.slice(Math.ceil(features.length / 2)).map((feat, idx) => (
+                  <li key={idx}>
+                    {locale === 'ar' ? feat.featureTextAr : feat.featureTextEn}
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -106,99 +111,88 @@ const Test = ({ course }) => {
           data-aos="fade-up"
           data-aos-duration="800"
         >
-          <SingleAccordion
-            show={true}
-            id="1"
-            title="Course Introduction"
-            desc={[
-              { title: "Introduction", icon: "icon-68" },
-              { title: "Course Overview", icon: "icon-68" },
-              {
-                title: "Course Overview",
-                badge_list: true,
-                question: 0,
-                minutes: 10,
-              },
-              {
-                title: "Course Exercise / Reference Files",
-                icon: "icon-68",
-              },
-              {
-                title: "Code Editor Installation (Optional if you have one)",
-                icon: "icon-68",
-              },
-              { title: "Embedding PHP in HTML", icon: "icon-68" },
-            ]}
-          />
-          <SingleAccordion
-            id="2"
-            title="JavaScript Language Basics"
-            desc={[
-              { title: "Introduction", icon: "icon-68" },
-              { title: "Course Overview", icon: "icon-68" },
-              {
-                title: "Course Overview",
-                badge_list: true,
-                question: 2,
-                minutes: 12,
-              },
-              {
-                title: "Course Exercise / Reference Files",
-                icon: "icon-68",
-              },
-              {
-                title: "Code Editor Installation (Optional if you have one)",
-                icon: "icon-68",
-              },
-              { title: "Embedding PHP in HTML", icon: "icon-68" },
-            ]}
-          />
-          <SingleAccordion
-            id="3"
-            title="Components & Databinding"
-            desc={[
-              { title: "Introduction", icon: "icon-68" },
-              { title: "Course Overview", icon: "icon-68" },
-              {
-                title: "Course Overview",
-                badge_list: true,
-                question: 4,
-                minutes: 15,
-              },
-              {
-                title: "Course Exercise / Reference Files",
-                icon: "icon-68",
-              },
-              {
-                title: "Code Editor Installation (Optional if you have one)",
-                icon: "icon-68",
-              },
-              { title: "Embedding PHP in HTML", icon: "icon-68" },
-            ]}
-          />
-          <SingleAccordion
-            id="4"
-            title="Product Management Leadership"
-            desc={[
-              { title: "Introduction", icon: "icon-68" },
-              { title: "Course Overview", icon: "icon-68" },
-              {
-                title: "Course Overview",
-                badge_list: true,
-                question: 6,
-                minutes: 18,
-              },
-              {
-                title: "Course Exercise / Reference Files",
-                icon: "icon-68",
-              },
-              {
-                title: "Code Editor Installation (Optional if you have one)",
-                icon: "icon-68",
-              },
-              { title: "Embedding PHP in HTML", icon: "icon-68" },
-            ]}
-          />
+          {
+            courses.map((course, idx) => (
+
+              // <Test testData={course} key={idx}/> https://it-legend-rrkg.vercel.app/ar/course-player/c84e7902-1205-426f-a857-922bedd84bdf?type=0&no=fef68bd2-7540-44d4-b8fd-c35b9f2dd839
+              <div className="accordion edu-accordion" id="accordionExample" key={idx}>
+                <div className="accordion-item">
+                  <h3 className="accordion-header" id={`heading-${idx}`}>
+                    <button
+                      className={`accordion-button ${openAccordion === idx ? "" : "collapsed"}`}
+                      type="button"
+                      onClick={() => handleAccordionToggle(idx)}
+                      aria-expanded={openAccordion === idx ? "true" : "false"}
+                    >
+                      <span style={{ textAlign: "start" }}>
+                        {course.moduleTitleAr}
+                      </span>
+                    </button>
+                  </h3>
+                  <div
+                    id={`module-${idx}`}
+                    className={`accordion-collapse ${openAccordion === idx ? "show" : "collapse"}`}
+                    data-bs-parent="#accordionExample"
+                  >
+                    <div className="accordion-body">
+                      <div className="course-lesson course-deatail ">
+                        <ul>
+                          {course.nodes.map((node, i) => {
+                            const {
+                              titleAr = "No Title Available",
+                              titleEn = "No English Title",
+                              nodeId = `node-${i}`,
+                              type = 0,
+                              isWatched = false,
+                              isPassed = false,
+                              duration = "Unknown Duration",
+                              questionCount = 0,
+                              contentId = null,
+                            } = node || {}; // Handle null or undefined `node`
+
+                            return (
+                              <li
+                                // style={{ color: isWatched || watchedNodes[nodeId] ? "#6ABD8A" : undefined }}
+                                // className={nodeId == activeNode ? "active" : ""}
+                                key={nodeId}
+                                onClick={() => handleNodeIdChange(nodeId)}
+                              >
+                                <div className="text d-flex align-items-center" >
+                                  <span style={{ margin: "0 4px 4px" }}>
+                                    {type === 1 || type === 2 ? (
+                                      <FilePen size={20} />
+                                    ) : type === 3 ? (
+                                      <Paperclip size={20} />
+                                    ) : type === 4 ? (
+                                      <FileText size={20} />
+                                    ) : (
+                                      <FileVideo size={20} />
+                                    )}
+                                  </span>
+                                  <span >
+                                    {/* <a href={`/ar/course-player/${course.courseId}?type=${type}&no=${nodeId}`}> */}
+                                    {titleAr}
+                                    {/* </a> */}
+                                  </span>
+                                </div>
+                                {type === 0 && <span className="duration-node">{duration}</span>}
+                                {type === 4 && (
+                                  <div className="badge-list">
+                                    <span className="badge badge-secondary">
+                                      {questionCount} أسئلة
+                                    </span>
+                                  </div>
+                                )}
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
         </div>
       </div>
       {/* 3 */}

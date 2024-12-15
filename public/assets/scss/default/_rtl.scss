@@ -2576,6 +2576,9 @@ html[dir="rtl"]{
             .layout-switcher {
                 margin-right: inherit;
                 margin-left: 30px;
+                @media #{$sm-layout} {
+                    margin-left: 0;
+                }
                 label {
                     margin-right: inherit;
                     margin-left: 10px;

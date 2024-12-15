@@ -12,7 +12,11 @@ html[lang="en"] body {
   scroll-behavior: smooth;
 
 }
-
+.course-deatail{
+  padding: 0px 15px;
+  border-bottom: 1px solid gray;
+  list-style: none;
+}
 .accordion-item{
   background: transparent !important;
 }

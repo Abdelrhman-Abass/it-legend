@@ -85,7 +85,7 @@ const BlogMasonryArea = ({ showMore = false }) => {
   };
 
   return (
-    <section id="projects" className="pt-[80px]">
+    <section id="projects" className="py-[80px]">
       <div className="container">
         <div
           className="g-5"

@@ -26,20 +26,39 @@ const fetchCourses = async () => {
   }
 };
 
+// const DiplomasArea = () => {
+//   const [diploma, setDiploma] = useState(null);
+
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       try {
+//         const data = await fetchCourses();
+//         setDiploma(data);
+//       } catch (error) {
+//         console.error("Error fetching diploma data:", error);
+//       }
+//     };
+
+//     fetchData();
+//   }, []);
+
 const DiplomasArea = async() => {
   const diploma = await fetchCourses();
-  console.log(diploma)
 
   // const t = useTranslations("home.learningPathsArea");
   return (
-    <div
-      id="paths"
-      className="edu-course-area course-area-2 gap-tb-text bg-lighten03"
-    >
-      <div className="container ">
-       <Diplomas data={diploma}/>
-      </div>
-    </div>
+    <>
+      {diploma ? (
+        <div
+          id="paths"
+          className="edu-course-area course-area-2 gap-tb-text bg-lighten03"
+        >
+          <div className="container">
+            <Diplomas data={diploma} />
+          </div>
+        </div>
+      ) : null}
+    </>
   );
 };
 

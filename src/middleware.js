@@ -9,6 +9,8 @@ const intlMiddleware = createMiddleware({
   // localePrefix,
   // Used when no locale matches
   defaultLocale: "ar",
+  localeDetection: false,
+
 });
 
 export async function middleware(req) {
