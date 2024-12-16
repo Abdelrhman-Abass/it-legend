@@ -133,33 +133,9 @@ export const VdoCipherVideoOtp = async (videoId) => {
 
 export const latestNodeOpend = async (courseId) => {
   try {
-    // const token = cookies().get("token")?.value;
-    // if (!token) {
-    //     const refreshToken = cookies().get("refreshToken")?.value
-    //     if (!refreshToken) {
-    //         return null
-    //     }else{
-    //         refreshAuth() 
-    // {
-    //   "otp": "20160313versUSE323qeW72bbPDwySWvI0dyAueUiwxLuiO7BIAiRC8JEmPEMZbD",
-    //   "playbackInfo": "eyJ2aWRlb0lkIjoiNTRlYjQ3ZjVkY2YwNGI1ZWExODFhYTc1NmFlMjZmYzYifQ=="
-    // }
-    //     }
-    // };
-
-    // const config = {
-    //     headers: {
-    //         Authorization: `Bearer ${token}`,
-    //         "Content-Type": "application/json",
-    //     },
-    //     timeout: 3000000,
-    // };
-
-    // const response = await fetchWithRetry(
-    //     `http://49.13.77.125:1118/Endpoint/api/MemberCoursePlayer/${courseId}`,
-    //     config
-    // );
+    
     const response = await api.get(`http://49.13.77.125:1118/Endpoint/api/MemberCoursePlayer/${courseId}`);
+
 
 
     // if (response) {
