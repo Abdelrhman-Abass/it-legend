@@ -293,9 +293,9 @@ const Player = ({ nodes, moduleId , modules, setWatch ,activeNode, typeActiveNod
         ) 
         : playerType == 2 ? (
           <VdocipherPlayer
-            node={node}
-            handleIsWatched={handleIsWatched}
+            node={video}
             handleIsVideoEnd={handleIsVideoEnd}
+            nextNode={nextNodeId}
           />
         ) : null
       ) : type == 1 && node ? (

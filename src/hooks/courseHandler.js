@@ -30,6 +30,7 @@ export const courseUSerData = async () => {
     return { data: null, message: error.response?.data?.message || error.message };
   }
 };
+
 export const courseGlobalData = async () => {
 
   try {
@@ -60,40 +61,74 @@ export const courseGlobalData = async () => {
     return { data: null, message: error.response?.data?.message || error.message };
   }
 };
+export const VdoCipherVideoOtp = async (videoId) => {
+  try {
+    const config = {
+      headers: {
+        Authorization: `Apisecret ${process.env.NEXT_PUBLIC_VDOCIPHER}`,
+        "Content-Type": "application/json", // Ensure the correct content type
+      },
+      timeout: 3000000, // Optional timeout
+    };
 
-// export const courseUSerData = async () => {
-//     try {
-//         const token = cookies().get("token")?.value;
-//         if (!token) {
-//             const refreshToken = cookies().get("refreshToken")?.value
-//             if (!refreshToken) {
-//                 return null
-//             }else{
-//                 refreshAuth()
-//             }
-//         };
+    const requestBody = {
+      ttl: 0,
+      forcedBitrate: 0,
+      annotate: "",
+      nocdn: 0,
+      whitelisthref: "",
+      ipGeoRules: "",
+    };
 
-//         const config = {
-//             headers: {
-//                 Authorization: `Bearer ${token}`,
-//                 "Content-Type": "application/json",
-//             },
-//             timeout: 3000000,
-//         };
+    const response = await axios.post(
+      `https://www.vdocipher.com/api/videos/${videoId}/otp`,
+      requestBody, // Request body
+      config // Configuration object containing headers
+    );
 
-//         const response = await fetchWithRetry(
-//             `http://49.13.77.125:1118/Endpoint/api/MemberCourse`,
-//             config
-//         );
+    console.log(response.data); // Log the data for debugging
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching VdoCipherVideoOtp data:", error.message);
+    return {
+      data: null,
+      message: error.response?.data?.message || error.message,
+    };
+  }
+};
 
-//         return response.data;
-//     } catch (error) {
-//         console.error("Error fetching course data:", error.message);
-//         return {
-//             data: null,
-//             message: error.response?.data?.message || error.message,
-//         };
-//     }
+// export const VdoCipherVideoOtp = async (videoId) => {
+//   try {
+
+//     const config = {
+//       headers: {
+//         Authorization: `Apisecret i2uuiGockUSRKdoAg4jmyJM07RmB9KPbaxJTpXy1vNiIzZJ3FPNjbSlEl1AfDuI2`,
+//       },
+//       timeout: 3000000,
+//     };
+
+//     const response = await axios.post(
+//       `https://www.vdocipher.com/api/videos/${videoId}/otp`,
+//       config,
+//       {
+//         "ttl": 0,
+//         "forcedBitrate": 0,
+//         "annotate": "",
+//         "nocdn": 0,
+//         "whitelisthref": "",
+//         "ipGeoRules": ""
+//       }
+//     );
+
+//     console.log(response)
+//     return response.data;
+//   } catch (error) {
+//     console.error("Error fetching VdoCipherVideoOtp data:", error.message);
+//     return {
+//       data: null,
+//       message: error.response?.data?.message || error.message,
+//     };
+//   }
 // };
 
 export const latestNodeOpend = async (courseId) => {
@@ -104,7 +139,11 @@ export const latestNodeOpend = async (courseId) => {
     //     if (!refreshToken) {
     //         return null
     //     }else{
-    //         refreshAuth()
+    //         refreshAuth() 
+    // {
+    //   "otp": "20160313versUSE323qeW72bbPDwySWvI0dyAueUiwxLuiO7BIAiRC8JEmPEMZbD",
+    //   "playbackInfo": "eyJ2aWRlb0lkIjoiNTRlYjQ3ZjVkY2YwNGI1ZWExODFhYTc1NmFlMjZmYzYifQ=="
+    // }
     //     }
     // };
 

@@ -179,6 +179,25 @@ const CourseTwoArea = ({
         },
       ],
     },
+    {
+      value: 'Sort',
+      label: 'Sort',
+      children: [
+        {
+          value: 'highestPrice',
+          label: 'Heighest',
+        },
+        {
+          value: 'lowestPrice',
+          label: 'Lowest',
+        },
+        
+      ],
+    },
+    // {
+    //   value: 'All',
+    //   label: 'All',
+    // },
   ];
   function displayRender(label) {
     return label[label.length - 1];
