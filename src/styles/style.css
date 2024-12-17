@@ -21,6 +21,21 @@ html[lang="en"] body {
   background: transparent !important;
 }
 
+
+.vjs-theme-custom .vjs-control-bar {
+  background-color: #1e293b; /* Dark background */
+}
+
+.vjs-theme-custom .vjs-play-control {
+  color: #f97316; /* Orange play button */
+}
+
+.vjs-theme-custom .vjs-progress-holder {
+  background-color: #e2e8f0; /* Light gray progress bar */
+}
+
+
+
 .react-international-phone-input-container input {
   text-align: left !important;
 }

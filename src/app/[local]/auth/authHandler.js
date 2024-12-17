@@ -7,7 +7,7 @@ import { setAccessToken, setRefreshToken } from "../../../hooks/tokenUtils";
 // Define a function to handle authentication requests with Axios
 export const authHandler = async (url, body) => {
   try {
-    const response = await api.post(`http://49.13.77.125:1118/Endpoint/api/${url}`, body);
+    const response = await api.post(`${process.env.NEXT_PUBLIC_BASE_URL}/${url}`, body);
     const expirationDate = new Date("9999-12-31T23:59:59.999Z");
     if (response?.data?.success) {
       const { token, refreshToken, email } = response.data.data;
@@ -31,7 +31,7 @@ export const authHandler = async (url, body) => {
 //   try {
 //     // Send the POST request using Axios
 //     const response = await axios.post(
-//       `http://49.13.77.125:1118/Endpoint/api/${url}`,
+//       `${process.env.NEXT_PUBLIC_BASE_URL}/${url}`,
 //       body,
 //       {
 //         headers: {
@@ -74,7 +74,7 @@ export const refreshAuth = async()=>{
     console.log(email)
     
     const response = await axios.post(
-      `http://49.13.77.125:1118/Endpoint/api/Token/`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/Token/`,
       {
         email,
         refreshToken
@@ -122,7 +122,7 @@ export const PlayerLatestNode = async (courseId) => {
       };
 
       const response = await axios.get(
-          `http://49.13.77.125:1118/Endpoint/api/MemberCoursePlayer/${courseId}`,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/MemberCoursePlayer/${courseId}`,
           config
       );
       

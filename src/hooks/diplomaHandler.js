@@ -17,7 +17,7 @@ export const diplomaUSerData = async () => {
         // };
 
         // const response = await fetch(
-        //     `http://49.13.77.125:1118/Endpoint/api/MemberCategory/categories`,
+        //     `${process.env.NEXT_PUBLIC_BASE_URL}/MemberCategory/categories`,
         //     {
         //         method: "GET",
         //         headers: {
@@ -27,7 +27,7 @@ export const diplomaUSerData = async () => {
         //     }
         // );
 
-        const response = await api.get(`http://49.13.77.125:1118/Endpoint/api/MemberCategory/categories`);
+        const response = await api.get(`${process.env.NEXT_PUBLIC_BASE_URL}/MemberCategory/categories`);
         return response.data;
 
 
@@ -66,7 +66,7 @@ export const getCoursesByCategory = async (categoryId) => {
         // };
 
         // const response = await fetch(
-        //     `http://49.13.77.125:1118/Endpoint/api/MemberCategory/${categoryId}/details`,
+        //     `${process.env.NEXT_PUBLIC_BASE_URL}/MemberCategory/${categoryId}/details`,
         //     {
         //         method: "GET",
         //         headers: {
@@ -75,7 +75,7 @@ export const getCoursesByCategory = async (categoryId) => {
         //         },
         //     }
         // );
-        const response = await api.get(`http://49.13.77.125:1118/Endpoint/api/MemberCategory/${categoryId}/details`);
+        const response = await api.get(`${process.env.NEXT_PUBLIC_BASE_URL}/MemberCategory/${categoryId}/details`);
         return response.data;
 
 

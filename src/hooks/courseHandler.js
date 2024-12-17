@@ -23,7 +23,7 @@ const fetchWithRetry = async (url, config, retries = 5, delay = 1000) => {
 export const courseUSerData = async () => {
 
   try {
-    const response = await api.get("http://49.13.77.125:1118/Endpoint/api/MemberCourse");
+    const response = await api.get(`${process.env.NEXT_PUBLIC_BASE_URL}/MemberCourse`);
     return response.data;
   } catch (error) {
     console.error("Error fetching course data:", error.message);
@@ -34,7 +34,7 @@ export const courseUSerData = async () => {
 export const courseGlobalData = async () => {
 
   try {
-    // const response = await axios.get("http://49.13.77.125:1118/Endpoint/api/Course");
+    // const response = await axios.get("${process.env.NEXT_PUBLIC_BASE_URL}/Course");
     // const config = {
     //   headers: {
     //     "Content-Type": "application/json",
@@ -43,10 +43,10 @@ export const courseGlobalData = async () => {
     // };
 
     // const response = await fetch(
-    //   `http://49.13.77.125:1118/Endpoint/api/Cours`,
+    //   `${process.env.NEXT_PUBLIC_BASE_URL}/Cours`,
     // );
     const response = await axios.get(
-      `http://49.13.77.125:1118/Endpoint/api/Course`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/Course`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -134,7 +134,7 @@ export const VdoCipherVideoOtp = async (videoId) => {
 export const latestNodeOpend = async (courseId) => {
   try {
     
-    const response = await api.get(`http://49.13.77.125:1118/Endpoint/api/MemberCoursePlayer/${courseId}`);
+    const response = await api.get(`${process.env.NEXT_PUBLIC_BASE_URL}/MemberCoursePlayer/${courseId}`);
 
 
 
@@ -165,7 +165,7 @@ export const authHandler = async (url, body) => {
   try {
     // Send the POST request using Axios
     const response = await axios.post(
-      `http://49.13.77.125:1118/Endpoint/api/${url}`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/${url}`,
       body,
       {
         headers: {
@@ -203,7 +203,7 @@ export const authHandler = async (url, body) => {
 //         if (!token) throw new Error("Token is not available");
 
 //         const response = await axios.get(
-//             `http://49.13.77.125:1118/Endpoint/api/MemberCourse`,
+//             `${process.env.NEXT_PUBLIC_BASE_URL}/MemberCourse`,
 //             {
 //                 headers: {
 //                     Authorization: `Bearer ${token}`,

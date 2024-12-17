@@ -6,7 +6,7 @@ import { Wrapper } from "@/layout";
 // import SortingArea from "@/components/course-filter/sorting-area";
 const fetchCourses = async () => {
   try {
-    const response = await fetch("http://49.13.77.125:1118/Endpoint/api/Category", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/Category`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 
 
 const api = axios.create({
-  // baseURL: "http://49.13.77.125:1118/Endpoint/api",
+  // baseURL: "${process.env.NEXT_PUBLIC_BASE_URL}",
   headers: { "Content-Type": "application/json" },
 });
 
@@ -21,7 +21,7 @@ const refreshAccessToken = async () => {
   }
 
   const response = await axios.post(
-    "http://49.13.77.125:1118/Endpoint/api/Token", 
+    `${process.env.NEXT_PUBLIC_BASE_URL}/Token`, 
     { email : em , refreshToken }
   );
 

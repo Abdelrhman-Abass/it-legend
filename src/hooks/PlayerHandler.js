@@ -38,10 +38,10 @@ export const CoursePlayerLinks = async (courseId) => {
         // };
 
         // const response = await axios.get(
-        //     `http://49.13.77.125:1118/Endpoint/api/CourseLink/${courseId}/links`,
+        //     `${process.env.NEXT_PUBLIC_BASE_URL}/CourseLink/${courseId}/links`,
         //     config
         // );
-        const response = await api.get(`http://49.13.77.125:1118/Endpoint/api/CourseLink/${courseId}/links`);
+        const response = await api.get(`${process.env.NEXT_PUBLIC_BASE_URL}/CourseLink/${courseId}/links`);
 
 
         return response.data;
@@ -74,10 +74,10 @@ export const CoursePlayerLatest = async (videoId) => {
         // };
 
         // const response = await axios.get(
-        //     `http://49.13.77.125:1118/Endpoint/api/MemberCoursePlayer/${videoId}`,
+        //     `${process.env.NEXT_PUBLIC_BASE_URL}/MemberCoursePlayer/${videoId}`,
         //     config
         // );
-        const response = await api.get(`http://49.13.77.125:1118/Endpoint/api/MemberCoursePlayer/${videoId}`);
+        const response = await api.get(`${process.env.NEXT_PUBLIC_BASE_URL}/MemberCoursePlayer/${videoId}`);
 
         
         if (response?.data?.success) {
@@ -122,10 +122,10 @@ export const CoursePlayerLatestNode = async (courseId) => {
         // };
 
         // const response = await axios.get(
-        //     `http://49.13.77.125:1118/Endpoint/api/MemberCoursePlayer/${courseId}`,
+        //     `${process.env.NEXT_PUBLIC_BASE_URL}/MemberCoursePlayer/${courseId}`,
         //     config
         // );
-        const response = await api.get(`http://49.13.77.125:1118/Endpoint/api/MemberCoursePlayer/${courseId}`);
+        const response = await api.get(`${process.env.NEXT_PUBLIC_BASE_URL}/MemberCoursePlayer/${courseId}`);
 
         
         if (response?.data?.success) {
@@ -170,10 +170,10 @@ export const CoursePlayerVideoType = async (courseId) => {
         // };
 
         // const response = await axios.get(
-        //     `http://49.13.77.125:1118/Endpoint/api/MemberCoursePlayer/${courseId}`,
+        //     `${process.env.NEXT_PUBLIC_BASE_URL}/MemberCoursePlayer/${courseId}`,
         //     config
         // );
-        const response = await api.get(`http://49.13.77.125:1118/Endpoint/api/MemberCoursePlayer/${courseId}`);
+        const response = await api.get(`${process.env.NEXT_PUBLIC_BASE_URL}/MemberCoursePlayer/${courseId}`);
 
         
         if (response?.data?.success) {
@@ -221,13 +221,13 @@ export const CoursePlayerVideo = async (courseId, nodeId) => {
     //     timeout: 3000000,
     //   };
   
-    //   console.log("Making API Request to:", `http://49.13.77.125:1118/Endpoint/api/CourseVideo/${courseId}/videos/${nodeId}`);
+    //   console.log("Making API Request to:", `${process.env.NEXT_PUBLIC_BASE_URL}/CourseVideo/${courseId}/videos/${nodeId}`);
   
     //   const response = await axios.get(
-    //     `http://49.13.77.125:1118/Endpoint/api/CourseVideo/${courseId}/videos/${nodeId}`,
+    //     `${process.env.NEXT_PUBLIC_BASE_URL}/CourseVideo/${courseId}/videos/${nodeId}`,
     //     config
     //   );
-      const response = await api.get(`http://49.13.77.125:1118/Endpoint/api/CourseVideo/${courseId}/videos/${nodeId}`);
+      const response = await api.get(`${process.env.NEXT_PUBLIC_BASE_URL}/CourseVideo/${courseId}/videos/${nodeId}`);
 
   
       console.log("API Response:", response.data);
@@ -265,7 +265,7 @@ export const CoursePlayerVideo = async (courseId, nodeId) => {
 
         // Send POST request
         const response = await axios.post(
-            `http://49.13.77.125:1118/Endpoint/api/MemberVideo/${videoId}/watch`,
+            `${process.env.NEXT_PUBLIC_BASE_URL}/MemberVideo/${videoId}/watch`,
             {}, // No request body
             config
         );
@@ -306,11 +306,11 @@ export const CoursePlayerVideoComments = async (videoId) => {
         // };
 
         // const response = await axios.get(
-        //     `http://49.13.77.125:1118/Endpoint/api/VideoComment/${nodeId}/comments`,
+        //     `${process.env.NEXT_PUBLIC_BASE_URL}/VideoComment/${nodeId}/comments`,
         //     config
         // );
         console.log(" video id from server handler "  + videoId )
-        const response = await api.get(`http://49.13.77.125:1118/Endpoint/api/VideoComment/${videoId}/comments`);
+        const response = await api.get(`${process.env.NEXT_PUBLIC_BASE_URL}/VideoComment/${videoId}/comments`);
 
         return response.data.data;
     } catch (error) {
@@ -343,10 +343,10 @@ export const CoursePlayerNode = async (courseId ) => {
         // };
 
         // const response = await axios.get(
-        //     `http://49.13.77.125:1118/Endpoint/api/CourseNode/${courseId}/nodes`,
+        //     `${process.env.NEXT_PUBLIC_BASE_URL}/CourseNode/${courseId}/nodes`,
         //     config
         // );
-        const response = await api.get(`http://49.13.77.125:1118/Endpoint/api/CourseNode/${courseId}/nodes`);
+        const response = await api.get(`${process.env.NEXT_PUBLIC_BASE_URL}/CourseNode/${courseId}/nodes`);
 
         return response.data;
     } catch (error) {
@@ -360,7 +360,7 @@ export const CoursePlayerNode = async (courseId ) => {
 export const CourseFeatureDetails = async (courseId ) => {
     try {
         
-        const response = await api.get(`http://49.13.77.125:1118/Endpoint/api/CourseFeature/${courseId}/features`);
+        const response = await api.get(`${process.env.NEXT_PUBLIC_BASE_URL}/CourseFeature/${courseId}/features`);
 
         return response.data;
     } catch (error) {

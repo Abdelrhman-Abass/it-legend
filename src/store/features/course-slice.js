@@ -22,7 +22,7 @@ export const Courses = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `http://49.13.77.125:1118/Endpoint/api/Course`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/Course`,
         {
           headers: {
             "Content-Type": "application/json",
