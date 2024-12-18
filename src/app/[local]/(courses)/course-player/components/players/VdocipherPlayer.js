@@ -58,7 +58,7 @@ import React from "react";
 // export default VdocipherPlayer;  54eb47f5dcf04b5ea181aa756ae26fc6
 
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback  } from "react";
 // import axios from "axios";
 import { VdoCipherVideoOtp } from "@/hooks/courseHandler";
 import { useNodeId } from "../../context/NodeIdContext";
