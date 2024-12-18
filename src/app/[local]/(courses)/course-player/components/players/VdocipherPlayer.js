@@ -182,15 +182,14 @@ const VdocipherPlayer = ({ node , nextNode}) => {
   };
   const courseId = getCourseIdFromUrl();
 
-  // Debounced time update handler
+  // Debounced time update
   const handleTimeUpdate = useCallback(
     debounce(() => {
       if (playerInstance.current) {
-        const currentTime = playerInstance.current.currentTime; // Fetch the current time
-        const duration = playerInstance.current.duration;
+        const currentTime = playerInstance.current.currentTime || 0;
+        const duration = playerInstance.current.duration || 1;
 
         const watchedPercentage = (currentTime / duration) * 100;
-
         console.log("Current Time:", currentTime);
         console.log("Watched Percentage:", watchedPercentage);
 
@@ -200,11 +199,10 @@ const VdocipherPlayer = ({ node , nextNode}) => {
           markNodeAsWatched(activeNode);
         }
 
-        if (watchedPercentage === 100) {
+        if (watchedPercentage >= 100) {
           changeActiveNode(nextNode);
         }
 
-        // Save video time to localStorage
         localStorage.setItem(`video_${node.videoId}_time`, currentTime);
       }
     }, 500),
@@ -213,11 +211,8 @@ const VdocipherPlayer = ({ node , nextNode}) => {
 
   const handleVideoWatched = async (videoId) => {
     const result = await CoursePlayerVideoIsWatched(videoId);
-    if (result.success) {
-      console.log(result.message);
-    } else {
-      console.error("Error:", result.message);
-    }
+    if (result.success) console.log(result.message);
+    else console.error("Error:", result.message);
   };
 
   const changeActiveNode = (newNodeValue) => {
@@ -229,12 +224,9 @@ const VdocipherPlayer = ({ node , nextNode}) => {
     const fetchVideoData = async () => {
       try {
         const response = await VdoCipherVideoOtp(videoId);
-
         if (response.otp && response.playbackInfo) {
           setOtp(response.otp);
           setPlaybackInfo(response.playbackInfo);
-        } else {
-          console.error("Invalid video data:", response);
         }
       } catch (error) {
         console.error("Error fetching video data:", error);
@@ -244,10 +236,14 @@ const VdocipherPlayer = ({ node , nextNode}) => {
     fetchVideoData();
   }, [videoId]);
 
-  // Load and initialize player
+  // Initialize player after OTP and playbackInfo are available
   useEffect(() => {
     const loadPlayer = () => {
       if (window.VdoPlayer && containerRef.current && otp && playbackInfo) {
+        if (playerInstance.current) {
+          playerInstance.current.destroy(); // Destroy old instance if exists
+        }
+
         playerInstance.current = new window.VdoPlayer({
           otp,
           playbackInfo,
@@ -255,38 +251,35 @@ const VdocipherPlayer = ({ node , nextNode}) => {
           container: containerRef.current,
         });
 
-        // Add event listeners
+        // Add listeners
         playerInstance.current.addEventListener("timeupdate", handleTimeUpdate);
         playerInstance.current.addEventListener("play", () =>
           savePlaybackState(courseId, activeNode, node?.videoId)
         );
-
         playerInstance.current.addEventListener("pause", () =>
           savePlaybackState(courseId, activeNode, node?.videoId, playerInstance.current.currentTime)
         );
 
-        console.log("Player initialized and listeners added.");
+        console.log("Player initialized");
       }
     };
 
-    // Load player script if not already loaded
-    if (!window.VdoPlayer) {
-      const script = document.createElement("script");
-      script.src = "https://player.vdocipher.com/playerAssets/1.6.10/vdo.js";
-      script.async = true;
-      script.onload = loadPlayer;
-      document.body.appendChild(script);
+    if (otp && playbackInfo) {
+      if (!window.VdoPlayer) {
+        const script = document.createElement("script");
+        script.src = "https://player.vdocipher.com/playerAssets/1.6.10/vdo.js";
+        script.async = true;
+        script.onload = loadPlayer;
+        document.body.appendChild(script);
 
-      return () => {
-        script.onload = null; // Clean up script load event
-        document.body.removeChild(script);
-        if (playerInstance.current) {
-          playerInstance.current.removeEventListener("timeupdate", handleTimeUpdate);
-          playerInstance.current.destroy(); // Cleanup player instance
-        }
-      };
-    } else {
-      loadPlayer();
+        return () => {
+          script.onload = null;
+          document.body.removeChild(script);
+          if (playerInstance.current) playerInstance.current.destroy();
+        };
+      } else {
+        loadPlayer();
+      }
     }
   }, [otp, playbackInfo, handleTimeUpdate]);
  
