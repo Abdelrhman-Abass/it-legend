@@ -85,6 +85,7 @@ const VdocipherPlayer = ({ node , nextNode}) => {
   const courseId = getCourseIdFromUrl();
   const handleTimeUpdate = debounce((video) => {
     const watchedPercentage = (video.currentTime / video.duration) * 100;
+    console.log(video.currentTime)
 
     if (watchedPercentage >= 80 && !hasWatched80Percent) {
       setHasWatched80Percent(true);
@@ -138,7 +139,6 @@ const VdocipherPlayer = ({ node , nextNode}) => {
   useEffect(() => {
     let playerInstance = null;
     const loadPlayer = () => {
-      console.log("console OTP " + otp)
       if (window.VdoPlayer && containerRef.current) {
         playerInstance = new window.VdoPlayer({
           otp,
