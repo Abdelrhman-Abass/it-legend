@@ -270,7 +270,7 @@ const VdocipherPlayer = ({ node, nextNode }) => {
 
   useEffect(() => {
     if (!otp || !playbackInfo || !containerRef.current) return;
-
+  
     const initializePlayer = () => {
       if (window.VdoPlayer) {
         const playerInstance = new window.VdoPlayer({
@@ -279,23 +279,37 @@ const VdocipherPlayer = ({ node, nextNode }) => {
           theme: "9ae8bbe8dd964ddc9bdb932cca1cb59a",
           container: containerRef.current,
         });
-
-        setPlayer(playerInstance);
-
-        // Event Listeners
-        playerInstance.video.addEventListener("play", () => setStatus("Playing"));
-        playerInstance.video.addEventListener("pause", () => setStatus("Paused"));
-        playerInstance.video.addEventListener("canplay", () => setStatus("Ready"));
-        playerInstance.video.addEventListener("timeupdate", () => {
-          const time = playerInstance.video.currentTime;
-          setCurrentTime(time);
-          console.log(`Time Updated: ${time}`);
+  
+        // Wait for the player to be ready before adding event listeners
+        playerInstance.addEventListener("ready", () => {
+          console.log("Player is ready.");
+          setPlayer(playerInstance);
+  
+          if (playerInstance.video) {
+            playerInstance.video.addEventListener("play", () => {
+              console.log("Playing");
+              setStatus("Playing");
+            });
+  
+            playerInstance.video.addEventListener("pause", () => {
+              console.log("Paused");
+              setStatus("Paused");
+            });
+  
+            playerInstance.video.addEventListener("timeupdate", () => {
+              const time = playerInstance.video.currentTime;
+              console.log(`Time Updated: ${time}`);
+              setCurrentTime(time);
+            });
+          } else {
+            console.error("Player video element is not available.");
+          }
         });
       } else {
         console.error("VdoPlayer is not available.");
       }
     };
-
+  
     if (window.VdoPlayer) {
       initializePlayer();
     } else {
