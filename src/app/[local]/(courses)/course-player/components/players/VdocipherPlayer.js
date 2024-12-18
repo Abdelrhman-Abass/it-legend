@@ -320,7 +320,7 @@ const VdocipherPlayer = ({ node, nextNode }) => {
         }
       }, 100);
     }
-  }, [otp, playbackInfo]);
+  }, []);
 
   return (
     <div>
