@@ -58,267 +58,152 @@ import React from "react";
 // export default VdocipherPlayer;  54eb47f5dcf04b5ea181aa756ae26fc6
 
 
-import { useEffect, useRef, useState, useCallback  } from "react";
-// import axios from "axios";
-import { VdoCipherVideoOtp } from "@/hooks/courseHandler";
-import { useNodeId } from "../../context/NodeIdContext";
-import debounce from "lodash.debounce";
-import { savePlaybackState } from "../../../utils/cookies";
-import { CoursePlayerVideoIsWatched } from "@/hooks/PlayerHandler";
+// import { useEffect, useRef, useState } from "react";
+// // import axios from "axios";
+// import { VdoCipherVideoOtp } from "@/hooks/courseHandler";
+// import { useNodeId } from "../../context/NodeIdContext";
+// import debounce from "lodash.debounce";
+// import { savePlaybackState } from "../../../utils/cookies";
+// import { CoursePlayerVideoIsWatched } from "@/hooks/PlayerHandler";
 
-const VdocipherPlayer = ({ node , nextNode}) => {
+// const VdocipherPlayer = ({ node , nextNode}) => {
 
-  const containerRef = useRef(null);
-  const [otp, setOtp] = useState(null);
-  const [playbackInfo, setPlaybackInfo] = useState(null);
-  const [hasWatched80Percent, setHasWatched80Percent] = useState(false);
+//   const containerRef = useRef(null);
+//   const [otp, setOtp] = useState(null);
+//   const [playbackInfo, setPlaybackInfo] = useState(null);
+//   const [hasWatched80Percent, setHasWatched80Percent] = useState(false);
 
-  const [currentTime, setCurrentTime] = useState(0);
-  const { setActiveNode, activeNode, markNodeAsWatched } = useNodeId();
+//   const [currentTime, setCurrentTime] = useState(0);
+//   const { setActiveNode, activeNode, markNodeAsWatched } = useNodeId();
 
-  const videoId = node.path
-  let playerInstance = useRef(null); // Keep a persistent reference to the player instance
+//   const videoId = node.path
 
+//   const getCourseIdFromUrl = () => {
+//     const currentUrl = new URL(window.location.href);
+//     return currentUrl.pathname.split("/").pop(); // Assumes courseId is the last part of the URL
+//   };
+//   const courseId = getCourseIdFromUrl();
+//   const handleTimeUpdate = debounce((video) => {
+//     const watchedPercentage = (video.currentTime / video.duration) * 100;
 
-  // const getCourseIdFromUrl = () => {
-  //   const currentUrl = new URL(window.location.href);
-  //   return currentUrl.pathname.split("/").pop(); // Assumes courseId is the last part of the URL
-  // };
-  // const courseId = getCourseIdFromUrl();
-  // const handleTimeUpdate = debounce((video) => {
-  //   const watchedPercentage = (video.currentTime / video.duration) * 100;
-  //   console.log(video.currentTime)
+//     if (watchedPercentage >= 80 && !hasWatched80Percent) {
+//       setHasWatched80Percent(true);
+//       handleVideoWatched(node.videoId);
+//       markNodeAsWatched(activeNode);
+//     }
 
-  //   if (watchedPercentage >= 80 && !hasWatched80Percent) {
-  //     setHasWatched80Percent(true);
-  //     handleVideoWatched(node.videoId);
-  //     markNodeAsWatched(activeNode);
-  //   }
+//     if (watchedPercentage === 100) {
 
-  //   if (watchedPercentage === 100) {
+//       changeActiveNode(nextNode);
+//     }
 
-  //     changeActiveNode(nextNode);
-  //   }
+//     // Save video time to localStorage
+//     localStorage.setItem(`video_${node.videoId}_time`, video.currentTime);
+//   }, 500);
 
-  //   // Save video time to localStorage
-  //   localStorage.setItem(`video_${node.videoId}_time`, video.currentTime);
-  // }, 500);
+//   const handleVideoWatched = async (videoId) => {
+//     const result = await CoursePlayerVideoIsWatched(videoId);
 
-  // const handleVideoWatched = async (videoId) => {
-  //   const result = await CoursePlayerVideoIsWatched(videoId);
+//     if (result.success) {
+//       console.log(result.message);
+//     } else {
+//       console.error("Error:", result.message);
+//     }
+//   };
 
-  //   if (result.success) {
-  //     console.log(result.message);
-  //   } else {
-  //     console.error("Error:", result.message);
-  //   }
-  // };
+//   const changeActiveNode = (newNodeValue) => {
+//     setActiveNode(newNodeValue);
+//   };
 
-  // const changeActiveNode = (newNodeValue) => {
-  //   setActiveNode(newNodeValue);
-  // };
+//   useEffect(() => {
+//     const fetchVideoData = async () => {
+//       try {
+//         const response = await VdoCipherVideoOtp(videoId);
+//         const data = response.playbackInfo;
+//         // console.log("console OTP " + data)
 
-  // useEffect(() => {
-  //   const fetchVideoData = async () => {
-  //     try {
-  //       const response = await VdoCipherVideoOtp(videoId);
-  //       const data = response.playbackInfo;
-  //       // console.log("console OTP " + data)
+//         if (response.otp && response.playbackInfo) {
+//           setOtp(typeof response.otp === "string" ? response.otp : String(response.otp) );
+//           setPlaybackInfo(typeof response.playbackInfo === "string" ? response.playbackInfo: String(response.playbackInfo) );
+//         } else {
+//           console.error("Invalid video data:", response);
+//         }
+//       } catch (error) {
+//         console.error("Error fetching video data:", error);
+//       }
+//     };
 
-  //       if (response.otp && response.playbackInfo) {
-  //         setOtp(typeof response.otp === "string" ? response.otp : String(response.otp) );
-  //         setPlaybackInfo(typeof response.playbackInfo === "string" ? response.playbackInfo: String(response.playbackInfo) );
-  //       } else {
-  //         console.error("Invalid video data:", response);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching video data:", error);
-  //     }
-  //   };
+//     fetchVideoData();
+//   }, [videoId]);
+//   useEffect(() => {
+//     let playerInstance = null;
+//     const loadPlayer = () => {
+//       console.log("console OTP " + otp)
+//       if (window.VdoPlayer && containerRef.current) {
+//         playerInstance = new window.VdoPlayer({
+//           otp,
+//           playbackInfo,
+//           theme: "9ae8bbe8dd964ddc9bdb932cca1cb59a",
+//           container: containerRef.current,
+//         });
 
-  //   fetchVideoData();
-  // }, [videoId]);
-  // useEffect(() => {
-  //   let playerInstance = null;
-  //   const loadPlayer = () => {
-  //     if (window.VdoPlayer && containerRef.current) {
-  //       playerInstance = new window.VdoPlayer({
-  //         otp,
-  //         playbackInfo,
-  //         theme: "9ae8bbe8dd964ddc9bdb932cca1cb59a",
-  //         container: containerRef.current,
-  //       });
+//         playerInstance.addEventListener("play", () => savePlaybackState(courseId, activeNode, node?.videoId));
+//         playerInstance.addEventListener("timeupdate", () => {
+//           handleTimeUpdate(playerInstance);
+//         });
 
-  //       playerInstance.addEventListener("play", () => savePlaybackState(courseId, activeNode, node?.videoId));
-  //       playerInstance.addEventListener("timeupdate", () => {
-  //         handleTimeUpdate(playerInstance);
-  //       });
-
-  //       playerInstance.addEventListener("pause", () =>
-  //         savePlaybackState(courseId, activeNode, node?.videoId, playerInstance.currentTime)
-  //       );
-  //     }
-  //   };
+//         playerInstance.addEventListener("pause", () =>
+//           savePlaybackState(courseId, activeNode, node?.videoId, playerInstance.currentTime)
+//         );
+//       }
+//     };
     
-  //   if (window.VdoPlayer) {
-  //     loadPlayer();
-  //   } else {
-  //     const playerScript = document.createElement("script");
-  //     playerScript.src = "https://player.vdocipher.com/playerAssets/1.6.10/vdo.js";
-  //     document.body.appendChild(playerScript);
-  //     playerScript.addEventListener("load", loadPlayer);
+//     if (window.VdoPlayer) {
+//       loadPlayer();
+//     } else {
+//       const playerScript = document.createElement("script");
+//       playerScript.src = "https://player.vdocipher.com/playerAssets/1.6.10/vdo.js";
+//       document.body.appendChild(playerScript);
+//       playerScript.addEventListener("load", loadPlayer);
       
-  //     // Cleanup script if component unmounts
-  //     return () => {
-  //       playerScript.removeEventListener("load", loadPlayer);
-  //       document.body.removeChild(playerScript);
+//       // Cleanup script if component unmounts
+//       return () => {
+//         playerScript.removeEventListener("load", loadPlayer);
+//         document.body.removeChild(playerScript);
 
-  //     };
-  //   }
-  // }, [otp , playbackInfo]);
-  const getCourseIdFromUrl = () => {
-    const currentUrl = new URL(window.location.href);
-    return currentUrl.pathname.split("/").pop();
-  };
-  const courseId = getCourseIdFromUrl();
-
-  // Debounced time update
-   // Track video progress using setInterval
-   useEffect(() => {
-    let intervalId;
-
-    const trackTime = () => {
-      if (playerInstance.current) {
-        const currentTime = playerInstance.current.currentTime || 0;
-        const duration = playerInstance.current.duration || 1;
-
-        const watchedPercentage = (currentTime / duration) * 100;
-        console.log("Current Time:", currentTime);
-        console.log("Watched Percentage:", watchedPercentage);
-
-        // Update state when 80% watched
-        if (watchedPercentage >= 80 && !hasWatched80Percent) {
-          setHasWatched80Percent(true);
-          handleVideoWatched(node.videoId);
-          markNodeAsWatched(activeNode);
-        }
-
-        // Move to next node at 100%
-        if (watchedPercentage >= 100) {
-          changeActiveNode(nextNode);
-        }
-
-        // Save video time to localStorage
-        localStorage.setItem(`video_${node.videoId}_time`, currentTime);
-      }
-    };
-
-    if (playerInstance.current) {
-      intervalId = setInterval(trackTime, 1000); // Check every 1 second
-    }
-
-    return () => clearInterval(intervalId);
-  }, [hasWatched80Percent, nextNode, activeNode]);
-
-  const handleVideoWatched = async (videoId) => {
-    const result = await CoursePlayerVideoIsWatched(videoId);
-    if (result.success) console.log(result.message);
-    else console.error("Error:", result.message);
-  };
-
-  const changeActiveNode = (newNodeValue) => {
-    setActiveNode(newNodeValue);
-  };
-
-  // Fetch OTP and playback info
-  useEffect(() => {
-    const fetchVideoData = async () => {
-      try {
-        const response = await VdoCipherVideoOtp(videoId);
-        if (response.otp && response.playbackInfo) {
-          setOtp(response.otp);
-          setPlaybackInfo(response.playbackInfo);
-        }
-      } catch (error) {
-        console.error("Error fetching video data:", error);
-      }
-    };
-
-    fetchVideoData();
-  }, [videoId]);
-
-  // Initialize player
-  useEffect(() => {
-    const loadPlayer = () => {
-      if (window.VdoPlayer && containerRef.current && otp && playbackInfo) {
-        playerInstance.current = new window.VdoPlayer({
-          otp,
-          playbackInfo,
-          theme: "9ae8bbe8dd964ddc9bdb932cca1cb59a",
-          container: containerRef.current,
-        });
-
-        playerInstance.current.addEventListener("timeupdate", () => {
-          console.log("timeupdate" + playerInstance.video.currentTime);
-        });
-        playerInstance.current.addEventListener("play", () =>
-          savePlaybackState(courseId, activeNode, node?.videoId)
-        );
-        playerInstance.current.addEventListener("pause", () =>
-          savePlaybackState(courseId, activeNode, node?.videoId, playerInstance.current.currentTime)
-        );
-
-        console.log("Player initialized");
-      }
-    };
-
-    if (otp && playbackInfo) {
-      if (!window.VdoPlayer) {
-        const script = document.createElement("script");
-        script.src = "https://player.vdocipher.com/playerAssets/1.6.10/vdo.js";
-        script.async = true;
-        script.onload = loadPlayer;
-        document.body.appendChild(script);
-
-        return () => {
-          script.onload = null;
-          document.body.removeChild(script);
-        };
-      } else {
-        loadPlayer();
-      }
-    }
-  }, [otp, playbackInfo]);
+//       };
+//     }
+//   }, [otp , playbackInfo]);
  
-  return (
-    // <div style={{ position: 'relative', paddingBottom: 100, height: 0 }} ref={containerRef}>
-    //    <iframe
-    //      ref={containerRef}
-    //      src={`https://player.vdocipher.com/v2/?otp=${otp}&playbackInfo=${playbackInfo}&primaryColor=4245EF`}
-    //      frameBorder="0"
-    //     allow="encrypted-media"
-    //     allowFullScreen
-    //     style={{ position: 'absolute', top: -10, left: 0, width: '100%', height: '70%' }}
-    //     title="VdoCipher Video Player"
-    //     /> 
-    // </div> 
-    <div className="video-container w-full h-full">
-      <div
-        ref={containerRef}
-        style={{
-          width: "100%",
-          height: "100%",
-          overflow: "hidden",
-        }}
-      ></div>
+//   return (
+//     // <div style={{ position: 'relative', paddingBottom: 100, height: 0 }} ref={containerRef}>
+//     //    <iframe
+//     //      ref={containerRef}
+//     //      src={`https://player.vdocipher.com/v2/?otp=${otp}&playbackInfo=${playbackInfo}&primaryColor=4245EF`}
+//     //      frameBorder="0"
+//     //     allow="encrypted-media"
+//     //     allowFullScreen
+//     //     style={{ position: 'absolute', top: -10, left: 0, width: '100%', height: '70%' }}
+//     //     title="VdoCipher Video Player"
+//     //     /> 
+//     // </div> 
+//     <div className="video-container w-full h-full">
+//       <div
+//         ref={containerRef}
+//         style={{
+//           width: "100%",
+//           height: "100%",
+//           overflow: "hidden",
+//         }}
+//       ></div>
       
-    </div>
-  ) 
+//     </div>
+//   ) 
 
-};
+// };
 
 
-export default VdocipherPlayer;
+// export default VdocipherPlayer;
 
 
 
@@ -328,7 +213,119 @@ export default VdocipherPlayer;
 // playbackInfo: "eyJ2aWRlb0lkIjoiNTRlYjQ3ZjVkY2YwNGI1ZWExODFhYTc1NmFlMjZmYzYifQ==",
 
 
+import { useEffect, useRef, useState } from "react";
+import { VdoCipherVideoOtp } from "@/hooks/courseHandler";
+import { useNodeId } from "../../context/NodeIdContext";
+import { CoursePlayerVideoIsWatched } from "@/hooks/PlayerHandler";
+import { savePlaybackState } from "../../../utils/cookies";
 
+const VdocipherPlayer = ({ node, nextNode }) => {
+  const containerRef = useRef(null);
+  const [otp, setOtp] = useState(null);
+  const [playbackInfo, setPlaybackInfo] = useState(null);
+  const [hasWatched80Percent, setHasWatched80Percent] = useState(false);
+  const [player, setPlayer] = useState(null);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [status, setStatus] = useState("NA");
+  const { setActiveNode, activeNode, markNodeAsWatched } = useNodeId();
+
+  const videoId = node.path;
+
+  const getCourseIdFromUrl = () => {
+    const currentUrl = new URL(window.location.href);
+    return currentUrl.pathname.split("/").pop(); // Assumes courseId is the last part of the URL
+  };
+  const courseId = getCourseIdFromUrl();
+
+  const handleVideoWatched = async (videoId) => {
+    const result = await CoursePlayerVideoIsWatched(videoId);
+    if (result.success) {
+      console.log(result.message);
+    } else {
+      console.error("Error:", result.message);
+    }
+  };
+
+  const changeActiveNode = (newNodeValue) => {
+    setActiveNode(newNodeValue);
+  };
+
+  useEffect(() => {
+    const fetchVideoData = async () => {
+      try {
+        const response = await VdoCipherVideoOtp(videoId);
+        if (response.otp && response.playbackInfo) {
+          setOtp(response.otp);
+          setPlaybackInfo(response.playbackInfo);
+        } else {
+          console.error("Invalid video data:", response);
+        }
+      } catch (error) {
+        console.error("Error fetching video data:", error);
+      }
+    };
+
+    fetchVideoData();
+  }, [videoId]);
+
+  useEffect(() => {
+    if (!otp || !playbackInfo || !containerRef.current) return;
+
+    const playerInstance = new window.VdoPlayer({
+      otp,
+      playbackInfo,
+      theme: "9ae8bbe8dd964ddc9bdb932cca1cb59a",
+      container: containerRef.current,
+    });
+
+    setPlayer(playerInstance);
+
+    // Add event listeners
+    playerInstance.video.addEventListener("play", () => setStatus("Playing"));
+    playerInstance.video.addEventListener("pause", () => setStatus("Paused"));
+    playerInstance.video.addEventListener("canplay", () => setStatus("Ready"));
+    playerInstance.video.addEventListener("timeupdate", () => {
+      const time = playerInstance.video.currentTime;
+      setCurrentTime(time);
+
+      const watchedPercentage = (time / playerInstance.video.duration) * 100;
+
+      if (watchedPercentage >= 80 && !hasWatched80Percent) {
+        setHasWatched80Percent(true);
+        handleVideoWatched(node.videoId);
+        markNodeAsWatched(activeNode);
+      }
+
+      if (watchedPercentage === 100) {
+        changeActiveNode(nextNode);
+      }
+
+      localStorage.setItem(`video_${node.videoId}_time`, time);
+    });
+
+    return () => {
+      // Cleanup event listeners
+      playerInstance.video.removeEventListener("play", () => setStatus("Playing"));
+      playerInstance.video.removeEventListener("pause", () => setStatus("Paused"));
+      playerInstance.video.removeEventListener("canplay", () => setStatus("Ready"));
+      playerInstance.video.removeEventListener("timeupdate", () => {});
+    };
+  }, [otp, playbackInfo]);
+
+  return (
+    <div>
+      <div ref={containerRef} style={{ width: "100%", height: "500px" }} />
+      {player && player.video && (
+        <div className="api-controls">
+          <div>Status: {status}</div>
+          <div>Current Time: {currentTime}</div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default VdocipherPlayer;
 
 
 
