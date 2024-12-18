@@ -184,7 +184,6 @@ const VdocipherPlayer = ({ node , nextNode}) => {
 
   // Debounced time update
   const handleTimeUpdate = () => {
-    if (playerInstance.current) {
       const currentTime = playerInstance.current.currentTime || 0;
       const duration = playerInstance.current.duration || 1;
 
@@ -206,7 +205,7 @@ const VdocipherPlayer = ({ node , nextNode}) => {
 
       // Save video time to localStorage
       localStorage.setItem(`video_${node.videoId}_time`, currentTime);
-    }
+    
   };
 
   const handleVideoWatched = async (videoId) => {
