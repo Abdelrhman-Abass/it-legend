@@ -217,38 +217,38 @@ import { useEffect, useRef, useState } from "react";
 import { VdoCipherVideoOtp } from "@/hooks/courseHandler";
 import { useNodeId } from "../../context/NodeIdContext";
 import { CoursePlayerVideoIsWatched } from "@/hooks/PlayerHandler";
-import { savePlaybackState } from "../../../utils/cookies";
 
 const VdocipherPlayer = ({ node, nextNode }) => {
   const containerRef = useRef(null);
   const [otp, setOtp] = useState(null);
   const [playbackInfo, setPlaybackInfo] = useState(null);
-  const [hasWatched80Percent, setHasWatched80Percent] = useState(false);
   const [player, setPlayer] = useState(null);
   const [currentTime, setCurrentTime] = useState(0);
   const [status, setStatus] = useState("NA");
-  const { setActiveNode, activeNode, markNodeAsWatched } = useNodeId();
+  const { setActiveNode, markNodeAsWatched } = useNodeId();
 
   const videoId = node.path;
 
-  const getCourseIdFromUrl = () => {
-    const currentUrl = new URL(window.location.href);
-    return currentUrl.pathname.split("/").pop(); // Assumes courseId is the last part of the URL
-  };
-  const courseId = getCourseIdFromUrl();
+  useEffect(() => {
+    const loadVdoCipherScript = () => {
+      if (!window.VdoPlayer) {
+        const script = document.createElement("script");
+        script.src = "https://player.vdocipher.com/playerAssets/1.6.10/vdo.js";
+        script.async = true;
+        document.body.appendChild(script);
 
-  const handleVideoWatched = async (videoId) => {
-    const result = await CoursePlayerVideoIsWatched(videoId);
-    if (result.success) {
-      console.log(result.message);
-    } else {
-      console.error("Error:", result.message);
-    }
-  };
+        script.onload = () => {
+          console.log("VdoPlayer script loaded successfully.");
+        };
 
-  const changeActiveNode = (newNodeValue) => {
-    setActiveNode(newNodeValue);
-  };
+        script.onerror = () => {
+          console.error("Failed to load VdoPlayer script.");
+        };
+      }
+    };
+
+    loadVdoCipherScript();
+  }, []);
 
   useEffect(() => {
     const fetchVideoData = async () => {
@@ -271,52 +271,48 @@ const VdocipherPlayer = ({ node, nextNode }) => {
   useEffect(() => {
     if (!otp || !playbackInfo || !containerRef.current) return;
 
-    const playerInstance = new window.VdoPlayer({
-      otp,
-      playbackInfo,
-      theme: "9ae8bbe8dd964ddc9bdb932cca1cb59a",
-      container: containerRef.current,
-    });
+    const initializePlayer = () => {
+      if (window.VdoPlayer) {
+        const playerInstance = new window.VdoPlayer({
+          otp,
+          playbackInfo,
+          theme: "9ae8bbe8dd964ddc9bdb932cca1cb59a",
+          container: containerRef.current,
+        });
 
-    setPlayer(playerInstance);
+        setPlayer(playerInstance);
 
-    // Add event listeners
-    playerInstance.video.addEventListener("play", () => setStatus("Playing"));
-    playerInstance.video.addEventListener("pause", () => setStatus("Paused"));
-    playerInstance.video.addEventListener("canplay", () => setStatus("Ready"));
-    playerInstance.video.addEventListener("timeupdate", () => {
-      const time = playerInstance.video.currentTime;
-      setCurrentTime(time);
-
-      const watchedPercentage = (time / playerInstance.video.duration) * 100;
-
-      if (watchedPercentage >= 80 && !hasWatched80Percent) {
-        setHasWatched80Percent(true);
-        handleVideoWatched(node.videoId);
-        markNodeAsWatched(activeNode);
+        // Event Listeners
+        playerInstance.video.addEventListener("play", () => setStatus("Playing"));
+        playerInstance.video.addEventListener("pause", () => setStatus("Paused"));
+        playerInstance.video.addEventListener("canplay", () => setStatus("Ready"));
+        playerInstance.video.addEventListener("timeupdate", () => {
+          const time = playerInstance.video.currentTime;
+          setCurrentTime(time);
+          console.log(`Time Updated: ${time}`);
+        });
+      } else {
+        console.error("VdoPlayer is not available.");
       }
-
-      if (watchedPercentage === 100) {
-        changeActiveNode(nextNode);
-      }
-
-      localStorage.setItem(`video_${node.videoId}_time`, time);
-    });
-
-    return () => {
-      // Cleanup event listeners
-      playerInstance.video.removeEventListener("play", () => setStatus("Playing"));
-      playerInstance.video.removeEventListener("pause", () => setStatus("Paused"));
-      playerInstance.video.removeEventListener("canplay", () => setStatus("Ready"));
-      playerInstance.video.removeEventListener("timeupdate", () => {});
     };
+
+    if (window.VdoPlayer) {
+      initializePlayer();
+    } else {
+      const interval = setInterval(() => {
+        if (window.VdoPlayer) {
+          clearInterval(interval);
+          initializePlayer();
+        }
+      }, 100);
+    }
   }, [otp, playbackInfo]);
 
   return (
     <div>
       <div ref={containerRef} style={{ width: "100%", height: "500px" }} />
-      {player && player.video && (
-        <div className="api-controls">
+      {player && (
+        <div>
           <div>Status: {status}</div>
           <div>Current Time: {currentTime}</div>
         </div>
@@ -326,6 +322,7 @@ const VdocipherPlayer = ({ node, nextNode }) => {
 };
 
 export default VdocipherPlayer;
+
 
 
 
