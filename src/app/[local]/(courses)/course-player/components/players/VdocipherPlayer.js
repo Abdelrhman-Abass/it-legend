@@ -252,7 +252,7 @@ const VdocipherPlayer = ({ node , nextNode}) => {
         });
 
         // Add listeners
-        playerInstance.current.addEventListener("timeupdate", handleTimeUpdate);
+        playerInstance.current.addEventListener("timeupdate", ()=> handleTimeUpdate());
         playerInstance.current.addEventListener("play", () =>
           savePlaybackState(courseId, activeNode, node?.videoId)
         );
