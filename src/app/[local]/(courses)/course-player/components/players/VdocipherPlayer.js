@@ -77,6 +77,8 @@ const VdocipherPlayer = ({ node , nextNode}) => {
   const { setActiveNode, activeNode, markNodeAsWatched } = useNodeId();
 
   const videoId = node.path
+  let playerInstance = useRef(null); // Keep a persistent reference to the player instance
+
 
   // const getCourseIdFromUrl = () => {
   //   const currentUrl = new URL(window.location.href);
@@ -176,27 +178,35 @@ const VdocipherPlayer = ({ node , nextNode}) => {
   // }, [otp , playbackInfo]);
   const getCourseIdFromUrl = () => {
     const currentUrl = new URL(window.location.href);
-    return currentUrl.pathname.split("/").pop(); // Assumes courseId is the last part of the URL
+    return currentUrl.pathname.split("/").pop();
   };
   const courseId = getCourseIdFromUrl();
 
   // Debounced time update handler
   const handleTimeUpdate = useCallback(
-    debounce((video) => {
-      const watchedPercentage = (video.currentTime / video.duration) * 100;
-      console.log("Current Time:", video.currentTime);
+    debounce(() => {
+      if (playerInstance.current) {
+        const currentTime = playerInstance.current.currentTime; // Fetch the current time
+        const duration = playerInstance.current.duration;
 
-      if (watchedPercentage >= 80 && !hasWatched80Percent) {
-        setHasWatched80Percent(true);
-        handleVideoWatched(node.videoId);
-        markNodeAsWatched(activeNode);
+        const watchedPercentage = (currentTime / duration) * 100;
+
+        console.log("Current Time:", currentTime);
+        console.log("Watched Percentage:", watchedPercentage);
+
+        if (watchedPercentage >= 80 && !hasWatched80Percent) {
+          setHasWatched80Percent(true);
+          handleVideoWatched(node.videoId);
+          markNodeAsWatched(activeNode);
+        }
+
+        if (watchedPercentage === 100) {
+          changeActiveNode(nextNode);
+        }
+
+        // Save video time to localStorage
+        localStorage.setItem(`video_${node.videoId}_time`, currentTime);
       }
-
-      if (watchedPercentage === 100) {
-        changeActiveNode(nextNode);
-      }
-
-      localStorage.setItem(`video_${node.videoId}_time`, video.currentTime);
     }, 500),
     [hasWatched80Percent, activeNode, nextNode, node.videoId]
   );
@@ -219,13 +229,10 @@ const VdocipherPlayer = ({ node , nextNode}) => {
     const fetchVideoData = async () => {
       try {
         const response = await VdoCipherVideoOtp(videoId);
-        const data = response.playbackInfo;
 
         if (response.otp && response.playbackInfo) {
-          setOtp(typeof response.otp === "string" ? response.otp : String(response.otp));
-          setPlaybackInfo(
-            typeof response.playbackInfo === "string" ? response.playbackInfo : String(response.playbackInfo)
-          );
+          setOtp(response.otp);
+          setPlaybackInfo(response.playbackInfo);
         } else {
           console.error("Invalid video data:", response);
         }
@@ -237,12 +244,11 @@ const VdocipherPlayer = ({ node , nextNode}) => {
     fetchVideoData();
   }, [videoId]);
 
+  // Load and initialize player
   useEffect(() => {
-    let playerInstance = null;
-
     const loadPlayer = () => {
       if (window.VdoPlayer && containerRef.current && otp && playbackInfo) {
-        playerInstance = new window.VdoPlayer({
+        playerInstance.current = new window.VdoPlayer({
           otp,
           playbackInfo,
           theme: "9ae8bbe8dd964ddc9bdb932cca1cb59a",
@@ -250,35 +256,37 @@ const VdocipherPlayer = ({ node , nextNode}) => {
         });
 
         // Add event listeners
-        playerInstance.addEventListener("play", onPlay);
-        playerInstance.addEventListener("timeupdate", onTimeUpdate);
-        playerInstance.addEventListener("pause", onPause);
+        playerInstance.current.addEventListener("timeupdate", handleTimeUpdate);
+        playerInstance.current.addEventListener("play", () =>
+          savePlaybackState(courseId, activeNode, node?.videoId)
+        );
+
+        playerInstance.current.addEventListener("pause", () =>
+          savePlaybackState(courseId, activeNode, node?.videoId, playerInstance.current.currentTime)
+        );
+
+        console.log("Player initialized and listeners added.");
       }
     };
 
-    const onPlay = () => savePlaybackState(courseId, activeNode, node?.videoId);
-    const onTimeUpdate = () => handleTimeUpdate(playerInstance);
-    const onPause = () =>
-      savePlaybackState(courseId, activeNode, node?.videoId, playerInstance.currentTime);
+    // Load player script if not already loaded
+    if (!window.VdoPlayer) {
+      const script = document.createElement("script");
+      script.src = "https://player.vdocipher.com/playerAssets/1.6.10/vdo.js";
+      script.async = true;
+      script.onload = loadPlayer;
+      document.body.appendChild(script);
 
-    if (window.VdoPlayer) {
-      loadPlayer();
-    } else if (otp && playbackInfo) {
-      const playerScript = document.createElement("script");
-      playerScript.src = "https://player.vdocipher.com/playerAssets/1.6.10/vdo.js";
-      document.body.appendChild(playerScript);
-      playerScript.addEventListener("load", loadPlayer);
-
-      // Cleanup
       return () => {
-        if (playerInstance) {
-          playerInstance.removeEventListener("play", onPlay);
-          playerInstance.removeEventListener("timeupdate", onTimeUpdate);
-          playerInstance.removeEventListener("pause", onPause);
+        script.onload = null; // Clean up script load event
+        document.body.removeChild(script);
+        if (playerInstance.current) {
+          playerInstance.current.removeEventListener("timeupdate", handleTimeUpdate);
+          playerInstance.current.destroy(); // Cleanup player instance
         }
-        playerScript.removeEventListener("load", loadPlayer);
-        document.body.removeChild(playerScript);
       };
+    } else {
+      loadPlayer();
     }
   }, [otp, playbackInfo, handleTimeUpdate]);
  
