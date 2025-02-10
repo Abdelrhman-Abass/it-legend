@@ -1,0 +1,255 @@
+.course_details_page{
+    .course_details_banner{
+        background: #f5f9fa;
+        padding-block-start: 1em;
+        padding-block-end: 2em;
+        .course_details_banner_breadcrumb{
+            gap: $menu-gap *.2;
+            font-size: 1em;
+            margin-bottom: 2em;
+            span{
+                font-weight: 500;
+                color: $gray-text-color;
+            }
+            
+        }
+        h2{
+            font-size: 2.5em;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .course_details_banner_overview{
+            gap: $menu-gap;
+            margin-top: 1em;
+            .overview{
+                gap: $menu-gap *.3;
+                color: $gray-text-color;
+                font-weight: 500;
+                &:not(:last-of-type){
+                    border-inline-end: 2px solid rgba($color: $dark_color, $alpha: 0.2);
+                    padding-inline-end: 2em;
+                }
+                .overview_rate{
+                    gap: 0.5em;
+                    svg{
+                        font-size: 1.2em;
+                        color: rgba($color: $dark_color, $alpha: 0.1);
+                        &.gold{
+                            color: $yellow-color;
+                        }
+                    }
+                }
+                &:last-of-type{
+                    gap: $menu-gap ;
+                }
+            }
+        }
+    }
+    .course_details_page_container{
+        gap: $menu-gap * 3;
+        .course_details{
+            .course_details_header{
+                margin-bottom: 2em;
+                h2{
+                    font-size: 2em;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    margin-bottom: .8em;
+                }
+                p{
+                    color: $gray-text-color;
+                }
+            }
+            .course_details_points{
+                width: 100%;
+                border: 2px solid rgba($color: $dark_color, $alpha: 0.1);
+                padding: 2em;
+                // border-radius: .8em;
+                h3{
+                    font-weight: 500;
+                    font-size: 1.4em;
+                    margin-bottom: 1.5em;
+                }
+                .course_details_points_container{
+                    @include grid2;
+                    gap: $menu-gap * .2;
+                    row-gap: $menu-gap ;
+                    p{
+                        padding-inline-start: 1.5em;
+                        position: relative;
+                        &::before{
+                            content: "\2713";
+                            position: absolute;
+                            left: 0;
+                            color: $red-color;
+                            font-weight: 700;
+                        }
+                    }
+                }
+            }
+            .course_details_page_content{
+                h4{
+                    margin-block-start: 2.5em;
+                    margin-block-end: 1.5em;
+                    font-size: 1.5em;
+                    font-weight: 500;
+                }
+            }
+            .course_details_page_Instructor_Card{
+                padding-top: 3.5em;
+                .instructor_card{
+                    gap: $menu-gap;
+                    .instructor_card_image{
+                        flex-shrink: 0;
+                        width: 8em;
+                        height: 8em;
+                        overflow: hidden;
+                        position: relative;
+                        border-radius: .6em;
+                    }
+                    .instructor_card_info{
+                        h2{
+                            font-weight: 500;
+                            margin-bottom: .5em;
+                        }
+                        p{
+                            color: $gray-text-color;
+                            width: 80%;
+                        }
+                    }
+                }
+            }
+        }
+        .course_details_card{
+            background: $white-color;
+            box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.2);
+            width: 28em;
+            flex-shrink: 0;
+            padding: 2em;
+            border-radius: 1em;
+            transform: translateY(-15em);
+            height: fit-content;
+            position: sticky;
+            top: 0;
+            .course_details_card_image{
+                height: 15em;
+                background: #f5f9fa;
+                border-radius: 1em;
+                width: 100%;
+                overflow: hidden;
+                margin-bottom: 2em;
+            }
+            h3{
+                font-size: 1.4em;
+                font-weight: 600;
+                margin-bottom: 1em;
+            }
+            .course_details_card_info{
+                .card_info{
+                    gap: $menu-gap;
+                    padding-block: 1.5em;
+                    border-bottom: 1px solid rgba($color: $dark_color, $alpha: 0.2);
+                    gap: $menu-gap *.3;
+                    .card_info_icon{
+                        gap: $menu-gap *.3;
+                        span{
+                            font-weight: 500;
+                        }
+                    }
+                    span{
+                        font-size: 1.2em;
+                        font-weight: 500;
+                        font-size: 1em;
+                        &.red{
+                            color: $red-color;
+                            font-weight: 600;
+                        }
+                    }
+                }
+            }
+            .course_details_card_btn{
+                margin-top: 2.5em;
+                .custom_btn{
+                    width: 100%;
+                }
+            }
+        }
+        .course_details_page_content{
+            width: 100%;
+        }
+    }
+}
+.dark_theme{
+    .course_details_page{
+        .course_details_banner{
+            background: $second-color;
+            .course_details_banner_breadcrumb{
+                span {
+                    color: rgba($color: $white-color, $alpha: .5);
+                }
+                svg,a{
+                    color: $white-color;
+                }
+            }
+            h2{
+                color: $white-color;
+            }
+            .course_details_banner_overview{
+                .overview{
+                    color: rgba($color: $white-color, $alpha: .5);
+                    &:not(:last-of-type){
+                        border-inline-end: 2px solid rgba($color: $white-color, $alpha: 0.2);
+                    }
+                    .overview_rate{
+                        svg:not(.gold){
+                            color: rgba($color: $white-color, $alpha: 0.1);
+                        }
+                    }
+                }
+            }
+        }
+        .course_details_page_container{
+            background: $dark-bg;
+            color: $white-color;
+            .course_details_card{
+                background: $dark-bg;
+                color: $white-color;
+                .course_details_card_info{
+                    .card_info{
+
+                        border-color: rgba($color: $white-color, $alpha: .5) !important;
+                    }
+                }
+            }
+        }
+    }
+}
+@media (max-width:1024px) {
+    .course_details_page{
+        .course_details_page_container{
+            flex-wrap: wrap;
+            .course_details_card{
+                transform: translateY(0);
+                order: -1;
+                width: 100%;
+                position: static
+            }
+            .course_details{
+                .course_details_points{
+                    .course_details_points_container{
+                        @include grid1;
+                    }
+                }
+            }
+        }
+    }
+}
+@media (max-width:768px) {
+    .course_details_page{
+        .course_details_banner{
+            .course_details_banner_overview{
+                flex-wrap: wrap;
+            }
+        }
+    }
+}

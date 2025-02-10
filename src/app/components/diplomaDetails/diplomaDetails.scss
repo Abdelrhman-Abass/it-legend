@@ -1,0 +1,326 @@
+.diploma_details_about {
+    display: flex;
+    align-items: flex-start;
+    gap: $menu-gap * 5;
+    .diploma_details_about_content {
+        .header_section {
+            align-items: flex-start;
+            text-align: start;
+        }
+        .diploma_details_about_content_benfits {
+            margin-top: 2.5em;
+            display: flex;
+            flex-direction: column;
+            gap: $menu-gap * 2;
+        }
+        width: 50%;
+    }
+    .diploma_details_about_images {
+        position: relative;
+        .diploma_details_about_images_lg {
+            width: 25em;
+            height: 30em;
+            border-radius: 0.8em;
+            overflow: hidden;
+            position: relative;
+            img {
+                object-fit: cover;
+            }
+        }
+        .diploma_details_about_images_sm {
+            width: 20em;
+            height: 20em;
+            border-radius: 0.8em;
+            overflow: hidden;
+            position: absolute;
+            bottom: -4em;
+            right: 10em;
+            border: 0.8em solid $white-color;
+            box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.2);
+            img {
+                object-fit: cover;
+            }
+        }
+    }
+}
+.diploma_details_video {
+    .diploma_details_video_tech {
+        display: flex;
+        gap: $menu-gap * 2;
+        .header_section {
+            align-items: flex-start;
+        }
+        .diploma_details_video_tech_items {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            width: 50%;
+            position: relative;
+            height: 20em;
+            &::after {
+                content: "";
+                height: 1px;
+                width: 100%;
+                background-color: #f0f0f0;
+                position: absolute;
+                top: 50%;
+                left: 0;
+                right: 0;
+                transform: translateY(-50%);
+            }
+            .tech_item {
+                height: 10em;
+                border-left: 1px solid #f0f0f0;
+                transition: $delay;
+                padding: 2em;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                &:nth-of-type(1) {
+                    border-right: 1px solid #f0f0f0;
+                }
+                &:nth-of-type(5) {
+                    border-right: 1px solid #f0f0f0;
+                }
+                &:hover {
+                    box-shadow: 0px 10px 50px 0px rgba(26, 46, 85, 0.1);
+                }
+            }
+        }
+    }
+}
+.traits_section{
+    .header_section{
+        text-align: center;
+        span{
+            color: $red-color;
+        }
+    }
+    .traits_section_container{
+        display: grid;
+        grid-template-columns: repeat(3, minmax(10em, 1fr));
+        gap: 2em;
+        margin-top: 2.5em;
+    }
+}
+.diploma_details_info {
+    background-image:linear-gradient(-90deg,#242857,#4e57bd);
+    display: flex;
+    gap: $menu-gap * 5;
+    .diploma_details_info_image{
+        width:22em;
+        flex-shrink: 0;
+        transform: scaleY(1.1);
+        transform-origin: bottom;
+        position: relative;
+        overflow: hidden;
+        img{
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .diploma_details_info_content{
+        color: $white-color;
+        h3{
+            font-size: 2.2em;
+            margin-bottom: 1em;
+        }
+    }
+}
+.diploma_details_projects{
+    .diploma_details_projects_container{
+        display: grid;
+        grid-template-columns: repeat(3, minmax(10em, 1fr));
+        gap: 4em;
+        margin-top: 2.5em;
+        margin-bottom: 7em;
+    }
+}
+.diploma_details_projects_container_btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.diploma_details_footer{
+    background: #f7f3eb;
+    .diploma_details_footer_btn{
+        margin-top: 3em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .diploma_details_footer_container{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        margin-top: 3em;
+        counter-reset: List;
+        gap: $menu-gap * 3;
+        p{
+            position: relative;
+            padding-inline: 4em;
+            &::before{
+                counter-increment: List;
+                content:  counter(List) ;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                left: 0em;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: $red-color;
+                width: 3em;
+                height: 3em;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: $white-color;
+                box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.1);
+            }
+        }
+    }
+}
+.diploma_details_FAQS{
+    display: grid;
+    grid-template-columns: .5fr .5fr;
+    gap: $menu-gap * 5;
+    .diploma_details_FAQS_container{
+        .header_section{
+            align-items: flex-start;
+            margin-bottom: 2.5em;
+        }
+    }
+    .diploma_details_FAQS_image{
+        display: flex;
+        gap: $menu-gap * 2;
+        flex-wrap: wrap;
+        .diploma_details_FAQS_image_item{
+            height: 20em;
+            width: calc((100% - $menu-gap * 2) / 2);
+            background: gray;
+            position: relative;
+            overflow: hidden;
+            img{
+                object-fit: cover;
+            }
+            &:nth-of-type(1){
+                border-radius: 50% 50% 0 50%;
+            }
+            &:nth-of-type(2),&:nth-of-type(3){
+                border-radius: 25% 0% 25% 0%;
+            }
+            &:nth-of-type(4){
+                border-radius: 0% 50% 50% 50%;
+            }
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .diploma_details_about {
+        flex-wrap: wrap;
+        .diploma_details_about_content {
+            flex-wrap: wrap;
+        }
+        .diploma_details_about_images {
+            width: 100%;
+            .diploma_details_about_images_lg {
+                width: 100%;
+            }
+        }
+    }
+    .diploma_details_video {
+        .diploma_details_video_tech {
+            flex-wrap: wrap;
+            .diploma_details_video_tech_items{
+                height: fit-content;
+                width: 100%;
+                grid-template-columns: repeat(2,1fr);
+                &::after{
+                    display: none !important;
+                }
+                .tech_item{  
+                    border: 1px solid rgba($color: $dark-color, $alpha: 0.1) !important;
+                }
+            }
+        }
+    }
+    .diploma_details_info{
+        flex-wrap: wrap;
+        gap: 0;
+        padding-top: 2.5em;
+        .diploma_details_info_content{
+            width: 100%;
+        }
+        .diploma_details_info_image{
+            width: 100%;
+            height: 20em;
+            transform: none;
+        }
+    }
+    .traits_section{
+        .traits_section_container{
+            grid-template-columns: repeat(1, minmax(10em, 1fr));
+        }
+    }
+    .diploma_details_projects{
+        .diploma_details_projects_container{
+            gap: $menu-gap *5;
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+    .diploma_details_footer{
+        .diploma_details_footer_container{
+            grid-template-columns: repeat(1,1fr);
+
+        }
+    }
+    .diploma_details_FAQS{
+        grid-template-columns: 1fr;
+    }
+}
+
+.dark_theme {
+    .diploma_details_video {
+        position: relative;
+        background: $dark-bg;
+        z-index: 1;
+        &::after {
+            content: "";
+            width: 100%;
+            height: 50vh;
+            background: url("/assets/images/banner-wave.svg");
+            filter: brightness(0) saturate(100%) invert(4%) sepia(83%) saturate(1113%) hue-rotate(182deg) brightness(92%) contrast(101%);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background-size: cover;
+            background-position: bottom;
+        }
+        .diploma_details_video_tech {
+            .diploma_details_video_tech_items {
+                .tech_item {
+                    border: 1px solid rgba($color: $white-color, $alpha: 0.1) !important;
+                }
+            }
+        }
+    }
+    .diploma_details_projects{
+        background: $second-color;
+    }
+    .diploma_details_footer{
+        background: #020b17;
+        .diploma_details_footer_container{
+            p{
+                color: $white-color;
+            }
+        }
+    }
+    .diploma_details_FAQS{
+        background: $second-color;
+    }
+}

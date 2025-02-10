@@ -1,0 +1,136 @@
+.mobileApp {
+    .mobileApp_header {
+        text-align: center;
+        margin-bottom: 2.5em;
+        width: 100%;
+        h2 {
+            font-weight: 400;
+            font-size:1.1em ;
+            width: 80%;
+            margin: auto;
+        }
+    }
+    .mobileAppCard {
+        width: 70%;
+        margin: auto;
+        // height: 15em;
+        background: $primary-color;
+        border-radius: 0.8em;
+        overflow: hidden;
+        position: relative;
+        padding: 2em;
+        color: $white-color;
+        gap: 2em;
+        margin-bottom: 6em;
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("/assets/images/mobileApp/mobileAppBanner.png");
+            background-size: cover;
+            z-index: 1;
+        }
+        .mobileAppCard_image_or {
+            width: 5em;
+            height: 5em;
+            border-radius: 50%;
+            background: $white-color;
+            color: $primary-color;
+            font-weight: 600;
+            border: 4px solid #4e57bd;
+        }
+        .mobileAppCard_image {
+            color: $white-color;
+            span {
+                display: inline-block;
+                margin-bottom: 1em;
+                font-weight: 500;
+                font-size: 1.2em;
+            }
+            .mobileAppCard_image_leyer {
+                width: 15em;
+                height: 4em;
+                position: relative;
+                &::after {
+                    content: "";
+                    width: 100%;
+                    height: 100%;
+
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    z-index: 1;
+                    background: transparent;
+                }
+            }
+            &:nth-of-type(1) {
+                .mobileAppCard_image_leyer {
+                    &::after {
+                        background: url("/assets/images/mobileApp/google-play.png");
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-position: 50%;
+                    }
+                }
+            }
+            &:nth-of-type(2) {
+                .mobileAppCard_image_leyer {
+                    &::after {
+                        background: url("/assets/images/mobileApp/ios.png");
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-position: 50%;
+                    }
+                }
+            }
+        }
+    }
+    .faqs_mobile_app {
+        @include grid2;
+        .faqs_mobile_app_image {
+
+            height: 39em;
+            width: 33.75em;
+            overflow: hidden;
+            position: relative;
+            border-radius: 7em 7em 0 7em;
+            img{
+                object-fit: cover;
+            }
+        }
+        .faqs_mobile_app_content_accordion {
+            margin-top: 2em;
+        }
+    }
+}
+.dark_theme {
+    .mobileApp {
+        background:$second-color;
+        .mobileApp_header{
+            color: $white-color;
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .mobileApp {
+        .mobileAppCard {
+            width: 100%;
+            flex-direction: column;
+            height: fit-content;
+        }
+        .faqs_mobile_app {
+            @include grid1;
+            .faqs_mobile_app_image {
+            height: 39em;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            border-radius: 7em 7em 0 7em;
+        }
+        }
+    }
+}

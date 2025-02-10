@@ -1,0 +1,90 @@
+.course_player{
+    display: grid;
+    grid-template-columns: 1fr 30em;
+    position: relative;
+    .course_player_video{
+        padding: 1em;
+        height: calc(100vh - 6em);
+        overflow: auto;
+        &::-webkit-scrollbar{
+            width: 0;
+        }
+        .course_player_video_seaction{
+            aspect-ratio: 16/9;
+            background: $white-color;
+            overflow: hidden;
+            &.scroll_video{
+                position: fixed;
+                top: 1em;
+                right: 1em;
+            }
+            *{
+                width: 100% !important;
+                height: 100% !important;
+            }
+            .course_player_video_seaction_content{
+                padding: 2.5em 0;
+                h3{
+                    font-weight: 600;
+                }
+            }
+        }
+        .course_player_video_tabs{
+            margin-top: 2em;
+            background: $white-color;
+            padding: 1em;
+        }
+    }
+    .course_player_list{
+        height: calc(100vh - 6em);
+        padding: 1em;
+        background: $white-color;
+        overflow-y: hidden;
+        // z-index: -1;
+        position: relative;
+        .course_player_header{
+            h2{
+                font-weight: 500;
+            }
+        }
+        .course_player_list_items{
+            margin-top: 1.5em;
+            height: calc(100vh - 15em);
+            overflow-y: auto;
+            &::-webkit-scrollbar{
+                width: 0;
+            }
+        }
+    }
+}
+.course_player_header_info {
+    background: #f5f9fa;
+    padding-block: 2em;
+    .course_player_header_breadcrumb{
+        margin-bottom: 3em;
+    }
+}
+
+@media (max-width:1024px) {
+    .course_player{
+        grid-template-columns: 1fr;
+        .course_player_video{
+            height: fit-content;
+            overflow: unset;
+            padding: 1em;
+            .course_player_video_tabs{
+                .course_player_list{
+                    display: block;
+                    padding: 0;
+                    height: fit-content;
+                    .course_player_list_items{
+                        height: fit-content;
+                    }
+                }
+            }
+        }
+        .course_player_list{
+            display: none;
+        }
+    }
+}

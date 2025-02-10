@@ -1,0 +1,194 @@
+.course_banner {
+    padding-bottom: 16em;
+    position: relative;
+    z-index: 1;
+    .course_banner_header {
+        h2{
+            color: $dark-color;
+            font-size: 2.5em;
+            width: 70%;
+            margin: auto;
+            text-align: center;
+            span{
+                color: $red-color;
+            }
+        }
+        .custom_btn{
+            margin: auto;
+            margin-top: 2em;
+        }
+        
+    }
+    .course_banner_details{
+        gap: $menu-gap * 4;
+        margin-top: 3em;
+        .course_banner_details_images{
+            position: relative;
+            width: 100%;
+            height: 30em;
+            padding-top: 6em;
+            .course_banner_details_images_lg{
+                position: relative;
+                overflow: hidden;
+                width: 25em;
+                height: 25em;
+                outline: 1.5em solid $white-color;
+                border-radius: .6em;
+                position: absolute;
+                box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.2);
+                img{
+                    object-fit: cover;
+                }
+            }
+            .course_banner_details_images_sm{
+                overflow: hidden;
+                width: 15em;
+                height: 15em;
+                border-radius: .6em;
+                position: absolute;
+                bottom: -8em;
+                right: 5em;
+                
+                img{
+                    object-fit: cover;
+                }
+            }
+        }
+        .course_banner_details_content{
+            width: 100%;
+            .course_banner_details_content_steps{
+                margin-top: 3em;
+                p{
+                    position: relative;
+                    padding-inline: 1.5em;
+                    &:not(:last-child){
+                        margin-bottom: 1em;
+                    }
+                    &::after{
+                        content: "\2713";
+                        position: absolute;
+                        left: 0;
+                        color: $red-color;
+                        font-weight: 700;
+                    }
+                }
+            }
+        }
+    }
+    &::after {
+            z-index: -1;
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url(/assets/images/courseBanner/courseBanner.svg);
+            filter: brightness(0) saturate(100%) invert(52%) sepia(75%) saturate(451%) hue-rotate(121deg) brightness(96%) contrast(90%);
+            background-position: top;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+}
+.dark_theme {
+    .course_banner {
+        background: $second-color;
+        .course_banner_header {
+            h2{
+                color: $white-color;
+            }
+        }
+        .course_banner_details_content{
+            .course_banner_details_content_steps{
+                p{
+                    color: $white-color;
+                }
+            }
+        }
+    }
+    .course_banner_details_content_steps{
+                p{
+                    color: $white-color !important;
+                }
+            }
+}
+.course_banner_details{
+        gap: $menu-gap * 3;
+        margin-top: 3em;
+        .course_banner_details_images{
+            position: relative;
+            width: 100%;
+            height: 30em;
+            padding-top: 6em;
+            .course_banner_details_images_lg{
+                position: relative;
+                overflow: hidden;
+                width: 25em;
+                height: 25em;
+                outline: 1.5em solid $white-color;
+                border-radius: .6em;
+                position: absolute;
+                box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.2);
+                img{
+                    object-fit: cover;
+                }
+            }
+            .course_banner_details_images_sm{
+                overflow: hidden;
+                width: 15em;
+                height: 15em;
+                border-radius: .6em;
+                position: absolute;
+                bottom: -8em;
+                right: 5em;
+                
+                img{
+                    object-fit: cover;
+                }
+            }
+        }
+        .course_banner_details_content{
+            width: 100%;
+            .course_banner_details_content_steps{
+                margin-top: 3em;
+                p{
+                    position: relative;
+                    padding-inline: 1.5em;
+                    &:not(:last-child){
+                        margin-bottom: 1em;
+                    }
+                    &::after{
+                        content: "\2713";
+                        position: absolute;
+                        left: 0;
+                        color: $red-color;
+                        font-weight: 700;
+                    }
+                }
+            }
+        }
+    }
+@media screen and (max-width: 1024px) {
+    .course_banner {
+        padding-bottom: 2.22em;
+        .course_banner_header {
+            h2{
+                width: 100%;
+            }
+        }
+    }
+    .course_banner_details{
+        flex-wrap: wrap;
+        margin-top: 5em !important;
+        .course_banner_details_images{
+            .course_banner_details_images_lg{
+                left: 50%;
+                top: 0;
+                transform: translateX(-50%);
+            }
+            .course_banner_details_images_sm{
+                bottom: -2em !important;
+            }
+        }
+    }
+}

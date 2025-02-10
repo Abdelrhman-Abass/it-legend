@@ -1,0 +1,16 @@
+.general_video {
+    height: 35em;
+    width: 70%;
+    margin: auto;
+    border-radius: 0 5em 0 5em;
+    box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    padding: 3em;
+    background: $dark-color;
+
+}
+@media screen and (max-width: 1024px) {
+    .general_video {
+        width: 100%;
+    }
+}

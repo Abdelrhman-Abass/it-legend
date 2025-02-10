@@ -1,0 +1,24 @@
+.not_found{
+    min-height: 100vh;
+    background: $second-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    .custom_btn{
+        margin: auto;
+    }
+    .not_found_page{
+        .not_found_page_image{}
+        .not_found_page_content{
+            color: $white-color;
+            h2{
+                font-size: 2.5em;
+            }
+            p{
+                margin-block: 1em;
+                color: $gray-text-color;
+            }
+        }
+    }
+}

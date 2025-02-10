@@ -1,0 +1,106 @@
+.courses_container{
+    .courses_container_header{
+        gap: $menu-gap *3;
+        margin-bottom: 3em;
+        h2{
+            text-transform: capitalize;
+            font-weight: 500;
+            font-size: 1.2em;
+            span{
+                color: $red-color;
+
+            }
+        }
+        .courses_container_header_layout{
+            gap: $menu-gap;
+        }
+    }
+    .courses_container_cards{
+        gap: $menu-gap;
+        &._grid{
+            @include grid3;
+        }
+        &._line{
+            @include grid1;
+            .course_card{
+                display: grid;
+                grid-template-columns: 1fr 2fr;
+                width: 100%;
+                padding: 2em;
+                gap: $menu-gap *2;
+                .course_card_image{
+                    height: 100%;
+                    border-radius: .6em;
+                }
+                .course_card_content{
+                    padding: 0;
+                    .course_card_content_rate{
+                        justify-content: flex-start;
+                        gap: $menu-gap;
+                    }
+                    .course_card_content_details{
+                        display: flex; 
+                        flex-direction: row;
+                        gap: $menu-gap;
+                    }
+                }
+            }
+        }
+    }
+    .courses_container_cards_btn{
+        margin-top: 3em;
+    }
+}
+.dark_theme{
+    .courses_container{
+        background: $second-color;
+        .courses_container_header{
+            h2{
+                color: $white-color;
+            }
+        }
+    }
+}
+@media (max-width: 1024px) {
+    .courses_container{
+        .courses_container_header{
+            // align-items: flex-start;
+            // flex-direction: column;
+            gap: $menu-gap;
+            .cards_layout{
+                display: none
+            }
+        }
+        .courses_container_cards{
+            &._grid{
+                @include grid1;
+            }
+            &._line{
+                .course_card{
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    width: 100%;
+                    padding: 2em;
+                    gap: $menu-gap *2;
+                    .course_card_image{
+                        height: 20em;
+                        border-radius: .6em;
+                    }
+                    .course_card_content{
+                        padding: 0;
+                        .course_card_content_rate{
+                            justify-content: flex-start;
+                            gap: $menu-gap;
+                        }
+                        .course_card_content_details{
+                            display: flex; 
+                            flex-direction: row;
+                            gap: $menu-gap;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+}

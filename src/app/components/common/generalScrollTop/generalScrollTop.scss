@@ -1,0 +1,28 @@
+.general_scroll_top {
+    position: fixed;
+    bottom: -8rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9;
+    transition: $delay;
+    background: $white-color;
+    .progress {
+        stroke: $red-color;
+    }
+    .scroll_top_icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: red;
+    }
+    &.active{
+        bottom: 2rem;
+    }
+}

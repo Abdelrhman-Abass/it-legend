@@ -1,0 +1,85 @@
+.f {
+    display: flex;
+}
+
+.jc {
+    justify-content: center;
+}
+.ac {
+    align-items: center;
+}
+.jb {
+    justify-content: space-between;
+}
+.relative {
+    position: relative;
+}
+.f-column {
+    flex-direction: column;
+}
+.p-top {
+    padding-block-start: 5.55em;
+}
+.py {
+    padding-block: 5.55em;
+}
+.py-lg {
+    padding-block: 8.55em;
+}
+.px {
+    padding-inline: 5.55em;
+}
+.p-lg {
+    padding-inline: 11em;
+}
+.p1 {
+    font-size: 1em;
+}
+.aspect-ratio {
+    aspect-ratio: 16 / 9;
+}
+.error_message{
+    color: $red-color;
+    position: absolute;
+    bottom: -1.8em;
+    left: .5em;
+}
+@mixin grid1 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $menu-gap *2;
+}
+@mixin grid2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $menu-gap *2;
+}
+@mixin grid3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $menu-gap *2;
+}
+
+@media (max-width: 1250px) {
+    .p-lg {
+        padding-inline: 2em;
+    }
+}
+
+@media (max-width: 1024px) {
+    .hidden {
+        display: none;
+    }
+    .px {
+        padding-inline: 1.5em;
+    }
+    .p-lg {
+        padding-inline: 1.5em;
+    }
+    .py {
+        padding-block: 2.55em;
+    }
+    .p1 {
+    font-size: 1.1em;
+}
+}

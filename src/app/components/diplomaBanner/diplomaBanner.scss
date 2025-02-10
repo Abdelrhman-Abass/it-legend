@@ -1,0 +1,114 @@
+.diploma_banner {
+    min-height: 90vh;
+    clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: url("/assets/images/diploma/banner.webp");
+        background-size: cover;
+        background-position: center;
+        z-index: -1;
+    }
+    .diploma_banner_container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        gap: $menu-gap * 2;
+        .diploma_banner_content {
+            text-align: center;
+            h2 {
+                font-size: 3.5em;
+            }
+            p {
+                color: $gray-text-color;
+                width: 70%;
+                margin: auto;
+            }
+        }
+        .diploma_banner_content_image {
+            height: 18.75em;
+            width: 17em;
+            border-radius: 3em 0 3em 0;
+            position: relative;
+            overflow: hidden;
+            animation: diplomaBannerImg 3s linear infinite alternate-reverse;
+            img {
+                object-fit: cover;
+            }
+        }
+        .diploma_banner_content_images {
+            position: relative;
+            .diploma_banner_content_images_lg {
+                position: relative;
+                overflow: hidden;
+                width: 17em;
+                height: 22em;
+                border-radius: 3em 0 3em 0;
+                img {
+                    object-fit: cover;
+                }
+            }
+            .diploma_banner_content_images_sm {
+                position: absolute;
+                width: 15em;
+                height: 15em;
+                left:7em;
+                bottom: -6em;
+                border-radius: 0 3em 0 3em;
+                overflow: hidden;
+                img {
+                    object-fit: cover;
+                }
+            }
+        }
+    }
+}
+@keyframes diplomaBannerImg {
+    from {
+        border-radius: 3em 0 3em 0;
+    }
+    to {
+        border-radius: 0 3em 0 3em;
+    }
+}
+.dark_theme {
+    .diploma_banner {
+        background: #000d17;
+        clip-path:unset;
+        .diploma_banner_content {
+            h2 {
+                color: $white-color;
+            }
+            p {
+                color: rgba($color: $white-color, $alpha: 0.5);
+            }
+        }
+        &::before {
+            display: none;
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .diploma_banner {
+        .diploma_banner_container {
+            justify-content: center;
+            align-items: center;
+            .diploma_banner_content_image {
+                display: none;
+            }
+            .diploma_banner_content_images {
+                display: none;
+            }
+        }
+    }
+}

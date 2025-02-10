@@ -1,0 +1,34 @@
+.course_player_accordion {
+    .course_player_accordion_item {
+        padding-block: 1em;
+        position: relative;
+        .watch_icon{
+            flex-shrink: 0;
+            margin-inline-end: .2em;
+        }
+        &.watched{
+            color: #ccc;
+        }
+        &:not(:last-child) {
+            border-bottom: 1px solid rgba($color: $dark_color, $alpha: 0.1);
+        }
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: $menu-gap;
+        cursor: pointer;
+        p {
+            font-weight: 500;
+        }
+        span{
+            display: flex;
+        }
+        svg{
+            font-size: 1em;
+        }
+    }
+    .ant-collapse-header-text {
+        font-weight: 500 !important;
+        font-size: 1.2em !important;
+    }
+}

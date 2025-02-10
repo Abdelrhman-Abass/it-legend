@@ -1,0 +1,28 @@
+.benfits_section{
+    min-height: 100vh;
+    .benfits_section_container{
+        @include grid3;
+        margin-top: 4em;
+    }
+}
+.dark_theme {
+    .benfits_section {
+        background: $second-color;
+    }
+}
+@media (max-width: 1250px) {
+    .benfits_section{
+        .benfits_section_container{
+            @include grid2;
+        }
+    }
+    
+}
+@media (max-width: 1024px) {
+    .benfits_section{
+        .benfits_section_container{
+            @include grid1;
+        }
+    }
+    
+}

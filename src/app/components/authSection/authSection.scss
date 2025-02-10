@@ -1,0 +1,102 @@
+.auth_section {
+    gap: $menu-gap * 5;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .auth_section_form_container {
+        position: relative;
+        gap: 3em;
+        height: 100%;
+        width: 50%;
+        .auth_section_form_container_form {
+            background: $white-color;
+            box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.08);
+            padding: 4em 2.5em;
+            width: 100%;
+            transition: $delay;
+            backface-visibility: hidden;
+            height: fit-content;
+            left: 0px;
+            // position: absolute;
+            top: 0px;
+            // transform: rotateX(0);
+            // transform-style: preserve-3d;
+            transition: 0.6s;
+            z-index: 2;
+            .custom_btn {
+                width: 100%;
+            }
+            &.register {
+            
+                transform: rotateX(180deg);
+
+            }
+            .auth_section_form_container_form_header {
+                margin-bottom: 2em;
+                h2 {
+                    font-size: 2em;
+                    font-weight: 500;
+                }
+                p {
+                    font-weight: 400;
+                    color: $gray-text-color;
+                    span {
+                        color: $red-color;
+                        cursor: pointer;
+                    }
+                }
+            }
+            form {
+                display: flex;
+                flex-direction: column;
+                gap: 2em;
+                .forget {
+                    color: $red-color;
+                    font-weight: 400;
+                    font-size: 1.1em;
+                }
+            }
+        }
+    }
+    .auth_section_form_container_text{
+        width: 30%;
+        h2{
+            margin-bottom: 1em;
+            font-size: 1.8em;
+        }
+        .auth_section_form_container_text_desc{
+            gap: 1em;
+            h3{
+                font-weight: 500;
+            }
+            p{
+                color: $gray-text-color;
+            }
+        }
+    }
+}
+.dark_theme {
+    .auth_section {
+        background: $second-color;
+        .auth_section_form_container {
+            .auth_section_form_container_form {
+                color: $white-color;
+                background: $dark-bg;
+            }
+        }
+        .auth_section_form_container_text{
+            color: $white-color;
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .auth_section {
+        .auth_section_form_container,.auth_section_form_container_text {
+            width: 100%;    
+        }
+        .auth_section_form_container_text{
+            order: -1;
+        }
+    }
+    
+}

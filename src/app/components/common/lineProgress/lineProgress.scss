@@ -1,0 +1,63 @@
+.line_progress {
+    position: relative;
+    h2 {
+        font-weight: 500;
+    }
+    :where(.css-dev-only-do-not-override-nqoqt9).ant-progress .ant-progress-outer {
+        width: 100% !important;
+    }
+    .ant-progress-text {
+        width: 100% !important;
+        text-align: center !important;
+        margin-top: 1em;
+        order: 1;
+    }
+    .ant-progress-outer {
+        flex-wrap: wrap !important;
+    }
+    .line_progress_marker {
+        position: absolute;
+        top: 3em;
+        width: 3em;
+        height: 3em;
+        background: $white-color;
+        border-radius: 50%;
+        border: 2px solid #ccc;
+        animation: toTop 1s linear infinite alternate-reverse;
+        &::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: .4em solid transparent;
+            border-right: .4em solid transparent;
+            border-top: .8em solid #ccc;
+            bottom: -.8em;
+            left: 50%;
+            transform: translateX(-50%);
+            @media screen and (max-width: 768px) {
+                bottom: -0.85em;
+            }
+            
+            @media screen and (max-width: 460px) {
+                bottom: -.8em;
+            }
+        }
+    }
+}
+:lang(ar){
+    .line_progress{
+        .line_progress_marker{
+            top: 4em;
+        }
+    }
+}
+
+@keyframes toTop {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(0.5em);
+    }
+}

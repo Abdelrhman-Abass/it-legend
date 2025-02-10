@@ -1,0 +1,33 @@
+.free_diploma {
+    min-height: 100vh;
+    background: #f5f1eb;
+    .free_diploma_container {
+        @include grid3;
+        margin-top: 2em;
+        .course_card_content_details{
+            margin-block: 3em;
+        }
+    }
+    .free_diploma_more{
+        margin-top: 3em;
+    }
+}
+.dark_theme {
+    .free_diploma {
+        background: #020b17;
+    }
+}
+@media (max-width: 1250px) {
+    .free_diploma {
+        .free_diploma_container {
+            @include grid2;
+        }
+    }
+}
+@media (max-width: 1024px) {
+    .free_diploma {
+        .free_diploma_container {
+            @include grid1;
+        }
+    }
+}

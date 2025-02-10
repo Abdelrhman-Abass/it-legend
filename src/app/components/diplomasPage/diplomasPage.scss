@@ -1,0 +1,238 @@
+.diplomas_page {
+    .student_result_container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: $menu-gap * 2;
+    }
+    .student_result_container_items {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        justify-content: center;
+        box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.1);
+        width: 55%;
+        margin: auto;
+        border-radius: 0.8em;
+        overflow: hidden;
+        margin-bottom: 3.5em;
+        .student_result {
+            box-shadow: none;
+            padding-block: 2.5em;
+            border-radius: 0;
+            position: relative;
+            border: 0;
+            &:not(:last-child) {
+                &::after {
+                    content: "";
+                    width: 1px;
+                    height: 80%;
+                    position: absolute;
+                    right: 0;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    background: rgba($color: $dark_color, $alpha: 0.1);
+                }
+            }
+        }
+    }
+    .diplomas_page_cards {
+        gap: $menu-gap;
+        display: grid;
+        &._line {
+            @include grid1;
+            .course_card {
+                display: grid;
+                grid-template-columns: 1fr 2fr;
+                width: 100%;
+                padding: 2em;
+                gap: $menu-gap * 2;
+                .course_card_image {
+                    height: 100%;
+                    border-radius: 0.6em;
+                }
+                .course_card_content {
+                    padding: 0;
+                    .course_card_content_rate {
+                        justify-content: flex-start;
+                        gap: $menu-gap;
+                    }
+                    .course_card_content_details {
+                        display: flex;
+                        flex-direction: row;
+                        gap: $menu-gap;
+                    }
+                }
+            }
+        }
+        .diplomas_page_cards_container {
+            &._grid {
+                @include grid3;
+                .header_section {
+                    width: 100%;
+                }
+                .course_card_hide {
+                    p {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+    .last_video_watched {
+        .last_video_watched_item {
+            cursor: pointer;
+            width: fit-content;
+            margin: auto;
+            padding: 2em;
+            border: 1px solid rgba($color: $dark_color, $alpha: 0.1);
+            border-radius: 0.6em;
+            display: flex;
+            align-items: center;
+            gap: 1em;
+            position: relative;
+            background: #fff;
+            @media (max-width: 768px) {
+                flex-wrap: wrap;
+                width: 90%;
+            }
+            span {
+                font-weight: 500;
+                color: $gray-text-color;
+            }
+            h2 {
+                font-weight: 500;
+                width: 80%;
+                @media (max-width: 768px) {
+                    width: 100%;
+                }
+            }
+            .last_video_watched_item_progress {
+                position: absolute;
+                top: 1em;
+                right: 1em;
+                z-index: 1;
+                background: $white-color;
+                border-radius: 50%;
+                .ant-progress-text {
+                    color: $red-color !important;
+                }
+            }
+            .last_video_watched_item_image {
+                width: 20em;
+                height: 12em;
+                overflow: hidden;
+                position: relative;
+                border-radius: 0.6em;
+                img{
+                    object-fit: cover;
+                }
+                @media (max-width: 768px) {
+                    width: 100%;
+                    order: -1;
+                }
+            }
+            .last_video_watched_item_content {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5em;
+                @media (max-width: 768px) {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+.dark_theme {
+    .diplomas_page {
+        background: $second-color;
+    }
+}
+@media (max-width: 1024px) {
+    .diplomas_page {
+        .student_result_container {
+            grid-template-columns: repeat(2, 1fr);
+            gap: $menu-gap;
+        }
+        .diplomas_page_cards {
+            .diplomas_page_cards_container {
+                &._grid {
+                    @include grid2;
+                    gap: $menu-gap;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 768px) {
+    .diplomas_page {
+        .student_result_container {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .student_result_container_items {
+            width: 100%;
+        }
+        .diplomas_page_cards {
+            // .diplomas_page_cards_container {
+            //     &._grid {
+            //         @include grid1;
+            //     }
+            // }
+            &._line {
+                .course_card {
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    width: 100%;
+                    padding: 2em;
+                    gap: $menu-gap * 2;
+                    .course_card_image {
+                        height: 20em;
+                        border-radius: 0.6em;
+                    }
+                    .course_card_content {
+                        padding: 0;
+                        .course_card_content_rate {
+                            justify-content: flex-start;
+                            gap: $menu-gap;
+                        }
+                        .course_card_content_details {
+                            display: flex;
+                            flex-direction: row;
+                            gap: $menu-gap;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (max-width: 460px) {
+    .diplomas_page {
+        .diplomas_page_cards {
+            .diplomas_page_cards_container {
+                &._grid {
+                    @include grid1;
+                }
+            }
+        }
+        .student_result_container_items {
+            grid-template-columns: repeat(1, 1fr);
+            .student_result {
+                box-shadow: none;
+                padding-block: 2em;
+                border-radius: 0;
+                position: relative;
+                &:not(:last-child) {
+                    &::after {
+                        left: unset !important;
+                        right: 50% !important;
+                        top: unset !important;
+                        transform: unset !important;
+                        transform: translateX(50%) !important;
+                        bottom: 0;
+                        width: 90% !important;
+                        height: 1px !important;
+                    }
+                }
+            }
+        }
+    }
+}

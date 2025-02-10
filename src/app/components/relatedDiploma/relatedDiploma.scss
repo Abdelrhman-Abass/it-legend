@@ -1,0 +1,110 @@
+.related_diploma {
+    .related_diploma_results {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: $menu-gap * 2;
+        margin-top: 3.5em;
+        .student_result {
+            .student_result_content{
+                gap: 0;
+                h3{
+                    font-size: 3.5em;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+    .related_diploma_container{
+        margin-top: 5em;
+        display: flex;
+        .courses_list{
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: $menu-gap * 2;
+        }
+        &._line{
+            @include grid1;
+            .course_card{
+                display: grid;
+                grid-template-columns: 1fr 2fr;
+                width: 100%;
+                padding: 2em;
+                gap: $menu-gap *2;
+                .course_card_image{
+                    height: 100%;
+                    border-radius: .6em;
+                }
+                .course_card_content{
+                    padding: 0;
+                    .course_card_content_rate{
+                        justify-content: flex-start;
+                        gap: $menu-gap;
+                    }
+                    .course_card_content_details{
+                        display: flex; 
+                        flex-direction: row;
+                        gap: $menu-gap;
+                    }
+                }
+            }
+        }
+    }
+    .line_progress{
+        h2{
+            font-size: 2em;
+            margin-bottom: 2em;
+        }
+    }
+}
+@media (max-width: 1024px) {
+    .related_diploma {
+        .related_diploma_results {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .related_diploma_container{
+            &._line{
+                .course_card{
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    width: 100%;
+                    padding: 2em;
+                    gap: $menu-gap *2;
+                    .course_card_image{
+                        height: 20em;
+                        border-radius: .6em;
+                    }
+                    .course_card_content{
+                        padding: 0;
+                        .course_card_content_rate{
+                            justify-content: flex-start;
+                            gap: $menu-gap;
+                        }
+                        .course_card_content_details{
+                            display: flex; 
+                            flex-direction: row;
+                            gap: $menu-gap;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+}
+@media (max-width: 768px) {
+    .related_diploma {
+        .related_diploma_results {
+            gap: $menu-gap;
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    
+}
+@media (max-width: 460px) {
+    .related_diploma {
+        .related_diploma_results {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+    
+}

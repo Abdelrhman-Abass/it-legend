@@ -1,0 +1,62 @@
+@import "./variables";
+@import "./reset";
+@import "./template";
+@import "./responsive";
+@import "./rtl";
+@import "./components/navbar";
+@import "../components/common/button/button.scss";
+@import "../components/homeBanner/homeBanner.scss";
+@import "../components/homeExperience/homeExperience.scss";
+@import "../components/freeDiploma/freeDiploma.scss";
+@import "../components/common/headerSection/headerSection.scss";
+@import "../components/common/courseCard/courseCard.scss";
+@import "../components/solutionBanner/solutionBanner.scss";
+@import "../components/authSection/authSection.scss";
+@import "../components/common/wrapperInput/wrapperInput.scss";
+@import "../components/benfitsSection/benfitsSection.scss";
+@import "../components/benfitsCard/benfitsCard.scss";
+@import "../components/mobileApp/mobileApp.scss";
+@import "../components/common/accordionItem/accordionItem.scss";
+@import "../components/common/generalScrollTop/generalScrollTop.scss";
+@import "../components/courseBanner/courseBanner.scss";
+@import "../components/common/generalVideo/generalVideo.scss";
+@import "../components/coursesPage/coursesPage.scss";
+@import "../components/common/cardsLayout/cardsLayout.scss";
+@import "../components/courseDetailsPage/courseDetails.scss";
+@import "../components/courseAccordion/courseAccordion.scss";
+@import "../components/diplomaBanner/diplomaBanner.scss";
+@import "../components/scrollBottom/scrollBottom.scss";
+@import "../components/diplomaDetails/diplomaDetails.scss";
+@import "../components/common/projectCard/projectCard.scss";
+@import "../components/diplomasPage/diplomasPage.scss";
+@import "../components/common/studentResult/studentResult.scss";
+@import "../components/relatedDiploma/relatedDiploma.scss";
+@import "../components/common/lineProgress/lineProgress.scss";
+@import "../components/coursePlayer/coursePlayer.scss";
+@import "../components/common/coursePlayerAccordion/CoursePlayerAccordion.scss";
+@import "../components/common/loader/loader.scss";
+@import "../components/common/courseLinks/courseLinks.scss";
+@import "../components/common/addComment/addComment.scss";
+@import "../components/adsSection/adsSection.scss";
+@import "../components/common/reviewCard/reviewCard.scss";
+@import "../components/homeReviewsSection/homeReviewsSection.scss";
+@import "../components/common/generalPopup/generalPopup.scss";
+@import "../style/components/notFound";
+
+body{
+    // background: #f8f8f8;
+}
+.course_tabs{
+    min-height: 20em;
+        .ant-tabs-tab{
+            margin: 0 !important;
+            margin-inline-start: 2em !important;
+
+        }
+        .ant-tabs-nav{
+            margin:  0 0 3.5em 0 !important;
+        }
+        :where(.css-dev-only-do-not-override-nqoqt9).ant-tabs .ant-tabs-tab+.ant-tabs-tab{
+            margin-inline-start: 2em !important;
+        }
+    }

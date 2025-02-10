@@ -1,0 +1,40 @@
+.home_reviews_section {
+    .home_reviews_section_swiper_paginations {
+        justify-content: flex-end;
+        .swiper_navigation {
+            gap: 1em;
+            .swiper_navigation_icon {
+                width: 2.5em;
+                height: 2.5em;
+                border: 1px solid rgba($color: $dark_color, $alpha: 0.1);
+                border-radius: 50%;
+                cursor: pointer;
+                &.swiper-button-disabled {
+                    opacity: 0.5;
+                }
+            }
+        }
+    }
+    .swiper_pagination {
+        margin-top: 1.5em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .swiper_pagination_count {
+            width: fit-content;
+            .swiper-pagination-bullet {
+                width: 7px;
+                height: 7px;
+                border-radius: 1em;
+                transition: $delay;
+                background: $dark-color;
+                &.swiper-pagination-bullet-active {
+                    width: 3em;
+                }
+            }
+        }
+    }
+    .home_reviews_section_swiper {
+        margin-top: 1.5em;
+    }
+}

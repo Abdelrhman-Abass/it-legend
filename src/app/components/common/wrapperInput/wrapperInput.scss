@@ -1,0 +1,49 @@
+.wrapper_input{
+    width: 100%;
+    position: relative;
+    .show_password_icon{
+        position: absolute;
+        right: 1em;
+        top: 68%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        opacity: .5;
+    }
+    input{
+        width: 100%;
+        outline: 0;
+        border: 1px solid rgba($color: $dark_color, $alpha: .2);
+        border-radius: .5em;
+        height: 3.8em;
+        margin-top: 1em;
+        background: transparent;
+        padding-inline-start: 1.5em;
+    }
+    &.checkbox {
+        display: flex;
+        align-items: center;
+        gap: 1em;
+        label{
+            span {
+                color:  $red-color;
+            }
+        }
+        input{
+            width: 1em;
+            height: 1em;
+            margin-top: 0;
+            accent-color: $red-color;
+        }
+    }
+}
+.dark_theme {
+    .wrapper_input {
+        input {
+            border-color: rgba($color: $white_color, $alpha: .2);
+            color: $white-color;
+            &::placeholder {
+                color: rgba($color: $white_color, $alpha: .5);
+            }
+        }
+    }
+}

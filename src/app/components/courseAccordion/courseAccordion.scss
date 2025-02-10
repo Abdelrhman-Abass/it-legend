@@ -1,0 +1,57 @@
+.course_accordion {
+    padding: 1em;
+    border: 1px solid rgba($color: $dark_color, $alpha: 0.2);
+    &:not(:last-child) {
+        margin-bottom: 2em;
+    }
+    .course_accordion_header {
+        cursor: pointer;
+        margin-bottom: 2em;
+        padding-block: 1em;
+        border-bottom: 1px solid rgba($color: $dark_color, $alpha: 0.2);
+        h5 {
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+        .course_accordion_header_icon {
+            svg {
+                font-size: 1em;
+            }
+        }
+    }
+    .course_accordion_lectures {
+        .course_accordion_lectures_item {
+            padding-block: 1.5em;
+            &:not(:last-child) {
+                border-bottom: 1px solid rgba($color: $dark_color, $alpha: 0.2);
+                
+            }
+            .course_accordion_lectures_item_icon {
+                gap: $menu-gap *.2;
+                h6 {
+                    font-size: 1em;
+                    font-weight: 500;
+                    cursor: pointer;
+                }
+            }
+            span{
+                font-size: .9em;
+                color: $gray-text-color;
+                font-weight: 500;
+            }
+        }
+    }
+}
+.dark_theme{
+    .course_accordion{
+        border: 1px solid rgba($color: $white-color, $alpha: 0.2);
+        .course_accordion_header{
+            border-bottom: 1px solid rgba($color: $white-color, $alpha: 0.2);
+        }
+        .course_accordion_lectures{
+            .course_accordion_lectures_item{
+                border-color: rgba($color: $white-color, $alpha: 0.2);
+            }
+        }
+    }
+}

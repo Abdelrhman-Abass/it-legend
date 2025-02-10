@@ -1,0 +1,195 @@
+.homeBanner {
+    min-height: 100vh;
+    position: relative;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    gap: 4em;
+    padding-top: 10em;
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: url("/assets/images/banner-wave.svg");
+        filter: brightness(0) saturate(100%) invert(97%) sepia(7%) saturate(503%) hue-rotate(316deg) brightness(103%) contrast(92%);
+        background-size: cover;
+        background-position: 50%;
+        z-index: -1;
+    }
+    .homeBanner_content {
+        width: 45%;
+        gap: $menu-gap;
+        h1 {
+            font-size: 3.5em;
+            span {
+                color: $red-color;
+            }
+        }
+    }
+    .homeBanner_images {
+        width: 50%;
+        // background: red;
+        height: 45vh;
+        gap: 3em;
+        position: relative;
+        .banner_iamges {
+            position: relative;
+            overflow: hidden;
+            width: calc((100% - 3em) / 2);
+            img{
+                object-fit: cover;
+            }
+        }
+        .homeBanner_images_sm {
+            width: 16.8em;
+            height: 18.75em;
+            background: #bdbdbd;
+            border-radius: 0 5em 0 5em;
+            transform: translateY(-6em);
+        }
+        .homeBanner_images_lg {
+            width: 15em;
+            height: 23.125em;
+            background: #bdbdbd;
+            border-radius: 5em 0em 5em 0em;
+        }
+        .homeBanner_images_content {
+            // min-width: 25em;
+            // height: 10em;
+            background: $white-color;
+            position: absolute;
+            border-radius: 4em 1em 4em 1em;
+            padding-inline: 2.5em;
+            padding-block: 1.5em;
+            bottom: 0em;
+            left: 2.5em;
+            gap: 1.5em;
+            z-index: 1;
+            .homeBanner_images_content_icon {
+                width: 4em;
+                height: 4em;
+                background: #fdedef;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                svg {
+                    color: $red-color;
+                    transform: rotate(90deg);
+                }
+            }
+            .homeBanner_images_content_tel {
+                gap: 0.5em;
+                span {
+                    &:nth-of-type(1) {
+                        color: rgba($color: $dark-color, $alpha: 0.5);
+                        font-weight: 700;
+                        font-size: 1em;
+                        text-transform: uppercase;
+                    }
+                    &:nth-of-type(2) {
+                        color: $red-color;
+                        font-weight: 500;
+                        font-size: 1em;
+                        text-transform: uppercase;
+                        font-size: 1.5em;
+                    }
+                    &:nth-of-type(1) {
+                        color: rgba($color: $dark-color, $alpha: 0.5);
+                        font-weight: 700;
+                        font-size: 1em;
+                        text-transform: uppercase;
+                    }
+                }
+            }
+        }
+        .homeBAnner_bubble {
+            position: absolute;
+            top: -9em;
+            right: 10em;
+            aspect-ratio: 16 / 9;
+        }
+        .homeBAnner_rounded {
+            position: absolute;
+            bottom: -3em;
+            left: -1.5em;
+            aspect-ratio: 16 / 9;
+        }
+        .homeBAnner_rec {
+            position: absolute;
+            right: 0;
+            z-index: -1;
+            top: -2em;
+            aspect-ratio: 16 / 9;
+        }
+    }
+    .homeBAnner_shape {
+        position: absolute;
+        right: 5em;
+        bottom: 15em;
+        aspect-ratio: 16 / 9;
+    }
+}
+.dark_theme {
+    .homeBanner {
+        &::before {
+            filter: brightness(0) saturate(100%) invert(4%) sepia(14%) saturate(3862%) hue-rotate(182deg) brightness(105%) contrast(102%);
+        }
+        .homeBanner_content {
+            h1 {
+                color: $white-color;
+            }
+            p {
+                color: $white-color;
+            }
+        }
+    }
+}
+
+@media (max-width: 1250px) {
+    .homeBanner {
+        flex-wrap: wrap;
+        justify-content: center;
+        .homeBanner_images,
+        .homeBanner_content {
+            width: 100%;
+            justify-content: center;
+        }
+        .homeBanner_images {
+            .homeBAnner_rec,
+            .homeBAnner_rounded,
+            .homeBAnner_bubble {
+                display: none;
+            }
+            .homeBanner_images_sm {
+                transform: none !important;
+            }
+        }
+        .homeBAnner_shape {
+            display: none;
+        }
+    }
+}
+@media (max-width: 1024px) {
+    .homeBanner {
+        padding-top: 1.5em;
+        .homeBanner_images {
+            gap: 1em;
+            .homeBanner_images_content {
+                display: none;
+            }
+        }
+        .banner_iamges{
+            width: 100% !important;
+            height: 23.125em !important;
+        }
+        .homeBanner_content {
+            h1 {
+                font-size: 3em;
+            }
+        }
+    }
+}

@@ -1,0 +1,36 @@
+.cards_layout {
+    gap: $menu-gap * 0.5;
+    .cards_layout_icon {
+        border: 2px solid rgba($color: $dark_color, $alpha: 0.2);
+        width: 2.5em;
+        height: 2.5em;
+        border-radius: 0.2em;
+        cursor: pointer;
+        svg {
+            color: $gray-text-color;
+            font-size: 1.2em;
+        }
+        &.active {
+            border: 2px solid $primary-color;
+            svg {
+                color: $primary-color;
+            }
+        }
+    }
+}
+.dark_theme {
+    .cards_layout {
+        .cards_layout_icon {
+            border: 2px solid rgba($color: $white-color, $alpha: 0.2);
+            svg {
+                color: rgba($color: $white-color, $alpha: 0.2);
+            }
+            &.active {
+                border: 2px solid $white-color;
+                svg {
+                    color: $white-color;
+                }
+            }
+        }
+    }
+}

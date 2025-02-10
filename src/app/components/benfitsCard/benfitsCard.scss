@@ -1,0 +1,386 @@
+.benfitsCard {
+    // padding: 2em;
+    display: flex;
+    align-items: center;
+    gap: 1.5em;
+    // &.traits_mask {
+    //     .benfitsCard_icon {
+    //         position: relative;
+    //         overflow: visible;
+    //         z-index: 1;
+    //         &::after{
+    //             content: "";
+    //             background-color:red !important;
+    //             mask-image: url(/assets/images/diploma/mask.png);
+    //             -webkit-mask-repeat: no-repeat;
+    //             -webkit-mask-size: cover;
+    //             -webkit-mask-position: center;
+    //             position: absolute;
+    //             z-index: -1;
+    //             width: 100%;
+    //             height: 100%;
+    //         }
+    //     }
+    // }
+    .benfitsCard_icon {
+        width: 5.5em;
+        height: 5.5em;
+        flex-shrink: 0;
+        border-radius: 50%;
+        background: red;
+        transition: $delay;
+    }
+    .benfitsCard_content {
+        h3 {
+            font-weight: 600;
+            // background: red;
+            height: 2em;
+        }
+        p {
+            color: $gray-text-color;
+        }
+    }
+    &:nth-of-type(1) {
+        .benfitsCard_icon {
+            background: #e8f8f5;
+            position: relative;
+            &::before {
+                content: "";
+                width: 65%;
+                height: 65%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: url(/assets/images/benfits/achievement.png);
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+        }
+        &:hover {
+            .benfitsCard_icon {
+                background: #242857;
+                &::before {
+                    filter: brightness(0) saturate(100%) invert(97%) sepia(7%) saturate(503%) hue-rotate(316deg) brightness(103%) contrast(92%);
+                }
+            }
+        }
+    }
+    &:nth-of-type(2) {
+        .benfitsCard_icon {
+            background: rgba($color: $red-color, $alpha: 0.2);
+            position: relative;
+            &::before {
+                content: "";
+                width: 65%;
+                height: 65%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: url(/assets/images/benfits/achievement.png);
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+        }
+        &:hover {
+            .benfitsCard_icon {
+                background: $red-color;
+                &::before {
+                    filter: brightness(0) saturate(100%) invert(97%) sepia(7%) saturate(503%) hue-rotate(316deg) brightness(103%) contrast(92%);
+                }
+            }
+        }
+    }
+    &:nth-of-type(3) {
+        .benfitsCard_icon {
+            background: rgba(14, 205, 115, 0.1);
+            position: relative;
+            &::before {
+                content: "";
+                width: 65%;
+                height: 65%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: url(/assets/images/benfits/achievement.png);
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+        }
+        &:hover {
+            .benfitsCard_icon {
+                background: $red-color;
+                &::before {
+                    filter: brightness(0) saturate(100%) invert(97%) sepia(7%) saturate(503%) hue-rotate(316deg) brightness(103%) contrast(92%);
+                }
+            }
+        }
+    }
+    &:nth-of-type(4) {
+        .benfitsCard_icon {
+            background: rgba(248, 184, 31, 0.1);
+            position: relative;
+            &::before {
+                content: "";
+                width: 65%;
+                height: 65%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: url(/assets/images/benfits/achievement.png);
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+        }
+        &:hover {
+            .benfitsCard_icon {
+                background: #f8b81f;
+                &::before {
+                    filter: brightness(0) saturate(100%) invert(97%) sepia(7%) saturate(503%) hue-rotate(316deg) brightness(103%) contrast(92%);
+                }
+            }
+        }
+    }
+    &:nth-of-type(5) {
+        .benfitsCard_icon {
+            background: rgba(142, 86, 255, 0.1);
+            position: relative;
+            &::before {
+                content: "";
+                width: 65%;
+                height: 65%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: url(/assets/images/benfits/achievement.png);
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+        }
+        &:hover {
+            .benfitsCard_icon {
+                background: #8e56ff;
+                &::before {
+                    filter: brightness(0) saturate(100%) invert(97%) sepia(7%) saturate(503%) hue-rotate(316deg) brightness(103%) contrast(92%);
+                }
+            }
+        }
+    }
+    &:nth-of-type(6) {
+        .benfitsCard_icon {
+            background: rgba(249, 37, 150, 0.1);
+            position: relative;
+            &::before {
+                content: "";
+                width: 65%;
+                height: 65%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: url(/assets/images/benfits/achievement.png);
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+        }
+        &:hover {
+            .benfitsCard_icon {
+                background: #f92596;
+                &::before {
+                    filter: brightness(0) saturate(100%) invert(97%) sepia(7%) saturate(503%) hue-rotate(316deg) brightness(103%) contrast(92%);
+                }
+            }
+        }
+    }
+    &:nth-of-type(7) {
+        .benfitsCard_icon {
+            background: rgba(88, 102, 235, 0.1);
+            position: relative;
+            &::before {
+                content: "";
+                width: 65%;
+                height: 65%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: url(/assets/images/benfits/achievement.png);
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+        }
+        &:hover {
+            .benfitsCard_icon {
+                background: rgba(88, 102, 235, 0.1);
+                &::before {
+                    filter: brightness(0) saturate(100%) invert(97%) sepia(7%) saturate(503%) hue-rotate(316deg) brightness(103%) contrast(92%);
+                }
+            }
+        }
+    }
+    &:nth-of-type(8) {
+        .benfitsCard_icon {
+            background: rgba(248, 148, 31, 0.1);
+            position: relative;
+            &::before {
+                content: "";
+                width: 65%;
+                height: 65%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: url(/assets/images/benfits/achievement.png);
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+        }
+        &:hover {
+            .benfitsCard_icon {
+                background: #f8b81f;
+                &::before {
+                    filter: brightness(0) saturate(100%) invert(97%) sepia(7%) saturate(503%) hue-rotate(316deg) brightness(103%) contrast(92%);
+                }
+            }
+        }
+    }
+    &:nth-of-type(9) {
+        .benfitsCard_icon {
+            background: rgba(57, 192, 250, 0.1);
+            position: relative;
+            &::before {
+                content: "";
+                width: 65%;
+                height: 65%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: url(/assets/images/benfits/achievement.png);
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+        }
+        &:hover {
+            .benfitsCard_icon {
+                background: #39c0fa;
+                &::before {
+                    filter: brightness(0) saturate(100%) invert(97%) sepia(7%) saturate(503%) hue-rotate(316deg) brightness(103%) contrast(92%);
+                }
+            }
+        }
+    }
+    &.rounded {
+        .benfitsCard_icon {
+            width: 5.5em;
+            height: 5.5em;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: transparent;
+            transition: $delay;
+            border: 2px solid;
+        }
+        &:nth-of-type(1) {
+            .benfitsCard_icon {
+                background: transparent;
+                border-color: $red-color;
+                position: relative;
+                &::before {
+                    content: "";
+                    width: 65%;
+                    height: 65%;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: url(/assets/images/benfits/achievement.png);
+                    background-position: center;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                }
+            }
+            &:hover {
+                .benfitsCard_icon {
+                    background: $red-color;
+                    &::before {
+                        filter: brightness(0) saturate(100%) invert(97%) sepia(7%) saturate(503%) hue-rotate(316deg) brightness(103%) contrast(92%);
+                    }
+                }
+            }
+        }
+        &:nth-of-type(2) {
+            .benfitsCard_icon {
+                background: transparent;
+                border-color: $primary-color;
+                position: relative;
+                &::before {
+                    content: "";
+                    width: 65%;
+                    height: 65%;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: url(/assets/images/benfits/achievement.png);
+                    background-position: center;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                }
+            }
+            &:hover {
+                .benfitsCard_icon {
+                    background: $primary-color;
+                    &::before {
+                        filter: brightness(0) saturate(100%) invert(97%) sepia(7%) saturate(503%) hue-rotate(316deg) brightness(103%) contrast(92%);
+                    }
+                }
+            }
+        }
+        &:nth-of-type(3) {
+            .benfitsCard_icon {
+                background: transparent;
+                border-color: $yellow-color;
+                position: relative;
+                &::before {
+                    content: "";
+                    width: 65%;
+                    height: 65%;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: url(/assets/images/benfits/achievement.png);
+                    background-position: center;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                }
+            }
+            &:hover {
+                .benfitsCard_icon {
+                    background: $yellow-color;
+                    &::before {
+                        filter: brightness(0) saturate(100%) invert(97%) sepia(7%) saturate(503%) hue-rotate(316deg) brightness(103%) contrast(92%);
+                    }
+                }
+            }
+        }
+    }
+}
+.dark_theme {
+    .benfitsCard {
+        color: $white-color;
+    }
+}

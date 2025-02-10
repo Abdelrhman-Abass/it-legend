@@ -1,0 +1,198 @@
+:lang(ar) {
+    * {
+        font-family: var(--kufi-font);
+    }
+    .custom_btn {
+        button {
+            svg {
+                transform: rotate(0);
+            }
+        }
+    }
+    .header {
+        .mobile-menu-container {
+            left: unset;
+            right: 0;
+            .mobile-menu {
+                transform: translateX(100%);
+            }
+        }
+        .header-service {
+            .user_menu {
+                .user_menu_icon {
+                    cursor: pointer;
+                }
+                .user_menu_list {
+                    bottom: -10em;
+                    left: 5em;
+                    right: unset;
+                }
+            }
+        }
+    }
+    .homeBanner {
+        .homeBanner_images_content_tel {
+            span {
+                &:nth-of-type(2) {
+                    direction: ltr;
+                }
+            }
+        }
+        .homeBanner_images {
+            .homeBanner_images_content {
+                left: unset;
+                right: 2.5em;
+                border-radius: 1em 4em 1em 4em;
+            }
+            .homeBAnner_bubble {
+                right: unset;
+                left: 10em;
+            }
+            .homeBAnner_rounded {
+                left: unset;
+                right: -1.5em;
+            }
+            .homeBAnner_rec {
+                right: unset;
+                left: 0;
+            }
+        }
+        .homeBAnner_shape {
+            right: unset;
+            left: 5em;
+        }
+    }
+    .home-experience {
+        .home-experience_content {
+            .home-experience_content_image {
+                .home-experience_content_image_card {
+                    left: 6em;
+                    right: unset;
+                }
+                .home-experience_content_image_circleShape {
+                    position: absolute;
+                    z-index: -1;
+                    top: -4em;
+                    right: -4em;
+                    left: unset;
+                    &:nth-of-type(1) {
+                        left: -6em;
+                        top: -6em;
+                    }
+                    &:nth-of-type(2) {
+                        left: 4em;
+                        right: unset;
+                        top: unset;
+                        bottom: -5em;
+                    }
+                }
+            }
+            .home-experience_content_text {
+                h2 {
+                    &::before {
+                        right: unset;
+                        left: -2em;
+                    }
+                }
+            }
+        }
+    }
+    .flip_icon {
+        svg {
+            transform: rotate(180deg) !important;
+        }
+    }
+    .course_banner_details_content_steps {
+        p {
+            &::after {
+                left: unset;
+                right: 0;
+            }
+        }
+    }
+    .course_banner_details_images_sm {
+        left: 5em !important;
+        right: unset !important;
+    }
+    .diploma_banner {
+        .diploma_banner_container {
+            .diploma_banner_content_images {
+                .diploma_banner_content_images_sm {
+                    left: unset;
+                    right: 7em;
+                }
+            }
+        }
+    }
+    .diploma_details_footer {
+        .diploma_details_footer_container {
+            p {
+                &::before {
+                    left: unset;
+                    right: 0em;
+                }
+            }
+        }
+    }
+    .project_card {
+        .project_card_content {
+            a {
+                right: unset;
+                left: 2em;
+                transform: rotate(180deg);
+            }
+        }
+    }
+    .diplomas_page {
+        .student_result_container_items {
+            .student_result {
+                &:not(:last-child) {
+                    &::after {
+                        left: 0;
+                        right: unset;
+                    }
+                }
+                .student_result_count {
+                    direction: ltr;
+                }
+            }
+        }
+    }
+    .course_card {
+        .course_card_image {
+            .course_card_image_progress {
+                left: unset;
+                right: 1em;
+            }
+        }
+    }
+    .wrapper_input {
+        .show_password_icon {
+            right: unset;
+            left: 1em;
+        }
+    }
+    .diploma_details_about {
+        .diploma_details_about_images {
+            .diploma_details_about_images_sm {
+                right: -10em;
+            }
+        }
+    }
+    .course_details_page {
+        .course_details_banner {
+            .course_details_banner_breadcrumb {
+                svg {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+    }
+    .course_player_header_info {
+        .course_player_header_breadcrumb {
+            svg {
+                transform: rotate(180deg);
+            }
+        }
+    }
+}

@@ -1,136 +1,192 @@
 {
-    "header": {
-        "signin": "Sign In",
-        "signup": "Sign Up",
-        "signout": "Log out",
-        "discover": "Discover Free Courses",
-        "fromhere": "From Here",
-        "home": "Home",
-        "paths": "Learning Paths",
-        "policy": "Privacy Policy",
-        "aboutUs": "About Us",
-        "services": "Software Services",
-        "freeDeploma": "Enroll in Our Free Course",
-        "empty": "The Cart is Empty",
+    "common": {
+        "login": "Sign In",
+        "company": "ITLegend",
+        "btnHome": "Check Out the Learning Paths",
+        "offering": "Offering",
         "courses": "Courses",
-        "profile": "Profile",
-        "support" : "Support"
+        "lectures": "Lectures",
+        "exams": "Exams",
+        "summaries": "Summaries",
+        "reviews": "Reviews",
+        "showMoreDetails": "Show More Details",
+        "morePathes": "More Paths",
+        "return_home": "Return Home",
+        "myDiplomas": "My Diplomas",
+        "myCourses": "My Courses",
+        "myAccount": "My Account",
+        "support": "Support",
+        "logout": "Logout",
+        "comments": "Comments",
+        "links": "Links"
     },
-    "footer": {
-        "title": "Greate Solutions for Smart People",
-        "paragraphOne": "Create Your Education Website",
-        "paragraphTwo": "Today With It Legend",
-        "whatsapp": "Send a WhatsApp Message from Here",
-        "call": "Call Us Directly"
+    "menu": {
+        "home": "Home",
+        "learn_pathes": "Learn Paths",
+        "free_courses": "Free Courses",
+        "courses": "Courses"
     },
-    "home": {
-        "heroArea": {
-            "platform": "Platform",
-            "educational": "Educational",
-            "paragraph": "If you're looking to learn programming, web development, mobile app development, and excel in the field to prepare for the job market in a way that you can make real money, you're in the right place.",
-            "supervision": "Under the supervision of Eng. Ali Shaheen",
-            "paths": "Check Out the Learning Paths",
-            "communicate": "For Contact"
-        },
-        "counterArea": {
-            "year": "Year",
-            "field": "in the field",
-            "k": "Thousand",
-            "student": "benefited from his courses",
-            "years": "Years",
-            "experience": "of working in global companies",
-            "psychology": "from studying the psychology of programmers"
-        },
-        "aboutArea": {
-            "eng": "Ali Shaheen",
-            "experience": "15 years of experience in the field",
-            "student": "Student",
-            "title": "Many will teach you programming, but who will prepare you for the job market?",
-            "paragraph": "Information is everywhere, but the market demands something else... So the right question is, where is the place that will prepare me to work and earn from what I have learned?"
-        },
-        "featuresArea": {
-            "features": "Learning Benefits with",
-            "paragraphOne": "Since you're still scrolling, it means the message resonated with you and you're eager to work in this field...",
-            "paragraphTwo": "Let me tell you what you'll gain by learning programming at ITLegend:",
-            "businessManagement": "Business Management",
-            "artsAndDesign": "Arts and Design",
-            "personalDevelopment": "Personal Development",
-            "healthAndFitness": "Health and Fitness",
-            "dataScience": "Data Science",
-            "marketing": "Marketing",
-            "businessAndFinance": "Business and Finance",
-            "computerScience": "Computer Science",
-            "videoAndPhotography": "Video and Photography",
-            "courseText": "courses"
-        },
-        "videoArea": {
-            "success": "Success",
-            "title": "is the accumulation of many right steps",
-            "paragraph": "Start with the right step...",
-            "watch": "Watch this video"
-        },
-        "freeDeplomaArea": {
-            "FreeDeploma": "The Free Diploma",
-            "title": "I offer a free diploma that teaches you the basics of programming",
-            "paragraph": "We offer you a unique opportunity to gain a free diploma that will give you a strong foundation in programming basics. Whether you're a beginner or looking to enhance your skills, this diploma is specially designed to equip you with practical knowledge and the necessary tools to enter the programming world. Join now and take advantage of this special offer that will open new doors in the field of technology and programming!",
-            "featureOne": "Completely Free",
-            "featureTwo": "Will Set a Strong Foundation in Programming",
-            "featureThree": "No Prior Knowledge Required, Just Start Immediately",
-            "getIt": "Get It Now"
-        },
-        "learningPathsArea": {
-            "learningPaths": "Learning Paths",
-            "title": "Paid Diplomas on the Platform",
-            "more": "More Paths",
-            "lectures" : "Lectures",
-            "reviwes":"Reviews",
-            "exams" : "Exams",
-            "summary" : "Summaries"
-        },
-        "ctaArea": {
-            "titleOne": "If You Prefer Learning on Your Phone, Download the Platform App",
-            "titleTwo": "And Enjoy a Beneficial and Focused Learning Experience, Designed Just for You"
-        },
-        "faqArea": {
-            "faq": "Frequently Asked Questions",
-            "title": "What are you thinking about?",
-            "faqs": "Questions",
-            "inMind": "On Your Mind",
-            "more": "For More FAQs"
-        }
+    "homeBanner": {
+        "title": "Platform ITLegend Educational",
+        "Platform": "Platform",
+        "ITLegend": "ITLegend",
+        "Educational": "Educational",
+        "desc": "If you're looking to learn programming, web development, mobile app development, and excel in the field to prepare for the job market in a way that you can make real money, you're in the right place.",
+        "btn": "Check Out the Learning Paths",
+        "desc2": "Under the supervision of Eng. Ali Shaheen",
+        "for_contact": "For Contact"
     },
-    "userHeader": {
-        "myDeploma": "My Diplomas",
-        "Courses": "My Courses",
-        "myLevel": "My Level",
-        "relatedCourses": "Related Courses"
+    "solution": {
+        "title": "If you still have any questions or if something isn't clear, send a WhatsApp message from here.",
+        "text": "Greate Solutions for Smart People",
+        "btn1": "Send a WhatsApp Message from Here",
+        "btn2": "Call Us Directly"
     },
     "auth": {
+        "title": "Welcome, Friend",
         "signIn": "Sign In",
-        "Login": "Sign In",
-        "dont": "Don't Have an Account?",
-        "email": "Email",
-        "emailReq": "Email is Required",
-        "emailValid": "Email Must Be Valid",
-        "password": "Password",
-        "passwordMin": "Password Must Be at Least 6 Characters",
-        "passwordReq": "Password is Required",
-        "lost": "Forgot Password?",
         "signUp": "Sign Up",
-        "haveAccount": "Already Have an Account?",
-        "phoneNumber": "Phone Number",
-        "firstName": "First Name",
-        "firstNameReq": "First Name is Required",
-        "lastName": "Last Name",
-        "lastNameReq": "Last Name is Required",
-        "agree": "I Agree to the User Agreement",
-        "terms": "Terms and Conditions.",
-        "mustAgree": "You Must Agree to the Terms and Conditions",
-        "welcome": "Welcome, Friend",
         "ready": "Ready?",
-        "readyDesc": "Are you ready to keep pace with the job market opportunities we will provide?",
+        "readyText": "Are you ready to keep pace with the job market opportunities we will provide?",
         "time": "Time",
-        "timeDesc": "All you need to do is provide time and we will develop your skills",
-        "warning": "Please make sure to enter a valid username and password"
+        "timeText": "All you need to do is provide time and we will develop your skills",
+        "account": "Don't have an account?",
+        "forget": "Forget Password?",
+        "haveAccount": "Already Have an Account?",
+        "email": "Email",
+        "password": "Password",
+        "first_name": "First Name",
+        "last_name": "Last Name",
+        "phone": "Phone",
+        "terms": "I Agree to the User Agreement",
+        "terms_conditions": "Terms and Conditions"
+    },
+    "benfits": {
+        "title": "Learning Benefits with",
+        "subTitle": "Since you're still scrolling, it means the message resonated with you and you're eager to work in this field...",
+        "subTitle2": "Let me tell you what you'll gain by learning programming at ITLegend:",
+        "campany_name": "ITLegend"
+    },
+    "benfitsCard": {
+        "title1": "Business Management",
+        "subTitle1": "You have a mentor to guide you every step of the way.",
+        "title2": "Arts and Design",
+        "subTitle2": "By applying to real-world problems and projects.",
+        "title3": "Personal Development",
+        "subTitle3": "Learn with enjoyment: points, medals, and daily challenges.",
+        "title4": "Health and Fitness",
+        "subTitle4": "You'll find the learning path that suits you.",
+        "title5": "Data Science",
+        "subTitle5": "Videos, books, and summaries.",
+        "title6": "Marketing",
+        "subTitle6": "Laptop, mobile, or computer with ease.",
+        "title7": "Business and Finance",
+        "subTitle7": "The content is accessible anytime you need it.",
+        "title8": "Computer Science",
+        "subTitle8": "Got a problem? We're here for you.",
+        "title9": "Video and Photography",
+        "subTitle9": "Share your achievements and ask your peers."
+    },
+    "mobileApp": {
+        "title1": "If You Prefer Learning on Your Phone, Download the Platform App",
+        "title2": "And Enjoy a Beneficial and Focused Learning Experience, Designed Just for You",
+        "faqSubTitle": "Frequently Asked Questions",
+        "faqSubTitle2": "What are you thinking about?"
+    },
+    "diploma": {
+        "title": "Paid Diplomas on the Platform",
+        "subTitle": "Learning Paths"
+    },
+    "homeCourse": {
+        "success": "Success",
+        "title": " is the accumulation of many right steps Start with the right step...",
+        "btn": "Watch this Video",
+        "subTitle": "The Free Diploma",
+        "title2": "I offer a free diploma that teaches you the basics of programming",
+        "desc": "We offer you a unique opportunity to gain a free diploma that will give you a strong foundation in programming basics. Whether you're a beginner or looking to enhance your skills, this diploma is specially designed to equip you with practical knowledge and the necessary tools to enter the programming world. Join now and take advantage of this special offer that will open new doors in the field of technology and programming!",
+        "point1": "Completely Free",
+        "point2": "Will Set a Strong Foundation in Programming",
+        "point3": "No Prior Knowledge Required, Just Start Immediately"
+    },
+    "experienceCard": {
+        "years": "Years",
+        "Thousand": "Thousand",
+        "title1": "in the field",
+        "title2": "benefited from his courses",
+        "title3": "of working in global companies",
+        "title4": "from studying the psychology of programmers",
+        "titleHead": "Many will teach you programming, but who will prepare you for the job market?",
+        "desc": "Information is everywhere, but the market demands something else... So the right question is, where is the place that will prepare me to work and earn from what I have learned?",
+        "ali": "Ali Shaheen",
+        "ali_exp": "15 years of experience in the field"
+    },
+    "error404": {
+        "title": "404 - Page Not Found",
+        "message": "The page you are looking for doesn't exist"
+    },
+    "diplomaDetails": {
+        "about": {
+            "title": "Why choose it?",
+            "subTitle": "Who should take this path?",
+            "desc": "If you want to start your career in programming but don’t know what to choose or where to begin, this course will set you on the right path until you land your first job."
+        },
+        "tech": {
+            "title": "Technology",
+            "subTitle": "Technology Used",
+            "desc": "When you start learning a new skill, you might feel nervous or anxious. But don’t worry about it—you’ll master it easily with time and practice. Every small step brings you closer to your goal, and you’ll find yourself gradually gaining confidence and skill. Enjoy the process of learning and don’t hesitate to dive into the details."
+        },
+        "traits": {
+            "subTitle": "Traits",
+            "title": "The personal traits that, if you possess, will help you excel in this field and as you learn this path."
+        },
+        "info": {
+            "title": "What do I need to know before studying this path?",
+            "desc": "We offer you a unique learning experience that allows you to start your journey from scratch with no worries. Our specialized team will guide you step by step, ensuring you understand the fundamental concepts and apply them effectively."
+        },
+        "projects": {
+            "title": "The Projects You Will Work on During This Diploma",
+            "btn": "More Projects",
+            "subTitle": "Projects"
+        },
+        "footer": {
+            "title": "Mistakes You Should Avoid",
+            "btn": "Start Now"
+        },
+        "faqs": {
+            "subTitle": "Mistakes",
+            "title": "Common "
+        }
+    },
+    "user": {
+        "diplomaPage": {
+            "score": "My Total Score",
+            "myTitle": "My Title",
+            "currentRank": "Current Rank",
+            "crownLight": "Crown Light",
+            "status": "Under Training",
+            "status1": "Practitioner",
+            "status2": "300 Coin",
+            "card1": "Total Hours Learned",
+            "card2": "Total Exams Passed",
+            "card3": "Total Videos Watched"
+        }
+    },
+    "singleDiploma": {
+        "titleDiploma": "The progress level in the diploma."
+    },
+    "courseTabs": {
+        "links": "Important Links",
+        "q_a": "Ask a Question",
+        "leader": "Leaderboard",
+        "courseContent": "Course Content"
+    },
+    "courseResults": {
+        "title1": "Points",
+        "title2": "Level",
+        "title3": "Daily Challenge"
+    },
+    "empty": {
+        "comment": "No comments yet",
+        "links": "No links yet"
     }
 }
