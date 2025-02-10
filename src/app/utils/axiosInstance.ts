@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getCookie } from "cookies-next";
 export const AxiosInstance = axios.create({
-    baseURL: "http://49.13.77.125:1118/Endpoint/api",
+    baseURL: "http://49.13.77.125:1118/Endpoint",
 });
 AxiosInstance.defaults.headers.common["Accept"] = "application/json";
 AxiosInstance.defaults.headers.common["Content-Type"] = "application/json";
