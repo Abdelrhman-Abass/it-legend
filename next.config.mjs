@@ -44,7 +44,7 @@ const nextConfig = {
         return [
             {
                 source: "/api/:path*",
-                destination: `${process.env.NEXT_PUBLIC_BASE_URL}/api/:path*`,
+                destination: "http://49.13.77.125:1118/Endpoint/api/:path*",
             },
         ];
     },
