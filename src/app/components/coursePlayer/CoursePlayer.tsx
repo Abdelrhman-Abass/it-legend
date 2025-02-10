@@ -96,7 +96,6 @@ export default function CoursePlayer({ slug }: { slug: string }) {
     });
 
 
-    useEffect(() => {  
         useEffect(() => {
             if (vdocipherOTP?.data?.otp) {
                 setVdocipherConfig({
@@ -106,7 +105,6 @@ export default function CoursePlayer({ slug }: { slug: string }) {
             }
         }, [vdocipherOTP]);
         
-    }, [vdocipherOTP]);
 
 
     const videoCommentsMutation = useMutation({
