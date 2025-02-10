@@ -82,12 +82,33 @@ export default function CoursePlayer({ slug }: { slug: string }) {
         enabled: !!videoNode,
     });
 
+    
     useEffect(() => {
         if (courseVideos?.data?.data?.video?.path) {
             setVideoCipherPath(courseVideos.data.data.video.path);
         }
     }, [courseVideos]);
     
+    const { data: vdocipherOTP, isLoading: isLoadingvdocipherOTP } = useQuery({
+        queryKey: ["Vdo_Cipher_Otp", {videoCipherPath }],
+        queryFn: () => vdocipherPostServerOtpRequest(videoCipherPath),
+        enabled: !!videoCipherPath,
+    });
+
+
+    useEffect(() => {  
+        useEffect(() => {
+            if (vdocipherOTP?.data?.otp) {
+                setVdocipherConfig({
+                    otp: vdocipherOTP.data.otp,
+                    playbackInfo: vdocipherOTP.data.playbackInfo,
+                });
+            }
+        }, [vdocipherOTP]);
+        
+    }, [vdocipherOTP]);
+
+
     const videoCommentsMutation = useMutation({
         mutationFn: (nodeId) => getServerRequest(`/VideoComment/${nodeId}/comments`),
     });
@@ -107,13 +128,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
     // });
 
     // Fetch OTP when videoId changes
-    useEffect(() => {
-        const fetchOtp = async () => {
-            const res = await vdocipherPostServerOtpRequest(videoCipherPath);
-            console.log(res);
-        };
-        fetchOtp();
-    }, [videoCipherPath]);
+   
 
     // Derived state: First unwatched node
     const firstUnwatchedNodeId = useMemo(() => {
