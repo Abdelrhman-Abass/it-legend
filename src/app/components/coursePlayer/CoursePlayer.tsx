@@ -154,7 +154,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
             localStorage.setItem("watchedPercentage", JSON.stringify(lastWatchedPercentage));
             if (watchedPercentage >= WATCH_THRESHOLD_PERCENTAGE) {
                 watchVideoMutation.mutate();
-                alert("You have watched 80% of the video");
+                // alert("You have watched 80% of the video");
             }
         },
         [playbackState.duration, watchVideoMutation],
@@ -165,7 +165,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
         if (MemberCoursePlayer?.data?.data) {
             const nodes = MemberCoursePlayer.data.data.flatMap((item: any) => item.nodes);
             const currentIndex = nodes.findIndex((node: any) => node.nodeId === videoNode);
-            console.log(currentIndex)
+            console.log(videoNode)
             let nextNode;
             if (currentIndex !== -1 && currentIndex < nodes.length - 1) {
                 // If there is a next video, play it
@@ -238,6 +238,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                     document.body.appendChild(script);
                 });
             };
+            // console.log(videoNode  + " Node video from efffect")
             
             loadScript()
             .then(() => {
@@ -247,7 +248,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
             .catch((error) => {
                 console.error("❌ VdoCipher API load error:", error);
             });
-        }, [CourseDetails, videoId ]);
+        }, [CourseDetails, videoId, videoNode ]);
         
         const initializePlayer = () => {
             if (!iframeRef.current) {
@@ -262,7 +263,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                     setTimeout(checkVdoPlayer, 100);
                 } else {
                     console.log("🎬 Initializing VdoCipher Player...");
-        
+                    
                     try {
                         const playerInstance = window.VdoPlayer.getInstance(iframeRef.current);
                         if (playerInstance.video) {
@@ -282,26 +283,9 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                                 if (progress >= 80 && progress < 81) {
                                     console.log("🎯 Video reached 80%");
                                 }
-                                if (progress >= 50) {
-                                    // handleVideoEnd();
-                                    if (MemberCoursePlayer?.data?.data) {
-                                        const nodes = MemberCoursePlayer.data.data.flatMap((item: any) => item.nodes);
-                                        const currentIndex = nodes.findIndex((node: any) => node.nodeId === videoNode);
-                                        let nextNode;
-                                        if (currentIndex !== -1 && currentIndex < nodes.length - 1) {
-                                            // If there is a next video, play it
-                                            nextNode = nodes[currentIndex + 1];
-                                        } else {
-                                            // If there is no next video, play the first video
-                                            nextNode = nodes[0];
-                                        }
-                            
-                                        if (nextNode) {
-                                            setVideoNode(nextNode.nodeId);
-                                            setVideoName(locale === "ar" ? nextNode.titleAr : nextNode.titleEn);
-                                            videoCommentsMutation.mutate(nextNode.contentId);
-                                        }
-                                    }
+                                if (progress >= 100) {
+                                    handleVideoEnd();
+                                    
                                     console.log("🏁 Video reached 100%");
                                 }
                             });
