@@ -20,6 +20,7 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 const CoursePlayerAccordion = dynamic(() => import("../common/coursePlayerAccordion/CoursePlayerAccordion"), { ssr: false });
 const CourseTabs = dynamic(() => import("../common/courseTabs/CourseTabs"), { ssr: false });
+import { Autoplay } from 'swiper/modules';
 
 // Constants
 const WATCH_THRESHOLD_PERCENTAGE = 80;
@@ -45,6 +46,8 @@ export default function CoursePlayer({ slug }: { slug: string }) {
 
     const { videoNode, setVideoNode, videoLink, videoName, videoId, CourseVideo, setVideoName, lastVideoData } = GenralCoursePlayerId();
     const playerRef = useRef<HTMLVideoElement | null>(null);
+    const iframeRef = useRef<HTMLIFrameElement>(null);
+
     const sourceRef = useRef<any>(null);
 
     const [vdocipherConfig, setVdocipherConfig] = useState<any>({ otp: "", playbackInfo: "" });
@@ -62,7 +65,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
         queryKey: ["CourseDetails", { slug }],
         queryFn: () => getServerRequest(`/MemberCoursePlayer/${slug}`),
     });
-    console.log(CourseDetails?.data?.data?.image,"CourseDetails");
+    // console.log(CourseDetails?.data?.data?.image,"CourseDetails");
 
     
     
@@ -162,7 +165,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
         if (MemberCoursePlayer?.data?.data) {
             const nodes = MemberCoursePlayer.data.data.flatMap((item: any) => item.nodes);
             const currentIndex = nodes.findIndex((node: any) => node.nodeId === videoNode);
-
+            console.log(currentIndex)
             let nextNode;
             if (currentIndex !== -1 && currentIndex < nodes.length - 1) {
                 // If there is a next video, play it
@@ -210,6 +213,112 @@ export default function CoursePlayer({ slug }: { slug: string }) {
             videoCommentsMutation.mutate(lastVideoData?.data?.data?.contentId);
         }
     }, [lastVideoData]);
+
+    // http://localhost:3000/ar/learn-path/course-player/6c719fa0-70ea-41cc-bfb1-972482285d23
+    // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImE4YzhlMGQ1LTU5MmYtNDdhZC1hYWIyLTA2OWM2MjEwNmVkOCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhbGFhbXVoYW1lZDk3QGdtYWlsLmNvbSIsImp0aSI6IjYxNmZmNDk4LWYwOTItNDZmYy1hZjhiLTA3MjNiNWJhYzFiNCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6InVzZXIiLCJleHAiOjE3MzkzMTA4MTMsImlzcyI6Imh0dHBzOi8vd3d3Lml0bGVnZW5kLm5ldC8iLCJhdWQiOiJodHRwczovL3d3dy5pdGxlZ2VuZC5uZXQvIn0.THAxwYRyHLr2QJogl4tQrOIoHdWAWk2jrBjx5MVWL7g
+    // const iframeRef = useRef(null);
+    
+    
+    
+    useEffect(() => {
+        const scriptSrc = "https://player.vdocipher.com/v2/api.js";
+        
+        const loadScript = () => {
+            return new Promise((resolve, reject) => {
+                    if (document.querySelector(`script[src="${scriptSrc}"]`)) {
+                        resolve("Script already loaded");
+                        return;
+                    }
+                    
+                    const script = document.createElement("script");
+                    script.src = scriptSrc;
+                    script.async = true;
+                    script.onload = () => resolve("Script loaded successfully");
+                    script.onerror = () => reject("Script load error");
+                    document.body.appendChild(script);
+                });
+            };
+            
+            loadScript()
+            .then(() => {
+                console.log("✅ VdoCipher API loaded.");
+                initializePlayer();
+            })
+            .catch((error) => {
+                console.error("❌ VdoCipher API load error:", error);
+            });
+        }, [CourseDetails, videoId ]);
+        
+        const initializePlayer = () => {
+            if (!iframeRef.current) {
+                console.warn("⚠️ iframeRef.current is not available yet. Retrying...");
+                setTimeout(initializePlayer, 100); // Retry after 100ms
+                
+            }
+            
+            const checkVdoPlayer = () => {
+                if (typeof window.VdoPlayer === "undefined") {
+                    console.warn("⚠️ VdoPlayer not available yet. Retrying...");
+                    setTimeout(checkVdoPlayer, 100);
+                } else {
+                    console.log("🎬 Initializing VdoCipher Player...");
+        
+                    try {
+                        const playerInstance = window.VdoPlayer.getInstance(iframeRef.current);
+                        if (playerInstance.video) {
+                            console.log("✅ Player instance found. Adding event listeners...");
+        
+                            playerInstance.video.addEventListener("play", () => {
+                                console.log("▶️ Video is playing");
+                            });
+        
+                            
+                            // Tracking 80% and 100% progress
+                            playerInstance.video.addEventListener("timeupdate", () => {
+                                let currentTime = playerInstance.video.currentTime;
+                                let duration = playerInstance.video.duration;
+                                let progress = (currentTime / duration) * 100;
+        
+                                if (progress >= 80 && progress < 81) {
+                                    console.log("🎯 Video reached 80%");
+                                }
+                                if (progress >= 50) {
+                                    // handleVideoEnd();
+                                    if (MemberCoursePlayer?.data?.data) {
+                                        const nodes = MemberCoursePlayer.data.data.flatMap((item: any) => item.nodes);
+                                        const currentIndex = nodes.findIndex((node: any) => node.nodeId === videoNode);
+                                        let nextNode;
+                                        if (currentIndex !== -1 && currentIndex < nodes.length - 1) {
+                                            // If there is a next video, play it
+                                            nextNode = nodes[currentIndex + 1];
+                                        } else {
+                                            // If there is no next video, play the first video
+                                            nextNode = nodes[0];
+                                        }
+                            
+                                        if (nextNode) {
+                                            setVideoNode(nextNode.nodeId);
+                                            setVideoName(locale === "ar" ? nextNode.titleAr : nextNode.titleEn);
+                                            videoCommentsMutation.mutate(nextNode.contentId);
+                                        }
+                                    }
+                                    console.log("🏁 Video reached 100%");
+                                }
+                            });
+                        }
+                    } catch (error) {
+                        console.error("❌ Error initializing VdoCipher:", error);
+                    }
+                }
+            };
+        
+            checkVdoPlayer();
+        };
+
+
+
+
+
 
     // Effect to handle HLS video
     useEffect(() => {
@@ -281,6 +390,15 @@ export default function CoursePlayer({ slug }: { slug: string }) {
         return time;
     };
 
+    useEffect(() => {
+        if (iframeRef.current) {
+            iframeRef.current.contentWindow?.postMessage({ event: "subscribe", type: "timeupdate" }, "*");
+        }
+
+        console.log(iframeRef.current)
+        
+    }, []);
+
     // Function to check video type and render appropriate player
     const checkVideoType = useCallback(() => {
         const playerType = CourseDetails?.data?.data?.playerType;
@@ -346,18 +464,28 @@ export default function CoursePlayer({ slug }: { slug: string }) {
             case 2: //vdocipher
                 return (
                     <iframe
-                        src={`https://player.vdocipher.com/v2/?otp=${videoLink}&playbackInfo=${vdocipherConfig.playbackInfo}`}
-                        // style={{ width: "100%", height: "19em", border: "none" }}
-                        allowFullScreen
-                        allow="encrypted-media"
-                        onLoad={() => {
-                            // Send a message to the iframe to listen for the video end event
-                            const iframe = document.querySelector("iframe") as any;
-                            if (iframe) {
-                                iframe.contentWindow.postMessage("listenForVideoEnd", "*");
-                            }
-                        }}
-                    />
+                            src={`https://player.vdocipher.com/v2/?otp=${vdocipherConfig.otp}&playbackInfo=${vdocipherConfig.playbackInfo}&autoplay=false&enableEvents=true&enablePostroll=true`}
+                            // allowFullScreen
+                            ref={iframeRef}
+                            id="vdocipher-player"
+                            allow="encrypted-media"
+                            onLoad={() => {
+                                const iframe = document.querySelector("vdocipher-player") as any;
+
+                                if (iframe) {
+                                    iframe.contentWindow.postMessage("listenForVideoEnd", "*");
+                                    iframe.contentWindow.postMessage("listenForVideoProgress", "*");
+                                }
+                            }}
+                            // id="vdocipher-player"
+                            title="Vdocipher Player"
+                            
+                            // allow="autoplay; fullscreen; picture-in-picture"
+                            allowFullScreen
+                        />
+
+                        
+
                 );
             default:
                 return null;
@@ -380,13 +508,13 @@ export default function CoursePlayer({ slug }: { slug: string }) {
     useEffect(() => {
         const handleIframeProgress = (event: any) => {
             if (event.data.event_id === "publitio_video_played") {
-                console.log(event.data.type, "progress");
+                // console.log(event.data.type, "progress");
 
                 const progress = {
                     playedSeconds: event.data.currentTime,
                     played: event.data.currentTime / event.data.duration,
                 };
-                console.log(progress, "progress");
+                // console.log(progress, "progress");
 
                 handleProgress(progress);
             }
