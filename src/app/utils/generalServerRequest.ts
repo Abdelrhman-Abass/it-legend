@@ -50,26 +50,3 @@ export const spcificPostServerRequest = async (url: string) => {
     }
 };
 
-
-export const vdocipherPostServerOtpRequest = async (videoPath: string) => {
-    try {
-        const API_SECRET_KEY = process.env.NEXT_PUBLIC_VDOCIPHER;
-        console.log(videoPath)
-
-        const response = await axios.post(
-            `https://dev.vdocipher.com/api/videos/${videoPath}/otp`,
-            {}, // Axios requires an empty object as the request body
-            {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Apisecret ${API_SECRET_KEY}`,
-                },
-            }
-        );
-
-        return response.data;
-    } catch (error) {
-        console.error("Error fetching VdoCipher OTP:", error);
-        throw error;
-    }
-};

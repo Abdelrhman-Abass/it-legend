@@ -6,7 +6,7 @@ import { useMediaQuery } from "react-responsive";
 import { useParams, useRouter } from "next/navigation";
 import { useCookies } from "react-cookie";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { getServerRequest, spcificPostServerRequest ,vdocipherPostServerOtpRequest } from "@/app/utils/generalServerRequest";
+import { getServerRequest, spcificPostServerRequest  } from "@/app/utils/generalServerRequest";
 import GenralCoursePlayerId from "@/app/store/GeneralCoursePlayer";
 import LineProgress from "../common/lineProgress/LineProgress";
 import AddComment from "../common/addComment/AddComment";
@@ -91,18 +91,20 @@ export default function CoursePlayer({ slug }: { slug: string }) {
     
     const { data: vdocipherOTP, isLoading: isLoadingvdocipherOTP } = useQuery({
         queryKey: ["Vdo_Cipher_Otp", {videoCipherPath }],
-        queryFn: () => vdocipherPostServerOtpRequest(videoCipherPath),
+        queryFn: () => getServerRequest(`/VdoCipher/${videoCipherPath}/otp`),
         enabled: !!videoCipherPath,
     });
 
 
         useEffect(() => {
-            if (vdocipherOTP?.data?.otp) {
+            if (vdocipherOTP?.data?.data?.otp) {
                 setVdocipherConfig({
-                    otp: vdocipherOTP.data.otp,
-                    playbackInfo: vdocipherOTP.data.playbackInfo,
+                    otp: vdocipherOTP.data.data.otp,
+                    playbackInfo: vdocipherOTP.data.data.playbackInfo,
                 });
             }
+            console.log(vdocipherOTP?.data.data?.otp)
+
         }, [vdocipherOTP]);
         
 
