@@ -89,6 +89,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
         }
     }, [courseVideos]);
     
+    // Fetch OTP when videoId changes
     const { data: vdocipherOTP, isLoading: isLoadingvdocipherOTP } = useQuery({
         queryKey: ["Vdo_Cipher_Otp", {videoCipherPath }],
         queryFn: () => getServerRequest(`/VdoCipher/${videoCipherPath}/otp`),
@@ -96,15 +97,14 @@ export default function CoursePlayer({ slug }: { slug: string }) {
     });
 
 
-        useEffect(() => {
-            if (vdocipherOTP?.data?.data?.otp) {
-                setVdocipherConfig({
-                    otp: vdocipherOTP.data.data.otp,
-                    playbackInfo: vdocipherOTP.data.data.playbackInfo,
-                });
-            }
-            console.log(vdocipherOTP?.data.data?.otp)
-
+    useEffect(() => {
+        if (vdocipherOTP?.data?.data?.otp) {
+            setVdocipherConfig({
+                otp: vdocipherOTP.data.data.otp,
+                playbackInfo: vdocipherOTP.data.data.playbackInfo,
+            });
+        }
+    
         }, [vdocipherOTP]);
         
 
@@ -119,15 +119,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
             refetchMemberCoursePlayer();
         },
     });
-    // const watchVideoMutation = useMutation({
-    //     mutationFn: () => vdocipherPostServerOtpRequest(videoCipherPath),
-    //     onSuccess: () => {
-    //         refetchMemberCoursePlayer();
-    //         consoel
-    //     },
-    // });
-
-    // Fetch OTP when videoId changes
+   
    
 
     // Derived state: First unwatched node
