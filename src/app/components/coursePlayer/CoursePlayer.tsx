@@ -22,7 +22,14 @@ const CoursePlayerAccordion = dynamic(() => import("../common/coursePlayerAccord
 const CourseTabs = dynamic(() => import("../common/courseTabs/CourseTabs"), { ssr: false });
 import { Autoplay } from 'swiper/modules';
 
-// Constants
+declare global {
+    interface Window {
+        VdoPlayer: any; // You can replace 'any' with the specific type if you know it
+    }
+}
+// Constants 
+// http://localhost:3000/ar/learn-path/course-player/6c719fa0-70ea-41cc-bfb1-972482285d23
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImE4YzhlMGQ1LTU5MmYtNDdhZC1hYWIyLTA2OWM2MjEwNmVkOCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhbGFhbXVoYW1lZDk3QGdtYWlsLmNvbSIsImp0aSI6IjFiYjdkYzhlLWY1YmUtNDMxNy05MWMzLTQ3NzBmOGUxYzdiNiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6InVzZXIiLCJleHAiOjE3MzkzNDgzMDYsImlzcyI6Imh0dHBzOi8vd3d3Lml0bGVnZW5kLm5ldC8iLCJhdWQiOiJodHRwczovL3d3dy5pdGxlZ2VuZC5uZXQvIn0.t5sHF_SrVOYlzwiPhaImp5mm2DWa1XIu26v8M169U80
 const WATCH_THRESHOLD_PERCENTAGE = 80;
 
 // Reducer for playback state
@@ -166,6 +173,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
             const nodes = MemberCoursePlayer.data.data.flatMap((item: any) => item.nodes);
             const currentIndex = nodes.findIndex((node: any) => node.nodeId === videoNode);
             console.log(videoNode)
+            // watchVideoMutation()
             let nextNode;
             if (currentIndex !== -1 && currentIndex < nodes.length - 1) {
                 // If there is a next video, play it
@@ -213,11 +221,6 @@ export default function CoursePlayer({ slug }: { slug: string }) {
             videoCommentsMutation.mutate(lastVideoData?.data?.data?.contentId);
         }
     }, [lastVideoData]);
-
-    // http://localhost:3000/ar/learn-path/course-player/6c719fa0-70ea-41cc-bfb1-972482285d23
-    // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImE4YzhlMGQ1LTU5MmYtNDdhZC1hYWIyLTA2OWM2MjEwNmVkOCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhbGFhbXVoYW1lZDk3QGdtYWlsLmNvbSIsImp0aSI6IjYxNmZmNDk4LWYwOTItNDZmYy1hZjhiLTA3MjNiNWJhYzFiNCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6InVzZXIiLCJleHAiOjE3MzkzMTA4MTMsImlzcyI6Imh0dHBzOi8vd3d3Lml0bGVnZW5kLm5ldC8iLCJhdWQiOiJodHRwczovL3d3dy5pdGxlZ2VuZC5uZXQvIn0.THAxwYRyHLr2QJogl4tQrOIoHdWAWk2jrBjx5MVWL7g
-    // const iframeRef = useRef(null);
-    
     
     
     useEffect(() => {
@@ -250,6 +253,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
             });
         }, [CourseDetails, videoId, videoNode ]);
         
+       
         const initializePlayer = () => {
             if (!iframeRef.current) {
                 console.warn("⚠️ iframeRef.current is not available yet. Retrying...");
@@ -298,11 +302,6 @@ export default function CoursePlayer({ slug }: { slug: string }) {
         
             checkVdoPlayer();
         };
-
-
-
-
-
 
     // Effect to handle HLS video
     useEffect(() => {
@@ -448,20 +447,19 @@ export default function CoursePlayer({ slug }: { slug: string }) {
             case 2: //vdocipher
                 return (
                     <iframe
-                            src={`https://player.vdocipher.com/v2/?otp=${vdocipherConfig.otp}&playbackInfo=${vdocipherConfig.playbackInfo}&autoplay=false&enableEvents=true&enablePostroll=true`}
-                            // allowFullScreen
+                            src={`https://player.vdocipher.com/v2/?otp=${vdocipherConfig.otp}&playbackInfo=${vdocipherConfig.playbackInfo}&autoplay=true&mute=false&enableEvents=true&enablePostroll=true`}
                             ref={iframeRef}
                             id="vdocipher-player"
-                            allow="encrypted-media"
-                            onLoad={() => {
-                                const iframe = document.querySelector("vdocipher-player") as any;
 
-                                if (iframe) {
-                                    iframe.contentWindow.postMessage("listenForVideoEnd", "*");
-                                    iframe.contentWindow.postMessage("listenForVideoProgress", "*");
-                                }
-                            }}
-                            // id="vdocipher-player"
+                            allow="encrypted-media"
+                            // onLoad={() => {
+                            //     const iframe = document.querySelector("vdocipher-player") as any;
+
+                            //     if (iframe) {
+                            //         iframe.contentWindow.postMessage("listenForVideoEnd", "*");
+                            //         iframe.contentWindow.postMessage("listenForVideoProgress", "*");
+                            //     }
+                            // }}
                             title="Vdocipher Player"
                             
                             // allow="autoplay; fullscreen; picture-in-picture"
