@@ -18,6 +18,7 @@ export default function GeneralPopup({ isVideo = false }: { isVideo?: boolean })
 
     return (
         <motion.div
+            onClick={closePopup}
             initial={{ opacity: 0, visibility: "hidden" }}
             animate={{ opacity: isActivePopup ? 1 : 0,  visibility: isActivePopup ? "visible" : "hidden" }}
             // exit={{ opacity: 0, visibility: "hidden" }}
@@ -33,7 +34,7 @@ export default function GeneralPopup({ isVideo = false }: { isVideo?: boolean })
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.2, delay: 0.3, ease: "easeOut" }}
                         className="general_popup_video">
-                        <ReactPlayer url={extraData?.videoUrl} controls width="100%" height="100%" />
+                        <ReactPlayer url={extraData?.videoUrl} playing={extraData?.videoUrl ? true : false} controls width="100%" height="100%" />
                     </motion.div>
                 </Suspense>
             )}

@@ -74,3 +74,13 @@
         }
     }
 }
+.dark_theme {
+    .custom_btn {
+        button {
+            span{
+                color: $white-color;
+
+            }
+        }
+    }
+}

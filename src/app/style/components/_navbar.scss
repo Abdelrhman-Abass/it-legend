@@ -6,7 +6,7 @@
     top: 0;
     z-index: 10;
     background: $white-color;
-    padding-inline-start: 0;
+    // padding-inline-start: 0;
     // &.header_player {
     //     position: static;
     // }
@@ -24,8 +24,8 @@
             }
         }
         .header-logo {
-            width: 8em;
-            height: 4em;
+            width: 5.5em;
+            height: 4.5em !important;
             img {
                 object-fit: contain;
             }
@@ -117,18 +117,16 @@
             transform: translateX(-100%);
             transition: $delay 0.2s;
             .menu-mobile_logo {
-                padding: 2em;
-                padding-inline-start: 0;
+                padding: 2.5em;
                 border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             }
             .close_menu {
-                width: 3em;
-                height: 3em;
-                background: #fdfdfd;
+                width: 5.5em;
+                height: 5.5em;
                 border-radius: 50%;
                 transition: $delay;
                 cursor: pointer;
-                color: rgba($color: $dark-color, $alpha: .5);
+                color: rgba($color: $dark-color, $alpha: 0.5);
                 // &:hover {
                 //     background: $primary-color;
                 //     svg {
@@ -150,7 +148,9 @@
                     padding: 2em;
                     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
                     color: $gray-text-color;
-                    font-weight: 600;
+                    font-weight: 500;
+                    font-size: 1.3em;
+                    color: #444;
                     &.active {
                         color: $primary-color;
                     }
@@ -222,18 +222,20 @@
 }
 
 .header-logo {
-    width: 10em;
-    height: 6em;
-    display: inline-block;
+    width: 5.5em;
+    height: 4.5em !important;
+    img {
+        object-fit: contain;
+    }
 }
 .lang_swither {
     cursor: pointer;
     text-transform: uppercase;
     font-family: var(--kufi-font) !important;
     &.mobile_lang {
-        position: absolute;
-        bottom: 1.5em;
-        right: 1.5em;
+       padding: 2em;
+       color: #444;
+       font-size: 1.3em;
     }
 }
 .dark_theme {
@@ -266,8 +268,8 @@
                 width: 100%;
             }
         }
-        .header-service{
-            .toggle_bar{
+        .header-service {
+            .toggle_bar {
                 display: block;
             }
         }

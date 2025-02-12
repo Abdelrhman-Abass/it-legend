@@ -5,7 +5,7 @@ export const AxiosInstance = axios.create({
 });
 AxiosInstance.defaults.headers.common["Accept"] = "application/json";
 AxiosInstance.defaults.headers.common["Content-Type"] = "application/json";
-AxiosInstance.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
+// AxiosInstance.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
 AxiosInstance.interceptors.request.use(
     async (config) => {
         const token = getCookie("userData"); 

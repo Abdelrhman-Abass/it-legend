@@ -1,6 +1,8 @@
 .ads_section {
-    height: 20em;
+    height: 10em;
     position: relative;
+    width: 100%;
+    display: inline-block;
     @media (max-width:768px) {
         height: 28em;
     }

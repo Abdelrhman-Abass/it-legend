@@ -35,6 +35,7 @@ const poppins = localFont({
         },
     ],
     variable: "--poppins-font",
+    display: "swap",
 });
 
 const Kufi = localFont({
@@ -43,6 +44,7 @@ const Kufi = localFont({
             path: "../../../public/fonts/kufi/NotoKufiArabic-Regular.ttf",
             weight: "400",
             style: "normal",
+        
         },
         {
             path: "../../../public/fonts/kufi/NotoKufiArabic-Medium.ttf",
@@ -56,6 +58,7 @@ const Kufi = localFont({
         },
     ],
     variable: "--kufi-font",
+    display: "swap",
 });
 
 export default async function RootLayout({

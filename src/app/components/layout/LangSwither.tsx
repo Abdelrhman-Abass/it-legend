@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 import React, { useTransition } from "react";
 type Locales = "ar" | "en";
 
-export default function LangSwither({custom_class}: {custom_class?: string}) {
+export default function LangSwither({ custom_class, arText, enText }: { custom_class?: string;  arText?: any; enText?: any }) {
     const {usePathname, useRouter } = createSharedPathnamesNavigation({
         locales: ["en", "ar"],
         localePrefix: "as-needed",
@@ -28,7 +28,7 @@ export default function LangSwither({custom_class}: {custom_class?: string}) {
                     handleSwitchLang(params.locale === "ar" ? "en" : "ar");
                 }, 600);
             }}>
-             {params.locale === "en" ? "ع" : "En"}
+             {params.locale === "en" ? arText : enText}
         </div>
     );
 }

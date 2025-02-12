@@ -12,7 +12,7 @@ const Logo = React.memo(() => {
     const { theme } = useThemeProvider();
 
     // Determine the logo path based on the theme
-    const logoPath = theme === "light" ? "/assets/images/main-logo.webp" : "/assets/images/white-logo.webp";
+    const logoPath = theme === "light" ? "/assets/images/new-logo-light.png" : "/assets/images/IT-Legend-Logo-dark.png";
     const href = !!cookies.userData ? `/${locale}/learn-path` : `/${locale}`;
     return (
         <Link href={href} className="header-logo relative">

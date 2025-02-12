@@ -41,3 +41,20 @@
         }
     }
 }
+.dark_theme {
+    .course_links{
+        background: $dark-bg;
+        h3{
+            color: $white-color;
+        }
+        .course_links_container{
+            .course_links_container_item{
+                color: $white-color;
+                border-color: rgba($color: $white-color, $alpha: .4);
+                &:hover{
+                    color: $red-color;
+                }
+            }
+        }
+    }
+}

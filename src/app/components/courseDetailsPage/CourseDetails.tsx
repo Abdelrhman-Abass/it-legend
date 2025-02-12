@@ -3,19 +3,47 @@ import React from "react";
 import AccordionItem from "../common/accordionItem/AccordionItem";
 import CourseAccordion from "../courseAccordion/CourseAccordion";
 import InstructorCard from "../common/instructorCard/InstructorCard";
+import CoursePlayerAccordion from "../common/coursePlayerAccordion/CoursePlayerAccordion";
 
 export default function CourseDetails() {
+    const demoVideosItems = [
+        {
+            moduleTitleAr: "الوحدة ١",
+            moduleTitleEn: "Module 1",
+            moduleOrder: 1,
+            nodes: [
+                {
+                    nodeId: "vid1",
+                    contentId: "c1",
+                    titleAr: "مقدمة",
+                    titleEn: "Introduction",
+                    displayOrder: 1,
+                    type: 0,
+                    isWatched: false,
+                    isFree: true,
+                    duration: "5:30",
+                },
+                {
+                    nodeId: "vid2",
+                    contentId: "c2",
+                    titleAr: "أساسيات",
+                    titleEn: "Basics",
+                    displayOrder: 2,
+                    type: 0,
+                    isWatched: true,
+                    duration: "10:45",
+                },
+            ],
+        },
+    ];
     const [activeIndex, setActiveIndex] = React.useState(0);
     return (
         <div className="course_details ">
             <div className="course_details_header">
                 <h2>Course Overview</h2>
                 <p className="p1">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus aliquid dolorem iusto reiciendis minima optio odio officiis accusamus harum repellendus aspernatur, odit dolor
-                    mollitia aut, quo voluptatibus impedit culpa officia beatae! Est iste, corrupti nemo atque quis quidem suscipit aliquid quod illo laboriosam vero autem perspiciatis harum mollitia,
-                    ipsam eum quaerat ab doloremque consequuntur ut culpa consequatur numquam asperiores quo. Delectus odit deserunt nemo explicabo rem ratione, itaque ipsa veritatis velit provident
-                    officia quas quibusdam doloremque, at tempore autem nostrum et quod. Quas rerum ab numquam asperiores temporibus totam! Beatae, facilis nemo. Ipsam, sapiente asperiores!
-                    Necessitatibus distinctio praesentium officia beatae?
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid sint reprehenderit assumenda officiis error earum voluptatem neque cum. Sed modi dolores vero illo, culpa ullam
+                    unde maiores ut. Natus ipsam numquam quas laudantium! Illo voluptatibus quos velit placeat exercitationem repellat.
                 </p>
             </div>
             <div className="course_details_points">
@@ -30,9 +58,10 @@ export default function CourseDetails() {
             </div>
             <div className="course_details_page_content">
                 <h4>Course Content :</h4>
-                {new Array(8).fill("").map((item, index) => (
-                    <CourseAccordion key={index} />
-                ))}
+                <CoursePlayerAccordion
+                    videosItems={demoVideosItems}
+                    videoCommentsMutation={null} // Pass null if an empty string is not allowed
+                />
             </div>
             <div className="course_details_page_Instructor_Card ">
                 <InstructorCard />

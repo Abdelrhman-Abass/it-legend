@@ -1,7 +1,7 @@
 import { CoursePlayerAccordionProps, VideoItem } from "@/app/types/Types";
 import { Collapse } from "antd";
 import React, { useState, useEffect } from "react";
-import { LockOutlined, MinusOutlined, PlusOutlined } from "@ant-design/icons";
+import { DownOutlined, LockOutlined, MinusOutlined, PlusOutlined, UpOutlined } from "@ant-design/icons";
 import { useParams } from "next/navigation";
 import { FaCheck, FaCheckDouble, FaFileCode } from "react-icons/fa";
 import { useCookies } from "react-cookie";
@@ -82,7 +82,7 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
 
     return (
         <div className="course_player_accordion">
-            <Collapse activeKey={activeKey} expandIcon={({ isActive }) => (isActive ? <MinusOutlined /> : <PlusOutlined />)} onChange={(keys) => setActiveKey(keys)} expandIconPosition="end" items={items} />
+            <Collapse activeKey={activeKey} expandIcon={({ isActive }) => (isActive ? <DownOutlined /> : <UpOutlined />)} onChange={(keys) => setActiveKey(keys)} expandIconPosition="end" items={items} />
         </div>
     );
 }

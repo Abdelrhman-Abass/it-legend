@@ -99,7 +99,7 @@ export default function DiplomasPage() {
         <section className="diplomas_page ">
             <NewLoader loading={isLoading} />
             {lastVideo && (
-                <div className="last_video_watched py ">
+                <div className="last_video_watched py pb_remover">
                     <Link
                         href={`/${locale}/learn-path/course-player/${lastVideo?.slug}`}
                         className="last_video_watched_item"

@@ -2,15 +2,21 @@
     position: relative;
     h2 {
         font-weight: 500;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-box-orient: vertical;
     }
     :where(.css-dev-only-do-not-override-nqoqt9).ant-progress .ant-progress-outer {
         width: 100% !important;
     }
     .ant-progress-text {
-        width: 100% !important;
-        text-align: center !important;
-        margin-top: 1em;
-        order: 1;
+        // width: 100% !important;
+        // text-align: center !important;
+        // margin-top: 1em;
+        // order: 1;
+        padding-inline-end: .7em;
     }
     .ant-progress-outer {
         flex-wrap: wrap !important;
@@ -52,7 +58,22 @@
         }
     }
 }
+.dark_theme{
+    .line_progress{
+        h2{
+            color: $white-color;
 
+        }
+        .line_progress_marker{
+            background: $dark-bg;
+            color: $white-color;
+        }
+        .ant-progress-inner {
+            background-color: rgba($color: $white-color, $alpha: .3);
+        }
+        
+    }
+}
 @keyframes toTop {
     0% {
         transform: translateY(0);

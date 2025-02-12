@@ -30,11 +30,53 @@ export default function HomeReviewsSection() {
             comment: null,
             video: "https://youtu.be/IwtkCGhZP-A?si=4GVQ6LveyQrBEb-u",
         },
+        {
+            id: Math.random().toString(),
+            name: "ali",
+            job: "طالب",
+            comment: null,
+            video: "https://youtu.be/IwtkCGhZP-A?si=4GVQ6LveyQrBEb-u",
+        },
+        {
+            id: Math.random().toString(),
+            name: "ali",
+            job: "طالب",
+            comment: null,
+            video: "https://youtu.be/IwtkCGhZP-A?si=4GVQ6LveyQrBEb-u",
+        },
+        {
+            id: Math.random().toString(),
+            name: "ali",
+            job: "طالب",
+            comment: null,
+            video: "https://youtu.be/IwtkCGhZP-A?si=4GVQ6LveyQrBEb-u",
+        },
+        {
+            id: Math.random().toString(),
+            name: "ali",
+            job: "طالب",
+            comment: null,
+            video: "https://youtu.be/IwtkCGhZP-A?si=4GVQ6LveyQrBEb-u",
+        },
+        {
+            id: Math.random().toString(),
+            name: "ali",
+            job: "طالب",
+            comment: null,
+            video: "https://youtu.be/IwtkCGhZP-A?si=4GVQ6LveyQrBEb-u",
+        },
+        {
+            id: Math.random().toString(),
+            name: "ali",
+            job: "طالب",
+            comment: null,
+            video: "https://youtu.be/IwtkCGhZP-A?si=4GVQ6LveyQrBEb-u",
+        },
     ];
     return (
         <section className="home_reviews_section p-lg py">
             <HeaderSection title="Reviews" />
-            <div className="home_reviews_section_swiper_paginations f ac jb">
+            {/* <div className="home_reviews_section_swiper_paginations f ac jb">
                 <div className="swiper_navigation f ac">
                     <div className="swiper_navigation_icon _prev f ac jc">
                         <IoIosArrowRoundBack />
@@ -43,7 +85,7 @@ export default function HomeReviewsSection() {
                         <IoIosArrowRoundForward />
                     </div>
                 </div>
-            </div>
+            </div> */}
             <div className="home_reviews_section_swiper">
                 <Swiper
                     loop
@@ -56,12 +98,12 @@ export default function HomeReviewsSection() {
                         nextEl: "._next",
                         prevEl: "._prev",
                     }}
-                    // autoplay={{
-                    //     delay: 2500,
-                    //     disableOnInteraction: false,
-                    //     pauseOnMouseEnter: true,
-                    //     reverseDirection: false,
-                    // }}
+                    autoplay={{
+                        delay: 2500,
+                        disableOnInteraction: false,
+                        pauseOnMouseEnter: true,
+                        reverseDirection: false,
+                    }}
                     speed={900}
                     spaceBetween={20}
                     breakpoints={{

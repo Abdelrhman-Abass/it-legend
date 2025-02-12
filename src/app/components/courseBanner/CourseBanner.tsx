@@ -11,7 +11,7 @@ import CourseBannerDetails from "../courseBannerDetails/CourseBannerDetails";
 export default function CourseBanner({ videoLink }: { videoLink: string }) {
     const t = useTranslations();
     return (
-        <section className="course_banner py p-lg">
+        <section id="learn_path" className="course_banner py p-lg">
             <div className="course_banner_header p-lg py">
                 <h2>
                     <span>{t("homeCourse.success")}</span> {t("homeCourse.title")}

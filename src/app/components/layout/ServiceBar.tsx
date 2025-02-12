@@ -38,7 +38,7 @@ export default function ServiceBar() {
             <div className="header-service-mode" onClick={toggleTheme}>
                 {theme === "dark" ? <FiSun style={{ color: "gold" }} /> : <IoMoonOutline />}
             </div>
-            <LangSwither />
+            <LangSwither arText={"ع"} enText={"EN"}/>
             {!isAuthenticated && <Button title={t("common.login")} url="/auth" customClass="flip_icon" hideIcon />}
             {isAuthenticated && (
                 <div className="user_menu">

@@ -17,7 +17,7 @@ export default function MobileMenu() {
                     </div>
                 </div>
                 <Menu />
-                <LangSwither custom_class="mobile_lang" />
+                <LangSwither custom_class="mobile_lang" arText={"اللغة العربية"} enText={"English"}/>
             </div>
         </div>
     );

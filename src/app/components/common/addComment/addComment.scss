@@ -10,3 +10,12 @@
         font-size: 1.3em;
     }
 }
+.dark_theme {
+    .add_comment{
+        background: $dark-bg;
+        border: 1px solid rgba($color: $white-color, $alpha: .1);
+        h3{
+            color: $white-color;
+        }
+    }
+}

@@ -7,7 +7,7 @@
             margin-inline-end: .2em;
         }
         &.watched{
-            color: #ccc;
+            color: #888;
         }
         &:not(:last-child) {
             border-bottom: 1px solid rgba($color: $dark_color, $alpha: 0.1);

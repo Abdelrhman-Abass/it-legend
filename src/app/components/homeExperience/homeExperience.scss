@@ -197,6 +197,7 @@
 @media (max-width: 1024px) {
     .home-experience {
         .home-experience_container {
+            gap: $menu-gap;
             .experience-card {
                 width: calc((100% - $menu-gap) / 2);
             }
@@ -225,7 +226,7 @@
     .home-experience {
         .home-experience_container {
             .experience-card {
-                width: calc((100% - $menu-gap * 2) / 2);
+                width: calc((100% - $menu-gap ) / 2);
             }
         }
     }

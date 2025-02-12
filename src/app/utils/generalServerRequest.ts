@@ -1,4 +1,3 @@
-import axios from "axios";
 import { AxiosInstance } from "./axiosInstance";
 export const getServerRequest = async (url: string) => {
     try {
@@ -49,4 +48,3 @@ export const spcificPostServerRequest = async (url: string) => {
         console.log(error);
     }
 };
-

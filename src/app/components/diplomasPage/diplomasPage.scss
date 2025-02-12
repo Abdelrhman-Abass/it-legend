@@ -3,6 +3,7 @@
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: $menu-gap * 2;
+        padding-block: 3em;
     }
     .student_result_container_items {
         display: grid;
@@ -23,7 +24,7 @@
             &:not(:last-child) {
                 &::after {
                     content: "";
-                    width: 1px;
+                    width: 1.5px;
                     height: 80%;
                     position: absolute;
                     right: 0;
@@ -78,6 +79,7 @@
         }
     }
     .last_video_watched {
+        padding-top: 3em;
         .last_video_watched_item {
             cursor: pointer;
             width: fit-content;
@@ -229,7 +231,7 @@
                         transform: translateX(50%) !important;
                         bottom: 0;
                         width: 90% !important;
-                        height: 1px !important;
+                        height: 1.5px !important;
                     }
                 }
             }

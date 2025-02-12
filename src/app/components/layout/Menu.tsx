@@ -20,17 +20,17 @@ export default function Menu() {
             {
                 id: 1,
                 name: t("menu.home"),
-                url: "/",
+                url: "#",
             },
             {
                 id: 2,
                 name: t("menu.learn_pathes"),
-                url: "/learn_pathes",
+                url: "#learn_path",
             },
             {
                 id: 3,
                 name: t("menu.free_courses"),
-                url: "/free_courses",
+                url: "#free_diploma",
             },
             {
                 id: 4,

@@ -114,7 +114,7 @@ interface AccordionItem {
 
 // Props for the `CoursePlayerAccordion` component
 export interface CoursePlayerAccordionProps {
-    videosItems: AccordionItem[];
+    videosItems: AccordionItem[] | any;
     videoCommentsMutation: any
 }
 
