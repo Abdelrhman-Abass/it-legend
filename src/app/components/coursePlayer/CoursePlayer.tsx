@@ -286,8 +286,13 @@ export default function CoursePlayer({ slug }: { slug: string }) {
         
                                 if (progress >= 80 && progress < 81) {
                                     console.log("🎯 Video reached 80%");
+                                    handleProgress({
+                                        playedSeconds: currentTime,
+                                        played: currentTime / duration,
+                                    });
                                 }
                                 if (progress >= 100) {
+
                                     handleVideoEnd();
                                     
                                     console.log("🏁 Video reached 100%");
