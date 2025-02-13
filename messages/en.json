@@ -188,5 +188,8 @@
     "empty": {
         "comment": "No comments yet",
         "links": "No links yet"
+    },
+    "courseMinuts":{
+        "minuts":"min"
     }
 }

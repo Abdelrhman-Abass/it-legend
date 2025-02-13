@@ -9,10 +9,10 @@ export default function Menu() {
     const { locale } = useParams();
     const pathname = usePathname();
     const t = useTranslations();
-    const [cookies] = useCookies(["userData"]);
+    const [cookies] = useCookies(["userDataRefresh"]);
 
     // Determine authentication status directly from cookies
-    const isAuthenticated = !!cookies.userData;
+    const isAuthenticated = !!cookies.userDataRefresh;
 
     // Memoize MenuData and AuthMenuData to avoid unnecessary recalculations
     const MenuData = React.useMemo(

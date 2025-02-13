@@ -18,14 +18,16 @@ export default function ServiceBar() {
     const { toggleTheme, theme } = useThemeProvider();
     const { openMenu } = UseToggleMenu();
     const t = useTranslations();
-    const [cookies, setCookie, removeCookie] = useCookies(["userData"]);
+    const [cookies, setCookie, removeCookie] = useCookies(["userDataRefresh", "userData","userDataEmail"]);
     const router = useRouter(); // For redirecting after logout
 
-    const isAuthenticated = !!cookies.userData;
+    const isAuthenticated = !!cookies.userDataRefresh;
 
     // Handle logout
     const handleLogout = () => {
         removeCookie("userData", { path: "/", expires: new Date(0) });
+        removeCookie("userDataRefresh", { path: "/", expires: new Date(0) });
+        removeCookie("userDataEmail", { path: "/", expires: new Date(0) });
         router.push("/auth");
     };
 

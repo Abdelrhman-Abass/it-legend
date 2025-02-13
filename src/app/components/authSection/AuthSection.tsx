@@ -27,7 +27,17 @@ export default function AuthSection() {
             if (data?.data.success) {
                 setCookie("userData", data?.data?.data.token, {
                     path: `/`,
-                    maxAge: 7 * 24 * 60 * 60,
+                    maxAge: 1 * 60 * 60,
+                    // httpOnly: true,
+                });
+                setCookie("userDataRefresh", data?.data?.data.refreshToken, {
+                    path: `/`,
+                    maxAge: 30 * 24 * 60 * 60,
+                    // httpOnly: true,
+                });
+                setCookie("userDataEmail", data?.data?.data.email, {
+                    path: `/`,
+                    maxAge: 30 * 24 * 60 * 60,
                     // httpOnly: true,
                 });
                 router.push(`/${locale}/learn-path`);

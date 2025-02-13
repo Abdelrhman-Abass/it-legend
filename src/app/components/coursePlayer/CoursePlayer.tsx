@@ -132,14 +132,59 @@ export default function CoursePlayer({ slug }: { slug: string }) {
 
     // Derived state: First unwatched node
 
-    const firstUnwatchedNodeId = useMemo(() => {
+    // const firstUnwatchedNodeId = useMemo(() => {
+    //     if (!MemberCoursePlayer?.data?.data) return null;
+    //     for (const item of MemberCoursePlayer.data.data) {
+    //         const node = item.nodes.find((node: any) => node.type === 0 && !node.isWatched);
+    //         if (node) return node;
+    //     }
+    //     return null;
+    // }, [MemberCoursePlayer]);
+
+    
+
+    const nextUnwatchedNode = useMemo(() => {
         if (!MemberCoursePlayer?.data?.data) return null;
-        for (const item of MemberCoursePlayer.data.data) {
+      
+        let lastWatchedIndex = -1; // Track the index of the last watched video
+        let lastWatchedNode = null; // Track the last watched video node
+      
+        // Iterate through the data to find the last watched video
+        for (let i = 0; i < MemberCoursePlayer.data.data.length; i++) {
+          const item = MemberCoursePlayer.data.data[i];
+          for (let j = 0; j < item.nodes.length; j++) {
+            const node = item.nodes[j];
+            if (node.type === 0 && node.isWatched) {
+              // Update the last watched video
+              lastWatchedIndex = i;
+              lastWatchedNode = node;
+            }
+          }
+        }
+      
+        // If no videos have been watched, return the first unwatched video
+        if (lastWatchedIndex === -1) {
+          for (const item of MemberCoursePlayer.data.data) {
             const node = item.nodes.find((node: any) => node.type === 0 && !node.isWatched);
             if (node) return node;
+          }
+          return null;
         }
-        return null;
-    }, [MemberCoursePlayer]);
+      
+        // Find the next unwatched video after the last watched video
+        for (let i = lastWatchedIndex; i < MemberCoursePlayer.data.data.length; i++) {
+          const item = MemberCoursePlayer.data.data[i];
+          const startIndex = i === lastWatchedIndex ? item.nodes.indexOf(lastWatchedNode) + 1 : 0;
+          for (let j = startIndex; j < item.nodes.length; j++) {
+            const node = item.nodes[j];
+            if (node.type === 0 && !node.isWatched) {
+              return node; // Return the next unwatched video
+            }
+          }
+        }
+      
+        return null; // No unwatched videos found
+      }, [MemberCoursePlayer]);
 
     // Handlers
     const handleDuration = useCallback((duration: number) => dispatch({ type: "SET_DURATION", payload: duration }), []);
@@ -190,12 +235,12 @@ export default function CoursePlayer({ slug }: { slug: string }) {
 
     // Effects
     useEffect(() => {
-        if (firstUnwatchedNodeId) {
-            setVideoNode(firstUnwatchedNodeId.nodeId);
-            setVideoName(locale === "ar" ? firstUnwatchedNodeId.titleAr : firstUnwatchedNodeId.titleEn);
-            videoCommentsMutation.mutate(firstUnwatchedNodeId.contentId);
+        if (nextUnwatchedNode) {
+            setVideoNode(nextUnwatchedNode.nodeId);
+            setVideoName(locale === "ar" ? nextUnwatchedNode.titleAr : nextUnwatchedNode.titleEn);
+            videoCommentsMutation.mutate(nextUnwatchedNode.contentId);
         }
-    }, [firstUnwatchedNodeId, locale, setVideoName, setVideoNode, MemberCoursePlayer]);
+    }, [nextUnwatchedNode, locale, setVideoName, setVideoNode, MemberCoursePlayer]);
 
     useEffect(() => {
         if (courseVideos?.data?.data?.video?.path) {
@@ -311,6 +356,65 @@ export default function CoursePlayer({ slug }: { slug: string }) {
             
         };
 
+        useEffect(() => {
+            const handleBeforeUnload = () => {
+                localStorage.setItem("lastVisitedURL", window.location.href);
+            };
+        
+            window.addEventListener("beforeunload", handleBeforeUnload);
+        
+            return () => {
+                window.removeEventListener("beforeunload", handleBeforeUnload);
+            };
+        }, []);
+
+        useEffect(() => {
+            const handlePopState = () => {
+                const lastURL = localStorage.getItem("lastVisitedURL");
+        
+                if (lastURL) {
+                    router.push(lastURL); // Go to last visited video URL
+                } else {
+                    window.history.back(); // Default back behavior
+                }
+            };
+        
+            window.addEventListener("popstate", handlePopState);
+        
+            return () => {
+                window.removeEventListener("popstate", handlePopState);
+            };
+        }, [router]);
+        // http://localhost:3000/ar/learn-path/course-player/6c719fa0-70ea-41cc-bfb1-972482285d23?videoNode=89b1a2a6-ced7-4fea-992a-0836cdcad80a
+        
+
+        useEffect(() => {
+            // Function to handle the popstate event
+            const handlePopState = () => {
+                // Get the current history state
+                const currentState = window.history.state;
+    
+                // Optionally, check if there is a previous state
+                if (currentState && currentState.backUrl) {
+                    // Navigate to the previous URL stored in the state
+                    router.push(currentState.backUrl);
+                } else {
+                    // Default behavior: go back one step in history
+                    window.history.back();
+                }
+            };
+    
+            // Add the event listener for the popstate event
+            window.addEventListener("popstate", handlePopState);
+    
+            // Clean up the event listener on unmount
+            return () => {
+                window.removeEventListener("popstate", handlePopState);
+            };
+        }, [router]);
+    
+        // Example: Save the current URL in the history state when navigating to this page
+        
     // Effect to handle HLS video
     useEffect(() => {
         if (CourseDetails?.data?.data?.playerType === 1 && playerRef.current && sourceRef.current) {

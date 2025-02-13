@@ -7,8 +7,10 @@ import { FaCheck, FaCheckDouble, FaFileCode } from "react-icons/fa";
 import { useCookies } from "react-cookie";
 import GenralCoursePlayerId from "@/app/store/GeneralCoursePlayer";
 import { MdOndemandVideo } from "react-icons/md";
+import { useTranslations } from "next-intl";
 
 export default function CoursePlayerAccordion({ videosItems, videoCommentsMutation }: CoursePlayerAccordionProps) {
+    const t = useTranslations()
     const { setVideoNode, setVideoName, setVideoID, setLastVideoData, videoNode } = GenralCoursePlayerId();
     const [cookies] = useCookies(["userData"]);
     const { locale } = useParams() as { locale: string }; // Ensure `locale` is a string
@@ -43,6 +45,15 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
             setActiveKey([activeModule]);
         }
     }, [videoNode, videosItems]);
+    
+    const formatDuration = (duration: string): string => {
+        if (!duration) return `0  ${t("courseMinuts.minuts")}`; // Default value if duration is missing
+        const parts = duration.split(":"); // Split "HH:MM:SS"
+        if (parts.length === 3) {
+            return ` ${parseInt(parts[1], 10)} ${t("courseMinuts.minuts")}`; // Convert MM to a number and append 'M'
+        }
+        return "0M"; // Fallback
+    };
 
     const items =
         videosItems &&
@@ -73,7 +84,7 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
                                         {child.isWatched && <FaCheck className="watch_icon" />}
                                         {!child.isWatched && child.type === 0 && <MdOndemandVideo className="watch_icon" />} {locale === "ar" ? child.titleAr : child.titleEn}
                                     </p>
-                                    {cookies.userData ? <span>{child.duration || <FaFileCode />}</span> : child.isFree ? <span>{child.duration || <FaFileCode />}</span> : <LockOutlined />}
+                                    {cookies.userData ? <span>{formatDuration(child.duration) || <FaFileCode />}</span> : child.isFree ? <span>{child.duration || <FaFileCode />}</span> : <LockOutlined />}
                                 </div>
                             ))}
                     </>
