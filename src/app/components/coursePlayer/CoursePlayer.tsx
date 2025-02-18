@@ -3,10 +3,10 @@ import React, { useEffect, useMemo, useCallback, useReducer, useRef, useState } 
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { useMediaQuery } from "react-responsive";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, usePathname } from "next/navigation";
 import { useCookies } from "react-cookie";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { getServerRequest, spcificPostServerRequest  } from "@/app/utils/generalServerRequest";
+import { getServerRequest, spcificPostServerRequest } from "@/app/utils/generalServerRequest";
 import GenralCoursePlayerId from "@/app/store/GeneralCoursePlayer";
 import LineProgress from "../common/lineProgress/LineProgress";
 import AddComment from "../common/addComment/AddComment";
@@ -20,14 +20,17 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 const CoursePlayerAccordion = dynamic(() => import("../common/coursePlayerAccordion/CoursePlayerAccordion"), { ssr: false });
 const CourseTabs = dynamic(() => import("../common/courseTabs/CourseTabs"), { ssr: false });
-import { Autoplay } from 'swiper/modules';
+import { Autoplay } from "swiper/modules";
+import { FiSun } from "react-icons/fi";
+import { IoMoonOutline } from "react-icons/io5";
+import useThemeProvider from "@/app/store/ThemeProvider";
 
 declare global {
     interface Window {
         VdoPlayer: any; // You can replace 'any' with the specific type if you know it
     }
 }
-// Constants 
+// Constants
 const WATCH_THRESHOLD_PERCENTAGE = 80;
 
 // Reducer for playback state
@@ -43,11 +46,15 @@ const playbackReducer = (state: any, action: any) => {
 };
 
 export default function CoursePlayer({ slug }: { slug: string }) {
+    const [diplomaRoute, setDiplomaRoute] = useState<string | null>("");
+    const { theme,toggleTheme } = useThemeProvider();
     const t = useTranslations();
     const { locale } = useParams();
     const router = useRouter();
+    const pathname = usePathname(); // Get the current path
+
     const [cookies, , removeCookie] = useCookies(["userData"]);
-    const [videoCipherPath , setVideoCipherPath] = useState<string>("");
+    const [videoCipherPath, setVideoCipherPath] = useState<string>("");
     const [hasHandledProgress, setHasHandledProgress] = useState(false);
 
     const { videoNode, setVideoNode, videoLink, videoName, videoId, CourseVideo, setVideoName, lastVideoData } = GenralCoursePlayerId();
@@ -72,8 +79,6 @@ export default function CoursePlayer({ slug }: { slug: string }) {
         queryFn: () => getServerRequest(`/MemberCoursePlayer/${slug}`),
     });
 
-    
-    
     const {
         data: MemberCoursePlayer,
         refetch: refetchMemberCoursePlayer,
@@ -83,27 +88,132 @@ export default function CoursePlayer({ slug }: { slug: string }) {
         queryKey: ["MemberCoursePlayer", { slug }],
         queryFn: () => getServerRequest(`/CourseNode/${slug}/nodes`),
     });
-    
+
     const { data: courseVideos, isLoading: isLoadingVideo } = useQuery({
         queryKey: ["Course_videos", { slug, videoNode }],
         queryFn: () => getServerRequest(`/CourseVideo/${slug}/videos/${videoNode}`),
         enabled: !!videoNode,
     });
 
-    
     useEffect(() => {
         if (courseVideos?.data?.data?.video?.path) {
             setVideoCipherPath(courseVideos.data.data.video.path);
         }
     }, [courseVideos]);
-    
+
     // Fetch OTP when videoId changes
     const { data: vdocipherOTP, isLoading: isLoadingvdocipherOTP } = useQuery({
-        queryKey: ["Vdo_Cipher_Otp", {videoCipherPath }],
+        queryKey: ["Vdo_Cipher_Otp", { videoCipherPath }],
         queryFn: () => getServerRequest(`/VdoCipher/${videoCipherPath}/otp`),
         enabled: !!videoCipherPath,
     });
 
+    //     useEffect(() => {
+    //         // Function to handle the popstate event
+    //         const handlePopState = () => { 1px solid rgba(255, 255, 255, 0.1)
+    //             // Get the current history state
+    //             const currentState = window.history.state;
+
+    //             // Optionally, check if there is a previous state
+    //             if (currentState && currentState.backUrl) {
+    //                 // Navigate to the previous URL stored in the state
+    //                 router.push(currentState.backUrl);
+    //             } else {
+    //                 // Default behavior: go back one step in history
+    //                 window.history.back();
+    //             }
+    //         };
+
+    //         // Add the event listener for the popstate event
+    //         window.addEventListener("popstate", handlePopState);
+
+    //         // Clean up the event listener on unmount
+    //         return () => {
+    //             window.removeEventListener("popstate", handlePopState);
+    //         };
+    //     }, [router]);
+    useEffect(() => {
+        const handleBeforeUnload = () => {
+            localStorage.setItem("lastVisitedURL", window.location.href);
+        };
+
+        window.addEventListener("beforeunload", handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener("beforeunload", handleBeforeUnload);
+        };
+    }, []);
+
+    useEffect(() => {
+        const handlePopState = () => {
+            const lastURL = localStorage.getItem("lastVisitedURL");
+
+            if (lastURL) {
+                router.push(lastURL); // Go to last visited video URL
+            } else {
+                window.history.back(); // Default back behavior
+            }
+        };
+
+        window.addEventListener("popstate", handlePopState);
+
+        return () => {
+            window.removeEventListener("popstate", handlePopState);
+        };
+    }, [router]);
+
+    useEffect(() => {
+        const handlePopState = () => {
+            const lastURL = localStorage.getItem("lastVisitedURL");
+
+            if (lastURL) {
+                router.push(lastURL); // Go to last visited video URL
+            } else {
+                window.history.back(); // Default back behavior
+            }
+        };
+
+        window.addEventListener("popstate", handlePopState);
+
+        return () => {
+            window.removeEventListener("popstate", handlePopState);
+        };
+    }, [router]);
+
+    // useEffect(() => {
+    // Function to handle the popstate event
+    // window.addEventListener("popstate", (event) => {
+    //     console.log(
+    //       `location: ${document.location}, state: ${JSON.stringify(event.state)}`,
+    //     );
+    //   });
+    // console.log(window.history);
+    // }, []);
+
+    // useEffect(() => {
+    //     // Function to handle the popstate event
+    //     const handlePopState = () => {
+    //         // Get the current history state
+    //         const currentState = window.history.state;
+
+    //         // Optionally, check if there is a previous state
+    //         if (currentState && currentState.backUrl) {
+    //             // Navigate to the previous URL stored in the state
+    //             router.push(currentState.backUrl);
+    //         } else {
+    //             // Default behavior: go back one step in history
+    //             window.history.back();
+    //         }
+    //     };
+
+    //     // Add the event listener for the popstate event
+    //     window.addEventListener("popstate", handlePopState);
+
+    //     // Clean up the event listener on unmount
+    //     return () => {
+    //         window.removeEventListener("popstate", handlePopState);
+    //     };
+    // }, [router]);
 
     useEffect(() => {
         if (vdocipherOTP?.data?.data?.otp) {
@@ -112,10 +222,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                 playbackInfo: vdocipherOTP.data.data.playbackInfo,
             });
         }
-    
-        }, [vdocipherOTP]);
-        
-
+    }, [vdocipherOTP]);
 
     const videoCommentsMutation = useMutation({
         mutationFn: (nodeId) => getServerRequest(`/VideoComment/${nodeId}/comments`),
@@ -127,64 +234,52 @@ export default function CoursePlayer({ slug }: { slug: string }) {
             refetchMemberCoursePlayer();
         },
     });
-   
-   
 
     // Derived state: First unwatched node
 
-    // const firstUnwatchedNodeId = useMemo(() => {
-    //     if (!MemberCoursePlayer?.data?.data) return null;
-    //     for (const item of MemberCoursePlayer.data.data) {
-    //         const node = item.nodes.find((node: any) => node.type === 0 && !node.isWatched);
-    //         if (node) return node;
-    //     }
-    //     return null;
-    // }, [MemberCoursePlayer]);
-
-    
-
     const nextUnwatchedNode = useMemo(() => {
         if (!MemberCoursePlayer?.data?.data) return null;
-      
+
         let lastWatchedIndex = -1; // Track the index of the last watched video
         let lastWatchedNode = null; // Track the last watched video node
-      
+
         // Iterate through the data to find the last watched video
         for (let i = 0; i < MemberCoursePlayer.data.data.length; i++) {
-          const item = MemberCoursePlayer.data.data[i];
-          for (let j = 0; j < item.nodes.length; j++) {
-            const node = item.nodes[j];
-            if (node.type === 0 && node.isWatched) {
-              // Update the last watched video
-              lastWatchedIndex = i;
-              lastWatchedNode = node;
+            const item = MemberCoursePlayer.data.data[i];
+            for (let j = 0; j < item.nodes.length; j++) {
+                const node = item.nodes[j];
+                if (node.type === 0 && node.isWatched) {
+                    // Update the last watched video
+                    lastWatchedIndex = i;
+                    lastWatchedNode = node;
+                }
             }
-          }
         }
-      
+
         // If no videos have been watched, return the first unwatched video
         if (lastWatchedIndex === -1) {
-          for (const item of MemberCoursePlayer.data.data) {
-            const node = item.nodes.find((node: any) => node.type === 0 && !node.isWatched);
-            if (node) return node;
-          }
-          return null;
+            for (const item of MemberCoursePlayer.data.data) {
+                const node = item.nodes.find((node: any) => node.type === 0 && !node.isWatched);
+                if (node) return node;
+            }
+            return null;
         }
-      
+
         // Find the next unwatched video after the last watched video
         for (let i = lastWatchedIndex; i < MemberCoursePlayer.data.data.length; i++) {
-          const item = MemberCoursePlayer.data.data[i];
-          const startIndex = i === lastWatchedIndex ? item.nodes.indexOf(lastWatchedNode) + 1 : 0;
-          for (let j = startIndex; j < item.nodes.length; j++) {
-            const node = item.nodes[j];
-            if (node.type === 0 && !node.isWatched) {
-              return node; // Return the next unwatched video
+            const item = MemberCoursePlayer.data.data[i];
+            const startIndex = i === lastWatchedIndex ? item.nodes.indexOf(lastWatchedNode) + 1 : 0;
+            for (let j = startIndex; j < item.nodes.length; j++) {
+                const node = item.nodes[j];
+                if (node.type === 0 && !node.isWatched) {
+                    return node; // Return the next unwatched video
+                }
             }
-          }
         }
-      
-        return null; // No unwatched videos found
-      }, [MemberCoursePlayer]);
+
+        return MemberCoursePlayer.data.data[0]?.nodes[0] ?? null;
+         
+    }, [MemberCoursePlayer]);
 
     // Handlers
     const handleDuration = useCallback((duration: number) => dispatch({ type: "SET_DURATION", payload: duration }), []);
@@ -207,7 +302,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                 // alert("You have watched 80% of the video");
             }
         },
-        [playbackState.duration, watchVideoMutation ,hasHandledProgress],
+        [playbackState.duration, watchVideoMutation, hasHandledProgress],
     );
 
     // Function to handle video end
@@ -263,29 +358,28 @@ export default function CoursePlayer({ slug }: { slug: string }) {
             videoCommentsMutation.mutate(lastVideoData?.data?.data?.contentId);
         }
     }, [lastVideoData]);
-    
-    
+
     useEffect(() => {
         const scriptSrc = "https://player.vdocipher.com/v2/api.js";
         if (CourseDetails?.data?.data?.playerType == 2) {
             const loadScript = () => {
                 return new Promise((resolve, reject) => {
-                        if (document.querySelector(`script[src="${scriptSrc}"]`)) {
-                            resolve("Script already loaded");
-                            return;
-                        }
-                        
-                        const script = document.createElement("script");
-                        script.src = scriptSrc;
-                        script.async = true;
-                        script.onload = () => resolve("Script loaded successfully");
-                        script.onerror = () => reject("Script load error");
-                        document.body.appendChild(script);
-                    });
-                };
-                // console.log(videoNode  + " Node video from efffect")
-                
-                loadScript()
+                    if (document.querySelector(`script[src="${scriptSrc}"]`)) {
+                        resolve("Script already loaded");
+                        return;
+                    }
+
+                    const script = document.createElement("script");
+                    script.src = scriptSrc;
+                    script.async = true;
+                    script.onload = () => resolve("Script loaded successfully");
+                    script.onerror = () => reject("Script load error");
+                    document.body.appendChild(script);
+                });
+            };
+            // console.log(videoNode  + " Node video from efffect")
+
+            loadScript()
                 .then(() => {
                     console.log("✅ VdoCipher API loaded.");
                     initializePlayer();
@@ -293,128 +387,162 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                 .catch((error) => {
                     console.error("❌ VdoCipher API load error:", error);
                 });
-
         }
-        }, [CourseDetails, videoId, videoNode ]);
-        
-       
-        const initializePlayer = () => {
+    }, [CourseDetails, videoId, videoNode]);
 
-            if (CourseDetails?.data?.data?.playerType == 2) {
-                if (!iframeRef.current) {
+    console.log(videoId);
+    const initializePlayer = () => {
+        if (CourseDetails?.data?.data?.playerType == 2) {
+            if (!iframeRef.current) {
                 console.warn("⚠️ iframeRef.current is not available yet. Retrying...");
                 setTimeout(initializePlayer, 100); // Retry after 100ms
-                
-                }
+            }
 
-                const checkVdoPlayer = () => {
-                    if (typeof window.VdoPlayer === "undefined") {
-                        console.warn("⚠️ VdoPlayer not available yet. Retrying...");
-                        setTimeout(checkVdoPlayer, 100);
-                    } else {
-                        console.log("🎬 Initializing VdoCipher Player...");
-                        
-                        try {
-                            const playerInstance = window.VdoPlayer.getInstance(iframeRef.current);
-                            if (playerInstance.video) {
-                                console.log("✅ Player instance found. Adding event listeners...");
-            
-                                playerInstance.video.addEventListener("play", () => {
-                                    console.log("▶️ Video is playing");
-                                });
-            
-                                
-                                // Tracking 80% and 100% progress
-                                playerInstance.video.addEventListener("timeupdate", () => {
-                                    let currentTime = playerInstance.video.currentTime;
-                                    let duration = playerInstance.video.duration;
-                                    let progress = (currentTime / duration) * 100;
-                                    
+            const checkVdoPlayer = () => {
+                if (typeof window.VdoPlayer === "undefined") {
+                    console.warn("⚠️ VdoPlayer not available yet. Retrying...");
+                    setTimeout(checkVdoPlayer, 100);
+                } else {
+                    console.log("🎬 Initializing VdoCipher Player...");
+
+                    try {
+                        const playerInstance = window.VdoPlayer.getInstance(iframeRef.current);
+                        if (playerInstance.video) {
+                            console.log("✅ Player instance found. Adding event listeners...");
+
+                            playerInstance.video.addEventListener("play", () => {
+                                console.log("▶️ Video is playing");
+                            });
+
+                            // Tracking 80% and 100% progress
+                            playerInstance.video.addEventListener("timeupdate", () => {
+                                let currentTime = playerInstance.video.currentTime;
+                                let duration = playerInstance.video.duration;
+                                let progress = (currentTime / duration) * 100;
+
+                                if (progress >= 80) {
+                                    console.log("🎯 Video reached 80%");
                                     handleProgress({
                                         playedSeconds: currentTime,
                                         played: currentTime / duration,
                                     });
-                                    if (progress >= 80) {
-                                        console.log("🎯 Video reached 80%");
-                                    }
-                                    if (progress >= 100) {
-    
-                                        handleVideoEnd();
-                                        
-                                        console.log("🏁 Video reached 100%");
-                                    }
-                                });
-                            }
-                        } catch (error) {
-                            console.error("❌ Error initializing VdoCipher:", error);
+                                }
+
+                                if (progress >= 100) {
+                                    handleVideoEnd();
+
+                                    console.log("🏁 Video reached 100%");
+                                }
+                            });
                         }
+                    } catch (error) {
+                        console.error("❌ Error initializing VdoCipher:", error);
                     }
-                };
-            
-                checkVdoPlayer();
-            }
-            
+                }
+            };
+
+            checkVdoPlayer();
+        }
+    };
+
+    useEffect(() => {
+        const handleBeforeUnload = () => {
+            localStorage.setItem("lastVisitedURL", window.location.href);
         };
 
-        useEffect(() => {
-            const handleBeforeUnload = () => {
-                localStorage.setItem("lastVisitedURL", window.location.href);
-            };
-        
-            window.addEventListener("beforeunload", handleBeforeUnload);
-        
-            return () => {
-                window.removeEventListener("beforeunload", handleBeforeUnload);
-            };
-        }, []);
+        window.addEventListener("beforeunload", handleBeforeUnload);
 
-        useEffect(() => {
-            const handlePopState = () => {
-                const lastURL = localStorage.getItem("lastVisitedURL");
-        
-                if (lastURL) {
-                    router.push(lastURL); // Go to last visited video URL
-                } else {
-                    window.history.back(); // Default back behavior
-                }
-            };
-        
-            window.addEventListener("popstate", handlePopState);
-        
-            return () => {
-                window.removeEventListener("popstate", handlePopState);
-            };
-        }, [router]);
-        // http://localhost:3000/ar/learn-path/course-player/6c719fa0-70ea-41cc-bfb1-972482285d23?videoNode=89b1a2a6-ced7-4fea-992a-0836cdcad80a
-        
+        return () => {
+            window.removeEventListener("beforeunload", handleBeforeUnload);
+        };
+    }, []);
 
-        useEffect(() => {
-            // Function to handle the popstate event
-            const handlePopState = () => {
-                // Get the current history state
-                const currentState = window.history.state;
-    
-                // Optionally, check if there is a previous state
-                if (currentState && currentState.backUrl) {
-                    // Navigate to the previous URL stored in the state
-                    router.push(currentState.backUrl);
-                } else {
-                    // Default behavior: go back one step in history
-                    window.history.back();
-                }
-            };
-    
-            // Add the event listener for the popstate event
-            window.addEventListener("popstate", handlePopState);
-    
-            // Clean up the event listener on unmount
-            return () => {
-                window.removeEventListener("popstate", handlePopState);
-            };
-        }, [router]);
-    
-        // Example: Save the current URL in the history state when navigating to this page
-        
+    useEffect(() => {
+        const handlePopState = () => {
+            const lastURL = localStorage.getItem("lastVisitedURL");
+
+            if (lastURL) {
+                router.push(lastURL); // Go to last visited video URL
+            } else {
+                window.history.back(); // Default back behavior
+            }
+        };
+
+        window.addEventListener("popstate", handlePopState);
+
+        return () => {
+            window.removeEventListener("popstate", handlePopState);
+        };
+    }, [router]);
+
+    useEffect(() => {
+        const handleBeforeUnload = () => {
+            localStorage.setItem("lastVisitedURL", window.location.href);
+        };
+
+        window.addEventListener("beforeunload", handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener("beforeunload", handleBeforeUnload);
+        };
+    }, []);
+
+    useEffect(() => {
+        const handlePopState = () => {
+            const lastURL = localStorage.getItem("lastVisitedURL");
+
+            if (lastURL) {
+                router.push(lastURL); // Go to last visited video URL
+            } else {
+                window.history.back(); // Default back behavior
+            }
+        };
+
+        window.addEventListener("popstate", handlePopState);
+
+        return () => {
+            window.removeEventListener("popstate", handlePopState);
+        };
+    }, [router]);
+
+    // useEffect(() => {
+    // Function to handle the popstate event
+    // window.addEventListener("popstate", (event) => {
+    //     console.log(
+    //       `location: ${document.location}, state: ${JSON.stringify(event.state)}`,
+    //     );
+    //   });
+    // const diplomaName = localStorage.getItem("diplomaName") || "{}"
+    // console.log(diplomaName + "diploma name")
+    // }, []);
+
+    // useEffect(() => {
+    //     // Function to handle the popstate event
+    //     const handlePopState = () => {
+    //         // Get the current history state
+    //         const currentState = window.history.state;
+
+    //         // Optionally, check if there is a previous state
+    //         if (currentState && currentState.backUrl) {
+    //             // Navigate to the previous URL stored in the state
+    //             router.push(currentState.backUrl);
+    //         } else {
+    //             // Default behavior: go back one step in history
+    //             window.history.back();
+    //         }
+    //     };
+
+    //     // Add the event listener for the popstate event
+    //     window.addEventListener("popstate", handlePopState);
+
+    //     // Clean up the event listener on unmount
+    //     return () => {
+    //         window.removeEventListener("popstate", handlePopState);
+    //     };
+    // }, [router]);
+
+    // Example: Save the current URL in the history state when navigating to this page
+
     // Effect to handle HLS video
     useEffect(() => {
         if (CourseDetails?.data?.data?.playerType === 1 && playerRef.current && sourceRef.current) {
@@ -441,7 +569,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
     }, [CourseDetails, videoLink]);
 
     // Tabs configuration
-    const isTablet = useMediaQuery({ query: "(min-width: 1024px)" });
+    const isTablet = useMediaQuery({ query: "(min-width: 1025px)" });
     const tabsData = useMemo(
         () => [
             {
@@ -468,9 +596,9 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                 label: t("courseTabs.courseContent"),
                 children: (
                     <div className="course_player_list">
-                        <div className="course_player_header">{CourseDetails && <LineProgress title="Course List" percent={Math.trunc(CourseDetails?.data.data.progressPercentage)} />}</div>
+                        <div className="course_player_header">{CourseDetails && <LineProgress title="Course List" percent={Math.trunc(CourseDetails?.data?.data.progressPercentage)} />}</div>
                         <div className="course_player_list_items">
-                            <CoursePlayerAccordion videosItems={MemberCoursePlayer?.data.data} videoCommentsMutation={videoCommentsMutation} />
+                            <CoursePlayerAccordion videosItems={MemberCoursePlayer?.data?.data} videoCommentsMutation={videoCommentsMutation} />
                         </div>
                     </div>
                 ),
@@ -490,9 +618,10 @@ export default function CoursePlayer({ slug }: { slug: string }) {
             iframeRef.current.contentWindow?.postMessage({ event: "subscribe", type: "timeupdate" }, "*");
         }
 
-        console.log(iframeRef.current)
-        
+        console.log(iframeRef.current);
     }, []);
+
+    // Function to convert percentage to time
 
     // Function to check video type and render appropriate player
     const checkVideoType = useCallback(() => {
@@ -502,19 +631,30 @@ export default function CoursePlayer({ slug }: { slug: string }) {
             case 0: // Normal video (e.g., YouTube)
                 return (
                     <ReactPlayer
-                        config={{
-                            file: { attributes: { controlsList: "nodownload" } },
-                        }}
+                        // config={{
+                        //     file: { attributes: { controlsList: "nodownload" } },
+                        // }}
                         key={videoNode}
                         width="100%"
                         style={{ aspectRatio: "16/9", width: "100%", height: "unset" }}
                         // height="19em"
                         controls
+                        ref={playerRef}
+                        config={{
+                            youtube: {
+                                playerVars: { modestbranding: 1, rel: 0 },
+                            },
+                        }}
                         url={videoLink}
                         playing={!!videoLink}
                         onDuration={handleDuration}
                         onProgress={handleProgress}
                         onEnded={handleVideoEnd}
+                        setPlayer
+                        onPlaybackQualityChange={(quality: any) => {
+                            console.log("Quality changed to:", quality.data);
+                            localStorage.setItem("Quality", quality.data);
+                        }}
                         progressInterval={100}
                         onReady={(player) => {
                             const startTime = startFromPercentage(lastVideoData?.percentage);
@@ -559,26 +699,21 @@ export default function CoursePlayer({ slug }: { slug: string }) {
             case 2: //vdocipher
                 return (
                     <iframe
-                            src={`https://player.vdocipher.com/v2/?otp=${vdocipherConfig.otp}&playbackInfo=${vdocipherConfig.playbackInfo}&autoplay=true&mute=true&enableEvents=true&enablePostroll=true`}
-                            ref={iframeRef}
-                            id="vdocipher-player"
+                        src={`https://player.vdocipher.com/v2/?otp=${vdocipherConfig.otp}&playbackInfo=${vdocipherConfig.playbackInfo}&autoplay=true&mute=true&enableEvents=true&enablePostroll=true`}
+                        ref={iframeRef}
+                        id="vdocipher-player"
+                        allow="encrypted-media"
+                        // onLoad={() => {
+                        //     const iframe = document.querySelector("vdocipher-player") as any;
 
-                            allow="encrypted-media"
-                            // onLoad={() => {
-                            //     const iframe = document.querySelector("vdocipher-player") as any;
-
-                            //     if (iframe) {
-                            //         iframe.contentWindow.postMessage("listenForVideoEnd", "*");
-                            //         iframe.contentWindow.postMessage("listenForVideoProgress", "*");
-                            //     }
-                            // }}
-                            title="Vdocipher Player"
-                            
-                            allowFullScreen
-                        />
-
-                        
-
+                        //     if (iframe) {
+                        //         iframe.contentWindow.postMessage("listenForVideoEnd", "*");
+                        //         iframe.contentWindow.postMessage("listenForVideoProgress", "*");
+                        //     }
+                        // }}
+                        title="Vdocipher Player"
+                        allowFullScreen
+                    />
                 );
             default:
                 return null;
@@ -619,19 +754,30 @@ export default function CoursePlayer({ slug }: { slug: string }) {
             window.removeEventListener("message", handleIframeProgress);
         };
     }, [handleProgress]);
- 
+    useEffect(() => {
+        if(localStorage.getItem("diploma_route")){
+            const router = localStorage.getItem("diploma_route");
+            setDiplomaRoute(router);
+        }
+    },[slug])
+
     // Render
     return (
         <>
-            <section className="course_player_header_info p-lg">
-                <div className="course_player_header_breadcrumb f ac">
-                    <Link href="/">Home</Link>
-                    <MdKeyboardArrowRight />
-                    <Link href="/courses">Courses</Link>
-                    <MdKeyboardArrowRight />
-                    <span>C# Course</span>
+            <section className="course_player_header_info p-lg f ac jb">
+                <div>
+                    <div className="course_player_header_breadcrumb f ac">
+                        <Link href="/learn-path">{t("menu.learn_pathes") }</Link>
+                        <MdKeyboardArrowRight />
+                        <Link href={`/${diplomaRoute}` }>{t("common.courses") }</Link>
+                        <MdKeyboardArrowRight />
+                        <span>{localStorage.getItem("course_title") }</span>
+                    </div>
+                    <h2>{videoName}</h2>
                 </div>
-                <h2>{videoName}</h2>
+                <div className={`header-service-mode `} onClick={toggleTheme}>
+                    {theme === "dark" ? <FiSun style={{ color: "gold" }} /> : <IoMoonOutline />}
+                </div>
             </section>
             <section className="course_player">
                 <div className="course_player_video">
@@ -646,9 +792,9 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                     </div>
                 </div>
                 <div className="course_player_list">
-                    <div className="course_player_header">{CourseDetails && <LineProgress title="Course List" percent={Math.trunc(CourseDetails?.data.data.progressPercentage)} />}</div>
+                    <div className="course_player_header">{CourseDetails && <LineProgress title="Course List" percent={Math.trunc(CourseDetails?.data?.data?.progressPercentage)} />}</div>
                     <div className="course_player_list_items">
-                        <CoursePlayerAccordion videosItems={MemberCoursePlayer?.data.data} videoCommentsMutation={videoCommentsMutation} />
+                        <CoursePlayerAccordion videosItems={MemberCoursePlayer?.data?.data} videoCommentsMutation={videoCommentsMutation} />
                     </div>
                 </div>
             </section>

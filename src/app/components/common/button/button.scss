@@ -40,28 +40,41 @@
         }
     }
     &.red {
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        transition: .4s;
         button {
-            background-color: $red-color;
+            background-color: #f1eee8;
+            color: $primary-color;
             &::after {
                 display: none;
             }
             &:hover {
-                background-color: $white-color;
-                color: $red-color;
+                background-color: #e7e4dc;
+                
+                // color: $red-color;
             }
+        }
+        &:hover{
+            transform: translateY(-0.2em);
         }
     }
     &.white {
         outline: 0;
+        transition: .4s;
         button {
             outline: 0;
             background-color: $white-color;
-            color: $dark-color;
-            &:hover{
-                color: $white-color;
-                
+            color: $primary-color;
+            &::after{
+                display: none;
             }
+            &:hover{
+                 color: $red-color;
+            }
+        }
+        &:hover{
+            transform: translateY(-0.2em);
+           
         }
     }
     &.noCTA{
@@ -80,6 +93,18 @@
             span{
                 color: $white-color;
 
+            }
+        }
+        &.white{
+            width: 100%;
+            button{
+                background-color: #2b3543;
+                span{
+                    color: $white-color;
+                }
+                svg{
+                    color: $white-color;
+                }
             }
         }
     }

@@ -38,3 +38,15 @@
         margin-top: 1.5em;
     }
 }
+.dark_theme {
+    .home_reviews_section {
+        background: $second-color;
+        .swiper_pagination {
+            .swiper_pagination_count {
+                .swiper-pagination-bullet {
+                    background: $white-color;
+                }
+            }
+        }
+    }
+}

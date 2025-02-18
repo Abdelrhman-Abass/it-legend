@@ -24,12 +24,12 @@ export default function Menu() {
             },
             {
                 id: 2,
-                name: t("menu.learn_pathes"),
+                name: t("menu.free_courses"),
                 url: "#learn_path",
             },
             {
                 id: 3,
-                name: t("menu.free_courses"),
+                name: t("menu.learn_pathes"),
                 url: "#free_diploma",
             },
             {

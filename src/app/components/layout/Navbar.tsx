@@ -16,15 +16,21 @@ const Navbar = React.memo(() => {
     //     navRef.current?.style.setProperty("transform", `translateY(${0}px)`);
     // }, []);
     return (
-        !pathname.includes("course-player") &&
-        <motion.header initial= {{opacity: 0,y:-50}} animate={{ opacity: 1 , y:0 }} transition={{ duration: 0.4, ease: "easeOut" }} className={`header p-lg jb f ac ${pathname.includes("course-player") ? "header_player" : ""} ${theme === "light" ? "light_theme" : "dark_theme"}`} ref={navRef}>
-            <div className="header-right-container f ac">
-                <Logo />
+        !pathname.includes("course-player") && (
+            <motion.header
+                initial={{ opacity: 0, y: -50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className={`header p-lg jb f ac ${pathname.includes("course-player") ? "header_player" : ""} ${theme === "light" ? "light_theme" : "dark_theme"}`}
+                ref={navRef}>
+                <div className="header-right-container f ac">
+                    <Logo />
+                </div>
                 <Menu />
-            </div>
-            <ServiceBar />
-            <MobileMenu />
-        </motion.header>
+                <ServiceBar />
+                <MobileMenu />
+            </motion.header>
+        )
     );
 });
 

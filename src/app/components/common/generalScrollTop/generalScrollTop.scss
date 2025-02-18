@@ -20,7 +20,7 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        color: red;
+        color: $red-color;
     }
     &.active{
         bottom: 2rem;

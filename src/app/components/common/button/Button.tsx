@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { RiLoader5Fill } from "react-icons/ri";
 
 // Memoizing the component to avoid unnecessary re-renders
-const Button = memo(({ title, url = "#", red = false, blank = false, white = false, customIcon = null, customClass = "", isLoading = false, hideIcon }: IButton) => {
+const Button = memo(({courseTitle, title, url = "#", red = false, blank = false, white = false, customIcon = null, customClass = "", isLoading = false, hideIcon }: IButton) => {
     const router = useRouter();
     const handleClick = () => {
         if (url) {
@@ -14,6 +14,7 @@ const Button = memo(({ title, url = "#", red = false, blank = false, white = fal
                 window.open(url, "_blank");
             } else {
                 scrollTo({ top: 0, behavior: "smooth" });
+                localStorage.setItem("course_title", courseTitle || "");
                 router.push(url, { scroll: false });
             }
         }

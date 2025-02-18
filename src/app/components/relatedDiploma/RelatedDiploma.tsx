@@ -12,12 +12,19 @@ import { GiRank2 } from "react-icons/gi";
 import { LuAlarmClock } from "react-icons/lu";
 import NewLoader from "../common/newLoader/NewLoader";
 import { useCookies } from "react-cookie";
+import { usePathname } from "@/i18n/routing";
 
 export default function RelatedDiploma({ slug }: any) {
     const [cookies, , removeCookie] = useCookies(["userData"]);
     const router = useRouter();
     const t = useTranslations();
     const { locale } = useParams();
+    const pathName = usePathname();
+    useEffect(() => {
+        if (pathName.includes("diploma")) {
+            localStorage.setItem("diploma_route", `${locale}/learn-path/diploma/${slug}`);
+        }
+    },[pathName])
 
     const {
         data: relatedDiploma,
@@ -88,11 +95,8 @@ const sortedLevels = useMemo(() => {
             courses: data.courses
         })) // ✅ Now TypeScript fully recognizes data
         .sort((a, b) => a.levelOrder - b.levelOrder);
-}, [relatedDiploma]);
-
-
-    console.log(sortedLevels, "sortedLevels");
-
+    }, [relatedDiploma]);
+    
     return (
         <section className="related_diploma py p-lg">
             <NewLoader loading={isLoading} />
@@ -110,6 +114,7 @@ const sortedLevels = useMemo(() => {
                         <div className="courses_list ">
                             {level.courses.map((item: any) => (
                                 <CourseCard
+                                    courseTitle={locale === "ar" ? item.titleAr : item.titleEn}
                                     key={item.courseId}
                                     showProgress={true}
                                     hideItems={true}

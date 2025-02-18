@@ -56,6 +56,16 @@
         }
     }
 }
+.dark_theme{
+    .related_diploma{
+        background: $second-color;
+        .related_diploma_container  {
+            h2 {
+                color: $white-color;
+            }
+        }
+    }
+}
 @media (max-width: 1024px) {
     .related_diploma {
         .related_diploma_results {

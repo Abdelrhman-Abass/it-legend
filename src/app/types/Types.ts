@@ -1,6 +1,7 @@
 import React from "react";
 
 export interface IButton {
+    courseTitle?: string;
     title: string;
     itemVariants?: any;
     url?: string;
@@ -49,6 +50,7 @@ export interface IGeneralVideo {
     controls?: boolean;
 }
 export interface ICourseCard {
+    courseTitle?: string;
     btnText: string;
     customIcon?: React.ReactNode;
     titleAr?: string;
@@ -62,7 +64,7 @@ export interface ICourseCard {
     categoryId?: number;
     image?: string;
     index?: number;
-    progressPercentage?: number ;
+    progressPercentage?: number;
     hideItems?: boolean;
     showProgress?: boolean;
     url?: string;

@@ -84,7 +84,9 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
                                         {child.isWatched && <FaCheck className="watch_icon" />}
                                         {!child.isWatched && child.type === 0 && <MdOndemandVideo className="watch_icon" />} {locale === "ar" ? child.titleAr : child.titleEn}
                                     </p>
-                                    {cookies.userData ? <span>{formatDuration(child.duration) || <FaFileCode />}</span> : child.isFree ? <span>{child.duration || <FaFileCode />}</span> : <LockOutlined />}
+                                    {child.type == 0 && (
+                                        cookies.userData ? <span>{formatDuration(child.duration) || <FaFileCode />}</span> : child.isFree ? <span>{child.duration || <FaFileCode />}</span> : <LockOutlined />
+                                    )}
                                 </div>
                             ))}
                     </>

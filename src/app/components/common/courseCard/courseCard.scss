@@ -3,11 +3,23 @@
     background: white;
     border-radius: 0.6em;
     overflow: hidden;
-    box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.4s;
     &:hover {
-        .course_card_image{
-            img{
+        box-shadow: 0 0px 60px 0 rgba(0, 0, 0, 0.08);
+        transform: translateY(-.4em);
+        .course_card_image {
+            img {
                 transform: scale(1.1);
+            }
+        }
+        .course_card_content {
+            p {
+                color: $dark-color;
+            }
+            .course_card_content_details {
+                .course_card_content_details_item {
+                    color: $dark-color;
+                }
             }
         }
     }
@@ -16,7 +28,7 @@
         background: gray;
         overflow: hidden;
         position: relative;
-        .course_card_image_progress{
+        .course_card_image_progress {
             width: 4em;
             height: 4em;
             position: absolute;
@@ -28,22 +40,21 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            *:not(.ant-progress-text){
+            *:not(.ant-progress-text) {
                 width: 100% !important;
                 height: 100% !important;
             }
-            .ant-progress-text{
+            .ant-progress-text {
                 color: $red-color !important;
-                font-size: .8em;
+                font-size: 0.8em;
                 font-weight: 500;
             }
-            :where(.css-dev-only-do-not-override-nqoqt9).ant-progress .ant-progress-inner:not(.ant-progress-circle-gradient) .ant-progress-circle-path{
+            :where(.css-dev-only-do-not-override-nqoqt9).ant-progress .ant-progress-inner:not(.ant-progress-circle-gradient) .ant-progress-circle-path {
                 stroke: $red-color !important;
                 stroke-width: 4px !important;
             }
-            
         }
-        img{
+        img {
             transition: $delay;
             object-fit: cover;
         }
@@ -62,6 +73,7 @@
             font-weight: 500;
             -webkit-line-clamp: 2;
             overflow: hidden;
+            transition: 0.4s;
         }
         .course_card_content_rate {
             margin-top: 2em;
@@ -87,6 +99,7 @@
             .course_card_content_details_item {
                 gap: 1em;
                 color: $gray-text-color;
+                transition: .4s;
                 span {
                     font-weight: 500;
                 }
@@ -96,19 +109,25 @@
             }
         }
     }
-    &.course_card_hide{
-        .course_card_content{
-            p{
+    &.course_card_hide {
+        .course_card_content {
+            p {
                 margin-bottom: 2em;
                 width: 70%;
             }
+        }
+    }
+    .custom_btn{
+        width: 100%;
+        button{
+            background-color: #f2efec;
         }
     }
 }
 .dark_theme {
     .course_card {
         background: $dark-bg;
-        box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.2);
+        
         .course_card_content {
             color: $white-color;
             .course_card_content_rate {
@@ -123,7 +142,20 @@
             }
             .course_card_content_details {
                 .course_card_content_details_item {
+                    color: $gray-text-color;
+                }
+            }
+        }
+        &:hover {
+            box-shadow: 0 0 40px 0 rgba($color: $dark-color, $alpha: .5);
+            .course_card_content{
+                p,h3{
                     color: $white-color;
+                }
+                .course_card_content_details{
+                    .course_card_content_details_item{
+                        color: $white-color;
+                    }
                 }
             }
         }
@@ -131,14 +163,14 @@
 }
 
 @media (max-width: 1024px) {
-    .course_card{
-        &.course_card_hide{
-        .course_card_content{
-            p{
-                margin-bottom: 2em;
-                width: 100%;
+    .course_card {
+        &.course_card_hide {
+            .course_card_content {
+                p {
+                    margin-bottom: 2em;
+                    width: 100%;
+                }
             }
         }
-    }
     }
 }

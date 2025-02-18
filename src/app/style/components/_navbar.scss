@@ -12,22 +12,33 @@
     // }
     .header-right-container {
         gap: $menu-gap;
-        .header-links {
-            gap: $menu-gap;
-            a {
-                font-weight: 600;
-                font-size: 1em;
-                color: $dark-bg;
-                &.active {
-                    color: $primary-color;
-                }
-            }
-        }
+
         .header-logo {
-            width: 5.5em;
+            width: 10em;
             height: 4.5em !important;
             img {
                 object-fit: contain;
+            }
+        }
+    }
+    .header-links {
+        gap: $menu-gap;
+        a {
+            font-weight: 600;
+            font-size: 1em;
+            color: $primary-color;
+
+            transition: 0.4s;
+            &.active {
+                color: $primary-color;
+            }
+            &:hover {
+                color: $red-color;
+                transform: translateY(-0.2em);
+                @media screen and (max-width: 1024px) {
+                    color: $primary-color;
+                    transform: none;
+                }
             }
         }
     }
@@ -36,28 +47,70 @@
         .header-service-cart {
             cursor: pointer;
             position: relative;
+            transition: 0.4s;
             span {
                 position: absolute;
-                top: -8px;
-                right: -8px;
+                top: -11.5px;
+                right: -9.2px;
                 width: 1.5em;
                 height: 1.5em;
                 border-radius: 50%;
                 display: flex;
-                background: $primary-color;
-                color: $white-color;
+                background: #fff;
+                color: #222d5d;
+                border: 1.65px solid #222d5d;
+                transition: 0.4s;
+                @media  screen and (max-width: 600px) {
+                    top: -7.3px;
+                    right: -7.2px;
+                    border-width: 1px;
+                }
+            }
+            svg {
+                color: $primary-color;
+                transition: 0.4s;
+            }
+            &:hover {
+                transform: translateY(-0.2em);
+                svg {
+                    color: $red-color;
+                }
+                span {
+                    border-color: $red-color;
+                    color: $red-color;
+                }
             }
         }
         .header-service-mode {
             cursor: pointer;
+            transition: 0.4s;
+            svg {
+                color: $primary-color;
+                transition: 0.4s;
+            }
+            &:hover {
+                svg {
+                    color: $red-color;
+                }
+                transform: translateY(-0.2em);
+            }
+            &.show {
+                display: flex;
+            }
         }
         .toggle_bar {
             cursor: pointer;
             display: none;
+            color: $primary-color;
         }
         .user_menu {
             .user_menu_icon {
+                color: $primary-color;
                 cursor: pointer;
+                font-size: 2em;
+                *{
+                    stroke-width: 1.2px;
+                }
             }
             .user_menu_list {
                 padding: 1.5em;
@@ -89,11 +142,20 @@
         }
         .custom_btn {
             button {
+                color: $red-color;
                 background-color: transparent;
                 padding: 0;
-                color: $dark-color;
+                transition: 0.4s;
+                span {
+                    transition: 0.4s;
+                }
+                // color: $dark-color;
                 &::after {
                     display: none;
+                }
+                &:hover {
+                    color: $primary-color;
+                    transform: translateY(-0.2em);
                 }
             }
         }
@@ -167,21 +229,55 @@
     }
     &.dark_theme {
         background: $dark-bg;
-        .header-right-container {
-            .header-links {
-                a {
-                    color: $white-color;
+        .header-links {
+            a {
+                color: $white-color !important;
+                &:hover {
+                    color: $red-color !important;
                 }
             }
         }
+        .custom_btn {
+            button {
+                span {
+                    color: $red-color !important;
+                }
+                &:hover {
+                    span {
+                        color: $white-color !important;
+                    }
+                }
+            }
+        }
+        .header-right-container {
+        }
         .header-service {
             .header-service-cart {
+                span {
+                    transition: 0.4s;
+                    background: $dark-bg;
+                    border-color: $white-color;
+                    color: $white-color;
+                }
                 svg {
                     color: $white-color;
+                    transition: 0.4s;
+                }
+                &:hover {
+                    svg {
+                        color: $red-color;
+                    }
+                    span {
+                        border-color: $red-color;
+                        color: $red-color;
+                    }
                 }
             }
             .lang_swither {
                 color: $white-color;
+                &:hover {
+                    color: $red-color;
+                }
             }
             .toggle_bar {
                 color: $white-color;
@@ -229,37 +325,52 @@
     }
 }
 .lang_swither {
+    color: $primary-color;
     cursor: pointer;
-    text-transform: uppercase;
-    font-family: var(--kufi-font) !important;
-    &.mobile_lang {
-       padding: 2em;
-       color: #444;
-       font-size: 1.3em;
+    transition: 0.4s;
+    &:hover {
+        color: $red-color;
+        transform: translateY(-0.2em);
     }
 }
 .dark_theme {
     .header {
-        .header-right-container {
-            .header-links {
-                a {
-                    color: $gray-text-color !important;
-                    &.active {
-                        color: $white-color !important;
-                    }
+        .header-links {
+            a {
+                color: $white-color !important;
+                &.active {
+                    color: $white-color !important;
                 }
             }
+        }
+        .header-right-container {
         }
     }
 }
 
 @media (max-width: 1024px) {
     .header {
-        .header-right-container {
+        & .header-links {
+            display: none;
+        }
+        .mobile-menu-container {
             .header-links {
-                display: none;
+                display: flex;
+                a{
+                    color: $primary-color !important;
+                }
+            }
+            .lang_swither {
+                padding: 2em;
+                font-size: 1.3em;
+                font-weight: 500;
+            }
+            .header-logo{
+                width: 15em;
+                height: 6.5em !important;
             }
         }
+
         .lang_swither:not(.mobile_lang) {
             display: none;
         }
@@ -271,6 +382,7 @@
         .header-service {
             .toggle_bar {
                 display: block;
+                font-size: 2em;
             }
         }
     }

@@ -59,7 +59,7 @@
     }
 }
 .course_player_header_info {
-    background: #f5f9fa;
+    background: $gray-color;
     padding: 1em;
     .course_player_header_breadcrumb {
         margin-bottom: 0.5em;
@@ -80,6 +80,16 @@
             color: $white-color;
         }
     }
+    :where(.css-dev-only-do-not-override-nqoqt9).ant-collapse>.ant-collapse-item ,:where(.css-dev-only-do-not-override-nqoqt9).ant-tabs-top >.ant-tabs-nav::before {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    :where(.css-dev-only-do-not-override-nqoqt9).ant-collapse .ant-collapse-content{
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        background-color: rgb(255 255 255 / 3%);
+    }
+    :where(.css-dev-only-do-not-override-nqoqt9).ant-collapse>.ant-collapse-item:last-child, :where(.css-dev-only-do-not-override-nqoqt9).ant-collapse>.ant-collapse-item:last-child>.ant-collapse-header{
+        border-radius: 0;
+    }
     .course_player {
         .course_player_video {
             background: $dark-bg;
@@ -96,7 +106,7 @@
                 }
                 .course_player_accordion_item,
                 .ant-collapse .ant-collapse-content {
-                    border-color: rgba($color: $white-color, $alpha: 0.4) !important;
+                    border-color: rgba($color: $white-color, $alpha: 0.1) !important;
                 }
             }
             .ant-collapse-header {
@@ -107,7 +117,7 @@
                 }
             }
             .ant-collapse {
-                border-color: rgba($color: $white-color, $alpha: 0.4) !important;
+                border-color: rgba($color: $white-color, $alpha: 0.1) !important;
             }
         }
         .course_player_video_seaction{

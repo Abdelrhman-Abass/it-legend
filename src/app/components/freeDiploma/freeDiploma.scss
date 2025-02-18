@@ -14,13 +14,13 @@
 }
 .dark_theme {
     .free_diploma {
-        background: #020b17;
+        background: $second-color;
     }
 }
 @media (max-width: 1250px) {
     .free_diploma {
         .free_diploma_container {
-            @include grid2;
+            @include grid3;
         }
     }
 }

@@ -50,7 +50,7 @@
         .course_links_container{
             .course_links_container_item{
                 color: $white-color;
-                border-color: rgba($color: $white-color, $alpha: .4);
+                border-color: rgba($color: $white-color, $alpha: .1);
                 &:hover{
                     color: $red-color;
                 }

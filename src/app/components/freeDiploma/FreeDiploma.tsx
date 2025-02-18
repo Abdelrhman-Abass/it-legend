@@ -47,8 +47,8 @@ export default function FreeDiploma() {
             </div>
 
             {/* More Diplomas Button */}
-            <div className="free_diploma_more f ac jc" >
-                <Button title={t("common.morePathes")} url={`${locale}/diplomas`} customClass="flip_icon" />
+            <div className="free_diploma_more f ac jc" style={{width: "fit-content" , marginInline:"auto"}}>
+                <Button title={t("common.morePathes")} url={`${locale}/diplomas`} customClass="flip_icon white" />
             </div>
         </section>
     );

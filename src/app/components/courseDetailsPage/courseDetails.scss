@@ -1,6 +1,6 @@
 .course_details_page{
     .course_details_banner{
-        background: #f5f9fa;
+        background: $gray-color;
         padding-block-start: 1em;
         padding-block-end: 2em;
         .course_details_banner_breadcrumb{
@@ -133,7 +133,7 @@
             top: 0;
             .course_details_card_image{
                 height: 15em;
-                background: #f5f9fa;
+                background: $gray-color;
                 border-radius: 1em;
                 width: 100%;
                 overflow: hidden;

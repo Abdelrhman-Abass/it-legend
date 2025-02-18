@@ -6,8 +6,6 @@ export async function generateMetadata({ params }: any) {
     const metaData = await getMetadata(`/Settings`, "", params,"/assets/images/main-logo.webp");
     return metaData;
 }
-
-
 export default async function page() {
 
     return <HomePageSection />;

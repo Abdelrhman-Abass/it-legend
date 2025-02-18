@@ -28,7 +28,8 @@ const CourseCard = memo(({
   hideItems,
   showProgress,
   progressPercentage = 0,
-  url = "#"
+  url = "#",
+  courseTitle = "",
 }: ICourseCard) => {
   const { locale } = useParams();
   const t = useTranslations();
@@ -83,7 +84,7 @@ const CourseCard = memo(({
           </>
         )}
 
-        <Button title={btnText} url={url} red customIcon={customIcon} customClass="flip_icon" />
+        <Button title={btnText} url={url}  customIcon={customIcon} customClass="flip_icon white" courseTitle={courseTitle} />
       </div>
     </div>
   );

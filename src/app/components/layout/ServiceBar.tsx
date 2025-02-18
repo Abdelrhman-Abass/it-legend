@@ -8,7 +8,7 @@ import { useTranslations } from "next-intl";
 import { FaBars, FaRegUser } from "react-icons/fa";
 import UseToggleMenu from "@/app/store/ToggleMenu";
 import useThemeProvider from "@/app/store/ThemeProvider";
-import { FiSun } from "react-icons/fi";
+import { FiSun, FiUser } from "react-icons/fi";
 import { useCookies } from "react-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation"; // For navigation after logout
@@ -18,7 +18,7 @@ export default function ServiceBar() {
     const { toggleTheme, theme } = useThemeProvider();
     const { openMenu } = UseToggleMenu();
     const t = useTranslations();
-    const [cookies, setCookie, removeCookie] = useCookies(["userDataRefresh", "userData","userDataEmail"]);
+    const [cookies, setCookie, removeCookie] = useCookies(["userDataRefresh", "userData", "userDataEmail"]);
     const router = useRouter(); // For redirecting after logout
 
     const isAuthenticated = !!cookies.userDataRefresh;
@@ -28,23 +28,14 @@ export default function ServiceBar() {
         removeCookie("userData", { path: "/", expires: new Date(0) });
         removeCookie("userDataRefresh", { path: "/", expires: new Date(0) });
         removeCookie("userDataEmail", { path: "/", expires: new Date(0) });
-        router.push("/auth");
+        router.push("/");
     };
 
     return (
         <div className="header-service f ac">
-            <div className="header-service-cart">
-                <span className="ac jc">0</span>
-                <BsCart2 />
-            </div>
-            <div className="header-service-mode" onClick={toggleTheme}>
-                {theme === "dark" ? <FiSun style={{ color: "gold" }} /> : <IoMoonOutline />}
-            </div>
-            <LangSwither arText={"ع"} enText={"EN"}/>
-            {!isAuthenticated && <Button title={t("common.login")} url="/auth" customClass="flip_icon" hideIcon />}
             {isAuthenticated && (
                 <div className="user_menu">
-                    <FaRegUser className="user_menu_icon" />
+                    <FiUser  className="user_menu_icon" />
                     <div className="user_menu_list">
                         <Link href={"#"}>{t("common.myAccount")}</Link>
                         <Link href={"tel:+012 (345) 6789"} target="_blank">
@@ -54,7 +45,18 @@ export default function ServiceBar() {
                     </div>
                 </div>
             )}
-            <HiBars3BottomLeft className="toggle_bar" onClick={openMenu}/>
+             {!isAuthenticated && <Button title={t("common.login")} url="/auth" customClass="flip_icon" hideIcon />}
+            <div className="header-service-cart">
+                <span className="ac jc">0</span>
+                <BsCart2 />
+            </div>
+            <LangSwither arText={"ع"} enText={"EN"} />
+            <div className={`header-service-mode ${isAuthenticated ? "show" : ""}`} onClick={toggleTheme}>
+                {theme === "dark" ? <FiSun style={{ color: "gold" }} /> : <IoMoonOutline />}
+            </div>
+           
+
+            <HiBars3BottomLeft className="toggle_bar" onClick={openMenu} />
         </div>
     );
 }

@@ -1,16 +1,14 @@
 import createMiddleware from "next-intl/middleware";
-import { NextResponse, NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-// Middleware for i18n (from next-intl)
 const intlMiddleware = createMiddleware({
   locales: ["ar", "en"],
   defaultLocale: "ar",
   localeDetection: false,
 });
-
 export function middleware(req: NextRequest) {
   // Access cookies from the request headers
-  const user = req.cookies.get("userData")?.value;
+  const user = req.cookies.get("userDataRefresh")?.value;
   const isUserLoggedIn = Boolean(user);
 
   // Extract URL and pathname
@@ -47,9 +45,13 @@ export function middleware(req: NextRequest) {
 // 📌 Apply middleware to relevant routes
 export const config = {
   matcher: [
-    "/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js|images|sitemap.xml|robots.txt|googled02dc937f6d8947f.html).*)",
-    "/(ar|en)/:path*", // Support localized paths
-    "/course-player/:id*", "/diploma/:id*", "/learning-path/:id*",
-    "/auth", "/diploma-details/:id*"
-  ],
+    '/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js|images|sitemap.xml|robots.txt|googled02dc937f6d8947f.html).*)'
+  ]
 };
+
+
+
+
+// Define domain-specific locales
+
+

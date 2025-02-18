@@ -19,7 +19,7 @@ export default function BenfitsSection() {
         
     ]
     return (
-        <section  className="benfits_section p-lg py">
+        <section  className="benfits_section p-lg py pb_remover">
             <HeaderSection title={t("benfits.title")} subTitle={t("benfits.subTitle")} subTitle2={t("benfits.subTitle2")} campany_name={"ITLegend"} flip />
             <div className="benfits_section_container">
                 {benfitsData.map((item, index) => (
