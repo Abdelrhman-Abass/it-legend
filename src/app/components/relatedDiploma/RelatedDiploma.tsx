@@ -95,8 +95,11 @@ const sortedLevels = useMemo(() => {
             courses: data.courses
         })) // ✅ Now TypeScript fully recognizes data
         .sort((a, b) => a.levelOrder - b.levelOrder);
-    }, [relatedDiploma]);
-    
+}, [relatedDiploma]);
+
+
+    console.log(sortedLevels, "sortedLevels");
+
     return (
         <section className="related_diploma py p-lg">
             <NewLoader loading={isLoading} />
