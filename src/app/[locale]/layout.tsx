@@ -61,13 +61,15 @@ const Kufi = localFont({
     display: "swap",
 });
 
+type Props = {
+    params: Promise<{ locale: string }>;
+    children: React.ReactNode;
+};
+
 export default async function RootLayout({
     children,
     params,
-}: Readonly<{
-    children: React.ReactNode;
-    params: { locale: string };
-}>) {
+}: Props) {
     const messages = await getMessages();
     const { locale } = await params;
 

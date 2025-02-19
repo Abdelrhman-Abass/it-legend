@@ -13,6 +13,30 @@ import { LuAlarmClock } from "react-icons/lu";
 import NewLoader from "../common/newLoader/NewLoader";
 import { useCookies } from "react-cookie";
 import { usePathname } from "@/i18n/routing";
+interface Course {
+    courseId: string;
+    titleAr: string;
+    titleEn: string;
+    category_id: string;
+    levelTitleAr: string;
+    levelOrder: number;
+    progressPercentage: number;
+    shortDescriptionAr: string;
+    shortDescriptionEn: string;
+    image: string;
+}
+
+interface DiplomaData {
+    score: number;
+    level: number;
+    codeChallenges: number;
+    categoryProgress: number;
+    courses: Course[];
+}
+
+interface RelatedDiplomaProps {
+    slug: string;
+}
 
 export default function RelatedDiploma({ slug }: any) {
     const [cookies, , removeCookie] = useCookies(["userData"]);
@@ -34,6 +58,25 @@ export default function RelatedDiploma({ slug }: any) {
         queryKey: ["MemberCategory", slug],
         queryFn: async () => await getServerRequest(`/MemberCategory/${slug}/details`),
     });
+
+    useEffect(() => {
+        if (relatedDiploma?.data?.data?.courses) {
+            const storedCourses: Record<string, { titleAR: string; category_id: string; categoryTitleAr: string, categoryTitleEn : string }> =
+                JSON.parse(localStorage.getItem("courses") || "{}");
+
+                relatedDiploma?.data?.data?.courses.forEach((course:Course) => {
+                storedCourses[course.courseId] = {
+                    titleAR: course.titleAr,
+                    category_id: slug,
+                    categoryTitleAr: relatedDiploma?.data?.data?.titleAr, // Storing category title in Arabic
+                    categoryTitleEn: relatedDiploma?.data?.data?.titleEn // Storing category title in Arabic
+
+                };
+            });
+
+            localStorage.setItem("courses", JSON.stringify(storedCourses));
+        }
+    }, [relatedDiploma]);
 
     // تحضير بيانات نتائج الطالب
     const studentResults = useMemo(() => {

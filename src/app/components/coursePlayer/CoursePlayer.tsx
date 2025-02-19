@@ -45,6 +45,14 @@ const playbackReducer = (state: any, action: any) => {
     }
 };
 
+type CourseData = {
+    titleAR: string;
+    category_id: string;
+    categoryTitleAr: string;
+    categoryTitleEn: string;
+};
+
+
 export default function CoursePlayer({ slug }: { slug: string }) {
     const [diplomaRoute, setDiplomaRoute] = useState<string | null>("");
     const { theme,toggleTheme } = useThemeProvider();
@@ -56,6 +64,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
     const [cookies, , removeCookie] = useCookies(["userData"]);
     const [videoCipherPath, setVideoCipherPath] = useState<string>("");
     const [hasHandledProgress, setHasHandledProgress] = useState(false);
+    const [storedCourse, setStoredCourse] = useState<{} | null>(null);
 
     const { videoNode, setVideoNode, videoLink, videoName, videoId, CourseVideo, setVideoName, lastVideoData } = GenralCoursePlayerId();
     const playerRef = useRef<HTMLVideoElement | null>(null);
@@ -161,6 +170,35 @@ export default function CoursePlayer({ slug }: { slug: string }) {
             window.removeEventListener("popstate", handlePopState);
         };
     }, [router]);
+
+    useEffect(() => {
+        const storedData = localStorage.getItem("courses");
+        console.log("Slug: ", slug);
+        console.log("Stored Data: ", storedData);
+    
+        if (storedData) {
+            const courses: Record<string, { titleAr: string; category_id: string; categoryTitleAr: string; categoryTitleEn?: string }> = JSON.parse(storedData);
+            
+            const foundCourse = courses[slug]; // Ensure courses is an object with keys matching slugs
+            console.log("Found Course: ", foundCourse);
+    
+            if (foundCourse) {
+                setStoredCourse({
+                    ...foundCourse,
+                    categoryTitleEn: foundCourse.categoryTitleEn || "Default Title",
+                });
+            } else {
+                setStoredCourse(null);
+            }
+        } else {
+            setStoredCourse(null);
+        }
+    }, [slug]); // ✅ Add slug as a dependency
+    
+    // 🔥 Correct way to log the updated state
+    useEffect(() => {
+        console.log("Updated storedCourse: ", storedCourse);
+    }, [storedCourse]); // ✅ Logs when `storedCourse` updates
 
     useEffect(() => {
         const handlePopState = () => {
@@ -390,7 +428,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
         }
     }, [CourseDetails, videoId, videoNode]);
 
-    console.log(videoId);
+    // console.log(videoId);
     const initializePlayer = () => {
         if (CourseDetails?.data?.data?.playerType == 2) {
             if (!iframeRef.current) {
@@ -618,7 +656,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
             iframeRef.current.contentWindow?.postMessage({ event: "subscribe", type: "timeupdate" }, "*");
         }
 
-        console.log(iframeRef.current);
+        // console.log(iframeRef.current);
     }, []);
 
     // Function to convert percentage to time
@@ -769,8 +807,18 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                     <div className="course_player_header_breadcrumb f ac">
                         <Link href="/learn-path">{t("menu.learn_pathes") }</Link>
                         <MdKeyboardArrowRight />
-                        <Link href={`/${diplomaRoute}` }>{t("common.courses") }</Link>
-                        <MdKeyboardArrowRight />
+                        {/* <Link href={`/${diplomaRoute}` }>{t("common.courses") }</Link> */}
+
+                        {storedCourse && (
+                            <>
+                                <Link href={`/${diplomaRoute}`}>
+                                    {locale === "ar" ? storedCourse.categoryTitleAr : storedCourse.categoryTitleEn}
+                                </Link>
+                                <MdKeyboardArrowRight />
+                            
+                            </>
+
+                        )}
                         <span>{localStorage.getItem("course_title") }</span>
                     </div>
                     <h2>{videoName}</h2>
