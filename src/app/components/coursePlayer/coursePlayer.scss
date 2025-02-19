@@ -81,15 +81,34 @@
         }
     }
     :where(.css-dev-only-do-not-override-nqoqt9).ant-collapse>.ant-collapse-item ,:where(.css-dev-only-do-not-override-nqoqt9).ant-tabs-top >.ant-tabs-nav::before {
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
     }
     :where(.css-dev-only-do-not-override-nqoqt9).ant-collapse .ant-collapse-content{
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        background-color: rgb(255 255 255 / 3%);
+        border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+        background-color: rgb(255 255 255 / 3%) !important;
     }
     :where(.css-dev-only-do-not-override-nqoqt9).ant-collapse>.ant-collapse-item:last-child, :where(.css-dev-only-do-not-override-nqoqt9).ant-collapse>.ant-collapse-item:last-child>.ant-collapse-header{
-        border-radius: 0;
+        border-radius: 0 !important;
+        
     }
+    :where(.css-nqoqt9).ant-collapse .ant-collapse-content{
+        border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+        background-color: rgb(255 255 255 / 3%) !important;
+    }
+    :where(.css-nqoqt9).ant-collapse>.ant-collapse-item{
+        border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+        background-color: rgb(255 255 255 / 3%) !important;
+    }
+    :where(.css-nqoqt9).ant-collapse>.ant-collapse-item{
+        border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+        background-color: rgb(255 255 255 / 3%) !important;
+    }
+    :where(.css-nqoqt9).ant-tabs-top >.ant-tabs-nav::before, :where(.css-nqoqt9).ant-tabs-bottom >.ant-tabs-nav::before, :where(.css-nqoqt9).ant-tabs-top >div>.ant-tabs-nav::before, :where(.css-nqoqt9).ant-tabs-bottom >div>.ant-tabs-nav::before{
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+        background-color: rgb(255 255 255 / 3%) !important;
+    }
+    
     .course_player {
         .course_player_video {
             background: $dark-bg;

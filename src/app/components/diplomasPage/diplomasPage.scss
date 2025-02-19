@@ -147,6 +147,20 @@
     .diplomas_page {
         background: $second-color;
     }
+
+    .diplomas_page{
+        .last_video_watched{
+            .last_video_watched_item{
+                background: #1c242f;
+                span{
+                    color: $white-color;
+                }
+                h2{
+                    color: $white-color;
+                }
+            }
+        }
+    }
 }
 @media (max-width: 1024px) {
     .diplomas_page {

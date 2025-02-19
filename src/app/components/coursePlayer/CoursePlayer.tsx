@@ -64,7 +64,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
     const [cookies, , removeCookie] = useCookies(["userData"]);
     const [videoCipherPath, setVideoCipherPath] = useState<string>("");
     const [hasHandledProgress, setHasHandledProgress] = useState(false);
-    const [storedCourse, setStoredCourse] = useState<{} | null>(null);
+    const [storedCourse, setStoredCourse] = useState<any | null>(null);
 
     const { videoNode, setVideoNode, videoLink, videoName, videoId, CourseVideo, setVideoName, lastVideoData } = GenralCoursePlayerId();
     const playerRef = useRef<HTMLVideoElement | null>(null);
