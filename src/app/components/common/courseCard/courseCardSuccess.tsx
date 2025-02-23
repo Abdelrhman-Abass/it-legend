@@ -11,7 +11,7 @@ import { useTranslations } from "next-intl";
 import generalActivePopup from "@/app/store/ActivePopup";
 import GeneralPopup from "../generalPopup/GeneralPopup";
 
-export default function CoursePlayerAccordion({ videosItems, videoCommentsMutation }: CoursePlayerAccordionProps) {
+export default function CoursePlayerAcco({ videosItems, videoCommentsMutation }: CoursePlayerAccordionProps) {
     const t = useTranslations()
     const { setVideoNode, setVideoName, setVideoID, setLastVideoData, videoNode } = GenralCoursePlayerId();
     const [cookies] = useCookies(["userData"]);
@@ -77,7 +77,6 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
                                             openPopup()
                                             
                                         }
-                                        window.history.replaceState(null, "", window.location.pathname + window.location.search);
                                         setVideoID(child.contentId);
                                         setVideoName(`${locale === "ar" ? child.titleAr : child.titleEn}`);
                                         videoCommentsMutation.mutate(child.contentId);
@@ -104,7 +103,6 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
         <div className="course_player_accordion">
             <Collapse activeKey={activeKey} expandIcon={({ isActive }) => (isActive ? <DownOutlined /> : <UpOutlined />)} onChange={(keys) => setActiveKey(keys)} expandIconPosition="end" items={items} />
         </div>
-            <GeneralPopup isExam={true} />
         
         </>
     );

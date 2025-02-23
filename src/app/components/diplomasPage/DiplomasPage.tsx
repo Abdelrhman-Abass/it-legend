@@ -136,28 +136,11 @@ export default function DiplomasPage() {
                 ))}
             </div>
             <AdsSection />
-            <div className="diplomas_page_cards _line py p-lg" id="learn-path">
-                <HeaderSection title={t("common.myDiplomas")} />
-                {diplomaData?.data?.data.map((item: any, index: number) => (
-                    <CourseCard
-                        hideItems
-                        titleAr={item.titleAr}
-                        titleEn={item.titleEn}
-                        shortDescriptionAr={item.shortDescriptionAr}
-                        shortDescriptionEn={item.shortDescriptionEn}
-                        btnText={t("diplomaDetails.footer.btn")}
-                        image={`https://itlegend.net/Content/Uploads/CoursesMedia/${item.image}`}
-                        key={index}
-                        url={`/${locale}/learn-path/diploma/${item.categoryId}`}
-                    />
-                ))}
-            </div>
-            <div className="diplomas_page_cards p-lg py" id="my-courses">
-                <HeaderSection title={t("common.myCourses")} />
-                <div className="diplomas_page_cards_container _grid">
-                    {coursesData?.data?.data.map((item: any, index: number) => (
+            {diplomaData?.data?.data.length > 0 && (
+                <div className="diplomas_page_cards _line py p-lg" id="learn-path">
+                    <HeaderSection title={t("common.myDiplomas")} />
+                    {diplomaData?.data?.data.map((item: any, index: number) => (
                         <CourseCard
-                            showProgress
                             hideItems
                             titleAr={item.titleAr}
                             titleEn={item.titleEn}
@@ -166,12 +149,36 @@ export default function DiplomasPage() {
                             btnText={t("diplomaDetails.footer.btn")}
                             image={`https://itlegend.net/Content/Uploads/CoursesMedia/${item.image}`}
                             key={index}
-                            progressPercentage={Math.trunc(item.progressPercentage)}
-                            url={`/${locale}/learn-path/course-player/${item.courseId}`}
+                            url={`/${locale}/learn-path/diploma/${item.categoryId}`}
                         />
                     ))}
                 </div>
-            </div>
+
+            )}
+
+            {coursesData?.data?.data.length > 0 && (
+
+                <div className="diplomas_page_cards p-lg py" id="my-courses">
+                    <HeaderSection title={t("common.myCourses")} />
+                    <div className="diplomas_page_cards_container _grid">
+                        {coursesData?.data?.data.map((item: any, index: number) => (
+                            <CourseCard
+                                showProgress
+                                hideItems
+                                titleAr={item.titleAr}
+                                titleEn={item.titleEn}
+                                shortDescriptionAr={item.shortDescriptionAr}
+                                shortDescriptionEn={item.shortDescriptionEn}
+                                btnText={t("diplomaDetails.footer.btn")}
+                                image={`https://itlegend.net/Content/Uploads/CoursesMedia/${item.image}`}
+                                key={index}
+                                progressPercentage={Math.trunc(item.progressPercentage)}
+                                url={`/${locale}/learn-path/course-player/${item.courseId}`}
+                            />
+                        ))}
+                    </div>
+                </div>
+            )}
         </section>
     );
 }

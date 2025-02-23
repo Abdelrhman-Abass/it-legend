@@ -24,6 +24,7 @@ import { Autoplay } from "swiper/modules";
 import { FiSun } from "react-icons/fi";
 import { IoMoonOutline } from "react-icons/io5";
 import useThemeProvider from "@/app/store/ThemeProvider";
+import QuestionComponent from "../common/courseExam/CourseExam";
 
 declare global {
     interface Window {
@@ -63,8 +64,10 @@ export default function CoursePlayer({ slug }: { slug: string }) {
 
     const [cookies, , removeCookie] = useCookies(["userData"]);
     const [videoCipherPath, setVideoCipherPath] = useState<string>("");
+    const [nodeType, setNodeType] = useState<number>(0);
     const [hasHandledProgress, setHasHandledProgress] = useState(false);
     const [storedCourse, setStoredCourse] = useState<any | null>(null);
+    const [courseTitle, setCourseTitle] = useState<string>("");
 
     const { videoNode, setVideoNode, videoLink, videoName, videoId, CourseVideo, setVideoName, lastVideoData } = GenralCoursePlayerId();
     const playerRef = useRef<HTMLVideoElement | null>(null);
@@ -109,67 +112,63 @@ export default function CoursePlayer({ slug }: { slug: string }) {
             setVideoCipherPath(courseVideos.data.data.video.path);
         }
     }, [courseVideos]);
-
-    // Fetch OTP when videoId changes
+    
+    // console.log(courseVideos?.data?.data);
     const { data: vdocipherOTP, isLoading: isLoadingvdocipherOTP } = useQuery({
         queryKey: ["Vdo_Cipher_Otp", { videoCipherPath }],
         queryFn: () => getServerRequest(`/VdoCipher/${videoCipherPath}/otp`),
         enabled: !!videoCipherPath,
     });
 
-    //     useEffect(() => {
-    //         // Function to handle the popstate event
-    //         const handlePopState = () => { 1px solid rgba(255, 255, 255, 0.1)
-    //             // Get the current history state
-    //             const currentState = window.history.state;
-
-    //             // Optionally, check if there is a previous state
-    //             if (currentState && currentState.backUrl) {
-    //                 // Navigate to the previous URL stored in the state
-    //                 router.push(currentState.backUrl);
-    //             } else {
-    //                 // Default behavior: go back one step in history
-    //                 window.history.back();
-    //             }
-    //         };
-
-    //         // Add the event listener for the popstate event
-    //         window.addEventListener("popstate", handlePopState);
-
-    //         // Clean up the event listener on unmount
-    //         return () => {
-    //             window.removeEventListener("popstate", handlePopState);
-    //         };
-    //     }, [router]);
+    
+    
     useEffect(() => {
-        const handleBeforeUnload = () => {
-            localStorage.setItem("lastVisitedURL", window.location.href);
-        };
+        MemberCoursePlayer?.data?.data?.map((item: any) => {
+            item.nodes.map((node: any) => {
+                
+                if (node.contentId == videoId) {
+                    setNodeType(node.type);
+                }
+            });
+        });
+        // console.log("Node Type: ", nodeType);
+    }, [MemberCoursePlayer, videoNode]);
+    
+    
+    // console.log(nodeType)
 
-        window.addEventListener("beforeunload", handleBeforeUnload);
+    // Fetch OTP when videoId changes
 
-        return () => {
-            window.removeEventListener("beforeunload", handleBeforeUnload);
-        };
-    }, []);
+    
+    // useEffect(() => {
+    //     const handleBeforeUnload = () => {
+    //         localStorage.setItem("lastVisitedURL", window.location.href);
+    //     };
 
-    useEffect(() => {
-        const handlePopState = () => {
-            const lastURL = localStorage.getItem("lastVisitedURL");
+    //     window.addEventListener("beforeunload", handleBeforeUnload);
 
-            if (lastURL) {
-                router.push(lastURL); // Go to last visited video URL
-            } else {
-                window.history.back(); // Default back behavior
-            }
-        };
+    //     return () => {
+    //         window.removeEventListener("beforeunload", handleBeforeUnload);
+    //     };
+    // }, []);
 
-        window.addEventListener("popstate", handlePopState);
+    // useEffect(() => {
+    //     const handlePopState = () => {
+    //         const lastURL = localStorage.getItem("lastVisitedURL");
 
-        return () => {
-            window.removeEventListener("popstate", handlePopState);
-        };
-    }, [router]);
+    //         if (lastURL) {
+    //             router.push(lastURL); // Go to last visited video URL
+    //         } else {
+    //             window.history.back(); // Default back behavior
+    //         }
+    //     };
+
+    //     window.addEventListener("popstate", handlePopState);
+
+    //     return () => {
+    //         window.removeEventListener("popstate", handlePopState);
+    //     };
+    // }, [router]);
 
     useEffect(() => {
         const storedData = localStorage.getItem("courses");
@@ -219,39 +218,10 @@ export default function CoursePlayer({ slug }: { slug: string }) {
     }, [router]);
 
     // useEffect(() => {
-    // Function to handle the popstate event
-    // window.addEventListener("popstate", (event) => {
-    //     console.log(
-    //       `location: ${document.location}, state: ${JSON.stringify(event.state)}`,
-    //     );
-    //   });
-    // console.log(window.history);
-    // }, []);
-
-    // useEffect(() => {
-    //     // Function to handle the popstate event
-    //     const handlePopState = () => {
-    //         // Get the current history state
-    //         const currentState = window.history.state;
-
-    //         // Optionally, check if there is a previous state
-    //         if (currentState && currentState.backUrl) {
-    //             // Navigate to the previous URL stored in the state
-    //             router.push(currentState.backUrl);
-    //         } else {
-    //             // Default behavior: go back one step in history
-    //             window.history.back();
-    //         }
-    //     };
-
-    //     // Add the event listener for the popstate event
-    //     window.addEventListener("popstate", handlePopState);
-
-    //     // Clean up the event listener on unmount
-    //     return () => {
-    //         window.removeEventListener("popstate", handlePopState);
-    //     };
-    // }, [router]);
+    //     if (courseVideos?.data?.data?.video?.path) {
+    //         setVideoCipherPath(courseVideos.data.data.video.path);
+    //     }
+    // }, [courseVideos]);
 
     useEffect(() => {
         if (vdocipherOTP?.data?.data?.otp) {
@@ -259,8 +229,10 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                 otp: vdocipherOTP.data.data.otp,
                 playbackInfo: vdocipherOTP.data.data.playbackInfo,
             });
+
         }
     }, [vdocipherOTP]);
+    // console.log(videoCipherPath + "vdocipherOTP")
 
     const videoCommentsMutation = useMutation({
         mutationFn: (nodeId) => getServerRequest(`/VideoComment/${nodeId}/comments`),
@@ -483,101 +455,66 @@ export default function CoursePlayer({ slug }: { slug: string }) {
         }
     };
 
-    useEffect(() => {
-        const handleBeforeUnload = () => {
-            localStorage.setItem("lastVisitedURL", window.location.href);
-        };
-
-        window.addEventListener("beforeunload", handleBeforeUnload);
-
-        return () => {
-            window.removeEventListener("beforeunload", handleBeforeUnload);
-        };
-    }, []);
-
-    useEffect(() => {
-        const handlePopState = () => {
-            const lastURL = localStorage.getItem("lastVisitedURL");
-
-            if (lastURL) {
-                router.push(lastURL); // Go to last visited video URL
-            } else {
-                window.history.back(); // Default back behavior
-            }
-        };
-
-        window.addEventListener("popstate", handlePopState);
-
-        return () => {
-            window.removeEventListener("popstate", handlePopState);
-        };
-    }, [router]);
-
-    useEffect(() => {
-        const handleBeforeUnload = () => {
-            localStorage.setItem("lastVisitedURL", window.location.href);
-        };
-
-        window.addEventListener("beforeunload", handleBeforeUnload);
-
-        return () => {
-            window.removeEventListener("beforeunload", handleBeforeUnload);
-        };
-    }, []);
-
-    useEffect(() => {
-        const handlePopState = () => {
-            const lastURL = localStorage.getItem("lastVisitedURL");
-
-            if (lastURL) {
-                router.push(lastURL); // Go to last visited video URL
-            } else {
-                window.history.back(); // Default back behavior
-            }
-        };
-
-        window.addEventListener("popstate", handlePopState);
-
-        return () => {
-            window.removeEventListener("popstate", handlePopState);
-        };
-    }, [router]);
-
     // useEffect(() => {
-    // Function to handle the popstate event
-    // window.addEventListener("popstate", (event) => {
-    //     console.log(
-    //       `location: ${document.location}, state: ${JSON.stringify(event.state)}`,
-    //     );
-    //   });
-    // const diplomaName = localStorage.getItem("diplomaName") || "{}"
-    // console.log(diplomaName + "diploma name")
+    //     const handleBeforeUnload = () => {
+    //         localStorage.setItem("lastVisitedURL", window.location.href);
+    //     };
+
+    //     window.addEventListener("beforeunload", handleBeforeUnload);
+
+    //     return () => {
+    //         window.removeEventListener("beforeunload", handleBeforeUnload);
+    //     };
     // }, []);
 
     // useEffect(() => {
-    //     // Function to handle the popstate event
     //     const handlePopState = () => {
-    //         // Get the current history state
-    //         const currentState = window.history.state;
+    //         const lastURL = localStorage.getItem("lastVisitedURL");
 
-    //         // Optionally, check if there is a previous state
-    //         if (currentState && currentState.backUrl) {
-    //             // Navigate to the previous URL stored in the state
-    //             router.push(currentState.backUrl);
+    //         if (lastURL) {
+    //             router.push(lastURL); // Go to last visited video URL
     //         } else {
-    //             // Default behavior: go back one step in history
-    //             window.history.back();
+    //             window.history.back(); // Default back behavior
     //         }
     //     };
 
-    //     // Add the event listener for the popstate event
     //     window.addEventListener("popstate", handlePopState);
 
-    //     // Clean up the event listener on unmount
     //     return () => {
     //         window.removeEventListener("popstate", handlePopState);
     //     };
     // }, [router]);
+
+    // useEffect(() => {
+    //     const handleBeforeUnload = () => {
+    //         localStorage.setItem("lastVisitedURL", window.location.href);
+    //     };
+
+    //     window.addEventListener("beforeunload", handleBeforeUnload);
+
+    //     return () => {
+    //         window.removeEventListener("beforeunload", handleBeforeUnload);
+    //     };
+    // }, []);
+
+    // useEffect(() => {
+    //     const handlePopState = () => {
+    //         const lastURL = localStorage.getItem("lastVisitedURL");
+
+    //         if (lastURL) {
+    //             router.push(lastURL); // Go to last visited video URL
+    //         } else {
+    //             window.history.back(); // Default back behavior
+    //         }
+    //     };
+
+    //     window.addEventListener("popstate", handlePopState);
+
+    //     return () => {
+    //         window.removeEventListener("popstate", handlePopState);
+    //     };
+    // }, [router]);
+
 
     // Example: Save the current URL in the history state when navigating to this page
 
@@ -671,7 +608,6 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                     <ReactPlayer
                         // config={{
                         //     file: { attributes: { controlsList: "nodownload" } },
-                        // }}
                         key={videoNode}
                         width="100%"
                         style={{ aspectRatio: "16/9", width: "100%", height: "unset" }}
@@ -797,7 +733,13 @@ export default function CoursePlayer({ slug }: { slug: string }) {
             const router = localStorage.getItem("diploma_route");
             setDiplomaRoute(router);
         }
+        // if(localStorage.getItem("course_title")){
+        //     const route = localStorage.getItem("course_title");
+        //     setCourseTitle(router);
+        // }
+        
     },[slug])
+    // console.log(storedCourse)
 
     // Render
     return (
@@ -827,14 +769,17 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                     {theme === "dark" ? <FiSun style={{ color: "gold" }} /> : <IoMoonOutline />}
                 </div>
             </section>
+            
             <section className="course_player">
                 <div className="course_player_video">
-                    <div className="course_player_video_seaction">
-                        {checkVideoType()}
-                        {/* <div className="course_player_video_seaction_content">
-                            <h3>{videoName}</h3>
-                        </div> */}
-                    </div>
+
+                {nodeType === 0 ? (
+                        <div className="course_player_video_seaction">
+                            {checkVideoType()}
+                        </div>
+                    ) : (
+                        <QuestionComponent />
+                    )}
                     <div className="course_player_video_tabs">
                         <CourseTabs data={isTablet ? tabsData : tabsDataMobile} />
                     </div>

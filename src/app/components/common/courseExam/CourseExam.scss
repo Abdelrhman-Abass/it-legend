@@ -1,0 +1,246 @@
+.course-player {
+    width: 80%;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+
+.course_exam{
+    width:100%;
+
+    .course_exam_header{
+        display:flex;
+        justify-content:space-between;
+    }
+    .course_exam_title,.course_exam_box_answers ,.course_exam_time{
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 28px;
+        color: #4D4D4D;
+        direction:ltr;
+    }
+    .course_exam_time{
+        color:#A0A0A0;
+        margin-top:20px;
+    }
+
+    .course_exam_answers_boxs{
+        margin: 16px 0px;
+        grid-template-columns: repeat(2, 1fr);
+        display: grid;
+        gap: 30px;
+        padding-bottom: 40px;
+    }
+    .course_exam_buttons{
+        display:flex;
+        justify-content:space-between;
+    }
+    
+    .course_exam_buttons button {
+        padding: 10px 20px;
+        border: none;
+        // background-color: #007bff;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .line{
+        text-align:center;
+    }
+
+    .line-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color:#A9A9A9;
+      }
+      
+      .line-container::before,
+      .line-container::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid  #A9A9A9;
+        margin:10px
+      }
+      
+      .line-container::before {
+        margin-right: 10px; /* Space between line and text */
+      }
+      
+      .line-container::after {
+        margin-left: 10px; /* Space between text and line */
+      }
+      
+      .line-text {
+        color: gray;
+    }
+}
+
+@media (max-width: 756px) {
+    .course_exam {
+        .course_exam_answers_boxs {
+            grid-template-columns: 1fr; /* 1 column */
+            gap: 15px;
+        }
+    }
+}
+.dark_theme{
+    .course_exam{
+      background-color: #111822;
+      .course_exam_title,.course_exam_time{
+        color: #fff;
+      }
+
+      
+    }
+    :where(.css-dev-only-do-not-override-nqoqt9).ant-card-bordered{
+        border:0;
+    }
+  
+  }
+  
+.line_break{
+    height : 1px;
+    background-color: #A9A9A9;
+    margin: 0 100px;
+}
+
+.question-container {
+    text-align: center;
+}
+
+.answers-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.answer {
+    padding: 10px 20px;
+    border: none;
+    background-color: #fff;
+    color: #000;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.answer:hover {
+    background-color: #f0f0f0;
+}
+
+.answer.selected {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+.navigation-buttons {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between;
+    margin-top: 20px;
+    align-items:center;
+}
+
+
+// @media (max-width: 756px) {
+//     .navigation-buttons {
+//         display: grid;
+//             grid-template-columns: 1fr; /* 1 column */
+//             gap: 15px;
+//     }
+// }
+
+.navigation-buttons button {
+    padding: 10px 20px;
+    border: none;
+    // flex: 1; // Equal width for all boxes
+
+    background-color: #242857;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 10px;
+    
+}
+
+.navigation-buttons .bt_next  {
+    background-color: #242857;
+}
+.navigation-buttons .bt_prev  {
+    background-color: #EDEDED;
+    color:#242857;
+}
+// .navigation-buttons .bt_prev_question  {
+//     background-color: #242857;
+// }
+.navigation-buttons .bt_again , .navigation-buttons .bt_prev_question  {
+    background-color: #fff;
+    color:#242857;
+}
+
+.dark_theme{
+   
+    .navigation-buttons .bt_again , .navigation-buttons .bt_prev_question  {
+        background-color: #111822;
+        color:#fff;
+    }
+}
+
+.navigation-buttons 
+
+.navigation-buttons button:disabled {
+    background-color: #ccc;
+    color: #fff;
+
+    cursor: not-allowed;
+}
+
+.course_exam_len{
+    color:#A9A9A9;
+}
+
+/* Default Order (Desktop View) */
+@media (max-width: 768px) {
+      .navigation-buttons button:nth-child(1) { order: 1; } // First box
+      .navigation-buttons button:nth-child(2) { order: 2; } // Second box
+      .navigation-buttons button:nth-child(3) { order: 3; } // Third box
+        /* Medium Screens: Adjust Layout */
+    .navigation-buttons .course_exam_len{
+        width: 100%;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .line_break{
+        margin:0 30px;
+    }
+
+    
+    .navigation-buttons button:nth-child(2) {
+      flex: 100%; // Make second div take full width
+      order: -1;  // Moves it to the first position
+      text-align: center;
+
+    }
+
+    .navigation-buttons .bt_prev_question {
+        flex:none !important;
+    }
+
+    
+  }
+
+@media (max-width: 410px) {
+    .navigation-buttons button{
+        flex:1;
+        margin:8px;
+    }
+}
