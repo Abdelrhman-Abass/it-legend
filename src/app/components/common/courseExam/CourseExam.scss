@@ -13,6 +13,7 @@
     .course_exam_header{
         display:flex;
         justify-content:space-between;
+        direction: ltr;
     }
     .course_exam_title,.course_exam_box_answers ,.course_exam_time{
         font-size: 16px;
@@ -88,6 +89,75 @@
         }
     }
 }
+.exam_table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    text-align: center;
+  
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+    }
+  
+    th {
+      background-color: #f9f9f9;
+      font-size: 18px;
+      font-weight: bold;
+
+    }
+  
+    tr {
+      cursor: pointer;
+      transition: background 0.3s ease-in-out;
+      font-size:x-large;
+      font-weight: 300;
+      color: #242857;
+
+  
+      &:hover {
+        background-color: #f3f3f3;
+      }
+    }
+  
+    // tr:nth-child(even) {
+    //   background-color: #f8f8f8;
+    // }
+  }
+  
+  
+
+.retake{
+    .pre_but {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      .pre_but .bt_next {
+        background-color: #EDEDED;
+        color: #242857;
+        width: 50%;
+        font-size: x-large;
+        }
+      
+      .bt_next {
+        background: #EDEDED;
+        border: none;
+        color: #242857;
+
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: background 0.3s ease-in-out;
+      
+        &:hover {
+          background: #d6d6d6;
+        }
+  }
+}
+  
 .dark_theme{
     .course_exam{
       background-color: #111822;
@@ -237,6 +307,26 @@
 
     
   }
+.ace_editor{
+    width:100% !important;
+    height:100% !important;
+}
+
+
+.CourseCodeEditor{
+    *{
+        width:100% !important
+    }
+    .monaco-scrollable-element {
+        left:0 !important;
+    }
+    .lines-content{
+        left:0 !important;
+        height:100% !important;
+        top:0 !important;
+    }
+}
+
 
 @media (max-width: 410px) {
     .navigation-buttons button{

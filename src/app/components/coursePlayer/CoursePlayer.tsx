@@ -15,6 +15,11 @@ import NewLoader from "../common/newLoader/NewLoader";
 import Hls from "hls.js";
 import Link from "next/link";
 import { MdKeyboardArrowRight } from "react-icons/md";
+import { IoLinkSharp } from "react-icons/io5";
+
+import videojs from "video.js";
+// import "videojs-contrib-hls";
+// import "videojs-http-streaming";
 
 // Dynamic imports
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
@@ -24,7 +29,7 @@ import { Autoplay } from "swiper/modules";
 import { FiSun } from "react-icons/fi";
 import { IoMoonOutline } from "react-icons/io5";
 import useThemeProvider from "@/app/store/ThemeProvider";
-import QuestionComponent from "../common/courseExam/CourseExam";
+import CourseExam from "../common/courseExam/CourseExam";
 
 
 declare global {
@@ -67,12 +72,13 @@ export default function CoursePlayer({ slug }: { slug: string }) {
     const [videoCipherPath, setVideoCipherPath] = useState<string>("");
     const [hasHandledProgress, setHasHandledProgress] = useState(false);
     const [nodeType, setNodeType] = useState<number>(0);
+    const [examid, setExamId] = useState<number>(0);
 
     const [storedCourse, setStoredCourse] = useState<any | null>(null);
     const [courseTitle, setCourseTitle] = useState<string>("");
 
 
-    const { videoNode, setVideoNode, videoLink, videoName, videoId, CourseVideo, setVideoName, lastVideoData } = GenralCoursePlayerId();
+    const { videoNode, setVideoNode, videoLink, videoName, videoId, setVideoID ,CourseVideo, setVideoName, lastVideoData } = GenralCoursePlayerId();
     const playerRef = useRef<HTMLVideoElement | null>(null);
     const iframeRef = useRef<HTMLIFrameElement>(null);
 
@@ -135,32 +141,13 @@ export default function CoursePlayer({ slug }: { slug: string }) {
         // console.log("Node Type: ", nodeType);
     }, [MemberCoursePlayer, videoNode]);
 
+    // useEffect(()=>{
+    //     if(nodeType == 1 {
+    //         setExamId()
+    //     })
+    // })
+
     
-
-    //     useEffect(() => {
-    //         // Function to handle the popstate event
-    //         const handlePopState = () => { 1px solid rgba(255, 255, 255, 0.1)
-    //             // Get the current history state
-    //             const currentState = window.history.state;
-
-    //             // Optionally, check if there is a previous state
-    //             if (currentState && currentState.backUrl) {
-    //                 // Navigate to the previous URL stored in the state
-    //                 router.push(currentState.backUrl);
-    //             } else {
-    //                 // Default behavior: go back one step in history
-    //                 window.history.back();
-    //             }
-    //         };
-
-    //         // Add the event listener for the popstate event
-    //         window.addEventListener("popstate", handlePopState);
-
-    //         // Clean up the event listener on unmount
-    //         return () => {
-    //             window.removeEventListener("popstate", handlePopState);
-    //         };
-    //     }, [router]);
     useEffect(() => {
         const handleBeforeUnload = () => {
             localStorage.setItem("lastVisitedURL", window.location.href);
@@ -193,14 +180,14 @@ export default function CoursePlayer({ slug }: { slug: string }) {
 
     useEffect(() => {
         const storedData = localStorage.getItem("courses");
-        console.log("Slug: ", slug);
-        console.log("Stored Data: ", storedData);
+        // console.log("Slug: ", slug);
+        // console.log("Stored Data: ", storedData);
     
         if (storedData) {
             const courses: Record<string, { titleAr: string; category_id: string; categoryTitleAr: string; categoryTitleEn?: string }> = JSON.parse(storedData);
             
             const foundCourse = courses[slug]; // Ensure courses is an object with keys matching slugs
-            console.log("Found Course: ", foundCourse);
+            // console.log("Found Course: ", foundCourse);
     
             if (foundCourse) {
                 setStoredCourse({
@@ -238,40 +225,9 @@ export default function CoursePlayer({ slug }: { slug: string }) {
         };
     }, [router]);
 
-    // useEffect(() => {
-    // Function to handle the popstate event
-    // window.addEventListener("popstate", (event) => {
-    //     console.log(
-    //       `location: ${document.location}, state: ${JSON.stringify(event.state)}`,
-    //     );
-    //   });
-    // console.log(window.history);
-    // }, []);
+   
 
-    // useEffect(() => {
-    //     // Function to handle the popstate event
-    //     const handlePopState = () => {
-    //         // Get the current history state
-    //         const currentState = window.history.state;
-
-    //         // Optionally, check if there is a previous state
-    //         if (currentState && currentState.backUrl) {
-    //             // Navigate to the previous URL stored in the state
-    //             router.push(currentState.backUrl);
-    //         } else {
-    //             // Default behavior: go back one step in history
-    //             window.history.back();
-    //         }
-    //     };
-
-    //     // Add the event listener for the popstate event
-    //     window.addEventListener("popstate", handlePopState);
-
-    //     // Clean up the event listener on unmount
-    //     return () => {
-    //         window.removeEventListener("popstate", handlePopState);
-    //     };
-    // }, [router]);
+    
 
     useEffect(() => {
         if (vdocipherOTP?.data?.data?.otp) {
@@ -294,6 +250,8 @@ export default function CoursePlayer({ slug }: { slug: string }) {
     });
 
     // Derived state: First unwatched node
+
+    // console.log("video Id : " + videoId)
 
     const nextUnwatchedNode = useMemo(() => {
         if (!MemberCoursePlayer?.data?.data) return null;
@@ -330,6 +288,8 @@ export default function CoursePlayer({ slug }: { slug: string }) {
             for (let j = startIndex; j < item.nodes.length; j++) {
                 const node = item.nodes[j];
                 if (node.type === 0 && !node.isWatched) {
+                    // console.log("node : " + JSON.stringify(node, null, 2))
+                    setVideoID(node.contentId)
                     return node; // Return the next unwatched video
                 }
             }
@@ -602,37 +562,113 @@ export default function CoursePlayer({ slug }: { slug: string }) {
     // Example: Save the current URL in the history state when navigating to this page
 
     // Effect to handle HLS video
+    // useEffect(() => {
+    //     if (CourseDetails?.data?.data?.playerType === 1 && playerRef.current && sourceRef.current) {
+    //         const video = playerRef.current;
+    //         const source = sourceRef.current;
+    //         const videoSrc = videoLink.replace(".html", ".m3u8");
+
+    //         if (Hls.isSupported()) {
+    //             const hls = new Hls();
+    //             hls.loadSource(videoSrc);
+    //             hls.attachMedia(video);
+
+    //             hls.on(Hls.Events.MANIFEST_PARSED, () => {
+    //                 video.play().catch((error) => console.error("Error playing video:", error));
+    //             });
+    //         } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+    //             source.src = videoSrc;
+    //             video.load();
+    //             video.addEventListener("loadedmetadata", () => {
+    //                 video.play().catch((error) => console.error("Error playing video:", error));
+    //             });
+    //         }
+    //     }
+    // }, [CourseDetails, videoLink]);
     useEffect(() => {
         if (CourseDetails?.data?.data?.playerType === 1 && playerRef.current && sourceRef.current) {
             const video = playerRef.current;
-            const source = sourceRef.current;
             const videoSrc = videoLink.replace(".html", ".m3u8");
-
+    
             if (Hls.isSupported()) {
                 const hls = new Hls();
                 hls.loadSource(videoSrc);
                 hls.attachMedia(video);
-
+    
                 hls.on(Hls.Events.MANIFEST_PARSED, () => {
                     video.play().catch((error) => console.error("Error playing video:", error));
                 });
+    
+                hls.on(Hls.Events.FRAG_CHANGED, (event, data) => {
+                    console.log("Fragment changed:", data);
+                    // You can use this event to track progress
+                    const currentTime = video.currentTime;
+                    const duration = video.duration;
+                    const progress = {
+                        playedSeconds: currentTime,
+                        played: currentTime / duration,
+                    };
+                    handleProgress(progress);
+                });
+    
+                hls.on(Hls.Events.ERROR, (event, data) => {
+                    console.error("HLS error:", data);
+                });
             } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-                source.src = videoSrc;
+                sourceRef.current.src = videoSrc;
                 video.load();
                 video.addEventListener("loadedmetadata", () => {
                     video.play().catch((error) => console.error("Error playing video:", error));
                 });
+    
+                video.addEventListener("timeupdate", () => {
+                    const currentTime = video.currentTime;
+                    const duration = video.duration;
+                    const progress = {
+                        playedSeconds: currentTime,
+                        played: currentTime / duration,
+                    };
+                    handleProgress(progress);
+                });
             }
         }
     }, [CourseDetails, videoLink]);
+    // interface IconButtonProps {
+    //     icon: React.ReactNode;
+    //     label: string;
+    //   }
 
+    // const IconButton: React.FC<IconButtonProps> = ({ icon, label }) => {
+    //     const [showTooltip, setShowTooltip] = useState(false);
+      
+    //     return (
+    //       <div
+    //         className="icon-button"
+    //         onMouseEnter={() => setShowTooltip(true)}
+    //         onMouseLeave={() => setShowTooltip(false)}
+    //       >
+    //         {icon}
+    //         {showTooltip && <div className="tooltip">{label}</div>}
+    //       </div>
+    //     );
+    //   };
     // Tabs configuration
     const isTablet = useMediaQuery({ query: "(min-width: 1025px)" });
     const tabsData = useMemo(
         () => [
             {
                 key: "1",
-                label: t("courseTabs.links"),
+                label: (
+                    <>
+                    <div title={t("courseTabs.links")} className="custom-button">
+                            {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-shield-ellipsis"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="M8 12h.01"></path><path d="M12 12h.01"></path><path d="M16 12h.01"></path></svg> */}
+
+                            <IoLinkSharp />
+                        
+                        </div>
+                    </>
+
+                ),
                 children: (
                     <>
                         <CourseLinks data={CourseLinksData?.data?.data} title={t("courseTabs.links")} />
@@ -641,8 +677,23 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                     </>
                 ),
             },
-            { key: "2", label: t("courseTabs.q_a"), children: t("courseTabs.q_a") },
-            { key: "3", label: t("courseTabs.leader"), children: t("courseTabs.leader") },
+            { key: "2", label: (
+                <>
+                     <div title={t("courseTabs.q_a")} className="custom-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-message-circle-question"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg>
+    
+                     </div>
+                    
+                </>
+            ), children: t("courseTabs.q_a") },
+            { key: "3", label:(
+                <>
+                    <div title={t("courseTabs.leader")} className="custom-button">
+                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-shield-ellipsis"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="M8 12h.01"></path><path d="M12 12h.01"></path><path d="M16 12h.01"></path></svg>
+                            
+                    </div>
+                    
+                </>
+            ) , children: t("courseTabs.leader") },
         ],
         [CourseLinksData, t, videoCommentsMutation],
     );
@@ -651,7 +702,12 @@ export default function CoursePlayer({ slug }: { slug: string }) {
         () => [
             {
                 key: "4",
-                label: t("courseTabs.courseContent"),
+                label: (
+                    <>
+                         <div title={t("courseTabs.courseContent")} className="custom-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-file-user"><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M15 18a3 3 0 1 0-6 0"></path><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"></path><circle cx="12" cy="13" r="2"></circle></svg>
+                        </div>
+                    </>
+                ),
                 children: (
                     <div className="course_player_list">
                         <div className="course_player_header">{CourseDetails && <LineProgress title="Course List" percent={Math.trunc(CourseDetails?.data?.data.progressPercentage)} />}</div>
@@ -722,38 +778,39 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                 );
 
             case 1: // HLS video (e.g., Publit)
-                return (
-                    <div style={{ left: "0", width: "100%", height: "0", position: "relative", paddingBottom: "55.29%" }}>
-                        <figure
-                            style={{
-                                left: "0",
-                                width: "100%",
-                                height: "0",
-                                position: "relative",
-                                paddingBottom: "55.29%",
-                                marginBlockEnd: "0",
-                                marginBlockStart: "0",
-                                marginInlineStart: "0",
-                                marginInlineEnd: "0",
-                            }}>
-                            <iframe
-                                id="pv_NeR5g5Te"
-                                src={videoLink}
-                                scrolling="no"
-                                style={{ border: "0", top: "0", left: "0", width: "100%", height: "100%", position: "absolute", overflow: "hidden" }}
-                                allowFullScreen={true}
-                                onLoad={() => {
-                                    // Send a message to the iframe to listen for the video end event
-                                    const iframe = document.getElementById("pv_NeR5g5Te") as any;
-                                    if (iframe) {
-                                        iframe.contentWindow.postMessage("listenForVideoEnd", "*");
-                                        iframe.contentWindow.postMessage("listenForVideoProgress", "*");
-                                    }
-                                }}
-                            />
-                        </figure>
-                    </div>
-                );
+            return (
+                <div style={{ left: "0", width: "100%", height: "0", position: "relative", paddingBottom: "55.29%" }}>
+                    <figure
+                        style={{
+                            left: "0",
+                            width: "100%",
+                            height: "0",
+                            position: "relative",
+                            paddingBottom: "55.29%",
+                            marginBlockEnd: "0",
+                            marginBlockStart: "0",
+                            marginInlineStart: "0",
+                            marginInlineEnd: "0",
+                        }}>
+                        <iframe
+                            id="pv_NeR5g5Te"
+                            src={videoLink}
+                            scrolling="no"
+                            style={{ border: "0", top: "0", left: "0", width: "100%", height: "100%", position: "absolute", overflow: "hidden" }}
+                            allowFullScreen={true}
+                            // ref={playerRef}
+                            onLoad={() => {
+                                // Send a message to the iframe to listen for the video end event
+                                const iframe = document.getElementById("pv_NeR5g5Te") as any;
+                                if (iframe) {
+                                    iframe.contentWindow.postMessage("listenForVideoEnd", "*");
+                                    iframe.contentWindow.postMessage("listenForVideoProgress", "*");
+                                }
+                            }}
+                        />
+                    </figure>
+                </div>
+            );
             case 2: //vdocipher
                 return (
                     <iframe
@@ -778,6 +835,134 @@ export default function CoursePlayer({ slug }: { slug: string }) {
         }
     }, [CourseDetails, videoNode, videoLink, handleDuration, handleProgress, handleVideoEnd, lastVideoData, vdocipherConfig]);
 
+    
+    useEffect(() => {
+        const handleIframeEnd = (event: any) => {
+            if (event.data.event_id == "publitio_video_ended") {
+                handleVideoEnd();
+            }
+        };
+
+        window.addEventListener("message", handleIframeEnd);
+
+        return () => {
+            window.removeEventListener("message", handleIframeEnd);
+        };
+    }, [handleVideoEnd]);
+    useEffect(() => {
+        const handleIframeProgress = (event: any) => {
+            // console.log(event.data.event_id + "from here ")
+            if (event.data.event_id === "publitio_video_played") {
+
+                const progress = {
+                    playedSeconds: event.data.currentTime,
+                    played: event.data.currentTime / event.data.duration,
+                };
+
+                handleProgress(progress);
+            }
+        };
+
+        window.addEventListener("message", handleIframeProgress);
+
+        return () => {
+            window.removeEventListener("message", handleIframeProgress);
+        };
+    }, [handleProgress]);
+    // useEffect(() => {
+    //     if (CourseDetails?.data?.data?.playerType === 1 && playerRef.current) {
+    //         const video = playerRef.current;
+    //         const videoSrc = videoLink.replace(".html", ".m3u8");
+    
+    //         if (Hls.isSupported()) {
+    //             const hls = new Hls();
+    //             hls.loadSource(videoSrc);
+    //             hls.attachMedia(video);
+    
+    //             hls.on(Hls.Events.MANIFEST_PARSED, () => {
+    //                 video.play().catch((error) => console.error("Error playing video:", error));
+    //             });
+    
+    //             hls.on(Hls.Events.FRAG_CHANGED, (event, data) => {
+    //                 console.log("Fragment changed:", data);
+    //                 const currentTime = video.currentTime;
+    //                 const duration = video.duration;
+    //                 const progress = {
+    //                     playedSeconds: currentTime,
+    //                     played: currentTime / duration,
+    //                 };
+    //                 handleProgress(progress);
+    //             });
+    
+    //             hls.on(Hls.Events.ERROR, (event, data) => {
+    //                 console.error("HLS error:", data);
+    //             });
+    //         } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+    //             video.src = videoSrc;
+    //             video.addEventListener("loadedmetadata", () => {
+    //                 video.play().catch((error) => console.error("Error playing video:", error));
+    //             });
+    
+    //             video.addEventListener("timeupdate", () => {
+    //                 const currentTime = video.currentTime;
+    //                 const duration = video.duration;
+    //                 const progress = {
+    //                     playedSeconds: currentTime,
+    //                     played: currentTime / duration,
+    //                 };
+    //                 handleProgress(progress);
+    //             });
+    //         }
+    //     }
+    // }, [CourseDetails, videoLink]);
+    useEffect(() => {
+        const handleIframeEnd = (event: any) => {
+            if (event.data.event_id == "publitio_video_ended") {
+                handleVideoEnd();
+            }
+        };
+
+        window.addEventListener("message", handleIframeEnd);
+
+        return () => {
+            window.removeEventListener("message", handleIframeEnd);
+        };
+    }, [handleVideoEnd]);
+
+    useEffect(() => {
+        const handleIframeProgress = (event: any) => {
+            if (event.data.event_id === "publitio_video_played") {
+                console.log(event.data, "progress");
+
+                // let currentTime = event.data.currentTime;
+                // let duration = event.data.duration;
+
+                const progress = {
+                    playedSeconds: event.data.currentTime,
+                    played: event.data.duration,
+                };
+                console.log(event.data.currentTime, "progress");
+
+                handleProgress(progress);
+            }
+        };
+
+        window.addEventListener("message", handleIframeProgress);
+
+        return () => {
+            window.removeEventListener("message", handleIframeProgress);
+        };
+    }, [handleProgress]);
+
+    useEffect(() => {
+        if (iframeRef.current) {
+            iframeRef.current.contentWindow?.postMessage(
+                { event: "subscribe", type: "timeupdate" },
+                "*"
+            );
+        }
+    }, []);
+
     useEffect(() => {
         const handleIframeEnd = (event: any) => {
             if (event.data.event_id == "publitio_video_ended") {
@@ -796,18 +981,59 @@ export default function CoursePlayer({ slug }: { slug: string }) {
             if (event.data.event_id === "publitio_video_played") {
                 // console.log(event.data.type, "progress");
 
-                const progress = {
-                    playedSeconds: event.data.currentTime,
-                    played: event.data.currentTime / event.data.duration,
-                };
+                // const progress = {
+                //     playedSeconds: event.data.currentTime,
+                //     played: event.data.currentTime / event.data.duration,
+                // };
+
+                const { currentTime, duration } = event.data;
+
+                if (currentTime !== undefined && duration) {
+                    const progress = {
+                        playedSeconds: currentTime,
+                        played: currentTime / duration,
+                    };
+                    console.log("Video Progress:", progress);
+                    handleProgress(progress);
+                } else {
+                    console.warn("currentTime or duration is missing in event data:", event.data);
+                }
                 // console.log(progress, "progress");
 
-                handleProgress(progress);
+                // handleProgress(progress);
             }
         };
 
         window.addEventListener("message", handleIframeProgress);
 
+        return () => {
+            window.removeEventListener("message", handleIframeProgress);
+        };
+    }, [handleProgress]);
+
+    useEffect(() => {
+        const handleIframeProgress = (event: any) => {
+            if (!event.data) return;
+    
+            if (event.data.event_id === "publitio_video_played") {
+                console.log("Publit.io Video Event:", event.data);
+    
+                const { currentTime, duration } = event.data;
+                if (typeof currentTime === "number" && typeof duration === "number") {
+                    const progress = {
+                        playedSeconds: currentTime,
+                        totalDuration: duration,
+                    };
+                    console.log(`Current Time: ${currentTime} / ${duration}`);
+                    
+                    // Call the function to update progress in your state
+                    handleProgress(progress);
+                }
+            }
+        };
+    
+        window.addEventListener("message", handleIframeProgress);
+    
         return () => {
             window.removeEventListener("message", handleIframeProgress);
         };
@@ -855,13 +1081,25 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                             {checkVideoType()}
                         </div>
                     ) : (
-                        <QuestionComponent />
+                        <CourseExam/>
                     )}
                     <div className="course_player_video_tabs">
+                        {/* {nodeType === 1 ? (
+                            
+                            <div className="overlay"></div>
+                        ) : (
+                            null
+                        )} */}
                         <CourseTabs data={isTablet ? tabsData : tabsDataMobile} />
                     </div>
                 </div>
                 <div className="course_player_list">
+                {/* {nodeType === 1 ? (
+                        
+                        <div className="overlay"></div>
+                    ) : (
+                        null
+                    )} */}
                     <div className="course_player_header">{CourseDetails && <LineProgress title="Course List" percent={Math.trunc(CourseDetails?.data?.data?.progressPercentage)} />}</div>
                     <div className="course_player_list_items">
                         <CoursePlayerAccordion videosItems={MemberCoursePlayer?.data?.data} videoCommentsMutation={videoCommentsMutation} />
@@ -873,3 +1111,14 @@ export default function CoursePlayer({ slug }: { slug: string }) {
 }
 
 
+
+// <div class=" mb-5 flex items-center gap-5">
+//     <div title="LeaderBoard" class="rounded-full center size-10 border text-gray-500 hover:text-gray-900 hover:bg-gray-100 soft">
+//         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-ellipsis"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="M8 12h.01"></path><path d="M12 12h.01"></path><path d="M16 12h.01"></path></svg>
+    
+//     </div><a title="Comments" class="rounded-full center size-10 border text-gray-500 hover:text-gray-900 hover:bg-gray-100 soft" href="#comments"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle-more"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path><path d="M8 12h.01"></path><path d="M12 12h.01"></path><path d="M16 12h.01"></path></svg></a>
+    
+//     <div title="Ask a Question" class="rounded-full center size-10 border text-gray-500 hover:text-gray-900 hover:bg-gray-100 soft"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle-question"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg>
+    
+//     </div><a title="Curriculum" class="rounded-full center size-10 border text-gray-500 hover:text-gray-900 hover:bg-gray-100 soft" href="#curriculum"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-user"><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M15 18a3 3 0 1 0-6 0"></path><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"></path><circle cx="12" cy="13" r="2"></circle></svg></a>
+// </div>

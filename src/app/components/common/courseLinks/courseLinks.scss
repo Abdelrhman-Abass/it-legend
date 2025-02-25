@@ -40,7 +40,83 @@
             font-weight: 500;
         }
     }
+    .course_links_container_link {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1em;
+        justify-content: center;
+
+        .course_links_container_item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            padding: 1em;
+            border-radius: 0.6em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: 0.3s ease-in-out;
+            min-width: 200px;
+            // max-width: 250px;
+
+            &:hover {
+                color: $red-color;
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+                transform: translateY(-3px);
+            }
+        }
+
+        // Laptop mode (Two items take full width)
+        @media (min-width: 768px) and (max-width: 1443px) {
+            &:has(.course_links_container_item:nth-child(1):nth-last-child(2)) {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        // If there are 4th or 5th items alone on a new row, center them (Only on medium screens)
+        @media (min-width: 768px) and (max-width: 1443px) {
+            &:has(.course_links_container_item:nth-child(4):nth-last-child(1)),
+            &:has(.course_links_container_item:nth-child(5):nth-last-child(2)) {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+
+        // Large screens (1444px and above) - Always use Grid
+        @media (min-width: 1444px) {
+            // display: grid !important;
+            justify-content: start; // Align items normally
+            // grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .empty_message {
+            color: $gray-text-color;
+            font-weight: 500;
+            text-align: center;
+            width: 100%;
+        }
+    }
 }
+
+
+// .course_links {
+//     min-height: 15em;
+//     background: #f8f8f8;
+//     padding: 1.5em;
+//     border-radius: 0.6em;
+//     border: 1px solid rgba($dark_color, 0.1);
+//     margin-bottom: 2em;
+
+//     h3 {
+//         font-weight: 500;
+//         margin-bottom: 1em;
+//         font-size: 1.3em;
+//     }
+
+    
+// }
+
+
 .dark_theme {
     .course_links{
         background: $dark-bg;

@@ -171,6 +171,14 @@
             "card3": "Total Videos Watched"
         }
     },
+    "courseExam":{
+        "answer" : "Answers",
+        "submitAnswer":"Submit Answers",
+        "nextQuestion":"Next Question",
+        "prevQuestion":"previous Question",
+        "reatak":"Retake The Exam",
+        "prevQuestions": "Previous Questions"
+    },
     "singleDiploma": {
         "titleDiploma": "Your Diploma Progress."
     },

@@ -28,7 +28,7 @@ const CourseLinks = memo(({ data, title, showComments }: CourseLinksProps) => {
                     ))}
                 </div>
             ) : (
-                <div className="course_links_container">
+                <div className="course_links_container_link">
                     {data?.length <= 0 && <p className="p1 empty_message">{t("empty.links")}</p>}
                     {sortedLinks?.map((item) => (
                         <Link className="course_links_container_item" key={item.id || item.path} href={item.path} target="_blank">

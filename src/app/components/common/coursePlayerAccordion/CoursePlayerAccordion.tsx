@@ -21,6 +21,8 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
     function handleVideoPlayType(type: number, nodeID?: string) {
         if (type >= 0 && type <= 3) {
             setVideoNode(nodeID || "");
+            window.history.replaceState(null, "", window.location.pathname + window.location.search);
+
         } else if (type === 4) {
             // Uncomment if needed:
             // window.open(`https://itlegend.net/Content/Uploads/ViewerPath/${nodeID}`, "download", "_blank");
@@ -77,11 +79,11 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
                                             openPopup()
                                             
                                         }
-                                        window.history.replaceState(null, "", window.location.pathname + window.location.search);
                                         setVideoID(child.contentId);
+                                        window.history.replaceState(null, "", window.location.pathname + window.location.search);
                                         setVideoName(`${locale === "ar" ? child.titleAr : child.titleEn}`);
                                         videoCommentsMutation.mutate(child.contentId);
-                                        localStorage.clear();
+                                        // localStorage.clear();
                                         setLastVideoData(null);
                                     }}
                                     key={child.nodeId}

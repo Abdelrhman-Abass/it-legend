@@ -170,6 +170,14 @@
             "card3": "إجمالي مقاطع الفيديو التي شاهدتها"
         }
     },
+    "courseExam":{
+        "answer" : "الاجابات",
+        "submitAnswer":"إرسال الإجابات",
+        "nextQuestion":"السؤال التالي",
+        "prevQuestion":"السؤال السابق",
+        "reatak":"اعادة الامتحان",
+        "prevQuestions": "الاجابات السابقة"
+    },
     "singleDiploma": {
         "titleDiploma": "مستوي التقدم في الدبلومة"
     },
