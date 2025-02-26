@@ -58,6 +58,10 @@
         }
     }
 }
+
+:where(.css-dev-only-do-not-override-nqoqt9).ant-tabs-centered >.ant-tabs-nav .ant-tabs-nav-wrap:not([class*='.ant-tabs-nav-wrap-ping'])>.ant-tabs-nav-list{
+    margin: 0 !important;
+}
 .course_player_header_info {
     background: $gray-color;
     padding: 1em;
@@ -188,10 +192,16 @@
     left: 0;
     z-index: 2;
     width: 100%;
-    height: 100vh;
+    height: 115dvh;
     background-color: hsl(0deg 6.86% 20.04% / 76.9%);
   }
 
+.exam_overlay{
+
+    max-height:100vh;
+    height:100vh;
+    overflow:hidden;
+}  
 @media (max-width: 1024px) {
     .course_player {
         grid-template-columns: 1fr;

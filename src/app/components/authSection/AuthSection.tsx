@@ -21,7 +21,7 @@ export default function AuthSection() {
     const loginMutaion = useMutation({
         mutationFn: (value) => postServerRequest("/Auth/email-login", value),
         onSuccess: (data) => {
-            console.log(data);
+            // console.log(data);
 
             const message = data?.data.success ? "Login Successfully" : "Email Or Password Incorrect";
             if (data?.data.success) {

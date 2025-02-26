@@ -72,7 +72,7 @@ export default function CoursePlayerAcco({ videosItems, videoCommentsMutation }:
                                 <div
                                     onClick={() => {
                                         handleVideoPlayType(child.type, child.nodeId);
-                                        console.log(child,"child");
+                                        // console.log(child,"child");
                                         if (child.type === 1){
                                             openPopup()
                                             

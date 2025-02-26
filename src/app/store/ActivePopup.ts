@@ -5,9 +5,13 @@ interface StoreState {
     activeSuccess:boolean;
     success:boolean;
     activeDatesPopup:boolean;
+    activeWarningPopup:boolean;
+    closeWarningPopup:boolean;
     openPopup: () => void;
     openActiveDatePopup: () => void;
     closeActiveDatePopup: () => void;
+    openWarningClosePop: () => void;
+    closeWarningClosePop: () => void;
     setSuccess: () => void;
     closePopup: () => void;
     openSucPopup: () => void;
@@ -21,8 +25,14 @@ const generalActivePopup = create<StoreState>((set) => ({
     activeSuccess:false,
     success:false,
     activeDatesPopup:false,
+    activeWarningPopup:false,
+    closeWarningPopup:false,
     setSuccess: () => set({ success: true }),
     openActiveDatePopup: () => set({ activeDatesPopup: true }),
+
+    openWarningClosePop: () => set({ activeWarningPopup: true }),
+    closeWarningClosePop: () => set({ closeWarningPopup: true }),
+
     openPopup: () => set({ isActivePopup: true }),
     closeActiveDatePopup: () => set({ activeDatesPopup: false , extraData: null }),
     closePopup: () => set({ isActivePopup: false , extraData: null }),

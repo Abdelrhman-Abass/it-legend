@@ -185,7 +185,8 @@
         "links": "روابط مهمة",
         "q_a": "اسأل سؤال",
         "leader": "الليدر بورد",
-        "courseContent": "محتوي الكورس"
+        "courseContent": "محتوي الكورس",
+        "comments": "التعليقات"
     },
     "courseResults":{
         "title1":"النقاط",

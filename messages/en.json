@@ -186,7 +186,8 @@
         "links": "Important Links",
         "q_a": "Ask a Question",
         "leader": "Leaderboard",
-        "courseContent": "Course Content"
+        "courseContent": "Course Content",
+        "comments": "Comments"
     },
     "courseResults": {
         "title1": "Points",

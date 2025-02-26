@@ -5,8 +5,12 @@ interface StoreState {
     videoLink: string;
     videoName: string;
     videoId: string;
+    prevNode:string;
+    nextNode:any;
     lastVideoData: any;
     setVideoNode: (id: string) => void;
+    setPrevNode: (id: string) => void;
+    setNextNode: (data: any) => void;
     CourseVideo: (id: string) => void;
     setVideoName: (title: string) => void;
     setVideoID: (id: string) => void;
@@ -18,10 +22,20 @@ const GenralCoursePlayerId = create<StoreState>((set) => ({
     videoLink: "",
     videoName: "",
     videoId: "",
+    prevNode:"",
+    nextNode:null,
     lastVideoData: null,
     setVideoNode: (id: string) =>
         set(() => ({
             videoNode: id,
+        })),
+    setPrevNode: (id: string) =>
+        set(() => ({
+            prevNode: id,
+        })),
+    setNextNode: (data: any) =>
+        set(() => ({
+            nextNode: data,
         })),
     CourseVideo: (link: string) =>
         set(() => ({

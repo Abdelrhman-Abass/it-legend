@@ -72,7 +72,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
     const [videoCipherPath, setVideoCipherPath] = useState<string>("");
     const [hasHandledProgress, setHasHandledProgress] = useState(false);
     const [nodeType, setNodeType] = useState<number>(0);
-    const [examid, setExamId] = useState<number>(0);
+    const [examId, setExamID] = useState<number>(0);
 
     const [storedCourse, setStoredCourse] = useState<any | null>(null);
     const [courseTitle, setCourseTitle] = useState<string>("");
@@ -120,6 +120,13 @@ export default function CoursePlayer({ slug }: { slug: string }) {
         if (courseVideos?.data?.data?.video?.path) {
             setVideoCipherPath(courseVideos.data.data.video.path);
         }
+        else if(courseVideos?.data?.data?.video == null){
+            console.log(courseVideos?.data?.data);
+            setExamID(courseVideos?.data?.data.examId)
+        }else{
+            console.log(courseVideos)
+        }
+
     }, [courseVideos]);
 
     // Fetch OTP when videoId changes
@@ -661,8 +668,6 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                 label: (
                     <>
                     <div title={t("courseTabs.links")} className="custom-button">
-                            {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-shield-ellipsis"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="M8 12h.01"></path><path d="M12 12h.01"></path><path d="M16 12h.01"></path></svg> */}
-
                             <IoLinkSharp />
                         
                         </div>
@@ -677,7 +682,21 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                     </>
                 ),
             },
-            { key: "2", label: (
+            { key: "2", label:(
+                <>
+                    
+                    <div title={t("courseTabs.comments")} className="custom-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-message-circle-more"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path><path d="M8 12h.01"></path><path d="M12 12h.01"></path><path d="M16 12h.01"></path></svg></div>
+                    
+                </>
+            ) , children: (
+                <>
+                    <CourseLinks data={videoCommentsMutation?.isPending ? [] : videoCommentsMutation?.data?.data?.data} title={t("common.comments")} showComments />
+                    <AddComment />
+                </>
+            )},
+
+
+            { key: "3", label: (
                 <>
                      <div title={t("courseTabs.q_a")} className="custom-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-message-circle-question"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg>
     
@@ -685,7 +704,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                     
                 </>
             ), children: t("courseTabs.q_a") },
-            { key: "3", label:(
+            { key: "4", label:(
                 <>
                     <div title={t("courseTabs.leader")} className="custom-button">
                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-shield-ellipsis"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="M8 12h.01"></path><path d="M12 12h.01"></path><path d="M16 12h.01"></path></svg>
@@ -701,7 +720,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
     const tabsDataMobile = useMemo(
         () => [
             {
-                key: "4",
+                key: "5",
                 label: (
                     <>
                          <div title={t("courseTabs.courseContent")} className="custom-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-file-user"><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M15 18a3 3 0 1 0-6 0"></path><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"></path><circle cx="12" cy="13" r="2"></circle></svg>
@@ -1048,7 +1067,14 @@ export default function CoursePlayer({ slug }: { slug: string }) {
     // Render
     return (
         <>
-            <section className="course_player_header_info p-lg f ac jb">
+        
+                {nodeType === 1 ? (
+                            
+                            <div className="overlay"></div>
+                        ) : (
+                            null
+                        )}
+            <section className="course_player_header_info p-lg f ac jb" style={{ overflow: nodeType === 1 ? "hidden" : "visible"}}>
                 <div>
                     <div className="course_player_header_breadcrumb f ac">
                         <Link href="/learn-path">{t("menu.learn_pathes") }</Link>
@@ -1073,27 +1099,29 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                     {theme === "dark" ? <FiSun style={{ color: "gold" }} /> : <IoMoonOutline />}
                 </div>
             </section>
-            <section className="course_player">
-                <div className="course_player_video">
+            <section className= {"course_player " + (nodeType === 1 ? "exam_overlay" : "")}>
+                    {/* {nodeType === 1 ? (
+                        
+                        <div className="overlay"></div>
+                    ) : (
+                        null
+                    )} */}
+                <div className="course_player_video" style={{overflow : nodeType== 1 ? "hidden" : "auto"}}>
 
                 {nodeType === 0 ? (
                         <div className="course_player_video_seaction">
                             {checkVideoType()}
                         </div>
                     ) : (
-                        <CourseExam/>
+                        <CourseExam  examid={examId}/>
                     )}
                     <div className="course_player_video_tabs">
-                        {/* {nodeType === 1 ? (
-                            
-                            <div className="overlay"></div>
-                        ) : (
-                            null
-                        )} */}
+
+                        
                         <CourseTabs data={isTablet ? tabsData : tabsDataMobile} />
                     </div>
                 </div>
-                <div className="course_player_list">
+                <div className={"course_player_list " + (nodeType === 1 ? "exam_overlay" : "")}>
                 {/* {nodeType === 1 ? (
                         
                         <div className="overlay"></div>
@@ -1112,13 +1140,3 @@ export default function CoursePlayer({ slug }: { slug: string }) {
 
 
 
-// <div class=" mb-5 flex items-center gap-5">
-//     <div title="LeaderBoard" class="rounded-full center size-10 border text-gray-500 hover:text-gray-900 hover:bg-gray-100 soft">
-//         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-ellipsis"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="M8 12h.01"></path><path d="M12 12h.01"></path><path d="M16 12h.01"></path></svg>
-    
-//     </div><a title="Comments" class="rounded-full center size-10 border text-gray-500 hover:text-gray-900 hover:bg-gray-100 soft" href="#comments"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle-more"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path><path d="M8 12h.01"></path><path d="M12 12h.01"></path><path d="M16 12h.01"></path></svg></a>
-    
-//     <div title="Ask a Question" class="rounded-full center size-10 border text-gray-500 hover:text-gray-900 hover:bg-gray-100 soft"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle-question"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg>
-    
-//     </div><a title="Curriculum" class="rounded-full center size-10 border text-gray-500 hover:text-gray-900 hover:bg-gray-100 soft" href="#curriculum"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-user"><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M15 18a3 3 0 1 0-6 0"></path><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"></path><circle cx="12" cy="13" r="2"></circle></svg></a>
-// </div>

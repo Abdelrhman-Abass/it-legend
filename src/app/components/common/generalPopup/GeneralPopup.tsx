@@ -3,10 +3,24 @@ import React, { Suspense, useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import ReactPlayer from "react-player";
 import { motion } from "framer-motion";
+import GenralCoursePlayerId from "@/app/store/GeneralCoursePlayer";
 
-export default function GeneralPopup({ isVideo = false, isExam ,success }: { isVideo?: boolean, isExam?: boolean , success?:boolean}) {
+export default function GeneralPopup({ isVideo = false, isExam ,success ,videoNodeExam }: { isVideo?: boolean, isExam?: boolean , success?:boolean , videoNodeExam?:string}) {
     const { isActivePopup, closePopup, extraData } = generalActivePopup();
+    const { videoNode, videoId , setVideoNode ,setVideoID ,setVideoName ,setLastVideoData , prevNode} = GenralCoursePlayerId();
+
     const [showVideo, setShowVideo] = useState(false);
+    
+    const handleReady=() =>{
+        if(videoNodeExam){
+            setVideoNode(videoNodeExam)
+        }
+        window.history.replaceState(null, "", window.location.pathname + window.location.search);
+        // console.log("not ready " + videoNode)
+        
+        setLastVideoData(null);
+    }
+
 
     useEffect(() => {
         if (isActivePopup) {
@@ -47,22 +61,22 @@ export default function GeneralPopup({ isVideo = false, isExam ,success }: { isV
                         className="general_popup_video" style={{ background: "white" }}>
                         <div>
                             <div className="pop_up_content">
-                                <h1>ممتاز تقدمك يا صديقي</h1>
-                                <p>اقرأ الملاحظات دي بالتباه:</p>
+                                <h1>ممتاز تقدمك يا صديقي.. اقرأ الملاحظات دي بانتباه:</h1>
+                                {/* <p>اقرأ الملاحظات دي بالتباه:</p> */}
                                 <ul>
-                                    <li>الأحد إلك مذكر جويس قبل الامتحان، عشان السكو بناءك هيتحجد بناء على إجاباتك.</li>
-                                    <li>المحاضرات التالية هاتفاتم لك لما تجيب سكو أكثر من %۸ في الامتحان ده.</li>
-                                    <li>تقد ر تعيد الامتحان للد أ في أي وقت، لكن السكو بيتحجد بناء على أول مرة.</li>
-                                    <li>الامتحان متكون من ٠٢ سؤال اختيار من متعدد، وفيه عداد للوقت بمتوسط دقيقتي الامتحان.</li>
+                                    <li>اتأكد إنك مذاكر كويس قبل الامتحان، علشان السكور بتاعك هيتحدد بناء على إجاباتك.</li>
+                                    <li>المحاضرات التالية هتتفتح لك لما تجيب سكور أكتر من 80% في الامتحان ده.</li>
+                                    <li>الامتحان متكون من 20 سؤال اختيار من متعدد، وفيه عداد للوقت بمتوسط دقيقتين لكل سؤال</li>
+                                    <li>إجابتك في وقت أقصر بتضيف للسكور بتاعك في الامتحان</li>
                                 </ul>
                             </div>
                             <div className="pre_buttons">
                                 <button className="bt_next" onClick={closePopup}>
-                                    محتاج اراجع اكنر"
+                                    محتاج اراجع اكنر
                                 </button>
 
-                                <button className="bt_prev" onClick={closePopup}>
-                                    أنا جاهز للامتحان
+                                <button className="bt_prev" onClick={handleReady}>
+                                أنا جاهز.. ابدأ الامتحان الآن
                                 </button>
                             </div>
                         </div>

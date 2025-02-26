@@ -3,13 +3,35 @@ import React, { Suspense, useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import ReactPlayer from "react-player";
 import { motion } from "framer-motion";
-
+import GenralCoursePlayerId from "@/app/store/GeneralCoursePlayer";
+// import {videoCommentsMutation} from "./"
 export default function SuccessPopup({ result = 87 }: { result?: number }) {
     const { activeSuccess, closeSucPopup, extraData, success, activeDatesPopup } = generalActivePopup();
+    const { setVideoNode, videoNode ,setVideoID, nextNode ,setVideoName , setLastVideoData} = GenralCoursePlayerId();
+    const [next, setNext] = useState<any>()
+
     const [showVideo, setShowVideo] = useState(false);
 
+    const handleContinueLerning = ()=>{
+        // console.log(JSON.stringfy(nextNode))
+        if(nextNode){
+            setVideoNode(nextNode.nodeId)
+            setVideoID(nextNode.contentId)
+            window.history.replaceState(null, "", window.location.pathname + window.location.search);
+            setVideoName(`${nextNode.titleEn}`);
+            // videoCommentsMutation.mutate(nextNode.contentId);
+            setLastVideoData(null);
+        }
+        closeSucPopup()
+    }
+    useEffect(()=>{
+        // setNext(JSON.stringify(nextNode))
+        setNext(nextNode)
+        // console.log("next : " + nextNode.nodeId);
 
-
+    },[nextNode])
+    // console.log(videoNode)
+    // http://localhost:3000/ar/learn-path/course-player/c7f5bfef-8117-4021-b83e-448051bced9a
     return (
         <motion.div
             onClick={closeSucPopup}
@@ -68,7 +90,7 @@ export default function SuccessPopup({ result = 87 }: { result?: number }) {
                                     </div>
 
                                     <div className="pre_buttons">
-                                        <button className="bt_next" onClick={closeSucPopup}>
+                                        <button className="bt_next" style={{cursor:"pointer"}} onClick={handleContinueLerning}>
                                             استكمل الدراسة
                                         </button>
 

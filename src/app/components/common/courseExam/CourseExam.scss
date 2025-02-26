@@ -9,6 +9,7 @@
 
 .course_exam{
     width:100%;
+    z-index:20;
 
     .course_exam_header{
         display:flex;
@@ -28,11 +29,11 @@
     }
 
     .course_exam_answers_boxs{
-        margin: 16px 0px;
+        margin: 5px 0px;
         grid-template-columns: repeat(2, 1fr);
         display: grid;
-        gap: 30px;
-        padding-bottom: 40px;
+        gap: 10px;
+        padding-bottom: 15px;
     }
     .course_exam_buttons{
         display:flex;
@@ -85,7 +86,7 @@
     .course_exam {
         .course_exam_answers_boxs {
             grid-template-columns: 1fr; /* 1 column */
-            gap: 15px;
+            gap: 0px;
         }
     }
 }
@@ -126,7 +127,15 @@
   }
   
   
-
+  .correct {
+    border-color: #97EA7F !important;
+    background-color: #97EA7F !important;
+  }
+  
+  .incorrect {
+    border-color: #FF4D4F !important;
+    background-color: #FF4D4F !important;
+  }
 .retake{
     .pre_but {
         display: flex;
@@ -255,6 +264,9 @@
     background-color: #fff;
     color:#242857;
 }
+.navigation-buttons .bt_again  {
+    order:0 !important;
+}
 
 .dark_theme{
    
@@ -285,7 +297,7 @@
         /* Medium Screens: Adjust Layout */
     .navigation-buttons .course_exam_len{
         width: 100%;
-        margin-bottom: 20px;
+        // margin-bottom: -30px;
         text-align: center;
     }
 
