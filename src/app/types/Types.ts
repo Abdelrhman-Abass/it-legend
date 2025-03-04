@@ -67,6 +67,7 @@ export interface ICourseCard {
     progressPercentage?: number;
     hideItems?: boolean;
     showProgress?: boolean;
+    customClass?:string;
     url?: string;
 }
 export interface ICourseBannerDetails {

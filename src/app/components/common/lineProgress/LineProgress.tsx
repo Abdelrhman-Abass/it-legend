@@ -11,7 +11,7 @@ export default function LineProgress({ title, percent }: ILineProgress) {
                 <span>You</span>
             </div>
             <h2>{title}</h2>
-            <Progress percent={percent} style={{ width: "100%" }} percentPosition={{ align: 'end', type: 'inner' }} size={[300, 20]} status="active" strokeColor={{ from: '#108ee9', to: '#87d068' }} />
+            <Progress percent={percent} style={{ width: "100%" }} percentPosition={{ align: 'end', type: 'inner' }} size={[300, 20]} status="active" strokeColor={{ from: "#EB7236", to: '#222D5D' }} />
         </div>
     );
 }

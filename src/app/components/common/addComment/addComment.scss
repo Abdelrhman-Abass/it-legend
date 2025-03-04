@@ -18,4 +18,88 @@
             color: $white-color;
         }
     }
+    .review-container{
+        padding:20px 0;
+        .textarea-container{
+            textarea{
+                background: $dark-bg;
+                border: 1px solid rgba($color: $white-color, $alpha: .1);
+                color:white;
+                &::placeholder{
+                    color:white;
+                }
+            }
+        }
+
+    }
 }
+
+
+.review-container {
+    // max-width: 600px;
+    // margin: auto;
+    // border-radius: 8px;
+    // background: #f9f9f9;
+    // box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    
+    padding: 20px;
+    h2 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+  
+    .textarea-container {
+      width: 100%;
+      textarea {
+        width: 100%;
+        height: 10em;
+        padding: 15px;
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        font-size: 16px;
+        resize: none;
+        box-shadow:4px 4px 10px 3px rgba(0, 0, 0, 0.2);
+        &:focus {
+          outline: none;
+          border-color: #59B2E4;
+        }
+      }
+    }
+  
+    .submit-button {
+      margin-top: 15px;
+      display: flex;
+      justify-content: flex-start;
+      transition: 0.3s ease-in-out;
+
+      button {
+        background: #263666;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            width: 12em;
+            display: flex;
+            border-radius: 5px;
+            justify-content: space-evenly;
+            cursor: pointer;
+            gap: 1.5em;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 4px rgba(26, 5, 5, 0.2);
+            /* text-align: center; */
+            transition: background 0.3sease-in-out;
+  
+        .arrow {
+          margin-left: 8px;
+          font-size: 18px;
+        }
+      }
+      &:hover{
+        // box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        transform: translateY(-3px);
+}
+    }
+  }
+  

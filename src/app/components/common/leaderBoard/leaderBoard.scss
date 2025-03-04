@@ -1,0 +1,232 @@
+.header-container {
+  position: relative;
+  background: white;
+  padding: 5px;
+  // border-radius: 12px;
+  // box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  text-align: center; // Centers the "Leaderboard" text
+
+  .exit-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: transparent;
+    border: 1px solid red;
+    color: red;
+    border-radius: 5px;
+    width: 30px;
+    // height: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      background: red;
+      color: white;
+    }
+  }
+
+  .leaderboard-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1a237e;
+  }
+}
+// Colors
+$primary-color: #1a237e;
+$red-color: #ef4444;
+$background-color: #f0f7ff;
+$white: #ffffff;
+$gray-border: #f3f3f3;
+
+// Overlay
+.overlay_leaderboard {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 4;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+
+  &.active {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+// Popup
+.popup {
+  background-color: $white;
+  border-radius: 24px;
+  width: 90%;
+  max-width: 400px;
+  padding: 24px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  min-height: 600px;
+  position: relative;
+}
+
+// Close Button
+.closeButton {
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    color: #ef4444;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ef4444;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 28px;
+    transition: all 0.3sease;
+    background: transparent;
+    cursor: pointer;
+
+    // max-width: 28rem;
+
+
+// .w-\[90\%\] {
+//     width: 90%;
+// }
+// .min-h-\[600px\] {
+//     min-height: 600px;
+  
+  &:hover {
+    background: $red-color;
+    color: $white;
+  }
+}
+
+$primary-color: #1a237e;
+$red-color: #ef4444;
+$white: #ffffff;
+$border-color: #e0e0e0;
+
+// Container
+// .header-container {
+//     display: flex;
+//         flex-direction: row-reverse;
+//         /* align-items: center; */
+//         justify-content: center;
+//         text-align: center;
+//         background-color: #ffffff;
+//         /* padding: 16px; */
+//         border-radius: 12px;
+//         /* box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); */
+//         gap: 8px;
+// }
+
+// Top Row (for Close Button & Title)
+.top-row {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; // Space between close button and text
+}
+
+// Close Button
+.close-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: $red-color;
+  border: 1px solid $red-color;
+  background: transparent;
+  border-radius: 8px;
+  width: 28px;
+  height: 28px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: $red-color;
+    color: $white;
+  }
+}
+
+// Course Title
+.course_leaderBoard {
+  font-size: 16px;
+  font-weight: 500;
+  color: $primary-color;
+  flex: 1; // Allows title to take remaining space
+  text-align: center;
+}
+
+// Leaderboard Title
+.leaderboard-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: $primary-color;
+}
+
+
+// Header
+.leaderBoard_header {
+      /* padding-block: 0.5em; */
+    /* box-shadow: 0 6px 15px 0 rgba(0, 0, 0, 0.05); */
+    height: 6em;
+    position: -webkit-sticky;
+    /* position: sticky; */
+    top: 0;
+    /* z-index: 10; */
+    /* background: #fff; */
+
+}
+
+.title {
+  font-weight: 500;
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+// Message Section
+.message {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: $background-color;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  text-align: right;
+  font-family: "Cairo", sans-serif;
+  line-height: 1.5;
+}
+
+.trophy {
+  font-size: 32px;
+}
+
+// Leaderboard Entries
+.entries {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.entry {
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    padding: 20px;
+    height: 60px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.08);
+    border: 1px solid #f3f3f3;
+}

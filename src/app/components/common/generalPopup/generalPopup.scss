@@ -10,7 +10,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    .general_popup_close{
+    // border-radius: 10px;
+    .general_popup_close {
         position: absolute;
         right: 1em;
         top: 1em;
@@ -33,13 +34,31 @@
     }
     @media (min-width: 768px) {
       .general_popup_video{
-          width: 60%;
+          width: 70%;
       }
+      
+    }
     
   }
-   
-}
-
+  
+  @media (max-width: 440px) {
+    .general_popup .general_popup_video{
+        width: 100%;
+    }
+  }
+  // @media (min-width: 1440px) {
+  //   .general_popup .general_popup_video{
+  //       width: fit-content;
+  //       min-width: 50%;
+  //   }
+  // }
+  @media (min-width: 1440px) {
+    .general_popup .general_popup_video{
+        width: fit-content;
+        // min-width: 40%;
+    }
+  }
+  
 
 
 
@@ -47,11 +66,20 @@
     max-width: 800px;
     margin: 0 auto;
     background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
+    padding: 30px;
+    border-radius: 1em;
     // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     color:#353535;
 
+    @media (max-width:410px) {
+      padding: 20px;
+      ul{
+        li{
+          margin: 5px 10px !important;
+          padding: 7px 0 !important;
+        }
+      }
+    }
     h1 {
         color: #2c3e50;
         // text-align: center;
@@ -71,6 +99,7 @@
     ul {
         list-style-type: none;
         padding: 0;
+        width:100%;
 
         li {
             // background-color: #ecf0f1;
@@ -79,17 +108,36 @@
             color:#353535;
             // border-radius: 4px;
             // border-left: 5px solid #3498db;
-            font-weight:700;
-            font-size:18px;
+            font-weight:300;
+            font-size:16px;
             line-height:27px;
             list-style:disc;
         }
-        // @media (min-width: 1025px) {
-        //     li {
-        //         font-size: larger;
-        //     }
-          
-        // }
+    }
+
+    @media (min-width: 1026px) {
+      h1{
+        margin: 1em 0;
+      }
+      ul{
+        margin: 0 2em;
+      }
+    }
+    // @media (min-width: 720px) {
+    //   h1{
+    //     margin: 1em 0;
+    //   }
+    //   ul{
+    //     margin: 0 1em;
+    //   }
+    // }
+    @media (min-width: 720px) {
+      h1{
+        margin: 1em 0;
+      }
+      ul{
+        margin: 0 1em;
+      }
     }
 }
 
@@ -111,10 +159,12 @@
     }
     .bt_next  {
         background-color: #242857;
+        width: 17em;
     }
     .bt_prev  {
         background-color: #EDEDED;
         color:#242857;
+        width: 17em;
     }
     
 }
@@ -124,7 +174,7 @@
     line-height: 2.6;
 }
 
-@media (max-width: 605px) {
+@media (max-width: 1040px) {
     .pre_buttons {
       display: grid;
       margin: 0 20px;
@@ -133,13 +183,21 @@
     }
     
 }
+@media (max-width: 1056px) {
+    .pre_buttons {
+      margin: 15px 0px !important;
+      gap: 15px !important;
+      justify-content: center !important;
+    }
+    
+}
 
 
-// @media (max-width: 330px) {
-//     .pre_buttons {
-//         margin:3px;
-//     }
-// }
+@media (max-width: 425px) {
+    .pre_buttons .bt_prev , .pre_buttons .bt_next  {
+        width: 15em !important;
+    }
+}
 
 /* From Uiverse.io by sabbircoder07 */ 
 
@@ -240,7 +298,7 @@
     font-size: xxx-large;
     margin-bottom: -10px;
     font-weight: 800;
-    color: #fda275;
+    color: #EB7236;
   }
   }
   
@@ -492,8 +550,105 @@
 .ace_content{
   height: 0 !important;
 }  
-// .ace_layer {
-//   width:0 !important;
-//   // height: 0 !important;
 
-// } 
+.general {
+  .line_break{
+    margin : 0 !important;
+    background-color: #EDEDED !important;
+  }
+}
+
+// Colors
+// $primary-color: #ff4d4f; // Red alert color
+// $background-light: #fff4f4;
+// $border-color: #ffcccc;
+// $text-dark: #333;
+// $btn-primary: #1890ff;
+// $btn-hover: darken($btn-primary, 10%);
+// $btn-danger: #ff4d4f;
+// $btn-danger-hover: darken($btn-danger, 10%);
+
+// Popup Styles
+.warning-countdown-popup {
+  text-align: center;
+  padding: 20px;
+
+  // h2 {
+  //   color: $primary-color;
+  //   font-size: 20px;
+  //   font-weight: bold;
+  // }
+
+  // p {
+  //   color: $text-dark;
+  //   font-size: 16px;
+  //   margin-bottom: 15px;
+  // }
+
+  .countdown-timer {
+    font-size: 40px;
+    font-weight: 800;
+    color: $red-color;
+    // background: #fff4f4;
+    // border: 2px solid #ffcccc;
+    padding: 10px 20px;
+    border-radius: 8px;
+    display: inline-block;
+    margin: 10px auto;
+    transition: transform 0.2s ease-in-out;
+
+    &.alert {
+      animation: pulse 1s infinite;
+    }
+  }
+
+  // .warning-buttons {
+  //   display: flex;
+  //   justify-content: space-between;
+  //   margin-top: 20px;
+
+  //   button {
+  //     padding: 10px 15px;
+  //     font-size: 16px;
+  //     font-weight: bold;
+  //     border-radius: 6px;
+  //     border: none;
+  //     cursor: pointer;
+  //     transition: background 0.2s ease-in-out;
+  //   }
+
+  //   .btn-stay {
+  //     background: $btn-primary;
+  //     color: white;
+
+  //     &:hover {
+  //       background: $btn-hover;
+  //     }
+  //   }
+
+  //   .btn-exit {
+  //     background: $btn-danger;
+  //     color: white;
+
+  //     &:hover {
+  //       background: $btn-danger-hover;
+  //     }
+  //   }
+  // }
+}
+
+// Countdown Alert Animation
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

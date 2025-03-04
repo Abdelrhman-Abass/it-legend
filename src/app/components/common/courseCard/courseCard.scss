@@ -119,9 +119,21 @@
     }
     .custom_btn{
         width: 100%;
+        align-items: center;
+        text-align: center;
+        // margin: auto;
         button{
             background-color: #f2efec;
         }
+    }
+}
+.course_dip{
+    width:20em !important;
+    align-items: center;
+    text-align: center;
+    // margin: auto;
+    button{
+        background-color: #f2efec;
     }
 }
 .dark_theme {
@@ -173,6 +185,19 @@
             }
         }
     }
+    
+}
+@media (max-width: 768px) {
+    .custom_btn{
+        width: 100% !important;
+        align-items: center;
+        text-align: center;
+        margin: auto;
+        button{
+            background-color: #f2efec;
+        }
+    }
+    
 }
 
 

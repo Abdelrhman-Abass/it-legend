@@ -194,6 +194,13 @@
         "title2": "Level",
         "title3": "Daily Challenge"
     },
+    "askQuestion":{ 
+        "title":"Ask a Question",
+        "placeholder":"Write your question here...",
+        "btnSend":"Send",
+        "empty":"No questions yet",
+        "cancel":"Cancel"
+    },
     "empty": {
         "comment": "No comments yet",
         "links": "No links yet"

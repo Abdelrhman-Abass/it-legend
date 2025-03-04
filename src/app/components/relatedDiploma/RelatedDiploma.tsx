@@ -167,6 +167,8 @@ const sortedLevels = useMemo(() => {
                                     btnText={t("diplomaDetails.footer.btn")}
                                     titleAr={item.titleAr}
                                     titleEn={item.titleEn}
+                                    customClass="course_dip"
+
                                     progressPercentage={Math.trunc(item.progressPercentage ?? 0)}
                                     shortDescriptionAr={item.shortDescriptionAr}
                                     shortDescriptionEn={item.shortDescriptionEn}

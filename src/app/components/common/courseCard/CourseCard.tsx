@@ -31,6 +31,7 @@ const CourseCard = memo(({
   progressPercentage = 0,
   url = "#",
   courseTitle = "",
+  customClass = "",
 }: ICourseCard) => {
   const { locale } = useParams();
   const t = useTranslations();
@@ -42,14 +43,19 @@ const CourseCard = memo(({
   // Create an array of 5 stars (with gold for ratings >= 3)
   const stars = new Array(5).fill(0).map((_, index) => index < 3 ? <FaStar key={index} className="gold" /> : <FaStar key={index} />);
 
+  // localStorage.setItem("course_title", courseTitle || "");
+
+
   return (
-    <Link href={url} passHref>
-    
+    <Link href={url} passHref onClick={() => {
+      localStorage.setItem("course_title", courseTitle ?? (locale === "ar" ? titleAr : titleEn));
+    }}>
+
       <div className={`course_card ${hideItems ? "course_card_hide" : ""}`} >
         <div className="course_card_image">
           {showProgress && (
             <div className="course_card_image_progress">
-              <Progress type="circle" percent={progressPercentage} size={"small"} format={percent => `${percent}%`}/>
+              <Progress type="circle" percent={progressPercentage} size={"small"} format={percent => `${percent}%`} />
             </div>
           )}
           <Image src={image || ""} alt="course" fill loading="lazy" />
@@ -87,7 +93,7 @@ const CourseCard = memo(({
             </>
           )}
 
-          <Button title={btnText} url={url}  customIcon={customIcon} customClass="flip_icon white" courseTitle={courseTitle} />
+          <Button title={btnText} url={url} customIcon={customIcon} customClass={`flip_icon white ${customClass}`} courseTitle={courseTitle} />
         </div>
       </div>
     </Link>

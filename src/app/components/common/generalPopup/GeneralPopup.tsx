@@ -59,7 +59,7 @@ export default function GeneralPopup({ isVideo = false, isExam ,success ,videoNo
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.2, delay: 0.3, ease: "easeOut" }}
                         className="general_popup_video" style={{ background: "white" }}>
-                        <div>
+                        <div className="general">
                             <div className="pop_up_content">
                                 <h1>ممتاز تقدمك يا صديقي.. اقرأ الملاحظات دي بانتباه:</h1>
                                 {/* <p>اقرأ الملاحظات دي بالتباه:</p> */}
@@ -67,9 +67,12 @@ export default function GeneralPopup({ isVideo = false, isExam ,success ,videoNo
                                     <li>اتأكد إنك مذاكر كويس قبل الامتحان، علشان السكور بتاعك هيتحدد بناء على إجاباتك.</li>
                                     <li>المحاضرات التالية هتتفتح لك لما تجيب سكور أكتر من 80% في الامتحان ده.</li>
                                     <li>الامتحان متكون من 20 سؤال اختيار من متعدد، وفيه عداد للوقت بمتوسط دقيقتين لكل سؤال</li>
+                                    <li>تقدر تعيد الامتحان لاحقاً في أي وقت، لكن السكور بيتحدد بناء على أول مرة.</li>
                                     <li>إجابتك في وقت أقصر بتضيف للسكور بتاعك في الامتحان</li>
                                 </ul>
                             </div>
+                            <div className='line_break'></div>
+
                             <div className="pre_buttons">
                                 <button className="bt_next" onClick={closePopup}>
                                     محتاج اراجع اكنر

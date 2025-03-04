@@ -147,6 +147,7 @@ export default function DiplomasPage() {
                             shortDescriptionAr={item.shortDescriptionAr}
                             shortDescriptionEn={item.shortDescriptionEn}
                             btnText={t("diplomaDetails.footer.btn")}
+                            customClass="course_dip"
                             image={`https://itlegend.net/Content/Uploads/CoursesMedia/${item.image}`}
                             key={index}
                             url={`/${locale}/learn-path/diploma/${item.categoryId}`}

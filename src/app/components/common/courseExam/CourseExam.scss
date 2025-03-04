@@ -22,6 +22,7 @@
         line-height: 28px;
         color: #4D4D4D;
         direction:ltr;
+        margin-top:-1.5em;
     }
     .course_exam_time{
         color:#A0A0A0;
@@ -32,7 +33,7 @@
         margin: 5px 0px;
         grid-template-columns: repeat(2, 1fr);
         display: grid;
-        gap: 10px;
+        gap: 0.6em 3.5em;
         padding-bottom: 15px;
     }
     .course_exam_buttons{
@@ -228,13 +229,35 @@
 }
 
 
-// @media (max-width: 756px) {
-//     .navigation-buttons {
-//         display: grid;
-//             grid-template-columns: 1fr; /* 1 column */
-//             gap: 15px;
-//     }
-// }
+.next-question-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  
+    &:hover {
+      background-color: #0056b3;
+    }
+  
+    &.vibrate {
+      animation: vibrate 0.2s ease-in-out;
+    }
+  }
+  .vibrate {
+    animation: vibrate 0.2s ease-in-out;
+  }
+  // Define the shake (vibration) animation
+  @keyframes vibrate {
+    0% { transform: translateX(0); }
+    25% { transform: translatX(-3px); }
+    50% { transform: translateX(3px); }
+    75% { transform: translateX(-3px); }
+    100% { transform: translateX(0); }
+  }
 
 .navigation-buttons button {
     padding: 10px 20px;
