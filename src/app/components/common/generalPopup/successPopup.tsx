@@ -5,9 +5,9 @@ import ReactPlayer from "react-player";
 import { motion } from "framer-motion";
 import GenralCoursePlayerId from "@/app/store/GeneralCoursePlayer";
 // import {videoCommentsMutation} from "./"
-export default function SuccessPopup({ result = 87 }: { result?: number }) {
-    const { activeSuccess, closeSucPopup, extraData, success, activeDatesPopup } = generalActivePopup();
-    const { setVideoNode, videoNode ,setVideoID, nextNode ,setVideoName , setLastVideoData} = GenralCoursePlayerId();
+export default function SuccessPopup({ result , retake }: { result?: number , retake?:() => void}) {
+    const { activeSuccess, closeSucPopup, extraData, success, setSuccess,activeDatesPopup } = generalActivePopup();
+    const { setVideoNode, videoNode ,setVideoID,firstNodeModule, nextNode ,setVideoName , setLastVideoData} = GenralCoursePlayerId();
     const [next, setNext] = useState<any>()
 
     const [showVideo, setShowVideo] = useState(false);
@@ -23,6 +23,18 @@ export default function SuccessPopup({ result = 87 }: { result?: number }) {
             setLastVideoData(null);
         }
         closeSucPopup()
+    }
+    // console.log(firstNodeModule)
+    const handlePrevLerning = ()=>{
+        if(firstNodeModule){
+            setVideoNode(firstNodeModule.nodeId)
+            setVideoID(firstNodeModule.contentId)
+            window.history.replaceState(null, "", window.location.pathname + window.location.search);
+            setVideoName(`${firstNodeModule.titleEn}`);
+            // videoCommentsMutation.mutate(nextNode.contentId);
+            setLastVideoData(null);
+        }
+        // closeSucPopup()
     }
     useEffect(()=>{
         // setNext(JSON.stringify(nextNode))
@@ -78,14 +90,14 @@ export default function SuccessPopup({ result = 87 }: { result?: number }) {
                                     <div className="heading-tertiary">انت نجحت بنسبة 85% وكسبت</div>
                                     {/* <div className="result-box"> */}
                                     {/* <div className="heading-primary">{result}</div> */}
-                                    <p className="result">755</p>
+                                    <p className="result">{result}</p>
                                     {/* </div> */}
                                     <div className="heading-tertiary">نقطة</div>
 
                                     <div className="result-text-box">
                                         {/* <div className="heading-secondary">أنت تمتلك كل ما يلزم للوصول إلى القمة! </div> */}
                                         <p className="paragraph">
-                                            والسكور بتاعك دلوقتي 2580 وتم فتح المحاضرات التاليه
+                                            والسكور بتاعك دلوقتي {result} وتم فتح المحاضرات التاليه
                                         </p>
                                     </div>
 
@@ -108,6 +120,10 @@ export default function SuccessPopup({ result = 87 }: { result?: number }) {
             ) : <Suspense fallback={<div>Loading...</div>}>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        setSuccess(false);
+                      }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.2, delay: 0.3, ease: "easeOut" }}
                     className="general_popup_video">
@@ -129,30 +145,16 @@ export default function SuccessPopup({ result = 87 }: { result?: number }) {
                                 </div>
 
                                 <div className="pre_buttons" style={{ justifyContent: "center" }}>
-                                    <button className="bt_next" onClick={closeSucPopup}>
+                                    <button className="bt_next" onClick={retake}>
                                         حاول مره اخري
                                     </button>
-
+                                    <button className="bt_prev" onClick={handlePrevLerning}>
+                                        محتاج اراجع اكتر
+                                    </button>
 
                                 </div>
-
-                            </div>
-                            {/* <div className="results-summary-container__result" style={{ background: "white" }}>
-                            <div className="heading-tertiary">للأسف ي صديقي انت حققت</div>
-                            <div className="result-box">
-                                <div className="heading-primary">{result}</div>
-                                <p className="result">of 100</p>
-                            </div>
-                            <div className="result-text-box">
-                                <div className="heading-secondary">أنت قادر على تحقيق الأفضل! </div>
-                                <p className="paragraph">
-                                    والسكور بتاعك دلوقتي {result} حاول مره أخري
-                                </p>
                             </div>
                             
-                            
-                            
-                        </div> */}
                         </div>
 
                     </div>

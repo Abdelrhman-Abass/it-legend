@@ -177,7 +177,8 @@
         "nextQuestion":"Next Question",
         "prevQuestion":"previous Question",
         "reatak":"Retake The Exam",
-        "prevQuestions": "Previous Questions"
+        "prevQuestions": "Previous Questions",
+        "next" : "Next"
     },
     "singleDiploma": {
         "titleDiploma": "Your Diploma Progress."

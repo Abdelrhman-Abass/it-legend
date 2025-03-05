@@ -176,7 +176,8 @@
         "nextQuestion":"السؤال التالي",
         "prevQuestion":"السؤال السابق",
         "reatak":"اعادة الامتحان",
-        "prevQuestions": "الاجابات السابقة"
+        "prevQuestions": "الاجابات السابقة",
+        "next" : "التالي"
     },
     "singleDiploma": {
         "titleDiploma": "مستوي التقدم في الدبلومة"

@@ -5,7 +5,7 @@ import ReactPlayer from "react-player";
 import { motion } from "framer-motion";
 import GenralCoursePlayerId from "@/app/store/GeneralCoursePlayer";
 
-export default function WarningCountDownPopup({ isVideo = false, isExam ,success ,videoNodeExam }: { isVideo?: boolean, isExam?: boolean , success?:boolean , videoNodeExam?:string}) {
+export default function WarningCountDownPopup({ handleUserActivity }: { handleUserActivity: () => void }) {
     const { countDownPopup, closeCountDownPopup, extraData } = generalActivePopup();
     const { videoNode, videoId , setVideoNode ,setVideoID ,setVideoName ,setLastVideoData , prevNode} = GenralCoursePlayerId();
 
@@ -30,6 +30,7 @@ export default function WarningCountDownPopup({ isVideo = false, isExam ,success
                 if (prev <= 1) {
                     clearInterval(interval);
                     // onExamEnd(); // Call function when countdown reaches 0
+                    handleUserActivity()
                     return 0;
                 }
                 return prev - 1;

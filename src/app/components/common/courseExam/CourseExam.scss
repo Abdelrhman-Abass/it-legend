@@ -22,7 +22,12 @@
         line-height: 28px;
         color: #4D4D4D;
         direction:ltr;
+        width: 90%;
         margin-top:-1.5em;
+        @media (max-width: 768px) {
+          width: 100%;
+          margin-top: 0;
+        }
     }
     .course_exam_time{
         color:#A0A0A0;
