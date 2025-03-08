@@ -229,20 +229,23 @@ const CourseExam = ({ examid }: { examid: number, questions: any }) => {
 
 
   useEffect(() => {
-    document.addEventListener("mousemove", handleUserActivity);
-    document.addEventListener("keydown", handleUserActivity);
-    document.addEventListener("click", handleUserActivity);
+    if(isSubmitted === false){
+      document.addEventListener("mousemove", handleUserActivity);
+      document.addEventListener("keydown", handleUserActivity);
+      document.addEventListener("click", handleUserActivity);
+  
+      // Start the initial timers
+      handleUserActivity();
+  
+      return () => {
+        document.removeEventListener("mousemove", handleUserActivity);
+        document.removeEventListener("keydown", handleUserActivity);
+        document.removeEventListener("click", handleUserActivity);
+        clearTimeout(warningTimeout!);
+        clearTimeout(inactivityTimeout!);
+      };
 
-    // Start the initial timers
-    handleUserActivity();
-
-    return () => {
-      document.removeEventListener("mousemove", handleUserActivity);
-      document.removeEventListener("keydown", handleUserActivity);
-      document.removeEventListener("click", handleUserActivity);
-      clearTimeout(warningTimeout!);
-      clearTimeout(inactivityTimeout!);
-    };
+    }
   }, [handleUserActivity]);
 
 
