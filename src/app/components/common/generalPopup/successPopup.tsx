@@ -5,7 +5,7 @@ import ReactPlayer from "react-player";
 import { motion } from "framer-motion";
 import GenralCoursePlayerId from "@/app/store/GeneralCoursePlayer";
 // import {videoCommentsMutation} from "./"
-export default function SuccessPopup({ result , retake }: { result?: number , retake?:() => void}) {
+export default function SuccessPopup({ result , successRate , courseScore , retake ,handleReviewMyAnswer }: { result?: number ,courseScore?:number,successRate?:number, retake?:() => void ,handleReviewMyAnswer:()=>void}) {
     const { activeSuccess, closeSucPopup, extraData, success, setSuccess,activeDatesPopup } = generalActivePopup();
     const { setVideoNode, videoNode ,setVideoID,firstNodeModule, nextNode ,setVideoName , setLastVideoData} = GenralCoursePlayerId();
     const [next, setNext] = useState<any>()
@@ -87,7 +87,7 @@ export default function SuccessPopup({ result , retake }: { result?: number , re
                                 </div>
                                 <div className="results-summary-container__result">
                                     <div className="heading-tertiary">ممتاز ي صديقي ...</div>
-                                    <div className="heading-tertiary">انت نجحت بنسبة 85% وكسبت</div>
+                                    <div className="heading-tertiary">انت نجحت بنسبة {successRate}% وكسبت</div>
                                     {/* <div className="result-box"> */}
                                     {/* <div className="heading-primary">{result}</div> */}
                                     <p className="result">{result}</p>
@@ -97,7 +97,7 @@ export default function SuccessPopup({ result , retake }: { result?: number , re
                                     <div className="result-text-box">
                                         {/* <div className="heading-secondary">أنت تمتلك كل ما يلزم للوصول إلى القمة! </div> */}
                                         <p className="paragraph">
-                                            والسكور بتاعك دلوقتي {result} وتم فتح المحاضرات التاليه
+                                            والسكور بتاعك دلوقتي {courseScore} وتم فتح المحاضرات التاليه
                                         </p>
                                     </div>
 
@@ -106,7 +106,7 @@ export default function SuccessPopup({ result , retake }: { result?: number , re
                                             استكمل الدراسة
                                         </button>
 
-                                        <button className="bt_prev" onClick={closeSucPopup}>
+                                        <button className="bt_prev" onClick={handleReviewMyAnswer}>
                                             مراجعة اجاباتي
                                         </button>
                                     </div>
@@ -130,7 +130,7 @@ export default function SuccessPopup({ result , retake }: { result?: number , re
                     <div>
                         <div className="results-summary-container failed" >
                             <div className="results-summary-container__result" style={{gap:"50px"}}>
-                                <div className="heading-tertiary">للأسف ي صديقي.. انت حققت %45</div>
+                                <div className="heading-tertiary">للأسف ي صديقي.. انت حققت {successRate}% </div>
                                 {/* <div className="result-box"> */}
                                 {/* <div className="heading-primary">{result}</div> */}
                                 <p className="result">محتاج تراجع المنهج التاني</p>

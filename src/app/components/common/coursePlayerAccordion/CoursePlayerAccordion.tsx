@@ -10,15 +10,16 @@ import { MdOndemandVideo } from "react-icons/md";
 import { useTranslations } from "next-intl";
 import generalActivePopup from "@/app/store/ActivePopup";
 import GeneralPopup from "../generalPopup/GeneralPopup";
+import ActiveAnswersPopup from "../generalPopup/activeAnswersPopup";
 
 
 export default function CoursePlayerAccordion({ videosItems, videoCommentsMutation }: CoursePlayerAccordionProps) {
-    const { setVideoNode, setVideoName, setVideoID, setLastVideoData, videoId,videoNode , setFirstNodeModule ,setNextNode} = GenralCoursePlayerId();
+    const { setVideoNode, setVideoName, setVideoID, setLastVideoData, videoId,videoNode , setFirstNodeModule ,setNextNode ,setMemeberExam , memeberExam} = GenralCoursePlayerId();
     const [cookies] = useCookies(["userData"]);
     const { locale } = useParams() as { locale: string };
     const [activeKey, setActiveKey] = useState<string | string[]>([]);
     const [videoNodeExam, setVideoNodeExam] = useState<string>("");
-    const { openPopup } = generalActivePopup();
+    const { openPopup , openActiveDatePopup} = generalActivePopup();
     const t = useTranslations()
 
   
@@ -84,6 +85,21 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
     //     // Handle download logic
     //   }
     };
+
+  //   const { mutate: fetchExamHistoryMember, isPending: isFetchingHistoryMember } = useMutation({
+  //     mutationFn: async (memberExamID: string) => {
+  //         const response = await getServerRequest(`/MemberExam/${memberExamID}/solution`);
+  //         return response;
+  //     },
+  //     onSuccess: (data) => {
+  //         console.log("Fetched exam history:", data);
+  //         setMemeberExam(data.data.data)
+  //         // Handle the fetched history data
+  //     },
+  //     onError: (error) => {
+  //         console.error("Failed to fetch exam history:", error);
+  //     }
+  // });
     
     
     // Find the active module
@@ -131,6 +147,14 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
       }
       return "0M";
     };
+
+    const handleSelectExam = (memberExamID: string) => {
+      // setSelectedExamId(memberExamID);
+      // // // Fetch exam history or perform other actions with the selected memberExamID
+      // fetchExamHistoryMember(memberExamID);
+      console.log(memberExamID)
+  };
+
   
     // Generate accordion items
     const items =
@@ -146,13 +170,25 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
                 .sort((a: any, b: any) => a.displayOrder - b.displayOrder)
                 .map((child: any) => (
                   <div
-                    onClick={() => {
+                    onClick={async () => {
                       handleVideoPlayType(child.type, child.nodeId);
                       if (child.type === 1) {
-                        openPopup();
+                        
+                        if (child.isPassed) {
+                          console.log(child.contentId);
+                          setVideoID(child.contentId);
+                          setVideoNodeExam(child.nodeId)
+
+                          openActiveDatePopup(); // Open Active Date Popup first
+                          // openPopup(); // Directly open if not passed
+                          
+                        } else {
+                          openPopup(); // Directly open if not passed
+                        }
                         setVideoNodeExam(child.nodeId)
                       }
-                      setVideoID(child.contentId);
+                      
+                        setVideoID(child.contentId);
                       
                       window.history.replaceState(null, "", window.location.pathname + window.location.search);
                       setVideoName(`${locale === "ar" ? child.titleAr : child.titleEn}`);
@@ -185,6 +221,7 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
             items={items}
           />
         </div>
+        <ActiveAnswersPopup   />
         <GeneralPopup isExam={true} videoNodeExam={videoNodeExam} />
       </>
     );
