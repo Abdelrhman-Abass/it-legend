@@ -58,12 +58,15 @@ interface StoreState {
     success: boolean;
     activeDatesPopup: boolean;
     activeWarningPopup: boolean;
+    answerReasonPop:boolean;
     closeWarningPopup: boolean;
     countDownPopup: boolean; // New boolean
     askquestionPopup: boolean; // New boolean
     leaderBoard: boolean; // New boolean
     openPopup: () => void;
     openActiveDatePopup: () => void;
+    openAnswerReasonPop: () => void;
+    closeAnswerReasonPop: () => void;
     closeActiveDatePopup: () => void;
     openWarningClosePop: () => void;
     closeWarningClosePop: () => void;
@@ -88,12 +91,15 @@ const generalActivePopup = create<StoreState>((set) => ({
     activeDatesPopup: false,
     activeWarningPopup: false,
     closeWarningPopup: false,
+    answerReasonPop:false,
     countDownPopup: false, // New boolean
     askquestionPopup: false, // New boolean
     leaderBoard: false, // New boolean
     setSuccess: (sucsess :boolean) => set({ success: sucsess }),
     openActiveDatePopup: () => set({ activeDatesPopup: true }),
     openWarningClosePop: () => set({ activeWarningPopup: true }),
+    openAnswerReasonPop: () => set({ answerReasonPop: true }),
+    closeAnswerReasonPop: () => set({ answerReasonPop: false }),
     closeWarningClosePop: () => set({ closeWarningPopup: false }),
     openCountDownPopup: () => set({ countDownPopup: true }),
     closeCountDownPopup: () => set({ countDownPopup: false }),

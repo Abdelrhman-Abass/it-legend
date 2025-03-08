@@ -96,6 +96,19 @@
         }
     }
 }
+
+.why_answer_box{
+  position: relative;
+
+      button{
+        background: transparent;
+        border:0;
+        cursor:pointer;
+        color:#4D4D4D;
+        position: absolute;
+        left: 0;
+      }
+}
 .exam_table {
     width: 100%;
     border-collapse: collapse;
@@ -268,7 +281,7 @@
     padding: 10px 20px;
     border: none;
     // flex: 1; // Equal width for all boxes
-
+    width:10em;
     background-color: #242857;
     color: #fff;
     font-size: 16px;

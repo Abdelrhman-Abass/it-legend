@@ -134,7 +134,7 @@ interface ActiveAnswersPopupProps {
 export default function ActiveAnswersPopup() {
     const { closeActiveDatePopup, activeDatesPopup ,openPopup } = generalActivePopup();
     // const { videoId } = GenralCoursePlayerId();
-    const { setVideoNode, setVideoName, setVideoID, setLastVideoData, videoId,videoNode , setFirstNodeModule ,setNextNode ,setMemeberExam , memeberExam} = GenralCoursePlayerId();
+    const { setVideoNode, setVideoName, setVideoID, setLastVideoData,videoNodeExam , setVideoNodeExam, videoId,videoNode , setFirstNodeModule ,setNextNode ,setMemeberExam , memeberExam} = GenralCoursePlayerId();
 
 
     const [questionHistory, setQuestionHistory] = useState<any>(null);
@@ -157,6 +157,7 @@ export default function ActiveAnswersPopup() {
     const { mutate: fetchExamHistoryMember, isPending: isFetchingHistoryMember } = useMutation({
             mutationFn: async (memberExamID: string) => {
                 const response = await getServerRequest(`/MemberExam/${memberExamID}/solution`);
+                // console.log("Fetched exam history:", memberExamID);
                 return response;
             },
             onSuccess: (data) => {
@@ -176,6 +177,16 @@ export default function ActiveAnswersPopup() {
         }
     }, [activeDatesPopup, fetchExamHistory]);
 
+    const handleReady=() =>{
+        if(videoNodeExam){
+            setVideoNode(videoNodeExam)
+        }
+        window.history.replaceState(null, "", window.location.pathname + window.location.search);
+        // console.log("not ready " + videoNode)
+        
+        setLastVideoData(null);
+    }
+
     const handleSelectExam = (memberExamID: string) => {
         // setSelectedExamId(memberExamID);
         // Fetch exam history or perform other actions with the selected memberExamID
@@ -186,6 +197,8 @@ export default function ActiveAnswersPopup() {
         setSelectedDate(memberExamID);
         // onSelectExam(memberExamID); // Pass the selected memberExamID back to the parent
         fetchExamHistoryMember(memberExamID);
+        handleReady()
+
     };
     const handleRetake = ()=>{
         openPopup()

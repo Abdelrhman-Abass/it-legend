@@ -14,11 +14,11 @@ import ActiveAnswersPopup from "../generalPopup/activeAnswersPopup";
 
 
 export default function CoursePlayerAccordion({ videosItems, videoCommentsMutation }: CoursePlayerAccordionProps) {
-    const { setVideoNode, setVideoName, setVideoID, setLastVideoData, videoId,videoNode , setFirstNodeModule ,setNextNode ,setMemeberExam , memeberExam} = GenralCoursePlayerId();
+    const { setVideoNode, setVideoName, setVideoID, videoNodeExam , setVideoNodeExam,  setLastVideoData, videoId,videoNode , setFirstNodeModule ,setNextNode ,setMemeberExam , memeberExam} = GenralCoursePlayerId();
     const [cookies] = useCookies(["userData"]);
     const { locale } = useParams() as { locale: string };
     const [activeKey, setActiveKey] = useState<string | string[]>([]);
-    const [videoNodeExam, setVideoNodeExam] = useState<string>("");
+    // const [videoNodeExam, setVideoNodeExam] = useState<string>("");
     const { openPopup , openActiveDatePopup} = generalActivePopup();
     const t = useTranslations()
 
@@ -178,6 +178,8 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
                           console.log(child.contentId);
                           setVideoID(child.contentId);
                           setVideoNodeExam(child.nodeId)
+                          // setVideoNode(child.nodeId)
+                          // setVideoNode(videoNodeExam)
 
                           openActiveDatePopup(); // Open Active Date Popup first
                           // openPopup(); // Directly open if not passed

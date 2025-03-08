@@ -5,7 +5,7 @@ import ReactPlayer from "react-player";
 import { motion } from "framer-motion";
 import GenralCoursePlayerId from "@/app/store/GeneralCoursePlayer";
 // import {videoCommentsMutation} from "./"
-export default function SuccessPopup({ result , successRate , courseScore , retake ,handleReviewMyAnswer }: { result?: number ,courseScore?:number,successRate?:number, retake?:() => void ,handleReviewMyAnswer:()=>void}) {
+export default function SuccessPopup({ result , successRate ,timeScore ,isLevelUp, courseScore , retake ,handleReviewMyAnswer }: { result?: number ,courseScore?:number , timeScore?:number ,isLevelUp?:boolean,successRate?:number, retake?:() => void ,handleReviewMyAnswer:()=>void}) {
     const { activeSuccess, closeSucPopup, extraData, success, setSuccess,activeDatesPopup } = generalActivePopup();
     const { setVideoNode, videoNode ,setVideoID,firstNodeModule, nextNode ,setVideoName , setLastVideoData} = GenralCoursePlayerId();
     const [next, setNext] = useState<any>()
@@ -58,6 +58,9 @@ export default function SuccessPopup({ result , successRate , courseScore , reta
             {success ? (
                 <Suspense fallback={<div>Loading...</div>}>
                     <motion.div
+                    onClick={(e) => {
+                        e.stopPropagation();
+                      }}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.2, delay: 0.3, ease: "easeOut" }}
@@ -87,12 +90,23 @@ export default function SuccessPopup({ result , successRate , courseScore , reta
                                 </div>
                                 <div className="results-summary-container__result">
                                     <div className="heading-tertiary">ممتاز ي صديقي ...</div>
-                                    <div className="heading-tertiary">انت نجحت بنسبة {successRate}% وكسبت</div>
+                                    <div className="heading-tertiary">انت نجحت بنسبة {successRate?.toFixed()}% وكسبت</div>
                                     {/* <div className="result-box"> */}
                                     {/* <div className="heading-primary">{result}</div> */}
-                                    <p className="result">{result}</p>
+                                    {/* <p className="result">{result} + {timeScore}</p> */}
                                     {/* </div> */}
-                                    <div className="heading-tertiary">نقطة</div>
+                                    {/* <div className="heading-tertiary">نقطة  +  نقطه للوقت </div> */}
+                                    <div style={{ display: "flex", justifyContent: "center", gap: "10px", alignItems: "center" }}>
+                                        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                            <span className="result" style={{  fontWeight: "bold", color: "#EB7236" }}>{result} </span>
+                                            <span className="heading-tertiary" style={{ fontSize: "20px", color: "hsl(221, 35.6%, 26.82%)" }}>نقطة</span>
+                                        </div>
+                                        <span style={{ fontSize:"20px" , fontWeight: "bold", color: "hsl(221, 35.6%, 26.82%)" }}>+</span>
+                                        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                            <span className="result" style={{  fontWeight: "bold", color: "#EB7236" }}>{timeScore}</span>
+                                            <span className="heading-tertiary" style={{ fontSize: "20px", color: "hsl(221, 35.6%, 26.82%)" }}>نقطة للوقت</span>
+                                        </div>
+                                    </div>
 
                                     <div className="result-text-box">
                                         {/* <div className="heading-secondary">أنت تمتلك كل ما يلزم للوصول إلى القمة! </div> */}
@@ -130,7 +144,7 @@ export default function SuccessPopup({ result , successRate , courseScore , reta
                     <div>
                         <div className="results-summary-container failed" >
                             <div className="results-summary-container__result" style={{gap:"50px"}}>
-                                <div className="heading-tertiary">للأسف ي صديقي.. انت حققت {successRate}% </div>
+                                <div className="heading-tertiary">للأسف ي صديقي.. انت حققت {successRate?.toFixed()}% </div>
                                 {/* <div className="result-box"> */}
                                 {/* <div className="heading-primary">{result}</div> */}
                                 <p className="result">محتاج تراجع المنهج التاني</p>

@@ -1161,7 +1161,8 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                     ) : (
                         null
                     )} */}
-                <div className="course_player_video" style={{overflow : nodeType== 1 ? "hidden" : "auto"}}>
+                {/* <div className="course_player_video" style={{overflow : nodeType== 1 ? "hidden" : "auto"}}> */}
+                <div className="course_player_video" >
 
                 {nodeType === 0 ? (
                         <div className="course_player_video_seaction">
