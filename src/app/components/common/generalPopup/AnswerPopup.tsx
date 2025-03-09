@@ -38,10 +38,10 @@ export default function AnswerReason({ reason }: { reason?: string }) {
                         <div className="pop_up_content">
                             <h1>سبب الاجابة </h1>
                             <div className='line_break'></div>
-                            <p>{reason}</p>
+                            <p>{reason} I am know Abdo </p>
                             <div className='line_break'></div>
 
-                            <div className="pre_buttons">
+                            <div className="pre_buttons" style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
 
 
                                 <button className="bt_prev" onClick={closeAnswerReasonPop}>

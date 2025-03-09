@@ -126,6 +126,7 @@ import { motion } from "framer-motion";
 import { useMutation } from "@tanstack/react-query";
 import { getServerRequest } from "@/app/utils/generalServerRequest";
 import GenralCoursePlayerId from "@/app/store/GeneralCoursePlayer";
+import NewLoader from "../newLoader/NewLoader";
 
 interface ActiveAnswersPopupProps {
     onSelectExam: (memberExamID: string) => void;
@@ -134,7 +135,7 @@ interface ActiveAnswersPopupProps {
 export default function ActiveAnswersPopup() {
     const { closeActiveDatePopup, activeDatesPopup ,openPopup } = generalActivePopup();
     // const { videoId } = GenralCoursePlayerId();
-    const { setVideoNode, setVideoName, setVideoID, setLastVideoData,videoNodeExam , setVideoNodeExam, videoId,videoNode , setFirstNodeModule ,setNextNode ,setMemeberExam , memeberExam} = GenralCoursePlayerId();
+    const { setVideoNode, setVideoName, setVideoID, setLastVideoData,videoNodeExam ,setIsSubmitted,isSubmitted, setVideoNodeExam, videoId,videoNode , setFirstNodeModule ,setNextNode ,setMemeberExam , memeberExam} = GenralCoursePlayerId();
 
 
     const [questionHistory, setQuestionHistory] = useState<any>(null);
@@ -147,6 +148,8 @@ export default function ActiveAnswersPopup() {
         },
         onSuccess: (data) => {
             console.log("Fetched new History questions:", data);
+            console.log("Fetched new History questions:", videoId);
+
             setQuestionHistory(data.data);
         },
         onError: (error) => {
@@ -157,11 +160,12 @@ export default function ActiveAnswersPopup() {
     const { mutate: fetchExamHistoryMember, isPending: isFetchingHistoryMember } = useMutation({
             mutationFn: async (memberExamID: string) => {
                 const response = await getServerRequest(`/MemberExam/${memberExamID}/solution`);
-                // console.log("Fetched exam history:", memberExamID);
+                console.log("Fetched exam history:", memberExamID);
                 return response;
             },
             onSuccess: (data) => {
                 console.log("Fetched exam history:", data);
+                setIsSubmitted(true)
                 setMemeberExam(data.data.data)
                 // Handle the fetched history data
             },
@@ -224,7 +228,7 @@ export default function ActiveAnswersPopup() {
             </div>
 
             {activeDatesPopup && (
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense fallback={<NewLoader loading={isFetchingHistory}/>}>
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}

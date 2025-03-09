@@ -31,16 +31,15 @@ const WARNING_TIME = 5 * 60 * 1000; // 25 minutes
 let warningTimeout: NodeJS.Timeout | null = null;
 let inactivityTimeout: NodeJS.Timeout | null = null;
 
-const CourseExam = ({ examid }: { examid: number, questions: any }) => {
+const CourseExam = ({ examid }: { examid: number}) => {
   // State for tracking the current question index
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const t = useTranslations();
 
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-  // const [userAnswers, setUserAnswers] = useState<Record<string, any>>({});
   const [userAnswers, setUserAnswers] = useState<{ questionId: string; answerId: string }[]>([]);
   const [questionHistory, setQuestionHistory] = useState<any>();
-  const [filter, setFilter] = useState("all"); // "all", "correct", or "incorrect"
+  const [filter, setFilter] = useState("incorrect"); // "all", "correct", or "incorrect"
 
   // const [memeberExam, setMemeberExam] = useState<any>();
 
@@ -61,14 +60,15 @@ const CourseExam = ({ examid }: { examid: number, questions: any }) => {
   const [examResult, setExamResult] = useState(defaultExamResult);
   const [timeLeft, setTimeLeft] = useState<number>(0); // Timer State
   const { openPopup, openSucPopup, setSuccess, openActiveDatePopup, openCountDownPopup ,openAnswerReasonPop} = generalActivePopup();
-  const { setVideoNode, videoId, videoNode, setVideoID, nextNode, setVideoName, setMemeberExam, memeberExam, setLastVideoData } = GenralCoursePlayerId();
+  const { setVideoNode, videoId, setIsSubmitted,isSubmitted, videoNode, setVideoID, nextNode, setVideoName, setMemeberExam, memeberExam, setLastVideoData } = GenralCoursePlayerId();
 
   const [isVibrating, setIsVibrating] = useState(false);
   const [isVibrat, setIsVibrat] = useState(false);
   const [code, setCode] = useState<string>(``);
   const [questionTimes, setQuestionTimes] = useState<Record<string, number>>({});
-  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+  // const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [filteredQuestions, setFilteredQuestions] = useState<any[]>([]);
+  const [questions, setQuestions] = useState<any[]>([]);
   // const filteredQuestions = useMemo(() => getFilteredQuestions(), [memeberExam, filter]);
 
 
@@ -79,11 +79,11 @@ const CourseExam = ({ examid }: { examid: number, questions: any }) => {
 
   const [selectedExamId, setSelectedExamId] = useState<string | null>(null);
 
-  const handleSelectExam = (memberExamID: string) => {
-    setSelectedExamId(memberExamID);
-    // Fetch exam history or perform other actions with the selected memberExamID
-    fetchExamHistoryMember(memberExamID);
-  };
+  // const handleSelectExam = (memberExamID: string) => {
+  //   setSelectedExamId(memberExamID);
+  //   // Fetch exam history or perform other actions with the selected memberExamID
+  //   fetchExamHistoryMember(memberExamID);
+  // };
 
   const { mutate: fetchExamHistoryMember, isPending: isFetchingHistoryMember } = useMutation({
     mutationFn: async (memberExamID: string) => {
@@ -109,21 +109,7 @@ const CourseExam = ({ examid }: { examid: number, questions: any }) => {
   } = useQuery({
     queryKey: ["examQuestion", { videoId }],
     queryFn: () => getServerRequest(`/MemberExam/${videoId}/questions`),
-    enabled: !!videoId, // Only fetch if nodeType is 1 and examId exists
-  });
-
-
-  const { mutate: fetchExamQuestions, isPending: isFetchingExam } = useMutation({
-    mutationFn: async () => {
-      const response = await getServerRequest(`/MemberExam/${videoId}/questions`);
-      return response;
-    },
-    onSuccess: (data) => {
-      console.log("Fetched new exam questions:", data);
-    },
-    onError: (error) => {
-      console.error("Failed to fetch exam questions:", error);
-    }
+    enabled: !!videoId && isSubmitted === false, // Only fetch if nodeType is 1 and examId exists
   });
 
   const { mutate: fetchExamHistory, isPending: isFetchingHistory } = useMutation({
@@ -134,10 +120,6 @@ const CourseExam = ({ examid }: { examid: number, questions: any }) => {
     onSuccess: (data) => {
       console.log("Fetched new History questions:", data);
       setQuestionHistory(data.data)
-      // if (data?.data?.questions) {
-      //   setQuestion(data.data.questions); // ✅ Override questions with new data
-      //   setTimeLeft(data.data.examDurationInSeconds || 0); // ✅ Reset timer
-      // }
     },
     onError: (error) => {
       console.error("Failed to fetch exam questions:", error);
@@ -171,7 +153,7 @@ const CourseExam = ({ examid }: { examid: number, questions: any }) => {
         newLevel: data?.data?.data?.newLevel ?? 0,
         memberExamId: data?.data?.data?.memberExamId ?? "",
       });
-      console.log("Updated Exam Result:", score);
+      // console.log("Updated Exam Result:", score);
 
       if (hasPassed) {
         console.log("Exam Passed! Setting Success State.");
@@ -215,18 +197,6 @@ const CourseExam = ({ examid }: { examid: number, questions: any }) => {
     }, INACTIVITY_LIMIT);
   }, []);
 
-  // Attach event listeners
-
-  useEffect(() => {
-    console.log("ExamQuestion: ", ExamQuestion?.data.data);
-
-  }, [ExamQuestion?.data.data])
-
-  useEffect(() => {
-    console.log("userAnswers : ", memeberExam);
-
-  }, [memeberExam])
-
 
   useEffect(() => {
     if(isSubmitted === false){
@@ -267,15 +237,53 @@ const CourseExam = ({ examid }: { examid: number, questions: any }) => {
     handleExamFailure();
   };
 
+  // let questions;
+  useEffect(()=>{
+    if(isSubmitted){
+      if(filteredQuestions){
+        console.log(filteredQuestions)
+        setQuestions(filteredQuestions)
+      }else{
+        
+        setQuestions(memeberExam)
+      }
+    }
+    else{
+      setQuestions(ExamQuestion?.data.data?.questions)
+    }
+  },[isSubmitted , ExamQuestion , memeberExam ,filteredQuestions])
+  // let questions = filteredQuestions || ExamQuestion?.data.data?.questions || memeberExam || [];
 
-  // Get the current question and its details
-  let currentQuestion = ExamQuestion?.data.data?.questions[currentQuestionIndex];
-  const isLastQuestion = currentQuestionIndex === ExamQuestion?.data.data?.questions?.length - 1;
+   const getFilteredQuestions = () => {
+    if (!memeberExam) return [];
+  
+    return memeberExam.filter((question: any) => {
+      if (filter === "all") return true; // ✅ Show all questions
+      if (filter === "correct") return question.isCorrect; // ✅ Show only correctly answered questions
+      if (filter === "incorrect") return !question.isCorrect; // ❌ Show only incorrectly answered questions
+      return true; // Default case (should not be needed)
+    });
+  };
+
+  // const filteredQuestions = getFilteredQuestions();
+  // setFilteredQuestions(getFilteredQuestions())
+
+  let currentQuestion = questions[currentQuestionIndex] || {
+    questionId: 'default-id',
+    questionTitleEn: 'No question available',
+    answers: [],
+    isCodeQuestion: false,
+  };
+  
+  let isLastQuestion = currentQuestionIndex === questions.length - 1;
+  // let isLastQuestion = currentQuestionIndex === ExamQuestion?.data.data?.questions?.length - 1;
   const currentQuestionTime = questionTimes[currentQuestion.questionId] || 60;
-  const isTimeUp = currentQuestionTime <= 0;
-  const examvideo = ExamQuestion?.data.data?.examId;
+  // const isTimeUp = currentQuestionTime <= 0;
+  // const examvideo = ExamQuestion?.data.data?.examId;
 
-
+  // if (isLoadingExam || isFetchingHistoryMember) {
+  //   return <NewLoader loading={isLoadingExam || isFetchingHistoryMember}/>;
+  // }
 
   useEffect(() => {
     if (ExamQuestion?.data.data?.examDurationInSeconds) {
@@ -293,7 +301,12 @@ const CourseExam = ({ examid }: { examid: number, questions: any }) => {
     return () => clearInterval(timer);
   }, [timeLeft]);
 
-
+  useEffect(()=>{
+    if(memeberExam){
+      currentQuestion = memeberExam[currentQuestionIndex]
+      isLastQuestion = currentQuestionIndex == memeberExam.length - 1
+    }
+  },[memeberExam])
 
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
@@ -333,6 +346,7 @@ const CourseExam = ({ examid }: { examid: number, questions: any }) => {
       if (ExamQuestion?.data.data?.examId) {
         const formattedData = formatUserAnswers(ExamQuestion?.data.data.examId, userAnswers);
         submitExam(formattedData);  // ✅ Now correctly passes formatted data
+        // console.error("Missing examId or answers");
       } else {
         console.error("Missing examId or answers");
       }
@@ -348,7 +362,7 @@ const CourseExam = ({ examid }: { examid: number, questions: any }) => {
     setCurrentQuestionIndex(0);
     setTimeLeft(ExamQuestion?.data.data?.examDurationInSeconds);
 
-    fetchExamQuestions(); // ✅ Fetch new questions from the API
+    refetchExamQuestion(); // ✅ Fetch new questions from the API
   };
 
 
@@ -407,28 +421,24 @@ const CourseExam = ({ examid }: { examid: number, questions: any }) => {
     // ✅ Check if the current question is answered correctly
     const hasAnswered = userAnswers.some(answer => answer.questionId === currentQuestion.questionId);
 
-    if (!hasAnswered) {
-      // 🚨 Vibrate to indicate missing answer
-      if ("vibrate" in navigator) {
-        navigator.vibrate(100);
+    if(isSubmitted == false){
+      if (!hasAnswered) {
+        // 🚨 Vibrate to indicate missing answer
+        if ("vibrate" in navigator) {
+          navigator.vibrate(100);
+        }
+  
+        // 🚨 Trigger CSS animation for warning effect
+        setIsVibrating(true);
+        setTimeout(() => setIsVibrating(false), 600);
+  
+        return; // ⛔ Stop execution if the question hasn't been answered
+  
       }
-
-      // 🚨 Trigger CSS animation for warning effect
-      setIsVibrating(true);
-      setTimeout(() => setIsVibrating(false), 600);
-
-      return; // ⛔ Stop execution if the question hasn't been answered
-
     }
 
-    // ✅ Move to the next question if possible
-  //   if (isSubmitted){
-  //     if (currentQuestionIndex < memeberExam.length - 1) {
-  //       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-  //       setSelectedAnswer(null); // Reset selected answer when moving to a new question
-  //   }
-  // }
-    if (currentQuestionIndex < ExamQuestion?.data.data?.questions?.length - 1) {
+
+    if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       setSelectedAnswer(null); // Reset selected answer when moving to a new question
     }
@@ -452,32 +462,36 @@ const CourseExam = ({ examid }: { examid: number, questions: any }) => {
   }, []);
 
   function handleOnChange(value?: string) {
-    console.log('value', value)
+    // console.log('value', value)
     setCode(value || '');
   }
   const handleChange = (value: string) => {
     setFilter(value);
     setFilteredQuestions(getFilteredQuestions()); // ✅ Recalculate filtered questions on change
+    console.log(filteredQuestions)
+    questions = filteredQuestions
+    // currentQuestion = getFilteredQuestions()
+    // questions = getFilteredQuestions()
   };
 
 
-  const getFilteredQuestions = () => {
-    if (!memeberExam) return [];
+  // const getFilteredQuestions = () => {
+  //   if (!memeberExam) return [];
   
-    return memeberExam.filter((question: any) => {
-      if (filter === "all") return true; // ✅ Show all questions
-      if (filter === "correct") return question.isCorrect; // ✅ Show only correctly answered questions
-      if (filter === "incorrect") return !question.isCorrect; // ❌ Show only incorrectly answered questions
-      return true; // Default case (should not be needed)
-    });
-  };
+  //   return memeberExam.filter((question: any) => {
+  //     if (filter === "all") return true; // ✅ Show all questions
+  //     if (filter === "correct") return question.isCorrect; // ✅ Show only correctly answered questions
+  //     if (filter === "incorrect") return !question.isCorrect; // ❌ Show only incorrectly answered questions
+  //     return true; // Default case (should not be needed)
+  //   });
+  // };
 
   useEffect(() => {
     // Update filtered questions whenever memeberExam or filter changes
     if (memeberExam) {
       setFilteredQuestions(getFilteredQuestions());
       setCurrentQuestionIndex(0); // Reset to the first question when the filter changes
-      console.log(memeberExam)
+      // console.log(memeberExam)
       // currentQuestion = memeberExam[currentQuestionIndex]
     }
   }, [memeberExam, filter]);
@@ -498,7 +512,7 @@ const CourseExam = ({ examid }: { examid: number, questions: any }) => {
         ) : (
           <Space wrap>
             <Select
-              defaultValue="all"
+              defaultValue="incorrect"
               style={{ width: 150 }}
               onChange={handleChange}
               options={[
@@ -519,12 +533,14 @@ const CourseExam = ({ examid }: { examid: number, questions: any }) => {
                 onChange={handleOnChange}
                 name="UNIQUE_ID_OF_DIV"
                 editorProps={{ $blockScrolling: true }}
-                value={currentQuestion.questionTitleEn}
+                value={isSubmitted ?currentQuestion.titleEn :currentQuestion.questionTitleEn}
+                // value={currentQuestion.questionTitleEn || currentQuestion.titleEn }
               />
             </div>
           ) : (
+            // style={{ marginTop: isSubmitted ? 0 : "auto" }}
 
-            <Title level={4} className='course_exam_title' style={{ marginTop: isSubmitted ? 0 : "auto" }}>{currentQuestion.questionTitleEn} </Title>
+            <Title level={4} className='course_exam_title' >{isSubmitted ?currentQuestion.titleEn: currentQuestion.questionTitleEn } </Title>
           )}
         </div>
         <div className="line">
@@ -607,11 +623,10 @@ const CourseExam = ({ examid }: { examid: number, questions: any }) => {
                     <div className='why_answer_box'>
                       <Text className="course_exam_box_answers">{answer.answerTitleEn}</Text>
 
-                      {answerStatus === "correct"  && (
+                      {answerStatus === "correct" && answer.answerReason && (
                         <>
                           <button 
                             style={{
-                              marginLeft: "10px",
                               padding: "4px 8px",
                               borderRadius: "4px",
                               cursor: "pointer"
@@ -623,11 +638,11 @@ const CourseExam = ({ examid }: { examid: number, questions: any }) => {
                           >
                             ? Why
                           </button>
-                            <AnswerReason reason={answer.answerReason} />
                         
                         </>
                           )}
                     </div>
+                          <AnswerReason reason={answer.answerReason} />
                   </div>
                 )}
               </div>
@@ -661,7 +676,7 @@ const CourseExam = ({ examid }: { examid: number, questions: any }) => {
               </button>
             )
           }
-          <p className="course_exam_len">Question {currentQuestionIndex + 1} out of {ExamQuestion?.data.data?.questions?.length}</p>
+          <p className="course_exam_len">Question {currentQuestionIndex + 1} out of {questions.length || ExamQuestion?.data.data?.questions?.length }</p>
           <button className={`bt_prev  ${isVibrat ? "vibrate" : ""} `} onClick={() => handlePreviousQuestion()} >
             {t("courseExam.prevQuestion")}
           </button>

@@ -8,12 +8,14 @@ interface StoreState {
     prevNode:string;
     firstNodeModule:any;
     nextNode:any;
+    isSubmitted:boolean;
     videoNodeExam:string;
     lastVideoData: any;
     memeberExam:any;
     setMemeberExam: (data: any) => void;
     setVideoNode: (id: string) => void;
     setVideoNodeExam: (id: string) => void;
+    setIsSubmitted: (data: boolean) => void;
     setPrevNode: (id: string) => void;
     setFirstNodeModule: (data: any) => void;
     setNextNode: (data: any) => void;
@@ -32,11 +34,16 @@ const GenralCoursePlayerId = create<StoreState>((set) => ({
     videoNodeExam:"",
     firstNodeModule:null,
     nextNode:null,
+    isSubmitted:false,
     memeberExam:null,
     lastVideoData: null,
     setMemeberExam: (data: any) =>
         set(() => ({
             memeberExam: data,
+        })),
+    setIsSubmitted: (data: boolean) =>
+        set(() => ({
+            isSubmitted: data,
         })),
     setVideoNodeExam: (id: string) =>
         set(() => ({

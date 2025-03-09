@@ -11,10 +11,12 @@ import { useTranslations } from "next-intl";
 import generalActivePopup from "@/app/store/ActivePopup";
 import GeneralPopup from "../generalPopup/GeneralPopup";
 import ActiveAnswersPopup from "../generalPopup/activeAnswersPopup";
+import { getServerRequest } from "@/app/utils/generalServerRequest";
+import { useMutation } from "@tanstack/react-query";
 
 
 export default function CoursePlayerAccordion({ videosItems, videoCommentsMutation }: CoursePlayerAccordionProps) {
-    const { setVideoNode, setVideoName, setVideoID, videoNodeExam , setVideoNodeExam,  setLastVideoData, videoId,videoNode , setFirstNodeModule ,setNextNode ,setMemeberExam , memeberExam} = GenralCoursePlayerId();
+    const { setVideoNode, setVideoName, setVideoID, videoNodeExam , setVideoNodeExam,  setLastVideoData, videoId,videoNode , setFirstNodeModule ,setNextNode,setIsSubmitted,isSubmitted ,setMemeberExam , memeberExam} = GenralCoursePlayerId();
     const [cookies] = useCookies(["userData"]);
     const { locale } = useParams() as { locale: string };
     const [activeKey, setActiveKey] = useState<string | string[]>([]);
@@ -148,12 +150,12 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
       return "0M";
     };
 
-    const handleSelectExam = (memberExamID: string) => {
-      // setSelectedExamId(memberExamID);
-      // // // Fetch exam history or perform other actions with the selected memberExamID
-      // fetchExamHistoryMember(memberExamID);
-      console.log(memberExamID)
-  };
+  //   const handleSelectExam = (memberExamID: string) => {
+  //     // setSelectedExamId(memberExamID);
+  //     // // // Fetch exam history or perform other actions with the selected memberExamID
+  //     fetchExamHistoryMember(memberExamID);
+  //     console.log(memberExamID)
+  // };
 
   
     // Generate accordion items

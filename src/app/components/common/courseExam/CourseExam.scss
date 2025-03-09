@@ -22,11 +22,12 @@
         line-height: 28px;
         color: #4D4D4D;
         direction:ltr;
-        width: 90%;
+        width: 80%;
         margin-top:-1.5em;
-        @media (max-width: 768px) {
-          width: 100%;
+        @media (max-width: 620px) {
+          // width: 100%;
           margin-top: 0;
+          direction: inherit
         }
     }
     .course_exam_time{
@@ -107,7 +108,15 @@
         color:#4D4D4D;
         position: absolute;
         left: 0;
+        
       }
+  @media screen and (max-width: 768px) {
+    button{
+      display: flex;
+      gap: 1em;
+    }
+    
+  }    
 }
 .exam_table {
     width: 100%;

@@ -81,7 +81,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
     const [courseTitle, setCourseTitle] = useState<string>("");
 
 
-    const { videoNode, setVideoNode, videoLink, videoName, videoId, setVideoID ,CourseVideo, setVideoName, lastVideoData } = GenralCoursePlayerId();
+    const { videoNode, setVideoNode, videoLink, videoName,setIsSubmitted,isSubmitted, videoId, setVideoID ,CourseVideo, setVideoName, lastVideoData } = GenralCoursePlayerId();
     const { openQuestion , activeLeaderBoard} = generalActivePopup();
     const playerRef = useRef<HTMLVideoElement | null>(null);
     const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -114,6 +114,16 @@ export default function CoursePlayer({ slug }: { slug: string }) {
         queryFn: () => getServerRequest(`/CourseNode/${slug}/nodes`),
     });
     
+    // const {
+    //     data: ExamQuestion,
+    //     refetch: refetchExamQuestion,
+    //     isLoading: isLoadingExam,  // Renamed to avoid conflict
+    //     isFetching, // Indicates if data is being refetched
+    // } = useQuery({
+    //     queryKey: ["examQuestion", { videoId }],
+    //     queryFn: () => getServerRequest(`/MemberExam/${videoId}/questions`),
+    //     enabled: nodeType === 1 && !!videoId && isSubmitted, // Only fetch if nodeType is 1 and examId exists
+    // });
     const {
         data: ExamQuestion,
         refetch: refetchExamQuestion,
@@ -121,8 +131,12 @@ export default function CoursePlayer({ slug }: { slug: string }) {
         isFetching, // Indicates if data is being refetched
     } = useQuery({
         queryKey: ["examQuestion", { videoId }],
-        queryFn: () => getServerRequest(`/MemberExam/${videoId}/questions`),
-        enabled: nodeType === 1 && !!videoId, // Only fetch if nodeType is 1 and examId exists
+        // queryFn: () => getServerRequest(`/MemberExam/${videoId}/questions`),
+        queryFn: () => {
+            console.log("Fetching data... from course Player "); // Debugging: Check if query is running
+            return getServerRequest(`/MemberExam/${videoId}/questions`);
+        },
+        enabled: false, // Only fetch if nodeType is 1 and examId exists
     });
 
 
@@ -155,16 +169,13 @@ export default function CoursePlayer({ slug }: { slug: string }) {
     useEffect(() => {
         if (nodeType === 1) {
             console.log(videoId)
-            refetchExamQuestion(); // Manually fetch data when nodeType becomes 1
+            if(false){
+                refetchExamQuestion(); // Manually fetch data when nodeType becomes 1
+            }
         }
     }, [nodeType, refetchExamQuestion]);
     
-    
-        // useEffect(() => {
-        //     if (ExamQuestion) {
-        //         console.log("Fetched ExamQuestion:", ExamQuestion);
-        //     }
-        // }, [ExamQuestion]); // Runs whenever ExamQuestion changes
+
 
     // Fetch OTP when videoId changes
     const { data: vdocipherOTP, isLoading: isLoadingvdocipherOTP } = useQuery({
@@ -1173,7 +1184,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                         isLoadingExam || isLoadingVideo ? ( 
                             <NewLoader loading={isLoading} />  // Show loading message until both are ready
                         ) : (
-                            <CourseExam examid={examId} questions={ExamQuestion?.data?.data} />
+                            <CourseExam examid={examId} />
                         )
                     )}
                     <div className="course_player_video_tabs">
