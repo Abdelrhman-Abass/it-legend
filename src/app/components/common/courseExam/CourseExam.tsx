@@ -25,7 +25,7 @@ const { Title, Text } = Typography;
 
 
 
-const INACTIVITY_LIMIT = 30 * 60 * 1000; // 30 minutes in milliseconds
+const INACTIVITY_LIMIT = 35 * 60 * 1000; // 30 minutes in milliseconds
 // const INACTIVITY_LIMIT = 30 * 60 * 1000; // 30 minutes in milliseconds
 const WARNING_TIME = 5 * 60 * 1000; // 25 minutes
 let warningTimeout: NodeJS.Timeout | null = null;
@@ -469,7 +469,7 @@ const CourseExam = ({ examid }: { examid: number}) => {
     setFilter(value);
     setFilteredQuestions(getFilteredQuestions()); // ✅ Recalculate filtered questions on change
     console.log(filteredQuestions)
-    questions = filteredQuestions
+    // questions = filteredQuestions
     // currentQuestion = getFilteredQuestions()
     // questions = getFilteredQuestions()
   };
