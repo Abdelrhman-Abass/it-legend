@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useMemo, useState } from 'react';
 import { Card, Typography, Button } from 'antd';
 import GeneralPopup from '../generalPopup/GeneralPopup';
 import generalActivePopup from "@/app/store/ActivePopup";
@@ -59,7 +59,7 @@ const CourseExam = ({ examid }: { examid: number}) => {
   // ✅ State to hold the exam result object
   const [examResult, setExamResult] = useState(defaultExamResult);
   const [timeLeft, setTimeLeft] = useState<number>(0); // Timer State
-  const { openPopup, openSucPopup, setSuccess, openActiveDatePopup, openCountDownPopup ,openAnswerReasonPop} = generalActivePopup();
+  const { openPopup, openSucPopup, setSuccess, openActiveDatePopup,closeCountDownPopup, openCountDownPopup,closeSucPopup ,openAnswerReasonPop} = generalActivePopup();
   const { setVideoNode, videoId, setIsSubmitted,isSubmitted, videoNode, setVideoID, nextNode, setVideoName, setMemeberExam, memeberExam, setLastVideoData } = GenralCoursePlayerId();
 
   const [isVibrating, setIsVibrating] = useState(false);
@@ -78,6 +78,8 @@ const CourseExam = ({ examid }: { examid: number}) => {
   const [examFailed, setExamFailed] = useState(false);
 
   const [selectedExamId, setSelectedExamId] = useState<string | null>(null);
+  // const warningTimeout = useRef(null);
+  // const inactivityTimeout = useRef(null);
 
   // const handleSelectExam = (memberExamID: string) => {
   //   setSelectedExamId(memberExamID);
@@ -172,6 +174,7 @@ const CourseExam = ({ examid }: { examid: number}) => {
   const handleReviewMyAnswer = () => {
     if (examResult.memberExamId) {
       fetchExamHistoryMember(examResult.memberExamId);
+      closeSucPopup()
     } else {
       console.error("memberExamId is missing in examResult");
     }
@@ -187,6 +190,9 @@ const CourseExam = ({ examid }: { examid: number}) => {
     // Restart warning timer
     warningTimeout = setTimeout(() => {
       setShowWarning(true);
+      if (!isSubmitted) {
+              openCountDownPopup(); // Show the countdown popup
+            }
     }, WARNING_TIME);
 
     // Restart auto-fail timer
@@ -197,39 +203,113 @@ const CourseExam = ({ examid }: { examid: number}) => {
     }, INACTIVITY_LIMIT);
   }, []);
 
+  // const warningTimeout = useRef<number | undefined>(undefined);
+  // const inactivityTimeout = useRef<number | undefined>(undefined);
+
+  // Handle user activity (mouse move, key press, etc.)
+  // const handleUserActivity = useCallback(() => {
+  //   setLastActivityTime(Date.now());
+  //   closeCountDownPopup(); // Hide the countdown popup
+  //   clearTimeout(warningTimeout.current);
+  //   clearTimeout(inactivityTimeout.current);
+
+  //   // Start warning timer
+  //   warningTimeout.current = setTimeout(() => {
+  //     if (!isSubmitted) {
+  //       openCountDownPopup(); // Show the countdown popup
+  //     }
+  //   }, WARNING_TIME);
+
+  //   // Start auto-fail timer
+  //   inactivityTimeout.current = setTimeout(() => {
+  //     handleExamFailure();
+  //   }, INACTIVITY_LIMIT);
+  // }, [closeCountDownPopup, openCountDownPopup, isSubmitted]);
+
+  const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+    if (!isSubmitted) {
+      event.preventDefault(); // Show the confirmation dialog
+      event.returnValue = "Are you sure you want to leave? Your exam progress will be lost."; // Message for the dialog
+      // Do NOT call handleSubmit() here to avoid auto-submission
+    }
+  };
+
+  // Optional: Handle unload event to detect page leave (less reliable)
+  const handleUnload = () => {
+    if (!isSubmitted) {
+      // Optionally submit here if you want to force submission on leave
+      handleSubmit(); // Uncomment if you want to submit on unload
+      console.log("Page unloaded, exam not submitted due to user choice.");
+    }
+  };
+
+  // useEffect(() => {
+  //   if(isSubmitted === false){
+  //     document.addEventListener("mousemove", handleUserActivity);
+  //     document.addEventListener("keydown", handleUserActivity);
+  //     document.addEventListener("click", handleUserActivity);
+  
+  //     // Start the initial timers
+  //     handleUserActivity();
+  
+      
+  //   }
+  //   return () => {
+  //     document.removeEventListener("mousemove", handleUserActivity);
+  //     document.removeEventListener("keydown", handleUserActivity);
+  //     document.removeEventListener("click", handleUserActivity);
+  //     clearTimeout(warningTimeout!);
+  //     clearTimeout(inactivityTimeout!);
+  //   };
+  // }, [handleUserActivity]);
 
   useEffect(() => {
-    if(isSubmitted === false){
+    if (!isSubmitted) {
+      // Activity listeners
       document.addEventListener("mousemove", handleUserActivity);
       document.addEventListener("keydown", handleUserActivity);
       document.addEventListener("click", handleUserActivity);
-  
+
+      // Page exit/refresh listener
+      window.addEventListener("beforeunload", handleBeforeUnload);
+      window.addEventListener("unload", handleUnload)
+
       // Start the initial timers
       handleUserActivity();
-  
-      return () => {
-        document.removeEventListener("mousemove", handleUserActivity);
-        document.removeEventListener("keydown", handleUserActivity);
-        document.removeEventListener("click", handleUserActivity);
-        clearTimeout(warningTimeout!);
-        clearTimeout(inactivityTimeout!);
-      };
-
     }
-  }, [handleUserActivity]);
+
+    // Cleanup on unmount
+    return () => {
+      document.removeEventListener("mousemove", handleUserActivity);
+      document.removeEventListener("keydown", handleUserActivity);
+      document.removeEventListener("click", handleUserActivity);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("unload", handleUnload);
+      clearTimeout(warningTimeout!);
+      clearTimeout(inactivityTimeout!);
+    };
+  }, [handleUserActivity, isSubmitted]);
 
 
   // const handleReviewMyAnswer= () => {
   //   fetchExamHistoryMember(examResult.memberExamId)
   // }
+  // const handleExamFailure = () => {
+  //   if (!isSubmitted) {
+  //     // handleSubmit(); // Submit the exam before marking failure
+  //   }
+
+  //   setExamFailed(true);
+  //   localStorage.setItem("examFailed", "true"); // Save failure state
+  //   openCountDownPopup();
+  // };
   const handleExamFailure = () => {
     if (!isSubmitted) {
-      // handleSubmit(); // Submit the exam before marking failure
+      handleSubmit(); // Submit the exam before marking failure
     }
-
     setExamFailed(true);
-    localStorage.setItem("examFailed", "true"); // Save failure state
-    openCountDownPopup();
+    localStorage.setItem("examFailed", "true");
+    closeCountDownPopup(); // Ensure popup is closed after failure
   };
   // Handle unexpected exit
   const handleUnexpectedExit = (event: BeforeUnloadEvent) => {

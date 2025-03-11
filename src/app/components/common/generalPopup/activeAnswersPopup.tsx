@@ -210,7 +210,7 @@ export default function ActiveAnswersPopup() {
     // Format exam data only if questionHistory is available
     const examData = questionHistory?.data?.examSolutions?.map((exam: any) => ({
         date: new Date(exam.createdDate).toLocaleDateString(), // Format the date
-        successRate: exam.isPassed ? "100%" : "0%", // Calculate success rate (example logic)
+        successRate: exam.successRate?.toFixed(), // Calculate success rate (example logic)
         score: Math.round(exam.score),
         memberExamID: exam.memberExamId,
     }));

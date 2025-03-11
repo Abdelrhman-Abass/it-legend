@@ -5,16 +5,16 @@ import ReactPlayer from "react-player";
 import { motion } from "framer-motion";
 import GenralCoursePlayerId from "@/app/store/GeneralCoursePlayer";
 // import {videoCommentsMutation} from "./"
-export default function SuccessPopup({ result , successRate ,timeScore ,isLevelUp, courseScore , retake ,handleReviewMyAnswer }: { result?: number ,courseScore?:number , timeScore?:number ,isLevelUp?:boolean,successRate?:number, retake?:() => void ,handleReviewMyAnswer:()=>void}) {
-    const { activeSuccess, closeSucPopup, extraData, success, setSuccess,activeDatesPopup } = generalActivePopup();
-    const { setVideoNode, videoNode ,setVideoID,firstNodeModule, nextNode ,setVideoName , setLastVideoData} = GenralCoursePlayerId();
+export default function SuccessPopup({ result, successRate, timeScore, isLevelUp, courseScore, retake, handleReviewMyAnswer }: { result?: number, courseScore?: number, timeScore?: number, isLevelUp?: boolean, successRate?: number, retake?: () => void, handleReviewMyAnswer: () => void }) {
+    const { activeSuccess, closeSucPopup, extraData, success, setSuccess, activeDatesPopup } = generalActivePopup();
+    const { setVideoNode, videoNode, setVideoID, firstNodeModule, nextNode, setVideoName, setLastVideoData } = GenralCoursePlayerId();
     const [next, setNext] = useState<any>()
 
     const [showVideo, setShowVideo] = useState(false);
 
-    const handleContinueLerning = ()=>{
+    const handleContinueLerning = () => {
         // console.log(JSON.stringfy(nextNode))
-        if(nextNode){
+        if (nextNode) {
             setVideoNode(nextNode.nodeId)
             setVideoID(nextNode.contentId)
             window.history.replaceState(null, "", window.location.pathname + window.location.search);
@@ -25,8 +25,8 @@ export default function SuccessPopup({ result , successRate ,timeScore ,isLevelU
         closeSucPopup()
     }
     // console.log(firstNodeModule)
-    const handlePrevLerning = ()=>{
-        if(firstNodeModule){
+    const handlePrevLerning = () => {
+        if (firstNodeModule) {
             setVideoNode(firstNodeModule.nodeId)
             setVideoID(firstNodeModule.contentId)
             window.history.replaceState(null, "", window.location.pathname + window.location.search);
@@ -36,12 +36,12 @@ export default function SuccessPopup({ result , successRate ,timeScore ,isLevelU
         }
         // closeSucPopup()
     }
-    useEffect(()=>{
+    useEffect(() => {
         // setNext(JSON.stringify(nextNode))
         setNext(nextNode)
         // console.log("next : " + nextNode.nodeId);
 
-    },[nextNode])
+    }, [nextNode])
     // console.log(videoNode)
     // http://localhost:3000/ar/learn-path/course-player/c7f5bfef-8117-4021-b83e-448051bced9a
     return (
@@ -58,13 +58,13 @@ export default function SuccessPopup({ result , successRate ,timeScore ,isLevelU
             {success ? (
                 <Suspense fallback={<div>Loading...</div>}>
                     <motion.div
-                    onClick={(e) => {
-                        e.stopPropagation();
-                      }}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                        }}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.2, delay: 0.3, ease: "easeOut" }}
-                        className="general_popup_video">
+                        className="general_popup_video succes_popup">
                         <div>
                             <div className="results-summary-container">
                                 <div className="confetti">
@@ -98,14 +98,19 @@ export default function SuccessPopup({ result , successRate ,timeScore ,isLevelU
                                     {/* <div className="heading-tertiary">نقطة  +  نقطه للوقت </div> */}
                                     <div style={{ display: "flex", justifyContent: "center", gap: "10px", alignItems: "center" }}>
                                         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                                            <span className="result" style={{  fontWeight: "bold", color: "#EB7236" }}>{result} </span>
+                                            <span className="result" style={{ fontWeight: "bold", color: "#EB7236" }}>{result} </span>
                                             <span className="heading-tertiary" style={{ fontSize: "20px", color: "hsl(221, 35.6%, 26.82%)" }}>نقطة</span>
                                         </div>
-                                        <span style={{ fontSize:"20px" , fontWeight: "bold", color: "hsl(221, 35.6%, 26.82%)" }}>+</span>
-                                        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                                            <span className="result" style={{  fontWeight: "bold", color: "#EB7236" }}>{timeScore}</span>
-                                            <span className="heading-tertiary" style={{ fontSize: "20px", color: "hsl(221, 35.6%, 26.82%)" }}>نقطة للوقت</span>
-                                        </div>
+
+                                        {timeScore && (
+                                            <>
+                                                <span style={{ fontSize: "20px", fontWeight: "bold", color: "hsl(221, 35.6%, 26.82%)" }}>+</span>
+                                                <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                                    <span className="result" style={{ fontWeight: "bold", color: "#EB7236" }}>{timeScore}</span>
+                                                    <span className="heading-tertiary" style={{ fontSize: "20px", color: "hsl(221, 35.6%, 26.82%)" }}>نقطة للوقت</span>
+                                                </div>
+                                            </>
+                                        )}
                                     </div>
 
                                     <div className="result-text-box">
@@ -116,7 +121,7 @@ export default function SuccessPopup({ result , successRate ,timeScore ,isLevelU
                                     </div>
 
                                     <div className="pre_buttons">
-                                        <button className="bt_next" style={{cursor:"pointer"}} onClick={handleContinueLerning}>
+                                        <button className="bt_next" style={{ cursor: "pointer" }} onClick={handleContinueLerning}>
                                             استكمل الدراسة
                                         </button>
 
@@ -137,13 +142,13 @@ export default function SuccessPopup({ result , successRate ,timeScore ,isLevelU
                     onClick={(e) => {
                         e.stopPropagation();
                         setSuccess(false);
-                      }}
+                    }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.2, delay: 0.3, ease: "easeOut" }}
-                    className="general_popup_video">
+                    className="general_popup_video succes_popup">
                     <div>
                         <div className="results-summary-container failed" >
-                            <div className="results-summary-container__result" style={{gap:"50px"}}>
+                            <div className="results-summary-container__result" style={{ gap: "50px" }}>
                                 <div className="heading-tertiary">للأسف ي صديقي.. انت حققت {successRate?.toFixed()}% </div>
                                 {/* <div className="result-box"> */}
                                 {/* <div className="heading-primary">{result}</div> */}
@@ -168,7 +173,7 @@ export default function SuccessPopup({ result , successRate ,timeScore ,isLevelU
 
                                 </div>
                             </div>
-                            
+
                         </div>
 
                     </div>

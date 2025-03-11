@@ -58,7 +58,11 @@
         // min-width: 40%;
     }
   }
-  
+  .succes_popup{
+     @media (min-width: 768px) {
+      width: 70% !important;
+    }
+  }
 
 
 
