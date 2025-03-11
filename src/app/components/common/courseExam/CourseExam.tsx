@@ -56,7 +56,7 @@ const CourseExam = ({ examid }: { examid: number}) => {
     memberExamId: "",
   };
 
-  // ✅ State to hold the exam result object
+  // ✅ State to hold the exam result object 
   const [examResult, setExamResult] = useState(defaultExamResult);
   const [timeLeft, setTimeLeft] = useState<number>(0); // Timer State
   const { openPopup, openSucPopup, setSuccess, openActiveDatePopup,closeCountDownPopup, openCountDownPopup,closeSucPopup ,openAnswerReasonPop} = generalActivePopup();

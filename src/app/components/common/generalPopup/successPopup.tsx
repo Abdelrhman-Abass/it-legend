@@ -7,7 +7,7 @@ import GenralCoursePlayerId from "@/app/store/GeneralCoursePlayer";
 // import {videoCommentsMutation} from "./"
 export default function SuccessPopup({ result, successRate, timeScore, isLevelUp, courseScore, retake, handleReviewMyAnswer }: { result?: number, courseScore?: number, timeScore?: number, isLevelUp?: boolean, successRate?: number, retake?: () => void, handleReviewMyAnswer: () => void }) {
     const { activeSuccess, closeSucPopup, extraData, success, setSuccess, activeDatesPopup } = generalActivePopup();
-    const { setVideoNode, videoNode, setVideoID, firstNodeModule, nextNode, setVideoName, setLastVideoData } = GenralCoursePlayerId();
+    const { setVideoNode, videoNode, setVideoID, firstNodeModule, nextNode, setVideoName, setIsSubmitted, setLastVideoData } = GenralCoursePlayerId();
     const [next, setNext] = useState<any>()
 
     const [showVideo, setShowVideo] = useState(false);
@@ -33,6 +33,7 @@ export default function SuccessPopup({ result, successRate, timeScore, isLevelUp
             setVideoName(`${firstNodeModule.titleEn}`);
             // videoCommentsMutation.mutate(nextNode.contentId);
             setLastVideoData(null);
+            setIsSubmitted(false)
         }
         // closeSucPopup()
     }
@@ -142,6 +143,7 @@ export default function SuccessPopup({ result, successRate, timeScore, isLevelUp
                     onClick={(e) => {
                         e.stopPropagation();
                         setSuccess(false);
+                        setIsSubmitted(false)
                     }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.2, delay: 0.3, ease: "easeOut" }}
