@@ -182,11 +182,12 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
                           setVideoNodeExam(child.nodeId)
                           // setVideoNode(child.nodeId)
                           // setVideoNode(videoNodeExam)
-
+                          
                           openActiveDatePopup(); // Open Active Date Popup first
                           // openPopup(); // Directly open if not passed
                           
                         } else {
+                          setIsSubmitted(false)
                           openPopup(); // Directly open if not passed
                         }
                         setVideoNodeExam(child.nodeId)
