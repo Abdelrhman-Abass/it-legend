@@ -10,7 +10,17 @@
 .course_exam{
     width:100%;
     z-index:20;
+    user-select: none;
+    -webkit-user-select: none; // Safari
+    -moz-user-select: none; // Firefox
+    -ms-user-select: none; // IE/Edge
 
+    // Ensure content is not draggable
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    
     .course_exam_header{
         display:flex;
         justify-content:space-between;
