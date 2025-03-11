@@ -163,8 +163,9 @@ const CourseExam = ({ examid }: { examid: number}) => {
       } else {
         console.log("Exam Failed!");
       }
-
-      openSucPopup();
+      if (isSubmitted){
+        openSucPopup();
+      }
     },
     onError: (error) => {
       console.error("Submission failed:", error);

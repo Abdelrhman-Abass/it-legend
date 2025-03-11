@@ -27,13 +27,13 @@ export default function SuccessPopup({ result, successRate, timeScore, isLevelUp
     // console.log(firstNodeModule)
     const handlePrevLerning = () => {
         if (firstNodeModule) {
+            setIsSubmitted(false)
             setVideoNode(firstNodeModule.nodeId)
             setVideoID(firstNodeModule.contentId)
             window.history.replaceState(null, "", window.location.pathname + window.location.search);
             setVideoName(`${firstNodeModule.titleEn}`);
             // videoCommentsMutation.mutate(nextNode.contentId);
             setLastVideoData(null);
-            setIsSubmitted(false)
         }
         // closeSucPopup()
     }
