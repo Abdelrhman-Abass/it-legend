@@ -169,11 +169,9 @@ export default function CoursePlayer({ slug }: { slug: string }) {
     useEffect(() => {
         if (nodeType === 1) {
             console.log(videoId)
-            if(false){
-                refetchExamQuestion(); // Manually fetch data when nodeType becomes 1
-            }
+            // setIsSubmitted(false)
         }
-    }, [nodeType, refetchExamQuestion]);
+    }, [nodeType , isSubmitted]);
     
 
 

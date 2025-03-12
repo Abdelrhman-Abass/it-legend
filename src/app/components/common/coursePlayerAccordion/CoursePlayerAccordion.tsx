@@ -175,7 +175,6 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
                     onClick={async () => {
                       handleVideoPlayType(child.type, child.nodeId);
                       if (child.type === 1) {
-                        setIsSubmitted(false)
                         if (child.isPassed) {
                           console.log(child.contentId);
                           setVideoID(child.contentId);
@@ -188,6 +187,7 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
                           
                         } else {
                           
+                          setIsSubmitted(false)
                           openPopup(); // Directly open if not passed
                         }
                         setVideoNodeExam(child.nodeId)

@@ -30,6 +30,9 @@ export default function AnswerReason({ reason }: { reason?: string }) {
                 <Suspense fallback={<div>Loading...</div>}>
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                        }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.2, delay: 0.3, ease: "easeOut" }}
                         className="general_popup_video"

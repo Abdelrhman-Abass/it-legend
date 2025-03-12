@@ -163,14 +163,18 @@ const CourseExam = ({ examid }: { examid: number}) => {
       } else {
         console.log("Exam Failed!");
       }
-      if (isSubmitted){
-        openSucPopup();
-      }
+
+      openSucPopup();
+      
     },
     onError: (error) => {
       console.error("Submission failed:", error);
     },
   });
+
+  useEffect(()=>{
+    console.log("is submitted : " + isSubmitted)
+  },[isSubmitted])
 
   const handleReviewMyAnswer = () => {
     if (examResult.memberExamId) {
@@ -240,7 +244,7 @@ const CourseExam = ({ examid }: { examid: number}) => {
     if (!isSubmitted) {
       // Optionally submit here if you want to force submission on leave
       handleSubmit(); // Uncomment if you want to submit on unload
-      console.log("Page unloaded, exam not submitted due to user choice.");
+      // console.log("Page unloaded, exam not submitted due to user choice.");
     }
   };
 
@@ -549,7 +553,7 @@ const CourseExam = ({ examid }: { examid: number}) => {
   const handleChange = (value: string) => {
     setFilter(value);
     setFilteredQuestions(getFilteredQuestions()); // ✅ Recalculate filtered questions on change
-    console.log(filteredQuestions)
+    // console.log(filteredQuestions)
     // questions = filteredQuestions
     // currentQuestion = getFilteredQuestions()
     // questions = getFilteredQuestions()
@@ -606,7 +610,7 @@ const CourseExam = ({ examid }: { examid: number}) => {
         )}
         <div className="course_exam_header">
           {currentQuestion.isCodeQuestion ? (
-            <div style={{ height: "10em", width: "100%", marginBottom: "20px" }}>
+            <div style={{ height: "12em", width: "100%", marginBottom: "20px" }}>
 
               <AceEditor
                 mode="csharp"
@@ -614,8 +618,8 @@ const CourseExam = ({ examid }: { examid: number}) => {
                 onChange={handleOnChange}
                 name="UNIQUE_ID_OF_DIV"
                 editorProps={{ $blockScrolling: true }}
-                value={isSubmitted ?currentQuestion.titleEn :currentQuestion.questionTitleEn}
-                // value={currentQuestion.questionTitleEn || currentQuestion.titleEn }
+                // value={isSubmitted ?currentQuestion.titleEn :currentQuestion.questionTitleEn}
+                value={currentQuestion.questionTitleEn || currentQuestion.titleEn }
               />
             </div>
           ) : (
@@ -687,7 +691,7 @@ const CourseExam = ({ examid }: { examid: number}) => {
                           ? "#FAC3C3"
                           : isSelected
                             ? "#97EA7F"
-                            : "#FAC3C3"
+                            : "#E8E8E8"
                         }`,
                       borderRadius: "8px",
                       cursor: isSubmitted ? "default" : "pointer",

@@ -52,7 +52,7 @@ export default function SuccessPopup({ result, successRate, timeScore, isLevelUp
             animate={{ opacity: activeSuccess ? 1 : 0, visibility: activeSuccess ? "visible" : "hidden" }}
             // exit={{ opacity: 0, visibility: "hidden" }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
-            className={`general_popup p-lg py ${activeSuccess ? "active" : ""}`}>
+            className={`general_popup p-lg py ${activeSuccess ? "active" : ""}` }>
             <div className="general_popup_close f ac jc" onClick={closeSucPopup}>
                 <IoClose />
             </div>

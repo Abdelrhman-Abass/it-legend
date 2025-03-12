@@ -39,6 +39,9 @@ export default function WarningPopup({ isVideo = false, isExam ,success ,videoNo
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                        }}
                         transition={{ duration: 0.2, delay: 0.3, ease: "easeOut" }}
                         className="general_popup_video" style={{ background: "white" }}>
                         <div>
