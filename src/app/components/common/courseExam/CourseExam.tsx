@@ -618,8 +618,8 @@ const CourseExam = ({ examid }: { examid: number}) => {
                 onChange={handleOnChange}
                 name="UNIQUE_ID_OF_DIV"
                 editorProps={{ $blockScrolling: true }}
-                // value={isSubmitted ?currentQuestion.titleEn :currentQuestion.questionTitleEn}
-                value={currentQuestion.questionTitleEn || currentQuestion.titleEn }
+                value={isSubmitted ?currentQuestion.titleEn :currentQuestion.questionTitleEn}
+                // value={currentQuestion.questionTitleEn || currentQuestion.titleEn }
               />
             </div>
           ) : (
