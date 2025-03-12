@@ -448,6 +448,7 @@ const CourseExam = ({ examid }: { examid: number}) => {
     setTimeLeft(ExamQuestion?.data.data?.examDurationInSeconds);
     closeSucPopup()
     refetchExamQuestion(); // ✅ Fetch new questions from the API
+    console.log(ExamQuestion?.data.data)
   };
 
 
