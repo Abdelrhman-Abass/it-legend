@@ -21,6 +21,7 @@ export default function SuccessPopup({ result, successRate, timeScore, isLevelUp
             setVideoName(`${nextNode.titleEn}`);
             // videoCommentsMutation.mutate(nextNode.contentId);
             setLastVideoData(null);
+            closeSucPopup()
         }
         closeSucPopup()
     }
@@ -34,6 +35,7 @@ export default function SuccessPopup({ result, successRate, timeScore, isLevelUp
             setVideoName(`${firstNodeModule.titleEn}`);
             // videoCommentsMutation.mutate(nextNode.contentId);
             setLastVideoData(null);
+            closeSucPopup()
         }
         // closeSucPopup()
     }

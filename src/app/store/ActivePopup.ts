@@ -107,7 +107,9 @@ const generalActivePopup = create<StoreState>((set) => ({
     closeActiveDatePopup: () => set({ activeDatesPopup: false, extraData: null }),
     closePopup: () => set({ isActivePopup: false, extraData: null }),
     openSucPopup: () => set({ activeSuccess: true }),
-    closeSucPopup: () => set({ activeSuccess: false}),
+    // closeSucPopup: () => set({ activeSuccess: false}),
+    closeSucPopup: () => set({ activeSuccess: false, extraData: null }),
+
     setExtraData: (data: any) => set({ extraData: data }),
     openQuestion: () => set({ askquestionPopup: true }), // New function
     closeQuestion: () => set({ askquestionPopup: false }), // New function

@@ -446,7 +446,7 @@ const CourseExam = ({ examid }: { examid: number}) => {
     setUserAnswers([]); // ✅ Clear previous answers
     setCurrentQuestionIndex(0);
     setTimeLeft(ExamQuestion?.data.data?.examDurationInSeconds);
-
+    closeSucPopup()
     refetchExamQuestion(); // ✅ Fetch new questions from the API
   };
 

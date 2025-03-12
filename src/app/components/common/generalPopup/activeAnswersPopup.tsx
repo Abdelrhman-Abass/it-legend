@@ -121,7 +121,7 @@ export default function ActiveAnswersPopup() {
                             <h1>إجاباتك السابقة للامتحان</h1>
 
                             {isFetchingHistory ? (
-                                <div>Loading exam history...</div>
+                                <NewLoader loading={isFetchingHistory}/>
                             ) : (
                                 <>
                                     <table className="exam_table">

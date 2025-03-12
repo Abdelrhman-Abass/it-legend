@@ -15,6 +15,7 @@ export default function GeneralPopup({ isVideo = false, isExam ,success ,videoNo
         if(videoNodeExam){
             setVideoNode(videoNodeExam)
         }
+        closePopup()
         window.history.replaceState(null, "", window.location.pathname + window.location.search);
         // console.log("not ready " + videoNode)
         

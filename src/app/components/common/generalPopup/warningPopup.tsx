@@ -17,6 +17,7 @@ export default function WarningPopup({ isVideo = false, isExam ,success ,videoNo
         console.log("not ready " + videoNode)
         
         setLastVideoData(null);
+        closeWarningClosePop()
     }
 
 
