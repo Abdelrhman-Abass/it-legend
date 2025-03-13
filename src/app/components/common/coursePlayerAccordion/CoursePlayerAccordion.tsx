@@ -73,52 +73,112 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
   //   }
   // }, [videoNode, videosItems]); 
 
+  // useEffect(() => {
+  //   if (!updatedVideosItems || !videoNode) return;
+
+  //   // Find the active module (current module containing the `videoNode`)
+  //   const activeModuleIndex = updatedVideosItems.findIndex((module: any) =>
+  //     module.nodes.some((node: any) => node.nodeId === videoNode)
+  //   );
+
+  //   if (activeModuleIndex !== -1) {
+  //     const activeModule = updatedVideosItems[activeModuleIndex];
+  //     console.log(activeModule)
+  //     console.log(videosItems)
+
+  //     const examNode = activeModule.nodes.find(
+  //       (node: any) =>
+  //         node.type === 1 &&
+  //         node.isRequired === true &&
+  //         passedIsRequired[node.contentId] === true 
+  //     );
+  //     // const examNodePassed = activeModule.nodes.find(
+  //     //   (node: any) =>
+  //     //     node.type === 1 &&
+  //     //     passedIsRequired[node.contentId] === true 
+  //     // );
+
+  //     // if (examNodePassed) {
+  //     //   // Update the exam node to set isPassed to true if passedIsRequired[contentId] is true
+  //     //   const updatedModules = [...updatedVideosItems];
+  //     //   // const hasChanged = !examNodePassed.isPassed; // Check if isPassed needs updating
+  //     //   if (examNodePassed) {
+  //     //     updatedModules[activeModuleIndex] = {
+  //     //       ...activeModule,
+  //     //       nodes: activeModule.nodes.map((node: any) =>
+  //     //         node.nodeId === examNodePassed.nodeId ? { ...node, isPassed: true } : node
+  //     //       ),
+  //     //     };
+  //     //     setUpdatedVideosItems(updatedModules);
+  //     //     console.log("Updated examNodePassed isPassed to true:", examNodePassed);
+  //     //   }
+  //     // }
+
+  //     if (examNode) {
+  //       const nextModule = updatedVideosItems[activeModuleIndex +1]; // Get the next module
+  //       console.log(nextModule)
+  //       if(passedIsRequired[examNode.contentId] === true ){console.log("yes the problem in here : ")}
+  //       if (nextModule) {
+  //         const updatedModules = [...updatedVideosItems]; // Clone the array
+  //         updatedModules[activeModuleIndex + 1] = {
+  //           ...nextModule,
+  //           nodes: nextModule.nodes.map((node: any) => ({
+  //             ...node,
+  //             isAccessible: true, // Unlock all nodes in the next module
+  //           })),
+  //         };
+
+  //         // Update state to trigger re-render
+  //         setUpdatedVideosItems(updatedModules);
+  //       }
+  //     }
+  //   }
+  // }, [passedIsRequired]);
+
   useEffect(() => {
     if (!updatedVideosItems || !videoNode) return;
-
-    // Find the active module (current module containing the `videoNode`)
-    const activeModuleIndex = updatedVideosItems.findIndex((module: any) =>
-      module.nodes.some((node: any) => node.nodeId === videoNode)
-    );
-
-    if (activeModuleIndex !== -1) {
-      const activeModule = updatedVideosItems[activeModuleIndex];
-      console.log(activeModule)
-      console.log(videosItems)
-
-      // Check if the module contains an exam (type === 1) and if it's required and passed
-      // const examNode = activeModule.nodes.find(
-      //   (node: any) =>
-      //     node.type === 1 &&
-      //     node.isRequired === true &&
-      //     passedIsRequired[node.nodeId] === true 
-      // );
-      const examNode = activeModule.nodes.find(
-        (node: any) =>
-          node.type === 1 &&
-          node.isRequired === true 
-          // passedIsRequired[node.nodeId] === false 
-      );
-
-      if (examNode) {
-        const nextModule = updatedVideosItems[activeModuleIndex +1]; // Get the next module
-        console.log(nextModule)
-        if (nextModule) {
-          const updatedModules = [...updatedVideosItems]; // Clone the array
-          updatedModules[activeModuleIndex + 1] = {
-            ...nextModule,
-            nodes: nextModule.nodes.map((node: any) => ({
-              ...node,
-              isAccessible: true, // Unlock all nodes in the next module
-            })),
-          };
-
-          // Update state to trigger re-render
-          setUpdatedVideosItems(updatedModules);
+  
+    const updatedModules = updatedVideosItems.map((module:any, index:any, array:any) => {
+      const updatedNodes = module.nodes.map((node:any) => {
+        // If this node's exam is passed, mark it as passed
+        if (passedIsRequired[node.contentId]) {
+          return { ...node, isPassed: true };
         }
+        return node;
+      });
+  
+      // ✅ If an exam in this module is passed, unlock the next module
+      const isExamPassed = module.nodes.some((node:any) => passedIsRequired[node.contentId]);
+      if (isExamPassed && array[index + 1]) {
+        array[index + 1].nodes = array[index + 1].nodes.map((node:any) => ({
+          ...node,
+          isAccessible: true,
+        }));
       }
-    }
+  
+      return { ...module, nodes: updatedNodes };
+    });
+  
+    setUpdatedVideosItems(updatedModules); // ✅ Correctly update state
   }, [passedIsRequired]);
+
+  // useEffect(() => {
+  //   if (!updatedVideosItems || !videoNode) return;
+  
+  //   const updatedModules = updatedVideosItems.map((module) => {
+  //     const updatedNodes = module.nodes.map((node) => {
+  //       // Check if the node's contentId exists in `passedIsRequired` and is `true`
+  //       if (passedIsRequired[node.contentId]) {
+  //         return { ...node, isPassed: true }; // ✅ Mark as passed
+  //       }
+  //       return node;
+  //     });
+  
+  //     return { ...module, nodes: updatedNodes };
+  //   });
+  
+  //   setUpdatedVideosItems(updatedModules); // ✅ Correctly update state
+  // }, [passedIsRequired]);
 
   const flattenNodes = (updatedVideosItems: any[]) => {
     return updatedVideosItems
@@ -208,7 +268,9 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
     );
 
     if (activeModule && activeModule.nodes.length >= 0) {
-      const firstNode = activeModule.nodes[0]; // Get the first node in the active module
+      // const firstNode = activeModule.nodes[0]; // Get the first node in the active module
+      const firstNode = activeModule.nodes.find((node: any) => node.type === 0) || activeModule.nodes[0];
+
       console.log("First Node in Active Module:", firstNode);
       setFirstNodeModule(firstNode);
     }

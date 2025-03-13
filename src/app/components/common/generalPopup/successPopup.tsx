@@ -28,17 +28,20 @@ export default function SuccessPopup({ result, successRate, timeScore, isLevelUp
     // console.log(firstNodeModule)
     const handlePrevLerning = () => {
         if (firstNodeModule) {
-            setIsSubmitted(false)
-            setVideoNode(firstNodeModule.nodeId)
-            setVideoID(firstNodeModule.contentId)
-            window.history.replaceState(null, "", window.location.pathname + window.location.search);
-            setVideoName(`${firstNodeModule.titleEn}`);
-            // videoCommentsMutation.mutate(nextNode.contentId);
-            setLastVideoData(null);
-            closeSucPopup()
+          setIsSubmitted(false); // Reset submission state
+          setVideoNode(firstNodeModule.nodeId);
+          setVideoID(firstNodeModule.contentId);
+          window.history.replaceState(null, "", window.location.pathname + window.location.search);
+          setVideoName(`${firstNodeModule.titleEn}`);
+          setLastVideoData(null);
+          closeSucPopup();
+        } else {
+          console.warn("firstNodeModule is undefined, cannot navigate to previous learning.");
+          // Optionally set to the first available node or show an error
+          setVideoNode(videoNode || ""); // Fallback to current videoNode if available
+          closeSucPopup();
         }
-        // closeSucPopup()
-    }
+      };
     useEffect(() => {
         // setNext(JSON.stringify(nextNode))
         setNext(nextNode)

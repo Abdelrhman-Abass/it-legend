@@ -163,7 +163,7 @@ const CourseExam = ({ examid }: { examid: number}) => {
         setPassedIsRequired(videoId ,true);
       } else {
         // console.log("Exam Failed!");
-        setPassedIsRequired(videoId ,true);
+        setPassedIsRequired(videoId ,false);
       }
 
       openSucPopup();
@@ -176,7 +176,7 @@ const CourseExam = ({ examid }: { examid: number}) => {
 
   useEffect(()=>{
     console.log("is submitted : " + isSubmitted)
-  },[isSubmitted])
+  },[isLoadingExam])
 
   const handleReviewMyAnswer = () => {
     if (examResult.memberExamId) {
@@ -328,7 +328,7 @@ const CourseExam = ({ examid }: { examid: number}) => {
   useEffect(()=>{
     if(isSubmitted){
       if(filteredQuestions){
-        console.log(filteredQuestions)
+        // console.log(filteredQuestions)
         setQuestions(filteredQuestions)
       }else{
         
@@ -450,7 +450,7 @@ const CourseExam = ({ examid }: { examid: number}) => {
     setTimeLeft(ExamQuestion?.data?.data?.examDurationInSeconds);
     closeSucPopup()
     refetchExamQuestion(); // ✅ Fetch new questions from the API
-    console.log(ExamQuestion?.data?.data)
+    // console.log(ExamQuestion?.data?.data)
   };
 
 
@@ -556,31 +556,15 @@ const CourseExam = ({ examid }: { examid: number}) => {
   const handleChange = (value: string) => {
     setFilter(value);
     setFilteredQuestions(getFilteredQuestions()); // ✅ Recalculate filtered questions on change
-    // console.log(filteredQuestions)
-    // questions = filteredQuestions
-    // currentQuestion = getFilteredQuestions()
-    // questions = getFilteredQuestions()
+    
   };
-
-
-  // const getFilteredQuestions = () => {
-  //   if (!memeberExam) return [];
-  
-  //   return memeberExam.filter((question: any) => {
-  //     if (filter === "all") return true; // ✅ Show all questions
-  //     if (filter === "correct") return question.isCorrect; // ✅ Show only correctly answered questions
-  //     if (filter === "incorrect") return !question.isCorrect; // ❌ Show only incorrectly answered questions
-  //     return true; // Default case (should not be needed)
-  //   });
-  // };
 
   useEffect(() => {
     // Update filtered questions whenever memeberExam or filter changes
     if (memeberExam) {
       setFilteredQuestions(getFilteredQuestions());
       setCurrentQuestionIndex(0); // Reset to the first question when the filter changes
-      // console.log(memeberExam)
-      // currentQuestion = memeberExam[currentQuestionIndex]
+      
     }
   }, [memeberExam, filter]);
 
@@ -764,7 +748,7 @@ const CourseExam = ({ examid }: { examid: number}) => {
               </button>
             )
           }
-          {/* <p className="course_exam_len">Question {currentQuestionIndex + 1} out of {questions.length || ExamQuestion?.data.data?.questions?.length  || 0}</p> */}
+          <p className="course_exam_len">Question {currentQuestionIndex + 1} out of {questions.length || ExamQuestion?.data.data?.questions?.length  || 0}</p>
           {/* <p className="course_exam_len">Question {currentQuestionIndex + 1} out of {questions.length  || 0}</p> */}
           <button className={`bt_prev  ${isVibrat ? "vibrate" : ""} `} onClick={() => handlePreviousQuestion()} >
             {t("courseExam.prevQuestion")}
