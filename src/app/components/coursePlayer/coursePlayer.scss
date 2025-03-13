@@ -59,12 +59,22 @@
     }
 }
 
-:where(.css-dev-only-do-not-override-nqoqt9).ant-tabs-centered >.ant-tabs-nav .ant-tabs-nav-wrap:not([class*='.ant-tabs-nav-wrap-ping'])>.ant-tabs-nav-list{
+:where(.css-dev-only-do-not-override-nqoqt9).ant-tabs-centered
+    > .ant-tabs-nav
+    .ant-tabs-nav-wrap:not([class*=".ant-tabs-nav-wrap-ping"])
+    > .ant-tabs-nav-list {
     margin: 0 !important;
 }
-:where(.css-nqoqt9).ant-tabs-centered >.ant-tabs-nav .ant-tabs-nav-wrap:not([class*='.ant-tabs-nav-wrap-ping'])>.ant-tabs-nav-list, :where(.css-nqoqt9).ant-tabs-centered >div>.ant-tabs-nav .ant-tabs-nav-wrap:not([class*='.ant-tabs-nav-wrap-ping'])>.ant-tabs-nav-list{
+:where(.css-nqoqt9).ant-tabs-centered
+    > .ant-tabs-nav
+    .ant-tabs-nav-wrap:not([class*=".ant-tabs-nav-wrap-ping"])
+    > .ant-tabs-nav-list,
+:where(.css-nqoqt9).ant-tabs-centered
+    > div
+    > .ant-tabs-nav
+    .ant-tabs-nav-wrap:not([class*=".ant-tabs-nav-wrap-ping"])
+    > .ant-tabs-nav-list {
     margin: 0 !important;
-
 }
 .course_player_header_info {
     background: $gray-color;
@@ -87,19 +97,20 @@
     border: 1px solid #d1d5db;
     // color: #6b7280;
     transition: all 0.3s ease-in-out;
-   
-  }
-  
-  .custom-button:hover {
+}
+
+.custom-button:hover {
     color: #111827;
     background-color: #f3f4f6;
-  }
-  
-  /* If "soft" means a subtle shadow */
-  .custom-button {
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
+}
 
+/* If "soft" means a subtle shadow */
+.custom-button {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+:where(.css-nqoqt9).ant-progress .ant-progress-bg.ant-progress-bg-inner .ant-progress-text-inner {
+    color: white !important;
+}
 .dark_theme {
     .course_player_header_info {
         background: $second-color;
@@ -111,41 +122,45 @@
             color: $white-color;
         }
     }
-    .custom-button{
-        border: 1px solid #3B6798;
-        svg{
-            color: #3B6798;
+    .custom-button {
+        border: 1px solid #3b6798;
+        svg {
+            color: #3b6798;
         }
     }
-    :where(.css-dev-only-do-not-override-nqoqt9).ant-collapse>.ant-collapse-item ,:where(.css-dev-only-do-not-override-nqoqt9).ant-tabs-top >.ant-tabs-nav::before {
+    :where(.css-dev-only-do-not-override-nqoqt9).ant-collapse > .ant-collapse-item,
+    :where(.css-dev-only-do-not-override-nqoqt9).ant-tabs-top > .ant-tabs-nav::before {
         border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
     }
-    :where(.css-dev-only-do-not-override-nqoqt9).ant-collapse .ant-collapse-content{
+    :where(.css-dev-only-do-not-override-nqoqt9).ant-collapse .ant-collapse-content {
         border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
         background-color: rgb(255 255 255 / 3%) !important;
     }
-    :where(.css-dev-only-do-not-override-nqoqt9).ant-collapse>.ant-collapse-item:last-child, :where(.css-dev-only-do-not-override-nqoqt9).ant-collapse>.ant-collapse-item:last-child>.ant-collapse-header{
+    :where(.css-dev-only-do-not-override-nqoqt9).ant-collapse > .ant-collapse-item:last-child,
+    :where(.css-dev-only-do-not-override-nqoqt9).ant-collapse > .ant-collapse-item:last-child > .ant-collapse-header {
         border-radius: 0 !important;
-        
     }
-    :where(.css-nqoqt9).ant-collapse .ant-collapse-content{
+    :where(.css-nqoqt9).ant-collapse .ant-collapse-content {
         border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
         background-color: rgb(255 255 255 / 3%) !important;
     }
-    :where(.css-nqoqt9).ant-collapse>.ant-collapse-item{
+    :where(.css-nqoqt9).ant-collapse > .ant-collapse-item {
         border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
         background-color: rgb(255 255 255 / 3%) !important;
     }
-    :where(.css-nqoqt9).ant-collapse>.ant-collapse-item{
+    :where(.css-nqoqt9).ant-collapse > .ant-collapse-item {
         border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
         background-color: rgb(255 255 255 / 3%) !important;
     }
-    :where(.css-nqoqt9).ant-tabs-top >.ant-tabs-nav::before, :where(.css-nqoqt9).ant-tabs-bottom >.ant-tabs-nav::before, :where(.css-nqoqt9).ant-tabs-top >div>.ant-tabs-nav::before, :where(.css-nqoqt9).ant-tabs-bottom >div>.ant-tabs-nav::before{
+    :where(.css-nqoqt9).ant-tabs-top > .ant-tabs-nav::before,
+    :where(.css-nqoqt9).ant-tabs-bottom > .ant-tabs-nav::before,
+    :where(.css-nqoqt9).ant-tabs-top > div > .ant-tabs-nav::before,
+    :where(.css-nqoqt9).ant-tabs-bottom > div > .ant-tabs-nav::before {
         border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
         background-color: rgb(255 255 255 / 3%) !important;
     }
-    
+
     .course_player {
         .course_player_video {
             background: $dark-bg;
@@ -176,22 +191,22 @@
                 border-color: rgba($color: $white-color, $alpha: 0.1) !important;
             }
         }
-        .course_player_video_seaction{
+        .course_player_video_seaction {
             background: $dark-bg;
         }
         .course_player_video_tabs {
             background: $second-color;
             .ant-tabs-nav-wrap {
                 color: rgba($color: $white-color, $alpha: 1) !important;
-                .ant-tabs-tab{
-                    color: rgba($color: $white-color, $alpha: .5) !important;
+                .ant-tabs-tab {
+                    color: rgba($color: $white-color, $alpha: 0.5) !important;
                 }
-                .ant-tabs-tab.ant-tabs-tab-active{
+                .ant-tabs-tab.ant-tabs-tab-active {
                     color: rgba($color: $white-color, $alpha: 1) !important;
                 }
             }
         }
-        :where(.css-dev-only-do-not-override-nqoqt9).ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn{
+        :where(.css-dev-only-do-not-override-nqoqt9).ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
             color: $red-color !important;
         }
     }
@@ -206,14 +221,13 @@
     width: 100%;
     height: 115dvh;
     background-color: hsl(0deg 6.86% 20.04% / 76.9%);
-  }
+}
 
-.exam_overlay{
-
-    max-height:100vh;
-    height:100vh;
-    overflow:hidden;
-}  
+.exam_overlay {
+    max-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
+}
 @media (max-width: 1024px) {
     .course_player {
         grid-template-columns: 1fr;

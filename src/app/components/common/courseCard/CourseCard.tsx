@@ -43,7 +43,7 @@ const CourseCard = memo(({
   // Create an array of 5 stars (with gold for ratings >= 3)
   const stars = new Array(5).fill(0).map((_, index) => index < 3 ? <FaStar key={index} className="gold" /> : <FaStar key={index} />);
 
-  // localStorage.setItem("course_title", courseTitle || "");
+  localStorage.setItem("course_title", courseTitle || "");
 
 
   return (
