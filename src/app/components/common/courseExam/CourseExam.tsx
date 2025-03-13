@@ -162,8 +162,8 @@ const CourseExam = ({ examid }: { examid: number}) => {
         setSuccess(true);
         setPassedIsRequired(videoId ,true);
       } else {
-        console.log("Exam Failed!");
-        setPassedIsRequired(videoId ,false);
+        // console.log("Exam Failed!");
+        setPassedIsRequired(videoId ,true);
       }
 
       openSucPopup();
@@ -764,7 +764,8 @@ const CourseExam = ({ examid }: { examid: number}) => {
               </button>
             )
           }
-          <p className="course_exam_len">Question {currentQuestionIndex + 1} out of {questions.length || ExamQuestion?.data.data?.questions?.length }</p>
+          {/* <p className="course_exam_len">Question {currentQuestionIndex + 1} out of {questions.length || ExamQuestion?.data.data?.questions?.length  || 0}</p> */}
+          {/* <p className="course_exam_len">Question {currentQuestionIndex + 1} out of {questions.length  || 0}</p> */}
           <button className={`bt_prev  ${isVibrat ? "vibrate" : ""} `} onClick={() => handlePreviousQuestion()} >
             {t("courseExam.prevQuestion")}
           </button>
