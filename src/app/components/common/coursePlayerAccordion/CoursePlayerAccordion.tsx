@@ -87,16 +87,22 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
       console.log(videosItems)
 
       // Check if the module contains an exam (type === 1) and if it's required and passed
+      // const examNode = activeModule.nodes.find(
+      //   (node: any) =>
+      //     node.type === 1 &&
+      //     node.isRequired === true &&
+      //     passedIsRequired[node.nodeId] === true 
+      // );
       const examNode = activeModule.nodes.find(
         (node: any) =>
           node.type === 1 &&
-          node.isRequired === true &&
-          passedIsRequired[node.nodeId] === true 
+          node.isRequired === true 
+          // passedIsRequired[node.nodeId] === false 
       );
 
       if (examNode) {
-        const nextModule = updatedVideosItems[activeModuleIndex + 1]; // Get the next module
-
+        const nextModule = updatedVideosItems[activeModuleIndex +1]; // Get the next module
+        console.log(nextModule)
         if (nextModule) {
           const updatedModules = [...updatedVideosItems]; // Clone the array
           updatedModules[activeModuleIndex + 1] = {
@@ -112,7 +118,7 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
         }
       }
     }
-  }, [videoNode, updatedVideosItems, passedIsRequired]);
+  }, [passedIsRequired]);
 
   const flattenNodes = (updatedVideosItems: any[]) => {
     return updatedVideosItems

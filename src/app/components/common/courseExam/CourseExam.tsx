@@ -163,6 +163,7 @@ const CourseExam = ({ examid }: { examid: number}) => {
         setPassedIsRequired(videoId ,true);
       } else {
         console.log("Exam Failed!");
+        setPassedIsRequired(videoId ,false);
       }
 
       openSucPopup();
@@ -335,7 +336,7 @@ const CourseExam = ({ examid }: { examid: number}) => {
       }
     }
     else{
-      setQuestions(ExamQuestion?.data.data?.questions)
+      setQuestions(ExamQuestion?.data?.data?.questions)
     }
   },[isSubmitted , ExamQuestion , memeberExam ,filteredQuestions])
   // let questions = filteredQuestions || ExamQuestion?.data.data?.questions || memeberExam || [];
@@ -372,10 +373,10 @@ const CourseExam = ({ examid }: { examid: number}) => {
   // }
 
   useEffect(() => {
-    if (ExamQuestion?.data.data?.examDurationInSeconds) {
-      setTimeLeft(ExamQuestion?.data.data.examDurationInSeconds);
+    if (ExamQuestion?.data?.data?.examDurationInSeconds) {
+      setTimeLeft(ExamQuestion?.data?.data?.examDurationInSeconds);
     }
-  }, [ExamQuestion?.data.data]);
+  }, [ExamQuestion?.data?.data]);
 
   useEffect(() => {
     if (timeLeft <= 0) return; // Stop when timer reaches zero
@@ -429,8 +430,8 @@ const CourseExam = ({ examid }: { examid: number}) => {
   // Handle submission of the current question
   const handleSubmit = () => {
     if(!isSubmitted){
-      if (ExamQuestion?.data.data?.examId) {
-        const formattedData = formatUserAnswers(ExamQuestion?.data.data.examId, userAnswers);
+      if (ExamQuestion?.data?.data?.examId) {
+        const formattedData = formatUserAnswers(ExamQuestion?.data?.data?.examId, userAnswers);
         submitExam(formattedData);  // ✅ Now correctly passes formatted data
         // console.error("Missing examId or answers");
       } else {
@@ -446,10 +447,10 @@ const CourseExam = ({ examid }: { examid: number}) => {
     setIsSubmitted(false);
     setUserAnswers([]); // ✅ Clear previous answers
     setCurrentQuestionIndex(0);
-    setTimeLeft(ExamQuestion?.data.data?.examDurationInSeconds);
+    setTimeLeft(ExamQuestion?.data?.data?.examDurationInSeconds);
     closeSucPopup()
     refetchExamQuestion(); // ✅ Fetch new questions from the API
-    console.log(ExamQuestion?.data.data)
+    console.log(ExamQuestion?.data?.data)
   };
 
 
