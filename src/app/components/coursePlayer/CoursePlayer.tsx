@@ -99,7 +99,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
         enabled: !!slug,
     });
 
-    const { data: CourseDetails, isError: isCourseDetailsError } = useQuery({
+    const { data: CourseDetails, isLoading: isLoadingMemberCoursePlayer ,isError: isCourseDetailsError } = useQuery({
         queryKey: ["CourseDetails", { slug }],
         queryFn: () => getServerRequest(`/MemberCoursePlayer/${slug}`),
     });
@@ -1208,7 +1208,12 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                     )} */}
                     <div className="course_player_header">{CourseDetails && <LineProgress title="Course List" percent={Math.trunc(CourseDetails?.data?.data?.progressPercentage)} />}</div>
                     <div className="course_player_list_items">
+                        {isLoadingMemberCoursePlayer ? 
+                        (<NewLoader loading={isLoadingMemberCoursePlayer}/>) 
+                        : (
+
                         <CoursePlayerAccordion videosItems={MemberCoursePlayer?.data?.data} videoCommentsMutation={videoCommentsMutation} />
+                        )}
                     </div>
                 </div>
             </section>

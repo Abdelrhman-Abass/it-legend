@@ -30,7 +30,10 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
   const [vibratingNode, setVibratingNode] = useState<string | null>(null);
   const [updatedVideosItems, setUpdatedVideosItems] = useState(videosItems); // ✅ Maintain updated state
 
-
+  useEffect(() => {
+    setUpdatedVideosItems(videosItems); // Update when props change
+  }, [videosItems]);
+  // console.log(updatedVideosItems)
   const handleClickNot = (nodeId: string) => {
     setVibratingNode(nodeId); // Set the clicked node as vibrating
     setTimeout(() => setVibratingNode(null), 300); // Reset after animation duration
