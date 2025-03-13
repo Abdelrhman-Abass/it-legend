@@ -2,11 +2,11 @@
     .course_player_accordion_item {
         padding-block: 1em;
         position: relative;
-        .watch_icon{
+        .watch_icon {
             flex-shrink: 0;
-            margin-inline-end: .2em;
+            margin-inline-end: 0.2em;
         }
-        &.watched{
+        &.watched {
             color: #888;
         }
         &:not(:last-child) {
@@ -20,11 +20,50 @@
         p {
             font-weight: 500;
         }
-        span{
+        span {
             display: flex;
         }
-        svg{
+        svg {
             font-size: 1em;
+        }
+    }
+    
+    // CoursePlayer.scss
+
+    .not_accesible {
+        color: #bfa9a9;
+        // cursor: no-drop;
+        // transition: all 0.1s ease; // Smooth transition for other properties
+        p {
+            display:flex;
+            align-items: center;
+            transition: all 0.1s ease; // Smooth transition for animation
+      
+            &.vibrate {
+              animation: vibrate 0.3s ease-in-out;
+            }
+          }
+        // &.vibrate {
+        //     animation: vibrate 0.3s ease-in-out;
+        // }
+
+        // Define the vibrate animation
+        @keyframes vibrate {
+            0% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-5px);
+            }
+            50% {
+                transform: translateX(5px);
+            }
+            75% {
+                transform: translateX(-5px);
+            }
+            100% {
+                transform: translateX(0);
+            }
         }
     }
     .ant-collapse-header-text {

@@ -60,7 +60,7 @@ const CourseExam = ({ examid }: { examid: number}) => {
   const [examResult, setExamResult] = useState(defaultExamResult);
   const [timeLeft, setTimeLeft] = useState<number>(0); // Timer State
   const { openPopup, openSucPopup, setSuccess, openActiveDatePopup,closeCountDownPopup, openCountDownPopup,closeSucPopup ,openAnswerReasonPop} = generalActivePopup();
-  const { setVideoNode, videoId, setIsSubmitted,isSubmitted, videoNode, setVideoID, nextNode, setVideoName, setMemeberExam, memeberExam, setLastVideoData } = GenralCoursePlayerId();
+  const { setVideoNode, videoId, setIsSubmitted,isSubmitted, videoNode, setVideoID, setPassedIsRequired,nextNode, setVideoName, setMemeberExam, memeberExam, setLastVideoData } = GenralCoursePlayerId();
 
   const [isVibrating, setIsVibrating] = useState(false);
   const [isVibrat, setIsVibrat] = useState(false);
@@ -156,10 +156,11 @@ const CourseExam = ({ examid }: { examid: number}) => {
         memberExamId: data?.data?.data?.memberExamId ?? "",
       });
       // console.log("Updated Exam Result:", score);
-
+      
       if (hasPassed) {
         console.log("Exam Passed! Setting Success State.");
         setSuccess(true);
+        setPassedIsRequired(videoId ,true);
       } else {
         console.log("Exam Failed!");
       }

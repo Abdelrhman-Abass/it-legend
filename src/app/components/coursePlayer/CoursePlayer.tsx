@@ -81,7 +81,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
     const [courseTitle, setCourseTitle] = useState<string>("");
 
 
-    const { videoNode, setVideoNode, videoLink, videoName,setIsSubmitted,isSubmitted, videoId, setVideoID ,CourseVideo, setVideoName, lastVideoData } = GenralCoursePlayerId();
+    const { videoNode, setVideoNode, videoLink, videoName,setIsSubmitted,isSubmitted, videoId,passedIsRequired,setPassedIsRequired, setVideoID ,CourseVideo, setVideoName, lastVideoData } = GenralCoursePlayerId();
     const { openQuestion , activeLeaderBoard} = generalActivePopup();
     const playerRef = useRef<HTMLVideoElement | null>(null);
     const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -172,6 +172,14 @@ export default function CoursePlayer({ slug }: { slug: string }) {
             // setIsSubmitted(false)
         }
     }, [nodeType , isSubmitted]);
+
+
+    // useEffect(()=>{
+    //     if(passedIsRequired){
+    //         refetchMemberCoursePlayer()
+    //         setPassedIsRequired(false)
+    //     }
+    // },[passedIsRequired])
     
 
 
