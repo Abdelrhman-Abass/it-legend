@@ -16,7 +16,7 @@ const CourseCard = memo(({
   btnText,
   customIcon,
   titleAr,
-  titleEn,
+  titleEn ="",
   shortDescriptionAr,
   shortDescriptionEn,
   lectures,
@@ -43,12 +43,12 @@ const CourseCard = memo(({
   // Create an array of 5 stars (with gold for ratings >= 3)
   const stars = new Array(5).fill(0).map((_, index) => index < 3 ? <FaStar key={index} className="gold" /> : <FaStar key={index} />);
 
-  localStorage.setItem("course_title", courseTitle || "");
+  // localStorage.setItem("course_title", courseTitle || "");
 
 
   return (
     <Link href={url} passHref onClick={() => {
-      localStorage.setItem("course_title", courseTitle ?? (locale === "ar" ? titleAr : titleEn));
+      localStorage.setItem("course_title", titleEn);
     }}>
 
       <div className={`course_card ${hideItems ? "course_card_hide" : ""}`} >
