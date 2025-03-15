@@ -5,9 +5,9 @@ import ReactPlayer from "react-player";
 import { motion } from "framer-motion";
 import GenralCoursePlayerId from "@/app/store/GeneralCoursePlayer";
 
-export default function WarningCountDownPopup({ handleUserActivity }: { handleUserActivity: () => void }) {
+export default function WarningCountDownPopup({ handleUserActivity  , handleSubmit }: { handleUserActivity: () => void  , handleSubmit: () => void }) {
     const { countDownPopup, closeCountDownPopup, extraData } = generalActivePopup();
-    const { videoNode, videoId , setVideoNode ,setVideoID ,setVideoName ,setLastVideoData , prevNode} = GenralCoursePlayerId();
+    const { videoNode, videoId , setVideoNode ,setVideoID ,setVideoName ,setLastVideoData ,isSubmitted, prevNode} = GenralCoursePlayerId();
 
     const [showVideo, setShowVideo] = useState(false);
     
@@ -19,7 +19,7 @@ export default function WarningCountDownPopup({ handleUserActivity }: { handleUs
         setLastVideoData(null);
     }
 
-    const COUNTDOWN_TIME = 300; // 5 minutes in seconds
+    const COUNTDOWN_TIME = 60; // 5 minutes in seconds
         const [countdown, setCountdown] = useState(COUNTDOWN_TIME);
 
         useEffect(() => {
@@ -31,6 +31,9 @@ export default function WarningCountDownPopup({ handleUserActivity }: { handleUs
                     clearInterval(interval);
                     // onExamEnd(); // Call function when countdown reaches 0
                     handleUserActivity()
+                    if (!isSubmitted) {
+                                         handleSubmit(); // Auto-submit when countdown ends
+                    } 
                     return 0;
                 }
                 return prev - 1;
@@ -40,6 +43,28 @@ export default function WarningCountDownPopup({ handleUserActivity }: { handleUs
             return () => clearInterval(interval); // Cleanup interval when unmounting
             }
         }, [countDownPopup]);
+
+        // useEffect(() => {
+        //     if (countDownPopup) {
+        //         setCountdown(COUNTDOWN_TIME); // Reset countdown when popup is shown
+        //       const interval = setInterval(() => {
+        //         setCountdown((prev) => {
+        //           if (prev <= 0) {
+        //             clearInterval(interval);
+        //             if (!isSubmitted) {
+        //                 handleSubmit(); // Auto-submit when countdown ends
+        //             } 
+        //             // Submit the exam when countdown reaches 0
+        //             // closeCountDownPopup(); // Close the popup after submission
+        //             return 0;
+        //           }
+        //           return prev - 1;
+        //         });
+        //       }, 1000);
+        
+        //       return () => clearInterval(interval); // Cleanup interval when unmounting or popup closes
+        //     }
+        //   }, [countDownPopup, handleSubmit]);
 
         // Format countdown as MM:SS
         const formatCountdown = (time: number) => {

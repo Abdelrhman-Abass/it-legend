@@ -64,7 +64,7 @@ const CourseExam = ({ examid }: { examid: number}) => {
 
   const [isVibrating, setIsVibrating] = useState(false);
   const [isVibrat, setIsVibrat] = useState(false);
-  const [code, setCode] = useState<string>(``);
+  // const [code, setCode] = useState<string>(``);
   const [questionTimes, setQuestionTimes] = useState<Record<string, number>>({});
   // const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [filteredQuestions, setFilteredQuestions] = useState<any[]>([]);
@@ -74,18 +74,10 @@ const CourseExam = ({ examid }: { examid: number}) => {
 
 
   const [lastActivityTime, setLastActivityTime] = useState(Date.now());
-  const [showWarning, setShowWarning] = useState(false);
-  const [examFailed, setExamFailed] = useState(false);
+  // const [showWarning, setShowWarning] = useState(false);
+  // const [examFailed, setExamFailed] = useState(false);
 
-  const [selectedExamId, setSelectedExamId] = useState<string | null>(null);
-  // const warningTimeout = useRef(null);
-  // const inactivityTimeout = useRef(null);
 
-  // const handleSelectExam = (memberExamID: string) => {
-  //   setSelectedExamId(memberExamID);
-  //   // Fetch exam history or perform other actions with the selected memberExamID
-  //   fetchExamHistoryMember(memberExamID);
-  // };
 
   const { mutate: fetchExamHistoryMember, isPending: isFetchingHistoryMember } = useMutation({
     mutationFn: async (memberExamID: string) => {
@@ -187,51 +179,24 @@ const CourseExam = ({ examid }: { examid: number}) => {
     }
   };
 
-  // Reset the inactivity timer when user interacts
+
   const handleUserActivity = useCallback(() => {
     setLastActivityTime(Date.now());
-    setShowWarning(false); // Hide warning popup
+    // setShowWarning(false); // Hide warning popup
     clearTimeout(warningTimeout!);
     clearTimeout(inactivityTimeout!);
 
-    // Restart warning timer
+    // Start the warning timer (after 25 minutes)
     warningTimeout = setTimeout(() => {
-      setShowWarning(true);
-      if (!isSubmitted) {
-              openCountDownPopup(); // Show the countdown popup
-            }
-    }, WARNING_TIME);
+        // setShowWarning(true);
+        if (!isSubmitted) {
+            openCountDownPopup(); // ✅ Show the countdown popup (WarningCountDownPopup)
+        }
+    }, 1 * 60 * 1000); // 25 minutes in milliseconds
 
-    // Restart auto-fail timer
-    inactivityTimeout = setTimeout(() => {
-      // handleSubmit();
-
-      handleExamFailure();
-    }, INACTIVITY_LIMIT);
   }, []);
 
-  // const warningTimeout = useRef<number | undefined>(undefined);
-  // const inactivityTimeout = useRef<number | undefined>(undefined);
 
-  // Handle user activity (mouse move, key press, etc.)
-  // const handleUserActivity = useCallback(() => {
-  //   setLastActivityTime(Date.now());
-  //   closeCountDownPopup(); // Hide the countdown popup
-  //   clearTimeout(warningTimeout.current);
-  //   clearTimeout(inactivityTimeout.current);
-
-  //   // Start warning timer
-  //   warningTimeout.current = setTimeout(() => {
-  //     if (!isSubmitted) {
-  //       openCountDownPopup(); // Show the countdown popup
-  //     }
-  //   }, WARNING_TIME);
-
-  //   // Start auto-fail timer
-  //   inactivityTimeout.current = setTimeout(() => {
-  //     handleExamFailure();
-  //   }, INACTIVITY_LIMIT);
-  // }, [closeCountDownPopup, openCountDownPopup, isSubmitted]);
 
   const handleBeforeUnload = (event: BeforeUnloadEvent) => {
     if (!isSubmitted) {
@@ -249,26 +214,6 @@ const CourseExam = ({ examid }: { examid: number}) => {
       // console.log("Page unloaded, exam not submitted due to user choice.");
     }
   };
-
-  // useEffect(() => {
-  //   if(isSubmitted === false){
-  //     document.addEventListener("mousemove", handleUserActivity);
-  //     document.addEventListener("keydown", handleUserActivity);
-  //     document.addEventListener("click", handleUserActivity);
-  
-  //     // Start the initial timers
-  //     handleUserActivity();
-  
-      
-  //   }
-  //   return () => {
-  //     document.removeEventListener("mousemove", handleUserActivity);
-  //     document.removeEventListener("keydown", handleUserActivity);
-  //     document.removeEventListener("click", handleUserActivity);
-  //     clearTimeout(warningTimeout!);
-  //     clearTimeout(inactivityTimeout!);
-  //   };
-  // }, [handleUserActivity]);
 
   useEffect(() => {
     if (!isSubmitted) {
@@ -298,23 +243,12 @@ const CourseExam = ({ examid }: { examid: number}) => {
   }, [handleUserActivity, isSubmitted]);
 
 
-  // const handleReviewMyAnswer= () => {
-  //   fetchExamHistoryMember(examResult.memberExamId)
-  // }
-  // const handleExamFailure = () => {
-  //   if (!isSubmitted) {
-  //     // handleSubmit(); // Submit the exam before marking failure
-  //   }
 
-  //   setExamFailed(true);
-  //   localStorage.setItem("examFailed", "true"); // Save failure state
-  //   openCountDownPopup();
-  // };
   const handleExamFailure = () => {
     if (!isSubmitted) {
       handleSubmit(); // Submit the exam before marking failure
     }
-    setExamFailed(true);
+    // setExamFailed(true);
     localStorage.setItem("examFailed", "true");
     closeCountDownPopup(); // Ensure popup is closed after failure
   };
@@ -324,11 +258,9 @@ const CourseExam = ({ examid }: { examid: number}) => {
     handleExamFailure();
   };
 
-  // let questions;
   useEffect(()=>{
     if(isSubmitted){
       if(filteredQuestions){
-        // console.log(filteredQuestions)
         setQuestions(filteredQuestions)
       }else{
         
@@ -339,7 +271,6 @@ const CourseExam = ({ examid }: { examid: number}) => {
       setQuestions(ExamQuestion?.data?.data?.questions)
     }
   },[isSubmitted , ExamQuestion , memeberExam ,filteredQuestions])
-  // let questions = filteredQuestions || ExamQuestion?.data.data?.questions || memeberExam || [];
 
    const getFilteredQuestions = () => {
     if (!memeberExam) return [];
@@ -351,9 +282,6 @@ const CourseExam = ({ examid }: { examid: number}) => {
       return true; // Default case (should not be needed)
     });
   };
-
-  // const filteredQuestions = getFilteredQuestions();
-  // setFilteredQuestions(getFilteredQuestions())
 
   let currentQuestion = questions[currentQuestionIndex] || {
     questionId: 'default-id',
@@ -537,21 +465,10 @@ const CourseExam = ({ examid }: { examid: number}) => {
     }
   };
 
-  useEffect(() => {
-    setCode(`
-        // - my-code-playground/galaxy
-        class class1
-        {
-          private void Run(string str){
-            Console.WriteLine("Hello world");
-          }
-        }
-      `);
-  }, []);
 
   function handleOnChange(value?: string) {
-    // console.log('value', value)
-    setCode(value || '');
+    console.log('value', value)
+    // setCode(value || '');
   }
   const handleChange = (value: string) => {
     setFilter(value);
@@ -571,8 +488,8 @@ const CourseExam = ({ examid }: { examid: number}) => {
   // Get the current question from the filtered list
 
   const userSelectedAnswer = userAnswers.find((item) => item.questionId === currentQuestion.questionId)?.answerId;
-  const displayedQuestions = isSubmitted ? getFilteredQuestions() : [currentQuestion];
-  const displayedQuestion = getFilteredQuestions()[currentQuestionIndex];
+  // const displayedQuestions = isSubmitted ? getFilteredQuestions() : [currentQuestion];
+  // const displayedQuestion = getFilteredQuestions()[currentQuestionIndex];
   return (
     <>
       <Card className="course_exam">
@@ -596,8 +513,8 @@ const CourseExam = ({ examid }: { examid: number}) => {
           </Space>
         )}
         <div className="course_exam_header">
-          {currentQuestion.isCodeQuestion ? (
-            <div style={{ height: "12em", width: "100%", marginBottom: "20px" }}>
+          {currentQuestion.isCodeQuestion || currentQuestion.isCode ? (
+            <div  className="code_ace_editor">
 
               <AceEditor
                 mode="csharp"
@@ -606,12 +523,9 @@ const CourseExam = ({ examid }: { examid: number}) => {
                 name="UNIQUE_ID_OF_DIV"
                 editorProps={{ $blockScrolling: true }}
                 value={isSubmitted ?currentQuestion.titleEn :currentQuestion.questionTitleEn}
-                // value={currentQuestion.questionTitleEn || currentQuestion.titleEn }
               />
             </div>
           ) : (
-            // style={{ marginTop: isSubmitted ? 0 : "auto" }}
-
             <Title level={4} className='course_exam_title' >{isSubmitted ?currentQuestion.titleEn: currentQuestion.questionTitleEn } </Title>
           )}
         </div>
@@ -789,7 +703,7 @@ const CourseExam = ({ examid }: { examid: number}) => {
         {isFetchingHistory ? <NewLoader loading={isFetchingHistory} /> : <ActiveAnswersPopup />}
 
         <WarningPopup />
-        <WarningCountDownPopup handleUserActivity={handleUserActivity} />
+        <WarningCountDownPopup handleUserActivity={handleUserActivity} handleSubmit={handleSubmit} />
       </div>
 
     </>

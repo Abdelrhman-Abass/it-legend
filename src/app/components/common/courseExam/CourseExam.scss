@@ -133,6 +133,9 @@
   contain: style size layout !important;
 
 }
+.ace-dracula .ace_invisible{
+  display: none;
+}
 .ace_layer .ace_text-layer{
   contain: style size layout !important;
   height: 100% !important;
@@ -416,4 +419,14 @@
         flex:1;
         margin:8px;
     }
+}
+
+.code_ace_editor{
+  height: 16em !important;
+  width: 100% !important;
+  margin: 1em 0 2em ;
+  // style={{ height: "12em", width: "100%", marginBottom: "20px" }}
+  @media (max-width: 768px) {
+    height: 13em !important;
+  }
 }
