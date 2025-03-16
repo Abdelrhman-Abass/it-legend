@@ -126,21 +126,7 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
     }
   }, [nextNode]);
 
-  // Handle video play
-  // const handleVideoPlayType = (type: number, nodeID?: string) => {
-  //   if (type == 0) {
-  //     setVideoNode(nodeID || "");
-  //     // console.log(type)
-  //     window.history.replaceState(null, "", window.location.pathname + window.location.search);
-  //   } else if (type == 1) {
-  //     // Handle download logic
-  //     setNextNode(nextNode.nodeId);
 
-
-  //     // console.log(videoId)
-  //   }
-    
-  // };
 
   const handleVideoPlayType = async (type: number, nodeID?: string) => {
     if (type === 0) {

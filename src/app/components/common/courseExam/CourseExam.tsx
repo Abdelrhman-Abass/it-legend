@@ -120,13 +120,7 @@ const CourseExam = ({ examid }: { examid: number}) => {
     mutationFn: (examData: { examId: string; userAnswers: { questionId: string; answerId: string }[] }) =>
       postServerRequest("/MemberExam/submit", examData),
     onSuccess: (data) => {
-      console.log("Full API Response:", data);
-
-      const score = data?.data?.data?.score;
-      const hasPassed = data?.data?.data?.hasPassed;
-      const courseScore = data?.data?.data?.courseScore;
-      const degreeScore = data?.data?.data?.degreeScore;
-      const timeScore = data?.data?.data?.timeScore;
+      console.log("Full API Response:", data);     
 
 
       // setExamResult(score);
@@ -144,7 +138,7 @@ const CourseExam = ({ examid }: { examid: number}) => {
       });
       // console.log("Updated Exam Result:", score);
       
-      if (hasPassed) {
+      if (examResult.hasPassed) {
         console.log("Exam Passed! Setting Success State.");
         setSuccess(true);
         setPassedIsRequired(videoId ,true);
@@ -161,9 +155,9 @@ const CourseExam = ({ examid }: { examid: number}) => {
     },
   });
 
-  useEffect(()=>{
-    console.log("is submitted : " + isSubmitted)
-  },[isLoadingExam])
+  // useEffect(()=>{
+  //   console.log("is submitted : " + isSubmitted)
+  // },[isLoadingExam])
 
   const handleReviewMyAnswer = () => {
     if (examResult.memberExamId) {
@@ -667,7 +661,7 @@ const CourseExam = ({ examid }: { examid: number}) => {
         {isSubmitted && (
           <>
             <div className='line_break' style={{ marginTop: "30px" }}></div>
-            <div className="navigation-buttons">
+            <div className="navigation-buttons is_submtted">
               <button className="bt_again" onClick={handleRetake}>
                 {t("courseExam.reatak")}
               </button>

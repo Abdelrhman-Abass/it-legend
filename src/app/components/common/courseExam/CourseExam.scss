@@ -292,6 +292,14 @@
     justify-content: space-between;
     margin-top: 20px;
     align-items:center;
+
+    .is_submtted{
+      @media (max-width: 400px) {
+        display: block;
+        text-align: center;
+        
+      }
+    }
 }
 
 
@@ -365,7 +373,7 @@
     }
 }
 
-.navigation-buttons 
+// .navigation-buttons /
 
 .navigation-buttons button:disabled {
     background-color: #ccc;
