@@ -7,6 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import { getServerRequest } from "@/app/utils/generalServerRequest";
 import GenralCoursePlayerId from "@/app/store/GeneralCoursePlayer";
 import NewLoader from "../newLoader/NewLoader";
+import { useTranslations } from "next-intl";
 
 interface ActiveAnswersPopupProps {
     onSelectExam: (memberExamID: string) => void;
@@ -16,7 +17,7 @@ export default function ActiveAnswersPopup() {
     const { closeActiveDatePopup, activeDatesPopup ,openPopup , closeSucPopup } = generalActivePopup();
     // const { videoId } = GenralCoursePlayerId();
     const { setVideoNode, setVideoName, setVideoID, setLastVideoData,videoNodeExam ,setIsSubmitted,isSubmitted, setVideoNodeExam, videoId,videoNode , setFirstNodeModule ,setNextNode ,setMemeberExam , memeberExam} = GenralCoursePlayerId();
-
+    const t = useTranslations();
 
     const [questionHistory, setQuestionHistory] = useState<any>(null);
     const [selectedDate, setSelectedDate] = useState<string | null>(null);
@@ -118,7 +119,7 @@ export default function ActiveAnswersPopup() {
                         style={{ background: "white", maxHeight: "90vh", overflow: "scroll" }}
                     >
                         <div className="pop_up_content">
-                            <h1>إجاباتك السابقة للامتحان</h1>
+                            <h1> {t("popUp.prevAnswers")}</h1>
 
                             {isFetchingHistory ? (
                                 <NewLoader loading={isFetchingHistory}/>
@@ -127,9 +128,9 @@ export default function ActiveAnswersPopup() {
                                     <table className="exam_table">
                                         <thead>
                                             <tr>
-                                                <th>تاريخ الامتحان</th>
-                                                <th>نسبة النجاح</th>
-                                                <th>سكور</th>
+                                                <th>{t("popUp.examHistoryDate")}</th>
+                                                <th> {t("popUp.examPercentage")}</th>
+                                                <th>{t("popUp.examScore")}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -151,11 +152,11 @@ export default function ActiveAnswersPopup() {
                                     </div> */}
                                     <div className="pre_buttons">
                                         <button className="bt_next" onClick={handleRetake}>
-                                        اعادة الامتحان
+                                        {t("courseExam.reatak")}
                                         </button>
 
                                         <button className="bt_prev" onClick={closeActiveDatePopup}>
-                                            الغاء
+                                        {t("courseExam.cancel")}
                                         </button>
                                     </div>
                                 </>

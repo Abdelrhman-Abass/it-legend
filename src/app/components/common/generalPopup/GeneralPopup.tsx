@@ -90,66 +90,7 @@ export default function GeneralPopup({ isVideo = false, isExam ,success ,videoNo
                     </motion.div>
                 </Suspense>
             ) :null}
-            {/* {success  == true ?(
-                <Suspense fallback={<div>Loading...</div>}>
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.2, delay: 0.3, ease: "easeOut" }}
-                        className="general_popup_video" style={{ background: "white" }}>
-                        <div>
-                            <div className="results-summary-container">
-                                <div className="confetti">
-                                    <div className="confetti-piece"></div>
-                                    <div className="confetti-piece"></div>
-                                    <div className="confetti-piece"></div>
-                                    <div className="confetti-piece"></div>
-                                    <div className="confetti-piece"></div>
-                                    <div className="confetti-piece"></div>
-                                    <div className="confetti-piece"></div>
-                                    <div className="confetti-piece"></div>
-                                    <div className="confetti-piece"></div>
-                                    <div className="confetti-piece"></div>
-                                    <div className="confetti-piece"></div>
-                                    <div className="confetti-piece"></div>
-                                    <div className="confetti-piece"></div>
-                                    <div className="confetti-piece"></div>
-                                    <div className="confetti-piece"></div>
-                                    <div className="confetti-piece"></div>
-                                    <div className="confetti-piece"></div>
-                                    <div className="confetti-piece"></div>
-                                    <div className="confetti-piece"></div>
-                                </div>
-                                <div className="results-summary-container__result">
-                                    <div className="heading-tertiary">Your Result</div>
-                                    <div className="result-box">
-                                        <div className="heading-primary">78</div>
-                                        <p className="result">of 100</p>
-                                    </div>
-                                    <div className="result-text-box">
-                                        <div className="heading-secondary">excellent</div>
-                                        <p className="paragraph">
-                                            You scored higher than 65% of the people who have taken these tests.
-                                        </p>
-                                    </div>
-                                    
-                                    <div className="pre_buttons">
-                                        <button className="bt_next" onClick={closePopup}>
-                                            محتاج اراجع اكنر"
-                                        </button>
-
-                                        <button className="bt_prev" onClick={closePopup}>
-                                            أنا جاهز للامتحان
-                                        </button>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </motion.div>
-                </Suspense>
-            ):null} */}
+           
         </motion.div>
     );
 }

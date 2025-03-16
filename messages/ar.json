@@ -177,7 +177,12 @@
         "prevQuestion":"السؤال السابق",
         "reatak":"اعادة الامتحان",
         "prevQuestions": "الاجابات السابقة",
-        "next" : "التالي"
+        "next" : "التالي",
+        "all": "جميع اجاباتي",
+        "correct": "الاجابات الصحيحة",
+        "wrong": "الاجابات الخاطئة",
+        "cancel":" الغاء"
+
     },
     "singleDiploma": {
         "titleDiploma": "مستوي التقدم في الدبلومة"
@@ -207,6 +212,13 @@
     },
     "courseMinuts":{
         "minuts":"د"
+    },
+    "popUp": {
+        "prevAnswers": "إجاباتك السابقة للامتحان",
+        "examHistoryDate": "تاريخ الامتحان",
+        "examPercentage": "نسبة النجاح",
+        "examScore": "السكور"
+        
     }
 
 }

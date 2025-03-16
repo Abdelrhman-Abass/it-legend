@@ -178,7 +178,10 @@
         "prevQuestion":"previous Question",
         "reatak":"Retake The Exam",
         "prevQuestions": "Previous Questions",
-        "next" : "Next"
+        "next" : "Next",
+        "all": "All",
+        "correct": "Correct Answers",
+        "wrong": "Wrong Answers"
     },
     "singleDiploma": {
         "titleDiploma": "Your Diploma Progress."
@@ -208,5 +211,13 @@
     },
     "courseMinuts":{
         "minuts":"min"
+    },
+    "popUp": {
+        "prevAnswers": "Exam Previous Answers",
+        "examHistoryDate":  "Exam Date",
+        "examPercentage": "Success Rate",
+        "examScore":  "Score"
+        
     }
+
 }

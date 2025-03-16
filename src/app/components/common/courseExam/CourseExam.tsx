@@ -25,9 +25,6 @@ const { Title, Text } = Typography;
 
 
 
-const INACTIVITY_LIMIT = 35 * 60 * 1000; // 30 minutes in milliseconds
-// const INACTIVITY_LIMIT = 30 * 60 * 1000; // 30 minutes in milliseconds
-const WARNING_TIME = 5 * 60 * 1000; // 25 minutes
 let warningTimeout: NodeJS.Timeout | null = null;
 let inactivityTimeout: NodeJS.Timeout | null = null;
 
@@ -40,8 +37,6 @@ const CourseExam = ({ examid }: { examid: number}) => {
   const [userAnswers, setUserAnswers] = useState<{ questionId: string; answerId: string }[]>([]);
   const [questionHistory, setQuestionHistory] = useState<any>();
   const [filter, setFilter] = useState("incorrect"); // "all", "correct", or "incorrect"
-
-  // const [memeberExam, setMemeberExam] = useState<any>();
 
   const defaultExamResult = {
     score: 0,
@@ -192,7 +187,7 @@ const CourseExam = ({ examid }: { examid: number}) => {
         if (!isSubmitted) {
             openCountDownPopup(); // ✅ Show the countdown popup (WarningCountDownPopup)
         }
-    }, 1 * 60 * 1000); // 25 minutes in milliseconds
+    }, 5 * 60 * 1000); // 25 minutes in milliseconds
 
   }, []);
 
@@ -505,9 +500,9 @@ const CourseExam = ({ examid }: { examid: number}) => {
               style={{ width: 150 }}
               onChange={handleChange}
               options={[
-                { value: 'all', label: 'جميع اجاباتي' },
-                { value: 'correct', label: 'الاجابات الصحيحه' },
-                { value: 'incorrect', label: 'الاجابات الخطأ' },
+                { value: 'all', label: t("courseExam.all") },
+                { value: 'correct', label:  t("courseExam.correct")},
+                { value: 'incorrect', label: t("courseExam.wrong")},
               ]}
             />
           </Space>

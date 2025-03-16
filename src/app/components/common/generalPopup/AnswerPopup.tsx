@@ -41,7 +41,7 @@ export default function AnswerReason({ reason }: { reason?: string }) {
                         <div className="pop_up_content">
                             <h1>سبب الاجابة </h1>
                             <div className='line_break'></div>
-                            <p>{reason} I am know Abdo </p>
+                            <p>{reason} </p>
                             <div className='line_break'></div>
 
                             <div className="pre_buttons" style={{display: "flex", justifyContent: "center", alignItems: "center"}}>

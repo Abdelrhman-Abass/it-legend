@@ -46,12 +46,7 @@
         width: 100%;
     }
   }
-  // @media (min-width: 1440px) {
-  //   .general_popup .general_popup_video{
-  //       width: fit-content;
-  //       min-width: 50%;
-  //   }
-  // }
+  
   @media (min-width: 1440px) {
     .general_popup .general_popup_video{
         width: fit-content;
@@ -127,14 +122,7 @@
         margin: 0 2em;
       }
     }
-    // @media (min-width: 720px) {
-    //   h1{
-    //     margin: 1em 0;
-    //   }
-    //   ul{
-    //     margin: 0 1em;
-    //   }
-    // }
+    
     @media (min-width: 720px) {
       h1{
         margin: 1em 0;
@@ -282,7 +270,17 @@
 
     //animation: gradient 9s infinite alternate linear;
     
-    
+    .box_Points{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      .box_Points_resutl{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
     .result-box {
         width: 160px;
         height: 160px;
@@ -563,39 +561,15 @@
   }
 }
 
-// Colors
-// $primary-color: #ff4d4f; // Red alert color
-// $background-light: #fff4f4;
-// $border-color: #ffcccc;
-// $text-dark: #333;
-// $btn-primary: #1890ff;
-// $btn-hover: darken($btn-primary, 10%);
-// $btn-danger: #ff4d4f;
-// $btn-danger-hover: darken($btn-danger, 10%);
 
-// Popup Styles
 .warning-countdown-popup {
   text-align: center;
   padding: 20px;
-
-  // h2 {
-  //   color: $primary-color;
-  //   font-size: 20px;
-  //   font-weight: bold;
-  // }
-
-  // p {
-  //   color: $text-dark;
-  //   font-size: 16px;
-  //   margin-bottom: 15px;
-  // }
 
   .countdown-timer {
     font-size: 40px;
     font-weight: 800;
     color: $red-color;
-    // background: #fff4f4;
-    // border: 2px solid #ffcccc;
     padding: 10px 20px;
     border-radius: 8px;
     display: inline-block;
@@ -606,40 +580,6 @@
       animation: pulse 1s infinite;
     }
   }
-
-  // .warning-buttons {
-  //   display: flex;
-  //   justify-content: space-between;
-  //   margin-top: 20px;
-
-  //   button {
-  //     padding: 10px 15px;
-  //     font-size: 16px;
-  //     font-weight: bold;
-  //     border-radius: 6px;
-  //     border: none;
-  //     cursor: pointer;
-  //     transition: background 0.2s ease-in-out;
-  //   }
-
-  //   .btn-stay {
-  //     background: $btn-primary;
-  //     color: white;
-
-  //     &:hover {
-  //       background: $btn-hover;
-  //     }
-  //   }
-
-  //   .btn-exit {
-  //     background: $btn-danger;
-  //     color: white;
-
-  //     &:hover {
-  //       background: $btn-danger-hover;
-  //     }
-  //   }
-  // }
 }
 
 // Countdown Alert Animation

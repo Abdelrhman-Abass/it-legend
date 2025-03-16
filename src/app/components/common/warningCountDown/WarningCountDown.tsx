@@ -7,9 +7,8 @@ import GenralCoursePlayerId from "@/app/store/GeneralCoursePlayer";
 
 export default function WarningCountDownPopup({ handleUserActivity  , handleSubmit }: { handleUserActivity: () => void  , handleSubmit: () => void }) {
     const { countDownPopup, closeCountDownPopup, extraData } = generalActivePopup();
-    const { videoNode, videoId , setVideoNode ,setVideoID ,setVideoName ,setLastVideoData ,isSubmitted, prevNode} = GenralCoursePlayerId();
+    const { videoNode ,setLastVideoData ,isSubmitted} = GenralCoursePlayerId();
 
-    const [showVideo, setShowVideo] = useState(false);
     
     const handleReady=() =>{
         // setVideoNode(videoNodeExam)
@@ -19,7 +18,7 @@ export default function WarningCountDownPopup({ handleUserActivity  , handleSubm
         setLastVideoData(null);
     }
 
-    const COUNTDOWN_TIME = 60; // 5 minutes in seconds
+    const COUNTDOWN_TIME = 300; // 5 minutes in seconds
         const [countdown, setCountdown] = useState(COUNTDOWN_TIME);
 
         useEffect(() => {

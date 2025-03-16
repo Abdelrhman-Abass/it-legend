@@ -97,21 +97,17 @@ export default function SuccessPopup({ result, successRate, timeScore, isLevelUp
                                 <div className="results-summary-container__result">
                                     <div className="heading-tertiary">ممتاز ي صديقي ...</div>
                                     <div className="heading-tertiary">انت نجحت بنسبة {successRate?.toFixed()}% وكسبت</div>
-                                    {/* <div className="result-box"> */}
-                                    {/* <div className="heading-primary">{result}</div> */}
-                                    {/* <p className="result">{result} + {timeScore}</p> */}
-                                    {/* </div> */}
-                                    {/* <div className="heading-tertiary">نقطة  +  نقطه للوقت </div> */}
-                                    <div style={{ display: "flex", justifyContent: "center", gap: "10px", alignItems: "center" }}>
-                                        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                                            <span className="result" style={{ fontWeight: "bold", color: "#EB7236" }}>{result} </span>
+                                    
+                                    <div  className="box_Points">
+                                        <div className="box_points_resutl">
+                                            <span className="result" style={{ fontWeight: "bold", color: "#EB7236" }} >{result} </span>
                                             <span className="heading-tertiary" style={{ fontSize: "20px", color: "hsl(221, 35.6%, 26.82%)" }}>نقطة</span>
                                         </div>
 
                                         {timeScore && (
                                             <>
                                                 <span style={{ fontSize: "20px", fontWeight: "bold", color: "hsl(221, 35.6%, 26.82%)" }}>+</span>
-                                                <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                                <div className="box_points_resutl">
                                                     <span className="result" style={{ fontWeight: "bold", color: "#EB7236" }}>{timeScore}</span>
                                                     <span className="heading-tertiary" style={{ fontSize: "20px", color: "hsl(221, 35.6%, 26.82%)" }}>نقطة للوقت</span>
                                                 </div>
