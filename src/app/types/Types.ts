@@ -119,7 +119,7 @@ interface AccordionItem {
 export interface CoursePlayerAccordionProps {
     videosItems: AccordionItem[] | any;
     videoCommentsMutation: any,
-    slug: string,
+    slug?: string,
 }
 
 interface TabItem {
