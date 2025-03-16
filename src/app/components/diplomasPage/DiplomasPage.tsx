@@ -105,6 +105,7 @@ export default function DiplomasPage() {
                         className="last_video_watched_item"
                         onClick={() => {
                             setLastVideoData(lastVideo);
+                            localStorage.setItem("course_title", lastVideo.courseTitle);
                         }}>
                         <div className="last_video_watched_item_content">
                             <span>Continue from where you stopped.</span>

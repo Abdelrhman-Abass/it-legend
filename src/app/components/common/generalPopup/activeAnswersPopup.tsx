@@ -118,14 +118,14 @@ export default function ActiveAnswersPopup() {
                         className="general_popup_video"
                         style={{ background: "white", maxHeight: "90vh", overflow: "scroll" }}
                     >
-                        <div className="pop_up_content">
+                        <div className="pop_up_content answers">
                             <h1> {t("popUp.prevAnswers")}</h1>
 
                             {isFetchingHistory ? (
                                 <NewLoader loading={isFetchingHistory}/>
                             ) : (
                                 <>
-                                    <table className="exam_table">
+                                    <table className="exam_table ">
                                         <thead>
                                             <tr>
                                                 <th>{t("popUp.examHistoryDate")}</th>
@@ -143,13 +143,7 @@ export default function ActiveAnswersPopup() {
                                             ))}
                                         </tbody>
                                     </table>
-                                    {/* <div className="retake">
-                                        <div className="pre_but">
-                                            <button className="bt_next" onClick={closeActiveDatePopup}>
-                                                إلغاء
-                                            </button>
-                                        </div>
-                                    </div> */}
+                                    
                                     <div className="pre_buttons">
                                         <button className="bt_next" onClick={handleRetake}>
                                         {t("courseExam.reatak")}

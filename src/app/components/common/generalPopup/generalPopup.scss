@@ -71,7 +71,10 @@
     color:#353535;
 
     @media (max-width:410px) {
-      padding: 20px;
+      padding: 2em;
+      .answers{
+        padding: 2em 1em;
+      }
       ul{
         li{
           margin: 5px 10px !important;

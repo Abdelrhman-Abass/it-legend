@@ -226,7 +226,7 @@
 .exam_overlay {
     max-height: 100vh;
     height: 100vh;
-    overflow: hidden;
+    overflow: scroll;
 }
 @media (max-width: 1024px) {
     .course_player {

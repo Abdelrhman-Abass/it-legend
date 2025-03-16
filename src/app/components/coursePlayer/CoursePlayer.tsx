@@ -202,6 +202,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
     }, [MemberCoursePlayer, videoNode]);
     
     // console.log("Node Type: ", nodeType);
+    // console.log("Node Type: ", nodeType);
     // useEffect(()=>{
     //     if(nodeType == 1 {
     //         setExamID()
@@ -390,6 +391,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                 title: locale === "ar" ? courseVideos?.data?.data?.video?.titleAr : courseVideos?.data?.data?.video?.titleEn,
                 duration: playbackState.duration,
                 image: CourseDetails?.data?.data?.image,
+                courseTitle :CourseDetails?.data?.data?.titleEn,
             };
             localStorage.setItem("watchedPercentage", JSON.stringify(lastWatchedPercentage));
             if (watchedPercentage >= WATCH_THRESHOLD_PERCENTAGE) {
@@ -803,7 +805,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                     <div className="course_player_list">
                         <div className="course_player_header">{CourseDetails && <LineProgress title="Course List" percent={Math.trunc(CourseDetails?.data?.data.progressPercentage)} />}</div>
                         <div className="course_player_list_items">
-                            <CoursePlayerAccordion videosItems={MemberCoursePlayer?.data?.data} videoCommentsMutation={videoCommentsMutation} />
+                            <CoursePlayerAccordion videosItems={MemberCoursePlayer?.data?.data} videoCommentsMutation={videoCommentsMutation} slug={slug}/>
                         </div>
                     </div>
                 ),
@@ -1212,7 +1214,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                         (<NewLoader loading={isLoadingMemberCoursePlayer}/>) 
                         : (
 
-                        <CoursePlayerAccordion videosItems={MemberCoursePlayer?.data?.data} videoCommentsMutation={videoCommentsMutation} />
+                        <CoursePlayerAccordion videosItems={MemberCoursePlayer?.data?.data} videoCommentsMutation={videoCommentsMutation} slug={slug} />
                         )}
                     </div>
                 </div>

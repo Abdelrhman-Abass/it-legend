@@ -118,7 +118,8 @@ interface AccordionItem {
 // Props for the `CoursePlayerAccordion` component
 export interface CoursePlayerAccordionProps {
     videosItems: AccordionItem[] | any;
-    videoCommentsMutation: any
+    videoCommentsMutation: any,
+    slug: string,
 }
 
 interface TabItem {

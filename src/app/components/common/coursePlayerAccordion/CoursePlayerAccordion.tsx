@@ -17,7 +17,7 @@ import { useMutation } from "@tanstack/react-query";
 import { IoMdLock } from "react-icons/io";
 
 
-export default function CoursePlayerAccordion({ videosItems, videoCommentsMutation }: CoursePlayerAccordionProps) {
+export default function CoursePlayerAccordion({ videosItems, videoCommentsMutation , slug }: CoursePlayerAccordionProps ) {
   const { setVideoNode, setVideoName, setVideoID, videoNodeExam, setVideoNodeExam, passedIsRequired, setLastVideoData, videoId, videoNode, setFirstNodeModule, setNextNode, setIsSubmitted, isSubmitted, setMemeberExam, memeberExam } = GenralCoursePlayerId();
   const [cookies] = useCookies(["userData"]);
   const { locale } = useParams() as { locale: string };
@@ -38,103 +38,7 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
     setVibratingNode(nodeId); // Set the clicked node as vibrating
     setTimeout(() => setVibratingNode(null), 300); // Reset after animation duration
   }
-  // useEffect(() => {
-  //   if (!videosItems || !videoNode) return;
-
-  //   // Find the active module (current module containing the `videoNode`)
-  //   const activeModuleIndex = videosItems.findIndex((module: any) =>
-  //     module.nodes.some((node: any) => node.nodeId === videoNode)
-  //   );
-
-  //   if (activeModuleIndex !== -1) {
-  //     const activeModule = videosItems[activeModuleIndex];
-
-  //     // ✅ Check if the module contains an exam of type 1 and requires passing
-  //     const isExamType1 = activeModule.nodes.some((node: any) => node.type === 1);
-  //     const passedRequired = activeModule.nodes.some((node: any) => node.isRequired && node.isPassed);
-
-  //     if (isExamType1 && passedRequired) {
-  //       const nextModule = videosItems[activeModuleIndex + 1]; // ✅ Get the next module
-
-  //       if (nextModule) {
-  //         const updatedModules = [...videosItems]; // Clone the array
-  //         updatedModules[activeModuleIndex + 1] = {
-  //           ...nextModule,
-  //           nodes: nextModule.nodes.map((node: any) => ({
-  //             ...node,
-  //             isAccessible: true, // ✅ Unlock all nodes in the next module
-  //           })),
-  //         };
-
-  //         // ✅ Update state to trigger re-render
-  //         setUpdatedVideosItems(updatedModules);
-  //       }
-  //     }
-  //   }
-  // }, [videoNode, videosItems]); 
-
-  // useEffect(() => {
-  //   if (!updatedVideosItems || !videoNode) return;
-
-  //   // Find the active module (current module containing the `videoNode`)
-  //   const activeModuleIndex = updatedVideosItems.findIndex((module: any) =>
-  //     module.nodes.some((node: any) => node.nodeId === videoNode)
-  //   );
-
-  //   if (activeModuleIndex !== -1) {
-  //     const activeModule = updatedVideosItems[activeModuleIndex];
-  //     console.log(activeModule)
-  //     console.log(videosItems)
-
-  //     const examNode = activeModule.nodes.find(
-  //       (node: any) =>
-  //         node.type === 1 &&
-  //         node.isRequired === true &&
-  //         passedIsRequired[node.contentId] === true 
-  //     );
-  //     // const examNodePassed = activeModule.nodes.find(
-  //     //   (node: any) =>
-  //     //     node.type === 1 &&
-  //     //     passedIsRequired[node.contentId] === true 
-  //     // );
-
-  //     // if (examNodePassed) {
-  //     //   // Update the exam node to set isPassed to true if passedIsRequired[contentId] is true
-  //     //   const updatedModules = [...updatedVideosItems];
-  //     //   // const hasChanged = !examNodePassed.isPassed; // Check if isPassed needs updating
-  //     //   if (examNodePassed) {
-  //     //     updatedModules[activeModuleIndex] = {
-  //     //       ...activeModule,
-  //     //       nodes: activeModule.nodes.map((node: any) =>
-  //     //         node.nodeId === examNodePassed.nodeId ? { ...node, isPassed: true } : node
-  //     //       ),
-  //     //     };
-  //     //     setUpdatedVideosItems(updatedModules);
-  //     //     console.log("Updated examNodePassed isPassed to true:", examNodePassed);
-  //     //   }
-  //     // }
-
-  //     if (examNode) {
-  //       const nextModule = updatedVideosItems[activeModuleIndex +1]; // Get the next module
-  //       console.log(nextModule)
-  //       if(passedIsRequired[examNode.contentId] === true ){console.log("yes the problem in here : ")}
-  //       if (nextModule) {
-  //         const updatedModules = [...updatedVideosItems]; // Clone the array
-  //         updatedModules[activeModuleIndex + 1] = {
-  //           ...nextModule,
-  //           nodes: nextModule.nodes.map((node: any) => ({
-  //             ...node,
-  //             isAccessible: true, // Unlock all nodes in the next module
-  //           })),
-  //         };
-
-  //         // Update state to trigger re-render
-  //         setUpdatedVideosItems(updatedModules);
-  //       }
-  //     }
-  //   }
-  // }, [passedIsRequired]);
-
+  
   useEffect(() => {
     if (!updatedVideosItems || !videoNode) return;
   
@@ -223,20 +127,42 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
   }, [nextNode]);
 
   // Handle video play
-  const handleVideoPlayType = (type: number, nodeID?: string) => {
-    if (type == 0) {
-      setVideoNode(nodeID || "");
-      // console.log(type)
-      window.history.replaceState(null, "", window.location.pathname + window.location.search);
-    } else if (type == 1) {
-      // Handle download logic
-      setNextNode(nextNode.nodeId);
+  // const handleVideoPlayType = (type: number, nodeID?: string) => {
+  //   if (type == 0) {
+  //     setVideoNode(nodeID || "");
+  //     // console.log(type)
+  //     window.history.replaceState(null, "", window.location.pathname + window.location.search);
+  //   } else if (type == 1) {
+  //     // Handle download logic
+  //     setNextNode(nextNode.nodeId);
 
-      // console.log(videoId)
-    }
+
+  //     // console.log(videoId)
+  //   }
     
-  };
+  // };
 
+  const handleVideoPlayType = async (type: number, nodeID?: string) => {
+    if (type === 0) {
+      setVideoNode(nodeID || "");
+      window.history.replaceState(null, "", window.location.pathname + window.location.search);
+    } else if (type === 1) {
+      setNextNode(nextNode.nodeId);
+    } else if (type === 4 ) {
+      try {
+        // ✅ Fetch PDF URL from API
+        const response = await getServerRequest(`/CourseViewer/${slug}/viewers/${nodeID}`);
+        console.log(response.data.data.viewer.path)
+        if (response.data.data.viewer.path) {
+          window.open(`${process.env.NEXT_PUBLIC_BASE_URL_DEC}/Content/Uploads/ViewerPath/${response.data.data.viewer.path}`, "_blank"); // ✅ Open PDF in new tab
+        } else {
+          console.error("Failed to fetch PDF URL");
+        }
+      } catch (error) {
+        console.error("Error fetching PDF:", error);
+      }
+    }
+  };
 
   // Find the active module
   const findActiveModule = () => {
@@ -323,7 +249,7 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
                         }
                         setVideoNodeExam(child.nodeId)
                       }
-
+                      console.log(child.type)
                       setVideoID(child.contentId);
 
                       window.history.replaceState(null, "", window.location.pathname + window.location.search);
