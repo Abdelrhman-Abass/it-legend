@@ -152,7 +152,7 @@ export default function SuccessPopup({ result, successRate, timeScore, isLevelUp
                     <div>
                         <div className="results-summary-container failed" >
                             <div className="results-summary-container__result" style={{ gap: "50px" }}>
-                                <div className="heading-tertiary">للأسف ي صديقي.. انت حققت {successRate?.toFixed()}% </div>
+                                <div className="heading-tertiary">للأسف يا صديقي..  نتيجة امتحانك  {successRate?.toFixed()}% </div>
                                 {/* <div className="result-box"> */}
                                 {/* <div className="heading-primary">{result}</div> */}
                                 <p className="result">محتاج تراجع المنهج التاني</p>
@@ -162,16 +162,16 @@ export default function SuccessPopup({ result, successRate, timeScore, isLevelUp
                                 <div className="result-text-box">
                                     {/* <div className="heading-secondary">أنت تمتلك كل ما يلزم للوصول إلى القمة! </div> */}
                                     <p className="paragraph">
-                                        والسكور بتاعك دلوقتي {result} كما هو
+                                        والسكور بتاعك سيبقي <span style={{fontWeight:"bold"}}>{result}</span> كما هو
                                     </p>
                                 </div>
 
                                 <div className="pre_buttons" style={{ justifyContent: "center" }}>
-                                    <button className="bt_next" onClick={retake}>
+                                    {/* <button className="bt_next" onClick={retake}>
                                         حاول مره اخري
-                                    </button>
-                                    <button className="bt_prev" onClick={handlePrevLerning}>
-                                        محتاج اراجع اكتر
+                                    </button> */}
+                                    <button className="bt_next" onClick={handlePrevLerning}>
+                                        اعادة المنهج 
                                     </button>
 
                                 </div>

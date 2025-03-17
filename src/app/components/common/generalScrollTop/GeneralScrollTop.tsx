@@ -1,10 +1,13 @@
 "use client";
+import GenralCoursePlayerId from "@/app/store/GeneralCoursePlayer";
 import React, { useState, useEffect, useRef } from "react";
 import { MdKeyboardArrowUp } from "react-icons/md";
 
 export default function GeneralScrollTop() {
     const scrollRef = useRef<HTMLDivElement>(null);
     const [scrollProgress, setScrollProgress] = useState(0);
+    const { nodeType} = GenralCoursePlayerId();
+
 
     useEffect(() => {
         const updateScrollProgress = () => {
@@ -27,7 +30,7 @@ export default function GeneralScrollTop() {
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
     return (
-        <div className="general_scroll_top" onClick={scrollToTop} ref={scrollRef}>
+        <div className="general_scroll_top" onClick={scrollToTop} ref={scrollRef} style={{ display: nodeType === 1 ? "none" : "block"}}>
             <svg width="50" height="50" viewBox="0 0 36 36">
                 <path
                     d="M18 2.0845

@@ -7,6 +7,7 @@ interface StoreState {
     videoId: string;
     prevNode:string;
     firstNodeModule:any;
+    nodeType:number;
     nextNode:any;
     isSubmitted:boolean;
     videoNodeExam:string;
@@ -14,6 +15,7 @@ interface StoreState {
     memeberExam:any;
     passedIsRequired: Record<string, boolean>; // Changed to object mapping videoId to boolean    
     setMemeberExam: (data: any) => void;
+    setNodeType: (data: any) => void;
     setVideoNode: (id: string) => void;
     setVideoNodeExam: (id: string) => void;
     setIsSubmitted: (data: boolean) => void;
@@ -34,6 +36,7 @@ const GenralCoursePlayerId = create<StoreState>((set) => ({
     videoId: "",
     prevNode:"",
     videoNodeExam:"",
+    nodeType:0,
     firstNodeModule:null,
     nextNode:null,
     isSubmitted:false,
@@ -43,6 +46,10 @@ const GenralCoursePlayerId = create<StoreState>((set) => ({
     setMemeberExam: (data: any) =>
         set(() => ({
             memeberExam: data,
+        })),
+    setNodeType: (data: any) =>
+        set(() => ({
+            nodeType: data,
         })),
     setIsSubmitted: (data: boolean) =>
         set(() => ({

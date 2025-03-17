@@ -3,19 +3,36 @@ import React, { Suspense, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
+import { postServerRequest } from "@/app/utils/generalServerRequest";
+import GeneralToaster from "../generalToaster/GeneralToaster";
 
-export default function AskQuestion() {
+export default function AskQuestion({ slug }: { slug: string }) {
     const { closeQuestion, askquestionPopup } = generalActivePopup();
     const [question, setQuestion] = useState("");
     const t = useTranslations();
 
-    // Handle submitting the question
-    const handleAsk = () => {
-        if (question.trim()) {
-            console.log("Question:", question);
+    
+    const handleAsk = async () => {
+        if (!question.trim()) return alert("Please enter a question!");
+
+        try {
+            const response = await postServerRequest("/CourseQuestion/ask", {
+                questionText: question,
+                courseId: slug, // Use slug as course ID
+            });
+
+            if (response?.status !== 200) {
+                throw new Error("Failed to submit question");
+            }
+
             setQuestion(""); // Clear the textarea
-        }
-        closeQuestion(); // Close the popup
+            // alert("Question submitted successfully!");
+            GeneralToaster("Question submitted successfully!", "success");
+            closeQuestion(); // Close the popup
+        } catch (error) {
+            console.error("Error submitting question:", error);
+            alert("Something went wrong. Please try again.");
+        } // ✅ Missing closing bracket for try-catch block is now added
     };
 
     return (
@@ -46,6 +63,8 @@ export default function AskQuestion() {
                             placeholder={t("askQuestion.placeholder")}
                             value={question}
                             onChange={(e) => setQuestion(e.target.value)}
+                            maxLength={500}
+
                         />
                     </div>
                     <div className="ask-question-buttons">

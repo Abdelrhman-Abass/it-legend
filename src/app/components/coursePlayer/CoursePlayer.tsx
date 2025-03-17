@@ -74,14 +74,14 @@ export default function CoursePlayer({ slug }: { slug: string }) {
     const [cookies, , removeCookie] = useCookies(["userData"]);
     const [videoCipherPath, setVideoCipherPath] = useState<string>("");
     const [hasHandledProgress, setHasHandledProgress] = useState(false);
-    const [nodeType, setNodeType] = useState<number>(0);
+    // const [nodeType, setNodeType] = useState<number>(0);
     const [examId, setExamID] = useState<number>(0);
 
     const [storedCourse, setStoredCourse] = useState<any | null>(null);
     const [courseTitle, setCourseTitle] = useState<string>("");
 
 
-    const { videoNode, setVideoNode, videoLink, videoName,setIsSubmitted,isSubmitted, videoId,passedIsRequired,setPassedIsRequired, setVideoID ,CourseVideo, setVideoName, lastVideoData } = GenralCoursePlayerId();
+    const { videoNode, setVideoNode, videoLink, videoName,setIsSubmitted ,nodeType,setNodeType,isSubmitted, videoId,passedIsRequired,setPassedIsRequired, setVideoID ,CourseVideo, setVideoName, lastVideoData } = GenralCoursePlayerId();
     const { openQuestion , activeLeaderBoard} = generalActivePopup();
     const playerRef = useRef<HTMLVideoElement | null>(null);
     const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -172,16 +172,6 @@ export default function CoursePlayer({ slug }: { slug: string }) {
             // setIsSubmitted(false)
         }
     }, [nodeType , isSubmitted]);
-
-
-    // useEffect(()=>{
-    //     if(passedIsRequired){
-    //         refetchMemberCoursePlayer()
-    //         setPassedIsRequired(false)
-    //     }
-    // },[passedIsRequired])
-    
-
 
     // Fetch OTP when videoId changes
     const { data: vdocipherOTP, isLoading: isLoadingvdocipherOTP } = useQuery({
@@ -702,9 +692,11 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                     video.play().catch((error) => console.error("Error playing video:", error));
                 });
     
+                console.log("Current Time: ");
                 video.addEventListener("timeupdate", () => {
                     const currentTime = video.currentTime;
                     const duration = video.duration;
+
                     const progress = {
                         playedSeconds: currentTime,
                         played: currentTime / duration,
@@ -752,7 +744,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                     <>
                         <CourseLinks data={CourseLinksData?.data?.data} title={t("courseTabs.links")} />
                         <CourseLinks data={videoCommentsMutation?.isPending ? [] : videoCommentsMutation?.data?.data?.data} title={t("common.comments")} showComments />
-                        <AddComment />
+                        <AddComment videoCommentsMutation={videoCommentsMutation} nodeId={videoNode}/>
                     </>
                 ),
             },
@@ -765,7 +757,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
             ) , children: (
                 <>
                     <CourseLinks data={videoCommentsMutation?.isPending ? [] : videoCommentsMutation?.data?.data?.data} title={t("common.comments")} showComments />
-                    <AddComment />
+                    <AddComment videoCommentsMutation={videoCommentsMutation} nodeId={videoNode}/>
                 </>
             )},
             { key: "4", label: (
@@ -776,7 +768,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                     
                 </>
             ), children: (
-                        <AskQuestion />
+                        <AskQuestion slug={slug}/>
                      )},
             { key: "5", label:(
                 <>
@@ -803,7 +795,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                 ),
                 children: (
                     <div className="course_player_list">
-                        <div className="course_player_header">{CourseDetails && <LineProgress title="Course List" percent={Math.trunc(CourseDetails?.data?.data.progressPercentage)} />}</div>
+                        <div className="course_player_header">{CourseDetails && <LineProgress title={t("courseTabs.coursList")} percent={Math.trunc(CourseDetails?.data?.data.progressPercentage)} />}</div>
                         <div className="course_player_list_items">
                             <CoursePlayerAccordion videosItems={MemberCoursePlayer?.data?.data} videoCommentsMutation={videoCommentsMutation} slug={slug}/>
                         </div>
@@ -1195,7 +1187,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                             <CourseExam examid={examId} />
                         )
                     )}
-                    <div className="course_player_video_tabs">
+                    <div className="course_player_video_tabs" style={{ display: nodeType === 1 ? "none" : "block" }}>
 
                         
                         <CourseTabs data={isTablet ? tabsData : tabsDataMobile} />
@@ -1208,7 +1200,7 @@ export default function CoursePlayer({ slug }: { slug: string }) {
                     ) : (
                         null
                     )} */}
-                    <div className="course_player_header">{CourseDetails && <LineProgress title="Course List" percent={Math.trunc(CourseDetails?.data?.data?.progressPercentage)} />}</div>
+                    <div className="course_player_header">{CourseDetails && <LineProgress title={t("courseTabs.coursList")} percent={Math.trunc(CourseDetails?.data?.data?.progressPercentage)} />}</div>
                     <div className="course_player_list_items">
                         {isLoadingMemberCoursePlayer ? 
                         (<NewLoader loading={isLoadingMemberCoursePlayer}/>) 

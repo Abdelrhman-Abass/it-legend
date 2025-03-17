@@ -573,8 +573,9 @@ const CourseExam = ({ examid }: { examid: number}) => {
                   <div
                     onClick={() => !isSubmitted && handleAnswerClick(currentQuestion.questionId, answer)}
                     style={{
-                      padding: "16px",
+                      padding: "10px 16px",
                       margin: "8px 0",
+                      direction: "ltr",
                       border: `2px solid ${answerStatus === "correct"
                         ? "#97EA7F"
                         : answerStatus === "incorrect"

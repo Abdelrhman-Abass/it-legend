@@ -192,7 +192,8 @@
         "q_a": "اسأل سؤال",
         "leader": "الليدر بورد",
         "courseContent": "محتوي الكورس",
-        "comments": "التعليقات"
+        "comments": "التعليقات",
+        "coursList" : "المنهج"
     },
     "courseResults":{
         "title1":"النقاط",
@@ -211,7 +212,7 @@
         "links": "لا يوجد روابط حتى الان"
     },
     "courseMinuts":{
-        "minuts":"د"
+        "minuts":"M"
     },
     "popUp": {
         "prevAnswers": "إجاباتك السابقة للامتحان",

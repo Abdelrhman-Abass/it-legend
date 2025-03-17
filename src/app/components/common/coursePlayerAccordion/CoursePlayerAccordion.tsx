@@ -11,7 +11,7 @@ import { useTranslations } from "next-intl";
 import generalActivePopup from "@/app/store/ActivePopup";
 import GeneralPopup from "../generalPopup/GeneralPopup";
 import ActiveAnswersPopup from "../generalPopup/activeAnswersPopup";
-import { getServerRequest } from "@/app/utils/generalServerRequest";
+import { getServerRequest, postServerRequest } from "@/app/utils/generalServerRequest";
 import { useMutation } from "@tanstack/react-query";
 
 import { IoMdLock } from "react-icons/io";
@@ -128,27 +128,95 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
 
 
 
+  // const handleVideoPlayType = async (type: number, nodeID?: string) => {
+  //   if (type === 0) {
+  //     setVideoNode(nodeID || "");
+  //     window.history.replaceState(null, "", window.location.pathname + window.location.search);
+  //   } else if (type === 1) {
+  //     setNextNode(nextNode.nodeId);
+  //   } else if (type === 4 ) {
+  //     try {
+  //       // ✅ Fetch PDF URL from API
+  //       const response = await getServerRequest(`/CourseViewer/${slug}/viewers/${nodeID}`);
+  //       const path = response.data.data.viewer.path; 
+
+  //       // console.log(response.data.data.viewer.path)
+  //       if (response.data.data.viewer.path) {
+  //         const response = await postServerRequest(`/MemberViewerNode/${nodeID}/view`, {});
+
+  //         setUpdatedVideosItems((prevItems:any) =>
+  //           prevItems.map((module:any) => ({
+  //             ...module,
+  //             nodes: module.nodes.map((node:any) =>
+  //               node.nodeId === nodeID ? { ...node, isWatched: true } : node
+  //             ),
+  //           }))
+  //         );
+
+  //         window.open(`${process.env.NEXT_PUBLIC_BASE_URL_DEC}/Content/Uploads/ViewerPath/${path.data.data.viewer.path}`, "_blank"); // ✅ Open PDF in new tab
+  //       } else {
+  //         console.error("Failed to fetch PDF URL");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching PDF:", error);
+  //     }
+  //   }
+  // };
+
+  
   const handleVideoPlayType = async (type: number, nodeID?: string) => {
-    if (type === 0) {
-      setVideoNode(nodeID || "");
-      window.history.replaceState(null, "", window.location.pathname + window.location.search);
-    } else if (type === 1) {
-      setNextNode(nextNode.nodeId);
-    } else if (type === 4 ) {
-      try {
-        // ✅ Fetch PDF URL from API
-        const response = await getServerRequest(`/CourseViewer/${slug}/viewers/${nodeID}`);
-        console.log(response.data.data.viewer.path)
-        if (response.data.data.viewer.path) {
-          window.open(`${process.env.NEXT_PUBLIC_BASE_URL_DEC}/Content/Uploads/ViewerPath/${response.data.data.viewer.path}`, "_blank"); // ✅ Open PDF in new tab
-        } else {
-          console.error("Failed to fetch PDF URL");
+    if (!nodeID) {
+      console.error("Node ID is required");
+      return;
+    }
+  
+    switch (type) {
+      case 0:
+        setVideoNode(nodeID);
+        window.history.replaceState(null, "", window.location.pathname + window.location.search);
+        break;
+  
+      case 1:
+        setNextNode(nextNode.nodeId);
+        break;
+  
+      case 4:
+        try {
+          // ✅ Fetch PDF URL from API
+          const { data } = await getServerRequest(`/CourseViewer/${slug}/viewers/${nodeID}`);
+          const pdfPath = data?.data?.viewer?.path;
+  
+          if (!pdfPath) {
+            console.error("Failed to fetch PDF URL: Path is undefined");
+            return;
+          }
+  
+          // ✅ Mark the node as watched in the backend
+          await postServerRequest(`/MemberNode/${nodeID}/view`, {});
+  
+          // ✅ Update state to mark node as watched
+          setUpdatedVideosItems((prevItems: any) =>
+            prevItems.map((module: any) => ({
+              ...module,
+              nodes: module.nodes.map((node: any) =>
+                node.nodeId === nodeID ? { ...node, isWatched: true } : node
+              ),
+            }))
+          );
+  
+          // ✅ Open the PDF in a new tab
+          const pdfUrl = `${process.env.NEXT_PUBLIC_BASE_URL_DEC}/Content/Uploads/ViewerPath/${pdfPath}`;
+          window.open(pdfUrl, "_blank");
+        } catch (error) {
+          console.error("Error fetching or opening PDF:", error);
         }
-      } catch (error) {
-        console.error("Error fetching PDF:", error);
-      }
+        break;
+  
+      default:
+        console.warn("Unhandled video play type:", type);
     }
   };
+  
 
   // Find the active module
   const findActiveModule = () => {
@@ -273,7 +341,7 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
 
   return (
     <>
-      <div className="course_player_accordion">
+      <div className="course_player_accordion ltr_direction">
         <Collapse
           activeKey={activeKey}
           expandIcon={({ isActive }) => (isActive ? <DownOutlined /> : <UpOutlined />)}
