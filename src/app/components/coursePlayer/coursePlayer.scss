@@ -36,6 +36,29 @@
             margin-top: 2em;
             background: $white-color;
             padding: 1em;
+
+            .buttons-container{
+                display: flex;
+                gap: 2em;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                position: relative; 
+
+            }
+            .active{
+                color: #3b6798;
+                border: 1px solid #3b6798;
+            
+            }
+            .active::after{
+                content: "";
+                position: absolute;
+                bottom: -7px;
+                /* left: 0; */
+                width: 2.5em;
+                height: 1.5px;
+                background-color: #3b6798;
+            }
         }
     }
     .course_player_list {
@@ -99,13 +122,16 @@
     height: 40px;
     border: 1px solid #d1d5db;
     // color: #6b7280;
+    background: #fff;
+    cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
 
 .custom-button:hover {
-    color: #111827;
+    color: #3b6798;
     background-color: #f3f4f6;
 }
+
 
 /* If "soft" means a subtle shadow */
 .custom-button {

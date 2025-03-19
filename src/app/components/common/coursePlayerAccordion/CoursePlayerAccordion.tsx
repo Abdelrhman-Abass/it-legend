@@ -66,24 +66,6 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
     setUpdatedVideosItems(updatedModules); // ✅ Correctly update state
   }, [passedIsRequired]);
 
-  // useEffect(() => {
-  //   if (!updatedVideosItems || !videoNode) return;
-  
-  //   const updatedModules = updatedVideosItems.map((module) => {
-  //     const updatedNodes = module.nodes.map((node) => {
-  //       // Check if the node's contentId exists in `passedIsRequired` and is `true`
-  //       if (passedIsRequired[node.contentId]) {
-  //         return { ...node, isPassed: true }; // ✅ Mark as passed
-  //       }
-  //       return node;
-  //     });
-  
-  //     return { ...module, nodes: updatedNodes };
-  //   });
-  
-  //   setUpdatedVideosItems(updatedModules); // ✅ Correctly update state
-  // }, [passedIsRequired]);
-
   const flattenNodes = (updatedVideosItems: any[]) => {
     return updatedVideosItems
       .sort((a, b) => a.moduleOrder - b.moduleOrder)
@@ -101,12 +83,6 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
     return null; // No next node
   };
 
-  const getPreviousNode = (flattenedNodes: any[], currentIndex: number) => {
-    if (currentIndex > 0) {
-      return flattenedNodes[currentIndex - 1];
-    }
-    return null; // No previous node
-  };
   // Flatten all nodes
   const flattenedNodes = flattenNodes(updatedVideosItems || []);
 
@@ -115,7 +91,6 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
 
   // Get next and previous nodes
   const nextNode = getNextNode(flattenedNodes, currentNodeIndex);
-  const previousNode = getPreviousNode(flattenedNodes, currentNodeIndex);
 
   // Log next and previous nodes (for debugging)
   useEffect(() => {
@@ -126,44 +101,6 @@ export default function CoursePlayerAccordion({ videosItems, videoCommentsMutati
     }
   }, [nextNode]);
 
-
-
-  // const handleVideoPlayType = async (type: number, nodeID?: string) => {
-  //   if (type === 0) {
-  //     setVideoNode(nodeID || "");
-  //     window.history.replaceState(null, "", window.location.pathname + window.location.search);
-  //   } else if (type === 1) {
-  //     setNextNode(nextNode.nodeId);
-  //   } else if (type === 4 ) {
-  //     try {
-  //       // ✅ Fetch PDF URL from API
-  //       const response = await getServerRequest(`/CourseViewer/${slug}/viewers/${nodeID}`);
-  //       const path = response.data.data.viewer.path; 
-
-  //       // console.log(response.data.data.viewer.path)
-  //       if (response.data.data.viewer.path) {
-  //         const response = await postServerRequest(`/MemberViewerNode/${nodeID}/view`, {});
-
-  //         setUpdatedVideosItems((prevItems:any) =>
-  //           prevItems.map((module:any) => ({
-  //             ...module,
-  //             nodes: module.nodes.map((node:any) =>
-  //               node.nodeId === nodeID ? { ...node, isWatched: true } : node
-  //             ),
-  //           }))
-  //         );
-
-  //         window.open(`${process.env.NEXT_PUBLIC_BASE_URL_DEC}/Content/Uploads/ViewerPath/${path.data.data.viewer.path}`, "_blank"); // ✅ Open PDF in new tab
-  //       } else {
-  //         console.error("Failed to fetch PDF URL");
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching PDF:", error);
-  //     }
-  //   }
-  // };
-
-  
   const handleVideoPlayType = async (type: number, nodeID?: string) => {
     if (!nodeID) {
       console.error("Node ID is required");
