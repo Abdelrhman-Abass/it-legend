@@ -8,7 +8,7 @@ import Image from "next/image";
 import { ICourseCard } from "@/app/types/Types";
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { Progress } from "antd";
+import { ConfigProvider, Progress, Rate } from "antd";
 import Link from "next/link";
 
 // Memoizing to avoid re-renders when props are the same
@@ -19,9 +19,9 @@ const CourseCard = memo(({
   titleEn ="",
   shortDescriptionAr,
   shortDescriptionEn,
-  lectures,
-  exams,
-  summaries,
+  lectures =0,
+  exams = 0,
+  summaries = 0,
   averageRating,
   categoryId,
   image,
@@ -45,11 +45,13 @@ const CourseCard = memo(({
 
   // localStorage.setItem("course_title", courseTitle || "");
 
+  // console.log("courseTitle", averageRating);
 
   return (
     <Link href={url} passHref onClick={() => {
       localStorage.setItem("course_title", titleEn);
     }}>
+      
 
       <div className={`course_card ${hideItems ? "course_card_hide" : ""}`} >
         <div className="course_card_image">
@@ -69,7 +71,7 @@ const CourseCard = memo(({
             <>
               <div className="course_card_content_rate f ac jb">
                 <div className="course_card_content_rate_icons f ac">
-                  {stars}
+                  <Rate allowHalf disabled style={{color:"#f8b81f" ,fontSize:"14px"}} className="yellow-stars" defaultValue={averageRating} />
                 </div>
                 <span>
                   ({averageRating?.toFixed(1)} / 5 {t("common.reviews")})
@@ -77,18 +79,28 @@ const CourseCard = memo(({
               </div>
 
               <div className="course_card_content_details f f-column">
-                <div className="course_card_content_details_item f ac">
-                  <MdOndemandVideo />
-                  <span>{lectures} {t("common.lectures")}</span>
-                </div>
-                <div className="course_card_content_details_item f ac">
-                  <MdOutlineQuiz />
-                  <span>{exams} {t("common.exams")}</span>
-                </div>
-                <div className="course_card_content_details_item f ac">
-                  <BiRevision />
-                  <span>{summaries} {t("common.summaries")}</span>
-                </div>
+                {lectures > 0 && (
+                  <div className="course_card_content_details_item f ">
+                    <MdOndemandVideo />
+                    <span>{lectures} {t("common.lectures")}</span>
+                  </div>
+
+                )}
+
+                {exams > 0 && (
+                  <div className="course_card_content_details_item f ">
+                    <MdOutlineQuiz />
+                    <span>{exams} {t("common.exams")}</span>
+                  </div>
+
+                )}
+                {summaries > 0 && (
+                  <div className="course_card_content_details_item f ">
+                    <BiRevision />
+                    <span>{summaries} {t("common.summaries")}</span>
+                  </div>
+
+                )}
               </div>
             </>
           )}

@@ -61,6 +61,7 @@
     }
     .course_card_content {
         padding: 2em 2em;
+        // height: 26em;
         h3 {
             font-size: 1.2em;
             margin-bottom: 0.7em;
@@ -95,6 +96,7 @@
             @include grid2;
             gap: $menu-gap;
             margin-bottom: 2em;
+            // height: 5em;
             margin-top: 2em;
             .course_card_content_details_item {
                 gap: 1em;
@@ -105,6 +107,7 @@
                 }
                 svg {
                     font-size: 1.2em;
+                    margin-top: 4px;
                 }
             }
         }
@@ -136,6 +139,14 @@
         background-color: #f2efec;
     }
 }
+.yellow-stars .ant-rate-star {
+    color: #ffd700; /* Yellow color for stars */
+  }
+  
+  .yellow-stars .ant-rate-star-half .ant-rate-star-first,
+  .yellow-stars .ant-rate-star-full .ant-rate-star-second {
+    color: #ffd700; /* Yellow color for half-filled stars */
+  }
 .dark_theme {
     .course_card {
         background: $dark-bg;

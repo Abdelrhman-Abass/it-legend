@@ -25,8 +25,8 @@ export function middleware(req: NextRequest) {
  
 
   // Define public (login) and private (restricted) paths
-  const loginPaths = [ "/diploma-details", "/", "/courses", "/cart"];
-  const privatePaths = ["/course-player", "/diploma", "/learn-path"];
+  const loginPaths = [ "/diploma-details", "/","/diploma", "/courses", "/cart"];
+  const privatePaths = ["/course-player", "/learn-path/diploma", "/learn-path"];
 
   // 🚀 If logged in & on a login page OR at `/ar` or `/en`, redirect to localized "learn-path"
   if (isUserLoggedIn && (loginPaths.includes(pathname) || pathname === "")) {

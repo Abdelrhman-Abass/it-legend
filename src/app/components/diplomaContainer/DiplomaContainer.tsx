@@ -15,7 +15,7 @@ import NewLoader from "../common/newLoader/NewLoader";
 
 
 
-export default function CoursesContainer() {
+export default function DiplomaContainer() {
     const t = useTranslations();
     const { type } = GridToggle();
     const { locale } = useParams();
@@ -25,9 +25,9 @@ export default function CoursesContainer() {
 
     // Fetch courses using React Query
     const { data, isLoading, error } = useQuery({
-        queryKey: ["courses"],
+        queryKey: ["category"],
         queryFn: async () => {
-            const response = await getServerRequest("/Course");
+            const response = await getServerRequest("/Category");
             return response.data || [];
         },
     });
@@ -41,7 +41,8 @@ export default function CoursesContainer() {
         return <div>Error: {error.message}</div>;
     }
 
-    const courses = data.data;
+    const category = data?.data;
+    console.log("category", category);
 
     // Function to load more courses
     const loadMoreCourses = () => {
@@ -54,7 +55,7 @@ export default function CoursesContainer() {
                 <>
                     <div className="courses_container_header f jb ac">
                         <h2>
-                            {t("common.offering")} <span>{courses.length}</span> {t("common.courses")}
+                            {t("common.offering")} <span>{category.length}</span> {t("common.courses")}
                         </h2>
                         <div className="courses_container_header_layout f ac">
                             <CardsLayout />
@@ -64,27 +65,27 @@ export default function CoursesContainer() {
 
 
                     <div className={`courses_container_cards ${`_${type}`}`}>
-                        {courses.slice(0, visibleCourses).map((course: any, index: number) => (
+                        {category.slice(0, visibleCourses).map((category: any, index: number) => (
                             <CourseCard
                                 key={index}
                                 hideItems={false}
-                                titleAr={course.titleAr}
-                                titleEn={course.titleEn}
-                                shortDescriptionAr={course.shortDescriptionAr}
-                                shortDescriptionEn={course.shortDescriptionEn}
+                                titleAr={category.titleAr}
+                                titleEn={category.titleEn}
+                                shortDescriptionAr={category.shortDescriptionAr}
+                                shortDescriptionEn={category.shortDescriptionEn}
                                 btnText={t("diplomaDetails.footer.btn")}
                                 customClass={type === "line" ? "course_dip" : ""}
-                                image={`https://itlegend.net/Content/Uploads/CoursesMedia/${course.image}`}
-                                url={`/${locale}/courses/course-details/${course.categoryId}`}
-                                lectures={course.lectures}
-                                exams={course.exams}
-                                averageRating={course.averageRating}
+                                image={`https://itlegend.net/Content/Uploads/CoursesMedia/${category.image}`}
+                                url={`/${locale}/diploma/diploma-details/${category.categoryId}`}
+                                lectures={category.lectures}
+                                exams={category.exams}
+                                averageRating={category.averageRating}
                             />
                         ))}
                     </div>
 
                     <div className="courses_container_cards_btn f ac jc">
-                        {visibleCourses < courses.length && ( // Show the button only if there are more courses to load
+                        {visibleCourses < category.length && ( // Show the button only if there are more courses to load
                             <Button
                                 title="View More Courses"
                                 onClick={loadMoreCourses} // Call loadMoreCourses on button click
@@ -94,8 +95,7 @@ export default function CoursesContainer() {
                         )}
                     </div>
                 </>
-            )
-            }
-        </section >
+            )}
+        </section>
     );
 }

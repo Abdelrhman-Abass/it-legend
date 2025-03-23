@@ -18,9 +18,9 @@
             gap: 1.5em;
             padding-block: 1em ;
             transition: .4s ease-in-out;
-            &:not(:last-child){
-                border-bottom: 1px solid rgba($color: #000, $alpha: .1);
-            }
+            // &:not(:last-child){
+            //     border-bottom: 1px solid rgba($color: #000, $alpha: .1);
+            // }
             &:hover{
                 color: #EB7236;
             }
@@ -72,106 +72,7 @@
             }
         }
 
-        // @media (min-width: 920px)  {
-        //     display: grid;
-        //     grid-template-columns: repeat(4, 1fr); // Four items per line
-        //     gap: 1em;
-    
-        //     // Center the second and subsequent lines
-        //     &:has(.course_links_container_item:nth-child(n + 5)),
-        //     &:has(.course_links_container_item:nth-child(n + 4  )) {
-        //         display: flex;
-        //         justify-content: center;
-        //         flex-wrap: wrap;
-        //     }
-        // }
-        // @media (min-width: 750px) and (max-width: 920px) {
-        //     display: grid;
-        //     grid-template-columns: repeat(3, 1fr); // Four items per line
-        //     gap: 1em;
-    
-        //     // Center the second and subsequent lines
-        //     &:has(.course_links_container_item:nth-child(n + 5)) {
-        //         display: flex;
-        //         justify-content: center;
-        //         flex-wrap: wrap;
-
-        //     }
-        // }
-        // @media (min-width: 530px) and (max-width: 750px) {
-        //     display: grid;
-        //     grid-template-columns: repeat(2, 1fr); // Four items per line
-        //     gap: 1em;
-    
-        //     // Center the second and subsequent lines
-        //     &:has(.course_links_container_item:nth-child(n + 3)),&:has(.course_links_container_item:nth-child(n + 4)) {
-        //         display: flex;
-        //         justify-content: center;
-        //         flex-wrap: wrap;
-
-        //     }
-        // }
-
-        // Laptop mode (Two items take full width)
-        // @media (min-width: 768px) and (max-width: 1443px) {
-        //     &:has(.course_links_container_item:nth-child(1):nth-last-child(2)) {
-        //         grid-template-columns: 1fr 1fr;
-        //     }
-        // }
-
-        // // If there are 4th or 5th items alone on a new row, center them (Only on medium screens)
-        // @media (min-width: 768px)  {
-        //     &:has(.course_links_container_item:nth-child(4):nth-last-child(1)),
-        //     &:has(.course_links_container_item:nth-child(4):nth-last-child(1)),
-        //     &:has(.course_links_container_item:nth-child(5):nth-last-child(5)) {
-        //         display: flex;
-        //         justify-content: center;
-        //         flex-wrap: wrap;
-        //     }
-        // }
-
-        // // Large screens (1444px and above) - Always use Grid
-        // @media (min-width: 1444px) {
-        //     // display: grid !important;
-        //     justify-content: start; // Align items normally
-        //     // grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        // }
-
-        // &:has(.course_links_container_item:nth-child(2):nth-last-child(1)) {
-        //     justify-content: start; // Center the two items
-        // }
-    
-        // &:has(.course_links_container_item:nth-child(2):nth-last-child(5)) {
-        //     justify-content: center; // Center the two items
-        // }
-    
-        // // If there are exactly 3 items, align them to the start
-        // &:has(.course_links_container_item:nth-child(3):nth-last-child(1)) {
-        //     justify-content: flex-start; // Align three items to the start
-        // }
-    
-        // // Laptop mode (Two items take full width)
-        // @media (min-width: 768px) and (max-width: 1443px) {
-        //     &:has(.course_links_container_item:nth-child(1):nth-last-child(2)) {
-        //         grid-template-columns: 1fr 1fr;
-        //     }
-        // }
-    
-        // // If there are 4th or 5th items alone on a new row, center them (Only on medium screens)
-        // @media (min-width: 768px) {
-        //     &:has(.course_links_container_item:nth-child(4):nth-last-child(1)),
-        //     &:has(.course_links_container_item:nth-child(4):nth-last-child(1)),
-        //     &:has(.course_links_container_item:nth-child(5):nth-last-child(5)) {
-        //         display: flex;
-        //         justify-content: center;
-        //         flex-wrap: wrap;
-        //     }
-        // }
-    
-        // // Large screens (1444px and above) - Always use Grid
-        // @media (min-width: 1444px) {
-        //     justify-content: start; // Align items normally
-        // }
+        
 
         .empty_message {
             color: #808080;
@@ -181,24 +82,6 @@
         }
     }
 }
-
-
-// .course_links {
-//     min-height: 15em;
-//     background: #f8f8f8;
-//     padding: 1.5em;
-//     border-radius: 0.6em;
-//     border: 1px solid rgba($dark_color, 0.1);
-//     margin-bottom: 2em;
-
-//     h3 {
-//         font-weight: 500;
-//         margin-bottom: 1em;
-//         font-size: 1.3em;
-//     }
-
-    
-// }
 
 
 .dark_theme {
@@ -238,10 +121,13 @@
     display: flex;
     flex-direction: row;
     gap: 1em;
-    padding: 1em 0;
+    padding: 1em 0.5em;
+    border-radius: 10px;
+    width: 100%;
+    box-shadow: 0px 0px 9px 0px  rgb(26 5 5 / 20%);
 
     .comments_container_box{
-        gap: 0.5em;
+        gap: 0.2em;
         display: flex;
         flex-direction: column;
         color:#2E2E2E;
@@ -263,7 +149,7 @@
         flex-direction: column;
         color:white;
         .message_comment{
-            font-size: 1.1em;
+            font-size: 16px;
         }
         &:hover{
             color: #EB7236;
@@ -293,80 +179,3 @@
     //   text-decoration: underline;
     // }
   }
-
-// .course-links {
-//     display: flex;
-//     flex-direction: column;
-//     gap: 1rem;
-//     padding: 1rem;
-    
-//     &__title {
-//       font-size: 1.25rem;
-//       font-weight: 600;
-//       color: #333;
-//     }
-  
-//     &__container {
-//       display: flex;
-//       flex-direction: column;
-//       gap: 1rem;
-//     }
-  
-//     &__empty-message {
-//       font-size: 0.9rem;
-//       color: #888;
-//     }
-  
-//     /* Comments Styling */
-//     .comments {
-//       border-left: 4px solid #007bff;
-//       padding-left: 1rem;
-//     }
-  
-//     &__comment-item {
-//       display: flex;
-//       flex-direction: column;
-//       background: #f9f9f9;
-//       padding: 0.75rem;
-//       border-radius: 6px;
-//     }
-  
-//     &__comment-time {
-//       font-size: 0.85rem;
-//       font-weight: 600;
-//       color: #555;
-//     }
-  
-//     &__comment-message {
-//       font-size: 0.9rem;
-//       color: #222;
-//     }
-  
-//     /* Links Styling */
-//     .links {
-//       border-left: 4px solid #28a745;
-//       padding-left: 1rem;
-//     }
-  
-//     &__link-item {
-//       display: flex;
-//       align-items: center;
-//       gap: 0.5rem;
-//       color: #007bff;
-//       font-weight: 500;
-//       text-decoration: none;
-//       padding: 0.5rem;
-//       transition: color 0.2s ease-in-out;
-  
-//       &:hover {
-//         color: #0056b3;
-//         text-decoration: underline;
-//       }
-  
-//       svg {
-//         width: 1rem;
-//         height: 1rem;
-//       }
-//     }
-//   }
-  

@@ -152,10 +152,24 @@
         }
     }
     .custom-button {
+        background-color: #1c242f;
         border: 1px solid #3b6798;
+        color: #3b6798;
+
         svg {
             color: #3b6798;
         }
+    }
+    .active{
+        svg{
+            color: #fff;
+        }
+    }
+    .custom-button:hover {
+        svg{
+            color: #fff;
+        }
+
     }
     :where(.css-dev-only-do-not-override-nqoqt9).ant-collapse > .ant-collapse-item,
     :where(.css-dev-only-do-not-override-nqoqt9).ant-tabs-top > .ant-tabs-nav::before {

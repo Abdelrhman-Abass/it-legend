@@ -11,6 +11,7 @@ export interface IButton {
     blank?: boolean;
     isLoading?: boolean;
     hideIcon?: boolean;
+    onClick?: () => void;
     customIcon?: React.ReactNode;
 }
 export interface IExperienceCard {
@@ -70,6 +71,28 @@ export interface ICourseCard {
     customClass?:string;
     url?: string;
 }
+export interface Course  {
+    averageRating: number;
+    categoryId: string;
+    courseId: string;
+    displayOrder: number;
+    exams: number;
+    image: string;
+    lectures: number;
+    levelId: string;
+    levelOrder: number;
+    levelTitleAr: string;
+    levelTitleEn: string;
+    packageId: string | null;
+    packagePrice: number;
+    price: number;
+    salesPrice: number;
+    shortDescriptionAr: string;
+    shortDescriptionEn: string;
+    titleAr: string;
+    titleEn: string;
+};
+
 export interface ICourseBannerDetails {
     bgImg: string;
     smImg: string;
