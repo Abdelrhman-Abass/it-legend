@@ -24,11 +24,11 @@ export default function DiplomaContainer() {
     const [visibleCourses, setVisibleCourses] = useState(9);
 
     // Fetch courses using React Query
-    const { data, isLoading, error } = useQuery({
+    const { data:category, isLoading, error } = useQuery({
         queryKey: ["category"],
         queryFn: async () => {
             const response = await getServerRequest("/Category");
-            return response.data || [];
+            return response.data.data || [];
         },
     });
 
@@ -41,8 +41,8 @@ export default function DiplomaContainer() {
         return <div>Error: {error.message}</div>;
     }
 
-    const category = data?.data;
-    console.log("category", category);
+    // const category = data?.data;
+    // console.log("category", category);
 
     // Function to load more courses
     const loadMoreCourses = () => {

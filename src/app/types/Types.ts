@@ -156,3 +156,35 @@ interface TabItem {
 export interface CourseTabsProps {
     data: TabItem[];
 }
+export interface CourseFeatures {
+    featureId: string;
+    courseId: string;
+    featureTextAr: string;
+    featureTextEn: string;
+}
+
+
+export interface Node {
+    nodeId: string;
+    titleAr: string;
+    titleEn: string;
+    type: number;
+    displayOrder: number;
+    contentId: string;
+    isFree: boolean;
+    duration: string | null;
+    isWatched: boolean | null;
+    isPassed: boolean | null;
+    questionCount: number | null;
+    isRequired: boolean | null;
+    isAccessible: boolean;
+}
+
+export interface Module {
+    moduleId: string;
+    moduleTitleAr: string;
+    moduleTitleEn: string;
+    courseId: string;
+    moduleOrder: number;
+    nodes: Node[];
+}

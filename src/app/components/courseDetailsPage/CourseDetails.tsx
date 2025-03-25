@@ -4,8 +4,20 @@ import AccordionItem from "../common/accordionItem/AccordionItem";
 import CourseAccordion from "../courseAccordion/CourseAccordion";
 import InstructorCard from "../common/instructorCard/InstructorCard";
 import CoursePlayerAccordion from "../common/coursePlayerAccordion/CoursePlayerAccordion";
+import { CourseFeatures, Module } from "@/app/types/Types";
+import { useParams } from "next/navigation";
 
-export default function CourseDetails() {
+interface MyComponentProps {
+    features: CourseFeatures[];
+    nodes: Module[];
+    slug: string;
+}
+
+const CourseDetails : React.FC<MyComponentProps> = ({features ,nodes ,slug}) =>{
+// export default function CourseDetails : React.FC<MyComponentProps>({features} : {features : any}) {
+    const { locale } = useParams();
+    
+    // console.log(nodes)
     const demoVideosItems = [
         {
             moduleTitleAr: "الوحدة ١",
@@ -46,21 +58,26 @@ export default function CourseDetails() {
                     unde maiores ut. Natus ipsam numquam quas laudantium! Illo voluptatibus quos velit placeat exercitationem repellat.
                 </p>
             </div>
-            <div className="course_details_points">
-                <h3>What we Learn ?</h3>
-                <div className="course_details_points_container f">
-                    {new Array(8).fill("").map((item, index) => (
-                        <p className="p1" key={index}>
-                            Lorem ipsum dolor sit amet consectetur.
-                        </p>
-                    ))}
+            {features.length > 0 && (
+                <div className="course_details_points">
+                    <h3>What we Learn </h3>
+                    <div className="course_details_points_container f">
+                        {features.map((item, index) => (
+                            <p className="p1" key={index}>
+                                {locale == "ar" ? item.featureTextAr : item.featureTextEn}
+                            </p>
+                        ))}
+                    </div>
                 </div>
-            </div>
+
+            )}
+            
             <div className="course_details_page_content">
                 <h4>Course Content :</h4>
-                <CoursePlayerAccordion
-                    videosItems={demoVideosItems}
+                <CourseAccordion
+                    videosItems={nodes}
                     videoCommentsMutation={null} // Pass null if an empty string is not allowed
+                    slug={slug}
                 />
             </div>
             <div className="course_details_page_Instructor_Card ">
@@ -69,3 +86,6 @@ export default function CourseDetails() {
         </div>
     );
 }
+
+
+export default CourseDetails;

@@ -12,6 +12,7 @@ import { getServerRequest } from "@/app/utils/generalServerRequest";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import NewLoader from "../common/newLoader/NewLoader";
+import { Course } from "@/app/types/Types";
 
 
 
@@ -23,15 +24,39 @@ export default function CoursesContainer() {
     // State to manage the number of courses displayed
     const [visibleCourses, setVisibleCourses] = useState(9);
 
+    const [filter, setFilter] = useState("all"); // "all", "free", or "paid"
+
     // Fetch courses using React Query
-    const { data, isLoading, error } = useQuery({
+    // const { data: courses, isLoading, error } = useQuery({
+    //     queryKey: ["courses"],
+    //     queryFn: async () => {
+    //         const response = await getServerRequest("/Course");
+    //         return response.data.data || [];
+    //     },
+    // });
+
+    // Handle loading and error states
+   
+
+    // Filter courses based on the selected filter
+    
+    // Fetch courses using React Query
+    const { data :courses, isLoading, error } = useQuery({
         queryKey: ["courses"],
         queryFn: async () => {
             const response = await getServerRequest("/Course");
-            return response.data || [];
+            return response.data.data || [];
         },
     });
-
+    
+    const filteredCourses = courses?.filter((course:Course) => {
+        if (filter === "free") {
+            return course.price === 0; // Free courses have a price of 0
+        } else if (filter === "paid") {
+            return course.price > 0; // Paid courses have a price greater than 0
+        }
+        return true; // Show all courses if filter is "all"
+    });
     // Handle loading and error states
     // if (isLoading) {
     //     return <NewLoader loading={isLoading} />;
@@ -41,7 +66,7 @@ export default function CoursesContainer() {
         return <div>Error: {error.message}</div>;
     }
 
-    const courses = data.data;
+    // const courses = data?.data;
 
     // Function to load more courses
     const loadMoreCourses = () => {
@@ -54,17 +79,17 @@ export default function CoursesContainer() {
                 <>
                     <div className="courses_container_header f jb ac">
                         <h2>
-                            {t("common.offering")} <span>{courses.length}</span> {t("common.courses")}
+                            {t("common.offering")} <span>{filteredCourses.length}</span> {t("common.courses")}
                         </h2>
                         <div className="courses_container_header_layout f ac">
                             <CardsLayout />
-                            <WrapperSelect />
+                            <WrapperSelect  setFilter={setFilter}/>
                         </div>
                     </div>
 
 
                     <div className={`courses_container_cards ${`_${type}`}`}>
-                        {courses.slice(0, visibleCourses).map((course: any, index: number) => (
+                        {filteredCourses.slice(0, visibleCourses).map((course: Course, index: number) => (
                             <CourseCard
                                 key={index}
                                 hideItems={false}

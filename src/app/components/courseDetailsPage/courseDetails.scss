@@ -84,6 +84,14 @@
                             color: $red-color;
                             font-weight: 700;
                         }
+                        [dir="ltr"] &::before {
+                            left: 0;
+                        }
+            
+                        // For Arabic (right-to-left)
+                        [dir="rtl"] &::before {
+                            right: 0;
+                        }
                     }
                 }
             }

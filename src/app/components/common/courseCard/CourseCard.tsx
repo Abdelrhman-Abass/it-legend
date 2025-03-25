@@ -71,7 +71,7 @@ const CourseCard = memo(({
             <>
               <div className="course_card_content_rate f ac jb">
                 <div className="course_card_content_rate_icons f ac">
-                  <Rate allowHalf disabled style={{color:"#f8b81f" ,fontSize:"14px"}} className="yellow-stars" defaultValue={averageRating} />
+                  <Rate allowHalf disabled style={{fontSize:"14px"}} className="yellow-stars" defaultValue={averageRating} />
                 </div>
                 <span>
                   ({averageRating?.toFixed(1)} / 5 {t("common.reviews")})
