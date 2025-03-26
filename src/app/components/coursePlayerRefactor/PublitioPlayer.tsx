@@ -542,6 +542,11 @@ export default function VideoPlayer({
   }, []);
 
   useEffect(() => {
+    if (playerRef.current) {
+      playerRef.current.dispose();
+      playerRef.current = null;
+    }
+    
     if (!videoRef.current || !videoLink || !hlsLoaded) return;
 
     const savedSpeed = localStorage.getItem("videoPlaybackSpeed");
