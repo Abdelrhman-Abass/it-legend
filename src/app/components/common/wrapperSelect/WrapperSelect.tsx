@@ -297,7 +297,7 @@ interface Category {
 }
 
 interface WrapperSelectProps {
-    setFilter: (filter: { type?: string; categoryId?: string; level?: string }) => void;
+    setFilter: any;
     categories?: Category[];
     useArabic?: boolean;
     currentType?: string;
