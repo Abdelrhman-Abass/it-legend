@@ -46,7 +46,7 @@ export default function RelatedDiploma({ slug }: any) {
     const pathName = usePathname();
     useEffect(() => {
         if (pathName.includes("diploma")) {
-            localStorage.setItem("diploma_route", `${locale}/learn-path/diploma/${slug}`);
+            localStorage.setItem("diploma_route", `learn-path/diploma/${slug}`);
         }
     },[pathName])
 

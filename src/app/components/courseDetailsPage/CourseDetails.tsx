@@ -11,51 +11,22 @@ interface MyComponentProps {
     features: CourseFeatures[];
     nodes: Module[];
     slug: string;
+    courseOverView: string;
 }
 
-const CourseDetails : React.FC<MyComponentProps> = ({features ,nodes ,slug}) =>{
+const CourseDetails : React.FC<MyComponentProps> = ({features ,nodes ,slug , courseOverView}) =>{
 // export default function CourseDetails : React.FC<MyComponentProps>({features} : {features : any}) {
     const { locale } = useParams();
     
     // console.log(nodes)
-    const demoVideosItems = [
-        {
-            moduleTitleAr: "الوحدة ١",
-            moduleTitleEn: "Module 1",
-            moduleOrder: 1,
-            nodes: [
-                {
-                    nodeId: "vid1",
-                    contentId: "c1",
-                    titleAr: "مقدمة",
-                    titleEn: "Introduction",
-                    displayOrder: 1,
-                    type: 0,
-                    isWatched: false,
-                    isFree: true,
-                    duration: "5:30",
-                },
-                {
-                    nodeId: "vid2",
-                    contentId: "c2",
-                    titleAr: "أساسيات",
-                    titleEn: "Basics",
-                    displayOrder: 2,
-                    type: 0,
-                    isWatched: true,
-                    duration: "10:45",
-                },
-            ],
-        },
-    ];
+   
     const [activeIndex, setActiveIndex] = React.useState(0);
     return (
         <div className="course_details ">
             <div className="course_details_header">
                 <h2>Course Overview</h2>
                 <p className="p1">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid sint reprehenderit assumenda officiis error earum voluptatem neque cum. Sed modi dolores vero illo, culpa ullam
-                    unde maiores ut. Natus ipsam numquam quas laudantium! Illo voluptatibus quos velit placeat exercitationem repellat.
+                    {courseOverView}
                 </p>
             </div>
             {features.length > 0 && (

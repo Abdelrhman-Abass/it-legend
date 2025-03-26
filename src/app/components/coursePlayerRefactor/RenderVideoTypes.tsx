@@ -1,8 +1,9 @@
 import useGenralCoursePlayerId from "@/app/store/GeneralCoursePlayer";
 import dynamic from "next/dynamic";
 import React, { Fragment, useRef, useEffect } from "react";
+import VideoPlayer from "./PublitioPlayer";
 
-export default function RenderVideoTypes({ playerRef, handleDuration, handleProgress, handleVideoEnd, startFromPercentage, CourseDetails, otp, playbackInfo }: any) {
+export default function RenderVideoTypes({ playerRef, videoRef, handleDuration, handleProgress, handleVideoEnd, startFromPercentage, CourseDetails, otp, playbackInfo }: any) {
     const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
     // Zustand store
@@ -54,13 +55,18 @@ export default function RenderVideoTypes({ playerRef, handleDuration, handleProg
                 return (
                     <div style={{ left: "0", width: "100%", height: "0", position: "relative", paddingBottom: "55.29%" }}>
                         <figure style={{ left: "0", width: "100%", height: "0", position: "relative", paddingBottom: "55.29%" }}>
-                            <iframe
+                            {/* <iframe
                                 id="pv_NeR5g5Te"
                                 src={videoLink || ""}
                                 scrolling="no"
                                 style={{ border: "0", top: "0", left: "0", width: "100%", height: "100%", position: "absolute", overflow: "hidden" }}
                                 allowFullScreen
-                            />
+                            /> */}
+                             <VideoPlayer         
+ videoLink={videoLink} handleDuration={handleDuration}
+                                handleProgress={handleProgress}
+                                handleVideoEnd={handleVideoEnd}/> 
+                            
                         </figure>
                     </div>
                 );

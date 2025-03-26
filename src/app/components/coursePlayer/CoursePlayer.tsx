@@ -529,7 +529,7 @@ export default function CoursePlayer({ slug }: VideoPlayerProps) {
 
 
 
-
+    console.log(videoLink)
 
     // useEffect(() => {
     //     const handleBackButton = (event: PopStateEvent) => {
