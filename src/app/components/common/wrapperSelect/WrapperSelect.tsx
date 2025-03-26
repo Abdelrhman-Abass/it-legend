@@ -297,7 +297,7 @@ interface Category {
 }
 
 interface WrapperSelectProps {
-    setFilter: any;
+    setFilter?: (filter: { type?: string; categoryId?: string; level?: string }) => void;
     categories?: Category[];
     useArabic?: boolean;
     currentType?: string;
@@ -319,6 +319,9 @@ export default function WrapperSelect({
         : `${currentType}|${currentCategory}|${currentLevel}`;
 
     const handleChange = (value: string) => {
+        if (!setFilter) return; // ✅ Avoid calling undefined function
+
+
         if (value === "all") {
             // Reset all filters
             setFilter({ type: "all", categoryId: "all", level: "all" });

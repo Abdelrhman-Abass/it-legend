@@ -59,7 +59,7 @@ export default function DiplomaContainer() {
                         </h2>
                         <div className="courses_container_header_layout f ac">
                             <CardsLayout />
-                            <WrapperSelect />
+                            {/* <WrapperSelect /> */}
                         </div>
                     </div>
 
